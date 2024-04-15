@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import '../views/home/home_page_ui.dart';
-
 
 class RouteGenerate {
   static const String splashScreen = "/splash";
-  static const String homeScreen = "/homeScreen";
+  static const String homeScreen = "/home_page_ui";
+  static const String keyScreen = "/key_page_ui";
+
   static const String selectionScreen = "/SelectionScreen";
   static const String passwordRecover = "/passwordRecover";
   static const String signIn = "/signIn";
@@ -13,11 +14,10 @@ class RouteGenerate {
   static const String analyseResultScreen = "/analyseResultScreen";
   static const String cameraPreviewScreen = "/cameraPreviewScreen";
 
-
   static Route<dynamic>? onCreateRoute(RouteSettings routeSettings) {
     var arg = routeSettings.arguments;
     switch (routeSettings.name) {
-  /*    case splashScreen:
+      /*    case splashScreen:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
               create: (context) {
@@ -30,12 +30,13 @@ class RouteGenerate {
 
       case homeScreen:
         return MaterialPageRoute(builder: (context) {
-          return  HomePageUI();
+          return HomePageUI();
         });
 
-
-
-
+      case keyScreen:
+        return MaterialPageRoute(builder: (context) {
+          return KeyPageUI();
+        });
     }
   }
 }

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:key_admin_panel/views/home/home_page_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/views/login/bloc/SignIn_bloc.dart';
+import 'package:key_admin_panel/views/login/login_page_ui.dart';
 
-final Color darkBlue = Color.fromARGB(255, 15, 102, 196);
+
+const Color darkBlue = Colors.white;
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,10 +20,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: HomePageUI(),
+          child: BlocProvider(
+            create: (context) => SignInBloc(),
+            child: const SignInScreen(),
+          ),
         ),
       ),
     );
   }
 }
-
