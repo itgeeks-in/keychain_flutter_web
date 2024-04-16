@@ -1,10 +1,9 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
+import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
 
-class PopUpAddUser extends StatelessWidget {
-  const PopUpAddUser({super.key});
+class PopUpEditkey extends StatelessWidget {
+  const PopUpEditkey({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +28,14 @@ class PopUpAddUser extends StatelessWidget {
                   },
                   child: Icon(
                     Icons.close_outlined,
-                    // size: 30,
                     color: Color.fromARGB(255, 8, 185, 216),
                   ),
                 )
               ],
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
           const Text(
-            "Add User",
+            "Edit Key",
             style: TextStyle(
                 color: Color.fromARGB(255, 8, 185, 216),
                 fontSize: 32,
@@ -53,30 +48,26 @@ class PopUpAddUser extends StatelessWidget {
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
-              labelText: "Enter your Name",
-              prefixIconData: Icons.person_add_outlined,
-              hintText: "Enter your Name",
-            )),
-          ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          const Padding(
-            padding: EdgeInsets.only(left: 50, right: 50, top: 20),
-            child: Center(
-                child: CustomTextField(
-              labelText: "Enter your Email",
-              prefixIconData: Icons.email_outlined,
-              hintText: "Enter your Email",
+              labelText: "Enter your Key Name",
+              prefixIconData: Icons.vpn_key_outlined,
+              hintText: "Enter your Key Name",
             )),
           ),
           const Padding(
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
-              labelText: "Enter your Mob.",
-              prefixIconData: Icons.phone_forwarded_sharp,
-              hintText: "Enter your Mob.",
+              labelText: "Enter Capture Title",
+              prefixIconData: Icons.screen_search_desktop_outlined,
+              hintText: "Enter your Capture Title",
+            )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 50, right: 100, top: 20),
+            child: Center(
+                child: TextFieldMultiline(
+              labelText: "Description",
+              hintText: "Enter your Description",
             )),
           ),
           Padding(
@@ -85,16 +76,12 @@ class PopUpAddUser extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                        shadowColor: const Color.fromARGB(255, 8, 185, 216),
-                        elevation: 12,
-                        backgroundColor: const Color.fromARGB(255, 8, 185, 216)
-                        //  (state
-                        //         is SignInValidState)
-                        //     ? Colors.green
-                        //     : Color.fromARGB(255, 8, 185, 216)
-                        ),
+                      shadowColor: const Color.fromARGB(255, 8, 185, 216),
+                      elevation: 12,
+                      backgroundColor: const Color.fromARGB(255, 8, 185, 216),
+                    ),
                     child: const Text(
-                      'Add User',
+                      'key Update',
                       style: TextStyle(color: Colors.white),
                     ))),
           ),

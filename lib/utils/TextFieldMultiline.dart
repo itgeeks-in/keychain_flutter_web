@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class TextFieldMultiline extends StatelessWidget {
   final String labelText;
-  final IconData prefixIconData;
-  final IconData? suffixIconData;
   final String hintText;
-  final bool obscureText;
   final TextEditingController? controller;
-
-  const CustomTextField({
-    Key? key,
-    required this.labelText,
-    required this.prefixIconData,
-    required this.hintText,
-    this.suffixIconData,
-    this.obscureText = false,
-    this.controller,
-  }) : super(key: key);
+  const TextFieldMultiline(
+      {Key? key,
+      required this.labelText,
+      required this.hintText,
+      this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
       style: TextStyle(color: Colors.grey),
-      obscureText: obscureText,
+      keyboardType: TextInputType.multiline,
+      maxLines: 3, // Allows for an unlimited number of lines
       decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: TextStyle(color: Colors.grey),
+        labelText: "Description",
+        alignLabelWithHint: true,
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
@@ -46,15 +42,7 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(11),
           borderSide: BorderSide(color: Colors.black45, width: 2),
         ),
-        prefixIcon: Icon(
-          prefixIconData,
-          color: Color.fromARGB(255, 8, 185, 216),
-        ),
-        suffixIcon: Icon(
-          suffixIconData,
-          color: Color.fromARGB(255, 8, 185, 216),
-        ),
-        hintText: hintText,
+        hintText: "Enter your text here...",
         hintStyle: TextStyle(
           color: Colors.grey,
         ),
