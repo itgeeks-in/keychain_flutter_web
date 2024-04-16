@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 
-class PopUpAddUser extends StatelessWidget {
-  const PopUpAddUser({super.key});
+class PopUpScreenEditUser extends StatelessWidget {
+  const PopUpScreenEditUser({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class PopUpAddUser extends StatelessWidget {
             height: 30,
           ),
           const Text(
-            "Add User",
+            "Edit User",
             style: TextStyle(
                 color: Color.fromARGB(255, 8, 185, 216),
                 fontSize: 32,
@@ -94,7 +94,7 @@ class PopUpAddUser extends StatelessWidget {
                         //     : Color.fromARGB(255, 8, 185, 216)
                         ),
                     child: const Text(
-                      'Add User+',
+                      'User Update',
                       style: TextStyle(color: Colors.white),
                     ))),
           ),

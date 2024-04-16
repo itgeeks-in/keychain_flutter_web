@@ -14,7 +14,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           // event.emailValue == "" &&
           EmailValidator.validate(event.email) == false) {
         emit(SignInErrorState("Please enter a valid email address"));
-      } else if (event.password.length < 8) {
+      } else if (event.password.length < 3) {
         emit(SignInErrorState("Please enter a valid password"));
       } else {
         emit(SignInValidState());
