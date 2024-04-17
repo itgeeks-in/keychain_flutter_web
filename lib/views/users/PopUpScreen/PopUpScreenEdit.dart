@@ -3,9 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 
-class PopUpScreenEditUser extends StatelessWidget {
+class PopUpScreenEditUser extends StatefulWidget {
   const PopUpScreenEditUser({super.key});
 
+  @override
+  State<PopUpScreenEditUser> createState() => _PopUpScreenEditUserState();
+}
+
+class _PopUpScreenEditUserState extends State<PopUpScreenEditUser> {
+  bool isPassVisible = false;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -36,9 +42,7 @@ class PopUpScreenEditUser extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
+
           const Text(
             "Edit User",
             style: TextStyle(
@@ -46,13 +50,12 @@ class PopUpScreenEditUser extends StatelessWidget {
                 fontSize: 32,
                 fontWeight: FontWeight.bold),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+
           const Padding(
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
+              isPassVisible: false,
               labelText: "Enter your Name",
               prefixIconData: Icons.person_add_outlined,
               hintText: "Enter your Name",
@@ -65,6 +68,7 @@ class PopUpScreenEditUser extends StatelessWidget {
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
+              isPassVisible: false,
               labelText: "Enter your Email",
               prefixIconData: Icons.email_outlined,
               hintText: "Enter your Email",
@@ -74,9 +78,28 @@ class PopUpScreenEditUser extends StatelessWidget {
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
+              isPassVisible: false,
               labelText: "Enter your Mob.",
               prefixIconData: Icons.phone_forwarded_sharp,
               hintText: "Enter your Mob.",
+            )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+            child: Center(
+                child: CustomTextField(
+              labelText: 'Password',
+              prefixIconData: Icons.lock,
+              hintText: 'Enter your password',
+              obscureText: true,
+              suffixIconData: Icons.visibility,
+              suffixIconDataSecond: Icons.visibility_off,
+              isPassVisible: isPassVisible,
+              onSuffixPressed: () {
+                setState(() {
+                  isPassVisible = !isPassVisible;
+                });
+              },
             )),
           ),
           Padding(

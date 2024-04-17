@@ -9,6 +9,7 @@ class PopupViewUser extends StatefulWidget {
 }
 
 class _PopupViewUserState extends State<PopupViewUser> {
+  bool isPassVisible = false;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -70,6 +71,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
+              isPassVisible: false,
               labelText: "Enter your Name",
               prefixIconData: Icons.person_add_outlined,
               hintText: "Enter your Name",
@@ -82,6 +84,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
+              isPassVisible: false,
               labelText: "Enter your Email",
               prefixIconData: Icons.email_outlined,
               hintText: "Enter your Email",
@@ -91,6 +94,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
+              isPassVisible: false,
               labelText: "Enter your Mob.",
               prefixIconData: Icons.phone_forwarded_sharp,
               hintText: "Enter your Mob.",

@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
 
-class PopUpEditkey extends StatelessWidget {
+class PopUpEditkey extends StatefulWidget {
   const PopUpEditkey({super.key});
 
+  @override
+  State<PopUpEditkey> createState() => _PopUpEditkeyState();
+}
+
+class _PopUpEditkeyState extends State<PopUpEditkey> {
+  bool isPassVisible = false;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -48,6 +54,7 @@ class PopUpEditkey extends StatelessWidget {
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
+              isPassVisible: false,
               labelText: "Enter your Key Name",
               prefixIconData: Icons.vpn_key_outlined,
               hintText: "Enter your Key Name",
@@ -57,6 +64,7 @@ class PopUpEditkey extends StatelessWidget {
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
+              isPassVisible: false,
               labelText: "Enter Capture Title",
               prefixIconData: Icons.screen_search_desktop_outlined,
               hintText: "Enter your Capture Title",

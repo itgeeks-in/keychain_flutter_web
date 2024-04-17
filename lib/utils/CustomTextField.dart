@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String labelText;
   final IconData prefixIconData;
   final IconData? suffixIconData;
+  final IconData? suffixIconDataSecond; // Add second suffix icon data
   final String hintText;
   final bool obscureText;
   final TextEditingController? controller;
+  final bool isPassVisible;
+  final VoidCallback? onSuffixPressed;
 
   const CustomTextField({
     Key? key,
@@ -14,18 +17,26 @@ class CustomTextField extends StatelessWidget {
     required this.prefixIconData,
     required this.hintText,
     this.suffixIconData,
+    this.suffixIconDataSecond, // Add second suffix icon data
     this.obscureText = false,
     this.controller,
+    required this.isPassVisible,
+    this.onSuffixPressed,
   }) : super(key: key);
 
   @override
+  _CustomTextFieldState createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
+      controller: widget.controller,
       style: TextStyle(color: Colors.grey),
-      obscureText: obscureText,
+      obscureText: widget.obscureText && !widget.isPassVisible,
       decoration: InputDecoration(
-        labelText: labelText,
+        labelText: widget.labelText,
         labelStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
@@ -47,14 +58,24 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide(color: Colors.black45, width: 2),
         ),
         prefixIcon: Icon(
-          prefixIconData,
+          widget.prefixIconData,
           color: Color.fromARGB(255, 8, 185, 216),
         ),
-        suffixIcon: Icon(
-          suffixIconData,
-          color: Color.fromARGB(255, 8, 185, 216),
+        suffixIcon: Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: widget.suffixIconData != null
+              ? IconButton(
+                  icon: Icon(
+                    widget.isPassVisible
+                        ? widget.suffixIconData
+                        : widget.suffixIconDataSecond,
+                    color: const Color.fromARGB(255, 8, 185, 216),
+                  ),
+                  onPressed: widget.onSuffixPressed,
+                )
+              : null,
         ),
-        hintText: hintText,
+        hintText: widget.hintText,
         hintStyle: TextStyle(
           color: Colors.grey,
         ),
