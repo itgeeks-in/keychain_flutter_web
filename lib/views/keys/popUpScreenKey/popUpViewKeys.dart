@@ -1,6 +1,13 @@
+import 'dart:html';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:key_admin_panel/utils/CustomImagePicker.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
+import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpAddKeys.dart';
 
 class PopUpViewKey extends StatefulWidget {
   const PopUpViewKey({super.key});
@@ -16,13 +23,12 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
     return Dialog(
         child: Container(
       width: 500,
-      height: 600,
+      height: 650,
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(21))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -47,12 +53,9 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
               "View Key",
               style: TextStyle(
                   color: Color.fromARGB(255, 8, 185, 216),
-                  fontSize: 22,
+                  fontSize: 32,
                   fontWeight: FontWeight.bold),
             ),
-          ),
-          const SizedBox(
-            height: 20,
           ),
           const Padding(
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
@@ -74,30 +77,65 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
               hintText: "Enter your Capture Title",
             )),
           ),
-          Padding(
+          const Padding(
             padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
-            child: Container(
-              // width: 200,
-              child: TextFieldMultiline(
-                labelText: "Description",
-                hintText: "Enter your Description",
-              ),
+            child: TextFieldMultiline(
+              labelText: "Description",
+              hintText: "Enter your Description",
             ),
           ),
           Container(
-              padding: EdgeInsets.all(8.0),
-              margin: EdgeInsets.only(top: 20, left: 50),
-              width: 140,
-              height: 140,
-              child: Image.asset("assets/keys.jpg", fit: BoxFit.contain),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                border: Border.all(
-                  width: 2,
-                  color: Color.fromARGB(255, 8, 185, 216),
+              margin: EdgeInsets.only(left: 50, right: 50, top: 20),
+              child: DropdownMenuList()),
+          Padding(
+            padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    padding: EdgeInsets.all(8.0),
+                    // margin: EdgeInsets.only(top: 20, left: 50),
+                    width: 140,
+                    height: 140,
+                    child: Image.asset("assets/keys.jpg", fit: BoxFit.contain),
+                    // child:picker,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      border: Border.all(
+                        width: 2,
+                        color: Color.fromARGB(255, 8, 185, 216),
+                      ),
+                    )),
+                SizedBox(
+                  width: 80,
                 ),
-              ))
+                Container(
+                  width: 120,
+                  height: 40,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Close',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(
+                          // width: 5.0,
+                          color: Colors.white),
+                      backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     ));
