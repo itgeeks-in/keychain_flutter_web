@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:key_admin_panel/views/users/PopUpScreen/PopUpAddUser.dart';
@@ -29,60 +30,111 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        title: Container(
-          height: 40,
-          // color: Colors.white,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                      width: 80,
-                      child: const Text(
-                        'User',
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 8, 185, 216),
-                        ),
-                      )),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Center(
-                        child: Icon(
-                      Icons.close,
-                      color: Colors.white,
-                    )), // Centering the Icon
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 8, 185, 216),
-                      shape: const CircleBorder(),
-                      elevation: 5,
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Container(
-                height: 2,
-                width: double.infinity,
-                color: Colors.grey,
-              )
-            ],
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   backgroundColor: Colors.white,
+      //   automaticallyImplyLeading: false,
+      //   title: Container(
+      //     height: 50,
+      //     // color: Colors.white,
+      //     child: Column(
+      //       children: [
+      //         SizedBox(
+      //           height: 2,
+      //         ),
+      //         Row(
+      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: <Widget>[
+      //             Row(
+      //               mainAxisAlignment: MainAxisAlignment.start,
+      //               crossAxisAlignment: CrossAxisAlignment.start,
+      //               children: [
+      //                 Container(
+      //                     width: 80,
+      //                     child: const Text(
+      //                       'User',
+      //                       style: TextStyle(
+      //                         color: const Color.fromARGB(255, 8, 185, 216),
+      //                       ),
+      //                     )),
+      //                 Container(
+      //                   width: 200,
+      //                   height: 40,
+      //                   child: TextField(
+      //                     textAlignVertical: TextAlignVertical.bottom,
+      //                     decoration: InputDecoration(
+      //                         filled: true,
+      //                         fillColor: Colors.white,
+      //                         focusedBorder: OutlineInputBorder(
+      //                           borderRadius: BorderRadius.circular(11),
+      //                           borderSide: const BorderSide(
+      //                               color: Color.fromARGB(255, 8, 185, 216),
+      //                               width: 2),
+      //                         ),
+      //                         enabledBorder: OutlineInputBorder(
+      //                           borderRadius: BorderRadius.circular(11),
+      //                           borderSide: const BorderSide(
+      //                               color: Color.fromARGB(255, 8, 185, 216)),
+      //                         ),
+      //                         disabledBorder: OutlineInputBorder(
+      //                           borderRadius: BorderRadius.circular(11),
+      //                           borderSide: const BorderSide(
+      //                               color: Colors.black45, width: 2),
+      //                         ),
+      //                         prefixIcon: const Icon(
+      //                           Icons.person_search_sharp,
+      //                           color: Color.fromARGB(255, 8, 185, 216),
+      //                         ),
+      //                         hintText: "Search",
+      //                         hintStyle: TextStyle(color: Colors.grey)),
+      //                   ),
+      //                 ),
+      //               ],
+      //             ),
+      // ElevatedButton(
+      //   onPressed: () {
+      //     showDialog(
+      //       context: context,
+      //       builder: (context) => PopUpAddUser(),
+      //     );
+      //   },
+      //   child: const Text(
+      //     'Add User +',
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //   style: ElevatedButton.styleFrom(
+      //     shadowColor: Color.fromARGB(255, 8, 185, 216),
+      //     elevation: 10,
+      //     backgroundColor: Color.fromARGB(255, 8, 185, 216),
+      //   ),
+      // )
+      // ],
+      // ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10),
         child: SafeArea(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Container(
+                  width: 80,
+                  child: const Text(
+                    'Users',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.blue,
+                      fontSize: 20,
+                      color: const Color.fromARGB(255, 8, 185, 216),
+                    ),
+                  )),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -166,7 +218,6 @@ class _UserPageState extends State<UserPage> {
                     Expanded(
                       flex: 2,
                       child: Container(
-                        // color: Colors.amber,
                         child: const Text(
                           "Name",
                           style: TextStyle(
@@ -179,7 +230,6 @@ class _UserPageState extends State<UserPage> {
                     Expanded(
                       flex: 2,
                       child: Container(
-                        // color: Colors.blue,
                         child: const Text(
                           "Email",
                           style: TextStyle(
@@ -254,8 +304,8 @@ class _UserPageState extends State<UserPage> {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
-                                padding: const EdgeInsets.all(8.0),
-                                height: 40,
+                                padding: const EdgeInsets.all(4.0),
+                                height: 45,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: const BorderRadius.all(
@@ -281,6 +331,7 @@ class _UserPageState extends State<UserPage> {
                                       flex: 2,
                                       child: Container(
                                         // color: Colors.amber,
+                                        padding: EdgeInsets.only(left: 10),
                                         child: Text(
                                           data[index]['name'].toString(),
                                           style: const TextStyle(
@@ -328,69 +379,98 @@ class _UserPageState extends State<UserPage> {
                                       flex: 1,
                                       child: Container(
                                         // color: Colors.amber,
-                                        child: Center(
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                width: 80,
-                                                child: OutlinedButton(
-                                                  onPressed: () {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (context) =>
-                                                          const PopupViewUser(),
-                                                    );
-                                                  },
-                                                  child: Text(
-                                                    'View',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                  style:
-                                                      OutlinedButton.styleFrom(
-                                                    side: const BorderSide(
-                                                        // width: 5.0,
-                                                        color: Colors.white),
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                            255, 8, 185, 216),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                    ),
+                                        // height: ,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 80,
+                                              child: OutlinedButton(
+                                                onPressed: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        const PopupViewUser(),
+                                                  );
+                                                },
+                                                child: Text(
+                                                  'View',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                style: OutlinedButton.styleFrom(
+                                                  side: const BorderSide(
+                                                      // width: 5.0,
+                                                      color: Colors.white),
+                                                  backgroundColor:
+                                                      const Color.fromARGB(
+                                                          255, 8, 185, 216),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
                                                   ),
                                                 ),
                                               ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 10),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (context) =>
-                                                          const PopUpScreenEditUser(),
-                                                    );
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.edit,
-                                                    size: 23,
-                                                    color: Color.fromARGB(
-                                                        255, 8, 185, 216),
-                                                  ),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            // Padding(
+                                            //   padding: const EdgeInsets.only(
+                                            //       bottom: 10),
+                                            //   child: InkWell(
+                                            //     onTap: () {
+                                            //       showDialog(
+                                            //         context: context,
+                                            //         builder: (context) =>
+                                            //             const PopUpScreenEditUser(),
+                                            //       );
+                                            //     },
+                                            //     child: const Icon(
+                                            //       Icons.edit,
+                                            //       size: 23,
+                                            //       color: Color.fromARGB(
+                                            //           255, 8, 185, 216),
+                                            //     ),
+                                            //   ),
+                                            // )
+
+                                            // Container(
+                                            //   height: 100,
+                                            //   width: 50,
+                                            //   color: Colors.red,
+                                            // )
+
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      PopUpScreenEditUser(),
+                                                );
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(4),
+                                                child: Icon(
+                                                  Icons.edit_outlined,
+                                                  color: Colors.white,
                                                 ),
-                                              )
-                                            ],
-                                          ),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                shadowColor: Color.fromARGB(
+                                                    255, 8, 185, 216),
+                                                elevation: 10,
+                                                backgroundColor: Color.fromARGB(
+                                                    255, 8, 185, 216),
+                                                shape: CircleBorder(),
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ),
                                     )

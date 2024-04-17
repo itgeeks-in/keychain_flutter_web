@@ -48,33 +48,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
               ],
             ),
           ),
-          // Center(
-          //   child: Padding(
-          //     padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
-          //     child: Container(
-          //         height: 140,
-          //         width: 140,
-          //         decoration: BoxDecoration(
-          //             color: Colors.white,
-          //             borderRadius: const BorderRadius.all(Radius.circular(70)),
-          //             border: Border.all(
-          //               width: 2,
-          //               color: Color.fromARGB(255, 8, 185, 216),
-          //             ),
-          //             boxShadow: const [
-          //               BoxShadow(
-          //                 color: Color.fromARGB(193, 223, 212, 212),
-          //                 blurRadius: 8,
-          //                 spreadRadius: 4,
-          //                 // offset: Offset(0, 10),
-          //               )
-          //             ]),
-          //         child: Padding(
-          //           padding: const EdgeInsets.all(15),
-          //           child: Image.asset("assets/.jpg", fit: BoxFit.contain),
-          //         )),
-          //   ),
-          // ),
+
           Center(
             child: Container(
               width: 140,

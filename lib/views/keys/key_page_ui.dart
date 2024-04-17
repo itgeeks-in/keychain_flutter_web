@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpAddKeys.dart';
+import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpEditKey.dart';
+import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpViewKeys.dart';
 
 class KeyPageUI extends StatefulWidget {
   const KeyPageUI({super.key});
@@ -12,94 +16,170 @@ class _KeyPageUIState extends State<KeyPageUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Container(
-          height: 40,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    width: 80,
-                    child: const Text(
-                      'Key',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 8, 185, 216),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {}, // Change made here
-                    child: Center(
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 8, 185, 216),
-                      shape: CircleBorder(),
-                      elevation: 5,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                height: 2,
-                width: double.infinity,
-                color: Colors.grey,
-              )
-            ],
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   automaticallyImplyLeading: false,
+      //   centerTitle: true,
+      //   title: Container(
+      //     height: 40,
+      //     child: Column(
+      //       children: [
+      //         Row(
+      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: <Widget>[
+      //             Container(
+      //               width: 80,
+      //               child: const Text(
+      //                 'Key',
+      //                 style: TextStyle(
+      //                   color: Color.fromARGB(255, 8, 185, 216),
+      //                 ),
+      //               ),
+      //             ),
+      //             ElevatedButton(
+      //               onPressed: () {}, // Change made here
+      //               child: Center(
+      //                 child: Icon(
+      //                   Icons.add,
+      //                   color: Colors.white,
+      //                 ),
+      //               ),
+      //               style: ElevatedButton.styleFrom(
+      //                 backgroundColor: Color.fromARGB(255, 8, 185, 216),
+      //                 shape: CircleBorder(),
+      //                 elevation: 5,
+      //               ),
+      //             )
+      //           ],
+      //         ),
+      //         SizedBox(
+      //           height: 5,
+      //         ),
+      //         Container(
+      //           height: 2,
+      //           width: double.infinity,
+      //           color: Colors.grey,
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Container(
+            //   width: 200,
+            //   height: 40,
+            //   margin: EdgeInsets.only(bottom: 15, top: 0),
+            //   child: TextField(
+            //     style: const TextStyle(color: Colors.grey),
+            //     textAlignVertical: TextAlignVertical.bottom,
+            //     decoration: InputDecoration(
+            //       filled: true,
+            //       fillColor: Colors.white,
+            //       focusedBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(11),
+            //         borderSide: const BorderSide(
+            //             color: Color.fromARGB(255, 8, 185, 216), width: 2),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(11),
+            //         borderSide: const BorderSide(
+            //             color: Color.fromARGB(255, 8, 185, 216)),
+            //       ),
+            //       disabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(11),
+            //         borderSide:
+            //             const BorderSide(color: Colors.black45, width: 2),
+            //       ),
+            //       prefixIcon: const Icon(
+            //         Icons.person_search_sharp,
+            //         color: Color.fromARGB(255, 8, 185, 216),
+            //       ),
+            //       hintText: "Search",
+            //       hintStyle: const TextStyle(color: Colors.grey),
+            //     ),
+            //   ),
+            // ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 80,
+                  child: const Text(
+                    'Keys',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.blue,
+                      fontSize: 20,
+                      color: const Color.fromARGB(255, 8, 185, 216),
+                    ),
+                  )),
+            ),
+
             Container(
-              width: 200,
-              height: 40,
-              margin: EdgeInsets.only(bottom: 15, top: 0),
-              child: TextField(
-                style: const TextStyle(color: Colors.grey),
-                textAlignVertical: TextAlignVertical.bottom,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(11),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 8, 185, 216), width: 2),
+              padding: const EdgeInsets.all(0),
+              margin: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 200,
+                    height: 40,
+                    child: TextField(
+                      textAlignVertical: TextAlignVertical.bottom,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(11),
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 8, 185, 216),
+                                width: 2),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(11),
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 8, 185, 216)),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(11),
+                            borderSide: const BorderSide(
+                                color: Colors.black45, width: 2),
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.person_search_sharp,
+                            color: Color.fromARGB(255, 8, 185, 216),
+                          ),
+                          hintText: "Search",
+                          hintStyle: TextStyle(color: Colors.grey)),
+                    ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(11),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 8, 185, 216)),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(11),
-                    borderSide:
-                        const BorderSide(color: Colors.black45, width: 2),
-                  ),
-                  prefixIcon: const Icon(
-                    Icons.person_search_sharp,
-                    color: Color.fromARGB(255, 8, 185, 216),
-                  ),
-                  hintText: "Search",
-                  hintStyle: const TextStyle(color: Colors.grey),
-                ),
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const PopUpAddKeys(),
+                      );
+                    },
+                    child: const Text(
+                      'Add Keys +',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shadowColor: Color.fromARGB(255, 8, 185, 216),
+                      elevation: 10,
+                      backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                    ),
+                  )
+                ],
               ),
             ),
+
             KeyHeader(),
             Expanded(
               child: ListView.builder(
@@ -127,16 +207,17 @@ class _KeyPageUIState extends State<KeyPageUI> {
                           )
                         ]),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: Container(
                               // color: Colors.black,
                               child: Row(
                                 children: [
                                   Container(
+                                    // padding: EdgeInsets.only(left: 20),
                                     height: 150,
                                     child: Image.asset("assets/keys.jpg",
                                         fit: BoxFit.cover),
@@ -153,18 +234,15 @@ class _KeyPageUIState extends State<KeyPageUI> {
                               ),
                             )),
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: Container(
                             // color: Colors.blue,
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                "Document's scope. ",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                            child: Text(
+                              "Document's scope. ",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -180,20 +258,27 @@ class _KeyPageUIState extends State<KeyPageUI> {
                                 fontSize: 16,
                                 // fontWeight: FontWeight.bold,
                               ),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: true,
                             ),
                           ),
                         ),
                         Expanded(
-                          flex: 1,
+                          flex: 2,
                           child: Container(
                             // color: Colors.blue,
                             child: const Text(
-                              "A document description is a USPTO-defined description of forms and documents that are received and processed in the USPTO.",
+                              "A document description is a USPTO-defined A document description is a A document description is a USPTO-defined description of forms and documents that are received and processed in the USPTO USPTO-defined description of forms and documents that are received and processed in the USPTOdescription of forms and documents that are received and processed in the USPTO.",
                               style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 16,
                                 // fontWeight: FontWeight.bold,
                               ),
+                              maxLines: 3, // Limiting to three lines
+                              overflow: TextOverflow
+                                  .ellipsis, // Adding ellipsis for overflow
+                              softWrap: true, // Allowing the text to wrap
                             ),
                           ),
                         ),
@@ -201,50 +286,59 @@ class _KeyPageUIState extends State<KeyPageUI> {
                           flex: 1,
                           child: Container(
                             // color: Colors.amber,
-                            child: Center(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 80,
-                                    child: OutlinedButton(
-                                      onPressed: () {
-                                        // showBottomSheet(context: context, builder: builder)
-                                      },
-                                      child: Text(
-                                        'View',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      style: OutlinedButton.styleFrom(
-                                        side: BorderSide(
-                                            // width: 5.0,
-                                            color: Colors.white),
-                                        backgroundColor:
-                                            Color.fromARGB(255, 8, 185, 216),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  // width: 80,
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      // showBottomSheet(context: context, builder: builder)
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            const PopUpViewKey(),
+                                      );
+                                    },
+                                    child: Text(
+                                      'View',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                      side: BorderSide(
+                                          // width: 5.0,
+                                          color: Colors.white),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 8, 185, 216),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 10),
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: const Icon(
-                                        Icons.edit,
-                                        size: 23,
-                                        color: Color.fromARGB(255, 8, 185, 216),
-                                      ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => PopUpEditkey(),
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.edit_outlined,
+                                      color: Colors.white,
                                     ),
-                                  )
-                                ],
-                              ),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    shadowColor:
+                                        Color.fromARGB(255, 8, 185, 216),
+                                    elevation: 10,
+                                    backgroundColor:
+                                        Color.fromARGB(255, 8, 185, 216),
+                                    shape: CircleBorder(),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         )
@@ -285,10 +379,11 @@ class KeyHeader extends StatelessWidget {
             )
           ]),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Container(
               // color: Colors.amber,
               padding: EdgeInsets.only(left: 10),
