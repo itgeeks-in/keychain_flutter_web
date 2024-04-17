@@ -293,42 +293,34 @@ class _UserPageState extends State<UserPage> {
                                     ),
                                     Expanded(
                                       flex: 2,
-                                      child: Container(
-                                        // color: Colors.blue,
-                                        child: Text(
-                                          data[index]['email'].toString(),
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            // fontWeight: FontWeight.bold,
-                                          ),
+                                      child: Text(
+                                        data[index]['email'].toString(),
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          // fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
                                     Expanded(
                                       flex: 2,
-                                      child: Container(
-                                        // color: Colors.amber,
-                                        child: const Text(
-                                          "9638520741",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            // fontWeight: FontWeight.bold,
-                                          ),
+                                      child: const Text(
+                                        "9638520741",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          // fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
                                     Expanded(
                                       flex: 1,
-                                      child: Container(
-                                        child: const Text(
-                                          "12",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            // fontWeight: FontWeight.bold,
-                                          ),
+                                      child: const Text(
+                                        "12",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          // fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
