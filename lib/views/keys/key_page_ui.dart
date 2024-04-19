@@ -183,7 +183,7 @@ class _KeyPageUIState extends State<KeyPageUI> {
             KeyHeader(),
             Expanded(
               child: ListView.builder(
-                itemCount: 15,
+                itemCount: 8,
                 itemBuilder: (context, index) {
                   return Container(
                     // height: 100,

@@ -1,15 +1,28 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
-class CustomImagePicker extends StatefulWidget {
-  const CustomImagePicker({super.key});
+class CustomImagePicker {
+  final picker = ImagePicker();
 
-  @override
-  State<CustomImagePicker> createState() => _CustomImagePickerState();
-}
+  Future<File> imgFromCamera() async {
+    try {
+      final pickedFile =
+          await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
+      final File file = File(pickedFile!.path);
+      return file;
+    } catch (e) {
+      return File('');
+    }
+  }
 
-class _CustomImagePickerState extends State<CustomImagePicker> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+  Future<File> openGallery() async {
+    try {
+      final pickedFile = await picker.pickImage(
+          source: ImageSource.gallery, imageQuality: 100);
+      final File file = File(pickedFile!.path);
+      return file;
+    } catch (e) {
+      return File('');
+    }
   }
 }

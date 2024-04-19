@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:key_admin_panel/utils/CustomImagePicker.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
 
@@ -96,7 +97,13 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
                     // margin: EdgeInsets.only(top: 20, left: 50),
                     width: 140,
                     height: 140,
-                    child: Image.asset("assets/keys.jpg", fit: BoxFit.contain),
+                    // child: Image.asset("assets/keys.jpg", fit: BoxFit.contain),
+                    child: InkWell(
+                      onTap: () async {
+                        CustomImagePicker().openGallery();
+                      },
+                      child: Text("Image Upload"),
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: const BorderRadius.all(Radius.circular(20)),

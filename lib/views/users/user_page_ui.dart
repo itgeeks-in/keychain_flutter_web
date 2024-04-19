@@ -266,7 +266,7 @@ class _UserPageState extends State<UserPage> {
                       ),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Container(
                         // color: Colors.amber,
                         child: const Padding(
@@ -376,7 +376,7 @@ class _UserPageState extends State<UserPage> {
                                       ),
                                     ),
                                     Expanded(
-                                      flex: 1,
+                                      flex: 2,
                                       child: Container(
                                         // color: Colors.amber,
                                         // height: ,
