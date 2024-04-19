@@ -70,41 +70,6 @@ class _KeyPageUIState extends State<KeyPageUI> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Container(
-            //   width: 200,
-            //   height: 40,
-            //   margin: EdgeInsets.only(bottom: 15, top: 0),
-            //   child: TextField(
-            //     style: const TextStyle(color: Colors.grey),
-            //     textAlignVertical: TextAlignVertical.bottom,
-            //     decoration: InputDecoration(
-            //       filled: true,
-            //       fillColor: Colors.white,
-            //       focusedBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(11),
-            //         borderSide: const BorderSide(
-            //             color: Color.fromARGB(255, 8, 185, 216), width: 2),
-            //       ),
-            //       enabledBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(11),
-            //         borderSide: const BorderSide(
-            //             color: Color.fromARGB(255, 8, 185, 216)),
-            //       ),
-            //       disabledBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(11),
-            //         borderSide:
-            //             const BorderSide(color: Colors.black45, width: 2),
-            //       ),
-            //       prefixIcon: const Icon(
-            //         Icons.person_search_sharp,
-            //         color: Color.fromARGB(255, 8, 185, 216),
-            //       ),
-            //       hintText: "Search",
-            //       hintStyle: const TextStyle(color: Colors.grey),
-            //     ),
-            //   ),
-            // ),
-
             Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Container(
@@ -120,7 +85,6 @@ class _KeyPageUIState extends State<KeyPageUI> {
                     ),
                   )),
             ),
-
             Container(
               padding: const EdgeInsets.all(0),
               margin: const EdgeInsets.only(bottom: 10),
@@ -179,7 +143,6 @@ class _KeyPageUIState extends State<KeyPageUI> {
                 ],
               ),
             ),
-
             KeyHeader(),
             Expanded(
               child: ListView.builder(
