@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final colors = <Color>[Colors.indigo, Colors.blue, Colors.orange, Colors.red];
+  final colors = <Color>[
+    Color.fromARGB(190, 5, 224, 213),
+    Color.fromARGB(255, 22, 206, 160),
+    Color.fromARGB(255, 238, 97, 3),
+    Colors.red
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,30 +73,70 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+//   Widget _container(int index, String heading, String count) {
+//     return Expanded(
+//       child: Container(
+//         color: colors[index],
+//         margin: EdgeInsets.all(20),
+//         // width: 250,
+//         height: 180,
+//         padding: const EdgeInsets.all(10),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Row(
+//               children: [
+//                 Expanded(
+//                   child: Text(
+//                     count,
+//                     style: const TextStyle(fontSize: 24),
+//                   ),
+//                 ),
+//                 const Icon(Icons.more_vert),
+//               ],
+//             ),
+//             Text(heading),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
   Widget _container(int index, String heading, String count) {
     return Expanded(
       child: Container(
-        color: colors[index],
         margin: EdgeInsets.all(20),
         // width: 250,
         height: 180,
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+        padding: const EdgeInsets.all(5),
+        child: Card(
+          // elevation: 12,
+          color: colors[index],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Text(
-                    count,
-                    style: const TextStyle(fontSize: 24),
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        count,
+                        style:
+                            const TextStyle(fontSize: 24, color: Colors.white),
+                      ),
+                    ),
+                    const Icon(Icons.more_vert, color: Colors.white),
+                  ],
                 ),
-                const Icon(Icons.more_vert),
+                Text(
+                  heading,
+                  style: TextStyle(color: Colors.white),
+                ),
               ],
             ),
-            Text(heading),
-          ],
+          ),
         ),
       ),
     );
