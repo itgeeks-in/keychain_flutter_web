@@ -226,7 +226,7 @@ class _UserPageState extends State<UserPage> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(10)),
                                     border: Border.all(
-                                      width: 2,
+                                      width: 1,
                                       color: Color.fromARGB(255, 8, 185, 216),
                                     ),
                                     boxShadow: const [
