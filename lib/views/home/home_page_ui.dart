@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:key_admin_panel/views/home/homescreen.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
+import 'package:key_admin_panel/views/plan/plan_ui.dart';
 import 'package:key_admin_panel/views/profile/profilePagea.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
@@ -167,9 +168,10 @@ class _HomePageUIState extends State<HomePageUI> {
       case 5:
         return const ProfilePage();
 
-      case 4:
-      // return HomeScreen();
       case 3:
+        return const PlanPage();
+      // return HomeScreen();
+      case 4:
       // return const ProfilePage();
       case 6:
       // return HomeScreen();
