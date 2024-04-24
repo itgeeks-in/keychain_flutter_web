@@ -31,25 +31,11 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10, top: 10),
         child: SafeArea(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15),
-              child: Container(
-                  width: 80,
-                  child: const Text(
-                    'Users',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.blue,
-                      fontSize: 20,
-                      color: const Color.fromARGB(255, 8, 185, 216),
-                    ),
-                  )),
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

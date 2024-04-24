@@ -67,28 +67,13 @@ class _KeyPageUIState extends State<KeyPageUI> {
       //   ),
       // ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  width: 80,
-                  child: const Text(
-                    'Keys',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.blue,
-                      fontSize: 20,
-                      color: const Color.fromARGB(255, 8, 185, 216),
-                    ),
-                  )),
-            ),
             Container(
               padding: const EdgeInsets.all(0),
-              margin: const EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: 10, top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
