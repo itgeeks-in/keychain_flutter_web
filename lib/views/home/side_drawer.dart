@@ -7,6 +7,8 @@ import 'package:key_admin_panel/views/plan/plan_ui.dart';
 import 'package:key_admin_panel/views/profile/profilePagea.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
+import '../../utils/theme_text.dart';
+
 class SideDrawer extends StatefulWidget {
   const SideDrawer({Key? key}) : super(key: key);
 

@@ -39,14 +39,12 @@ class HomeScreen extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-                  Container(
-                    child: Row(
-                      children: [
-                        _container(0, "Total users", "1000"),
-                        _container(1, "Total Keys", "150"),
-                        _container(2, "Total Plans/purchase details", "3"),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      _container(0, "Total users", "1000"),
+                      _container(1, "Total Keys", "150"),
+                      _container(2, "Total Plans/purchase details", "3"),
+                    ],
                   ),
                   Container(
                     width: double.infinity,
