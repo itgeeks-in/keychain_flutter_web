@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/home/homescreen.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/plan/plan_ui.dart';
 import 'package:key_admin_panel/views/profile/profilePagea.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
-class HomePageUI extends StatefulWidget {
-  const HomePageUI({Key? key}) : super(key: key);
+class SideDrawer extends StatefulWidget {
+  const SideDrawer({Key? key}) : super(key: key);
 
   @override
-  State<HomePageUI> createState() => _HomePageUIState();
+  State<SideDrawer> createState() => _HomePageUIState();
 }
 
-class _HomePageUIState extends State<HomePageUI> {
+class _HomePageUIState extends State<SideDrawer> {
   bool isExpanded = true;
   int _selectedIndex = 0;
 
@@ -156,7 +157,7 @@ class _HomePageUIState extends State<HomePageUI> {
       ),
     );
   }
-
+//ToDo:
   Widget buildPages() {
     switch (_selectedIndex) {
       case 0:
@@ -177,7 +178,7 @@ class _HomePageUIState extends State<HomePageUI> {
       // return HomeScreen();
       default:
         return Container(
-          child: Text("This is Screen Not Present"),
+          child: Text("This is Screen Not Present",style: ThemeText.textMediumGrey),
         ); // or any other default widget you prefer
     }
   }

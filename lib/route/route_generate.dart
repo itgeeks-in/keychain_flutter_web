@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
-import '../views/home/home_page_ui.dart';
+import '../views/home/home_side_drawer.dart';
 
 class RouteGenerate {
   static const String splashScreen = "/splash";
@@ -30,7 +30,7 @@ class RouteGenerate {
 
       case homeScreen:
         return MaterialPageRoute(builder: (context) {
-          return HomePageUI();
+          return SideDrawer();
         });
 
       case keyScreen:
