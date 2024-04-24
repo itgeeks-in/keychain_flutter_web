@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:key_admin_panel/utils/CustomImagePicker.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
+import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
 import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpAddKeys.dart';
 
@@ -112,27 +112,31 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                   width: 80,
                 ),
                 Container(
-                  width: 120,
-                  height: 40,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Close',
-                      style: TextStyle(color: Colors.white),
+                    width: 120,
+                    // height: 40,
+                    child: RoundedButton(
+                      btnName: "Close",
+                      callback: () {},
+                    )
+                    //  OutlinedButton(
+                    //   onPressed: () {
+                    //     Navigator.pop(context);
+                    //   },
+                    //   child: Text(
+                    //     'Close',
+                    //     style: TextStyle(color: Colors.white),
+                    //   ),
+                    //   style: OutlinedButton.styleFrom(
+                    //     side: BorderSide(
+                    //         // width: 5.0,
+                    //         color: Colors.white),
+                    //     backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //     ),
+                    //   ),
+                    // ),
                     ),
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                          // width: 5.0,
-                          color: Colors.white),
-                      backgroundColor: Color.fromARGB(255, 8, 185, 216),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

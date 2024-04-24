@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpAddKeys.dart';
 import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpEditKey.dart';
 import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpViewKeys.dart';
@@ -123,23 +124,32 @@ class _KeyPageUIState extends State<KeyPageUI> {
                           hintStyle: TextStyle(color: Colors.grey)),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
+                  RoundedButton(
+                    btnName: "Add Keys +",
+                    callback: () {
                       showDialog(
                         context: context,
                         builder: (context) => const PopUpAddKeys(),
                       );
                     },
-                    child: const Text(
-                      'Add Keys +',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      shadowColor: Color.fromARGB(255, 8, 185, 216),
-                      elevation: 10,
-                      backgroundColor: Color.fromARGB(255, 8, 185, 216),
-                    ),
                   )
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  // showDialog(
+                  //   context: context,
+                  //   builder: (context) => const PopUpAddKeys(),
+                  // );
+                  //   },
+                  //   child: const Text(
+                  //     'Add Keys +',
+                  //     style: TextStyle(color: Colors.white),
+                  //   ),
+                  //   style: ElevatedButton.styleFrom(
+                  //     shadowColor: Color.fromARGB(255, 8, 185, 216),
+                  //     elevation: 10,
+                  //     backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                  //   ),
+                  // )
                 ],
               ),
             ),

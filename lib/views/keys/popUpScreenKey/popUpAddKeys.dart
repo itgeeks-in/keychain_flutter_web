@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:key_admin_panel/utils/CustomImagePicker.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
+import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
 
 class PopUpAddKeys extends StatefulWidget {
@@ -159,26 +160,30 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
                   width: 80,
                 ),
                 Container(
-                  width: 120,
-                  height: 40,
-                  // color: Colors.red,
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Add Key',
-                      style: TextStyle(color: Colors.white),
+                    width: 120,
+                    // height: 40,
+                    // color: Colors.red,
+                    child: RoundedButton(
+                      btnName: "Add Keys",
+                      callback: () {},
+                    )
+                    //: OutlinedButton(
+                    //   onPressed: () {},
+                    //   child: Text(
+                    //     'Add Key',
+                    //     style: TextStyle(color: Colors.white),
+                    //   ),
+                    //   style: OutlinedButton.styleFrom(
+                    //     side: BorderSide(
+                    //         // width: 5.0,
+                    //         color: Colors.white),
+                    //     backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //     ),
+                    //   ),
+                    // ),
                     ),
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                          // width: 5.0,
-                          color: Colors.white),
-                      backgroundColor: Color.fromARGB(255, 8, 185, 216),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

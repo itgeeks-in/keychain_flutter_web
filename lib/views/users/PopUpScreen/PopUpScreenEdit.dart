@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
+import 'package:key_admin_panel/utils/RoundedButton.dart';
 
 class PopUpScreenEditUser extends StatefulWidget {
   const PopUpScreenEditUser({super.key});
@@ -104,22 +105,29 @@ class _PopUpScreenEditUserState extends State<PopUpScreenEditUser> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 50, right: 50, top: 50),
-            child: Center(
-                child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        shadowColor: const Color.fromARGB(255, 8, 185, 216),
-                        elevation: 12,
-                        backgroundColor: const Color.fromARGB(255, 8, 185, 216)
-                        //  (state
-                        //         is SignInValidState)
-                        //     ? Colors.green
-                        //     : Color.fromARGB(255, 8, 185, 216)
-                        ),
-                    child: const Text(
-                      'User Update',
-                      style: TextStyle(color: Colors.white),
-                    ))),
+            child: Container(
+              // width: 120,
+              child: RoundedButton(
+                btnName: "User Update",
+                callback: () {},
+              ),
+            ),
+            // Center(
+            //     child: ElevatedButton(
+            //         onPressed: () {},
+            //         style: ElevatedButton.styleFrom(
+            //             shadowColor: const Color.fromARGB(255, 8, 185, 216),
+            //             elevation: 12,
+            //             backgroundColor: const Color.fromARGB(255, 8, 185, 216)
+            //             //  (state
+            //             //         is SignInValidState)
+            //             //     ? Colors.green
+            //             //     : Color.fromARGB(255, 8, 185, 216)
+            //             ),
+            //         child: const Text(
+            //           'User Update',
+            //           style: TextStyle(color: Colors.white),
+            //         ))),
           ),
         ],
       ),

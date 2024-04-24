@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
+import 'package:key_admin_panel/utils/RoundedButton.dart';
 
 class PopUpAddUser extends StatefulWidget {
   @override
@@ -101,19 +102,24 @@ class _PopUpAddUserState extends State<PopUpAddUser> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50, top: 50),
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    shadowColor: Color.fromARGB(255, 8, 185, 216),
-                    elevation: 12,
-                    backgroundColor: Color.fromARGB(255, 8, 185, 216),
-                  ),
-                  child: Text(
-                    'Add User',
-                    style: TextStyle(color: Colors.white),
-                  ),
+              child: Container(
+                width: 120,
+                child: RoundedButton(
+                  btnName: "Add User",
+                  callback: () {},
                 ),
+                // ElevatedButton(
+                //   onPressed: () {},
+                //   style: ElevatedButton.styleFrom(
+                //     shadowColor: Color.fromARGB(255, 8, 185, 216),
+                //     elevation: 12,
+                //     backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                //   ),
+                //   child: Text(
+                //     'Add User',
+                //     style: TextStyle(color: Colors.white),
+                //   ),
+                // ),
               ),
             ),
           ],

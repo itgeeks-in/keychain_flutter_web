@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/views/home/home_page_ui.dart';
 import 'package:key_admin_panel/views/login/bloc/SignIn_bloc.dart';
 import 'package:key_admin_panel/views/login/bloc/SignIn_state.dart';
@@ -202,32 +203,43 @@ class _SignInScreenState extends State<SignInScreen> {
                                     child: CircularProgressIndicator(),
                                   );
                                 }
-
                                 return Container(
-                                  width: 120,
-                                  child: ElevatedButton(
-                                      onPressed: () {
+                                    width: 120,
+                                    child: RoundedButton(
+                                      callback: () {
                                         BlocProvider.of<SignInBloc>(context)
                                             .add(SignInSubmittedEvent(
                                                 emailController.text,
                                                 passwordController.text));
                                       },
-                                      style: ElevatedButton.styleFrom(
-                                          shadowColor: const Color.fromARGB(
-                                              255, 8, 185, 216),
-                                          elevation: 12,
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 8, 185, 216)
-                                          //  (state
-                                          //         is SignInValidState)
-                                          //     ? Colors.green
-                                          //     : Color.fromARGB(255, 8, 185, 216)
-                                          ),
-                                      child: const Text(
-                                        'Login',
-                                        style: TextStyle(color: Colors.white),
-                                      )),
-                                );
+                                      btnName: "Login",
+                                    ));
+
+                                // return Container(
+                                //   width: 120,
+                                //   child: ElevatedButton(
+                                //       onPressed: () {
+                                //         BlocProvider.of<SignInBloc>(context)
+                                //             .add(SignInSubmittedEvent(
+                                //                 emailController.text,
+                                //                 passwordController.text));
+                                //       },
+                                //       style: ElevatedButton.styleFrom(
+                                //           shadowColor: const Color.fromARGB(
+                                //               255, 8, 185, 216),
+                                //           elevation: 12,
+                                //           backgroundColor: const Color.fromARGB(
+                                //               255, 8, 185, 216)
+                                //           //  (state
+                                //           //         is SignInValidState)
+                                //           //     ? Colors.green
+                                //           //     : Color.fromARGB(255, 8, 185, 216)
+                                //           ),
+                                //       child: const Text(
+                                //         'Login',
+                                //         style: TextStyle(color: Colors.white),
+                                //       )),
+                                // );
                               },
                             )
                           ],
