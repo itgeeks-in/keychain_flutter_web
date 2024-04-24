@@ -22,8 +22,7 @@ class MyApp extends StatelessWidget {
         body: Center(
           child: BlocProvider(
             create: (context) => SignInBloc(),
-            // child: const SignInScreen(),
-            child: HomePageUI(),
+            child: const SignInScreen(),
           ),
         ),
       ),
