@@ -18,14 +18,6 @@ class _HomePageUIState extends State<HomePageUI> {
   bool isExpanded = true;
   int _selectedIndex = 0;
 
-  // final List<Widget> _screens = [
-  //   HomeScreen(),
-  //   ReportsScreen(),
-  //   // KeyPageUI(),
-  //   ProfileScreen(),
-  //   SettingsScreen(),
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,10 +31,6 @@ class _HomePageUIState extends State<HomePageUI> {
             ),
             indicatorColor: Colors.white,
             extended: isExpanded,
-            // useIndicator: true,
-            // elevation: 50,
-
-            // labelType: NavigationRailLabelType.all,
             backgroundColor: Color.fromARGB(255, 8, 185, 216),
             unselectedIconTheme: IconThemeData(color: Colors.white, opacity: 1),
             unselectedLabelTextStyle: TextStyle(
@@ -71,7 +59,7 @@ class _HomePageUIState extends State<HomePageUI> {
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.palette_rounded),
-                label: Text("Category "),
+                label: Text("Category"),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.person_rounded),
@@ -93,15 +81,13 @@ class _HomePageUIState extends State<HomePageUI> {
             child: Column(
               children: [
                 Container(
-                  // color: Colors.white,
                   decoration:
                       BoxDecoration(color: Colors.white, boxShadow: const [
-                    // BoxShadow(
-                    //   color: Colors.white,
-                    //   blurRadius: 4,
-                    //   spreadRadius: 2,
-                    //   // offset: Offset(0, 10),
-                    // )
+                    BoxShadow(
+                      color: Colors.white,
+                      blurRadius: 4,
+                      spreadRadius: 2,
+                    )
                   ]),
                   padding: const EdgeInsets.all(8),
                   child: Row(
@@ -115,21 +101,21 @@ class _HomePageUIState extends State<HomePageUI> {
                         icon: Icon(Icons.menu),
                       ),
                       TextButton(
-                        child: const Text(
-                          'Dashboard',
+                        child: Text(
+                          _getLabelForIndex(_selectedIndex),
                           style: TextStyle(color: Colors.black87),
                         ),
                         onPressed: () {},
                       ),
                       const Spacer(),
                       IconButton(
-                        icon: const Icon(Icons.notification_important,
+                        icon: Icon(Icons.notification_important,
                             color: Colors.black87),
                         onPressed: () {},
                       ),
                       const SizedBox(width: 12),
                       IconButton(
-                        icon: const Icon(Icons.power_settings_new,
+                        icon: Icon(Icons.power_settings_new,
                             color: Colors.black87),
                         onPressed: () {},
                       ),
@@ -141,20 +127,34 @@ class _HomePageUIState extends State<HomePageUI> {
                   height: 1,
                   color: Colors.black12,
                 ),
-
                 Expanded(child: buildPages()),
-                // Padding(
-                //   padding: EdgeInsets.all(8.0),
-                //   child: SingleChildScrollView(
-                //     child: _screens[_selectedIndex],
-                //   ),
-                // ),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  String _getLabelForIndex(int index) {
+    switch (index) {
+      case 0:
+        return 'Dashboard';
+      case 1:
+        return 'Users';
+      case 2:
+        return 'Keys';
+      case 3:
+        return 'Plans';
+      case 4:
+        return 'Category';
+      case 5:
+        return 'Profile';
+      case 6:
+        return 'Logout';
+      default:
+        return '';
+    }
   }
 
   Widget buildPages() {
@@ -167,18 +167,12 @@ class _HomePageUIState extends State<HomePageUI> {
         return const KeyPageUI();
       case 5:
         return const ProfilePage();
-
       case 3:
         return const PlanPage();
-      // return HomeScreen();
-      case 4:
-      // return const ProfilePage();
-      case 6:
-      // return HomeScreen();
       default:
         return Container(
           child: Text("This is Screen Not Present"),
-        ); // or any other default widget you prefer
+        );
     }
   }
 }
