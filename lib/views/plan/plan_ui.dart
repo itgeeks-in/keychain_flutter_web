@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 
@@ -406,20 +407,29 @@ class _PlanPageState extends State<PlanPage> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: Text(
-            'Edit Plan',
-            style: TextStyle(color: Color.fromARGB(255, 8, 185, 216)),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Edit Plan',
+                style: TextStyle(color: Color.fromARGB(255, 8, 185, 216)),
+              ),
+              InkWell(
+                child: Icon(
+                  Icons.close_outlined,
+                  color: Color.fromARGB(255, 8, 185, 216),
+                ),
+              )
+            ],
           ),
           content: Container(
             width: 350,
             height: 250,
             child: Center(
               child: Column(
-                // mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    // margin: EdgeInsets.only(top: 10, bottom: 10),
                     child: CustomTextField(
                       controller: nameController,
                       isPassVisible: false,
@@ -428,6 +438,7 @@ class _PlanPageState extends State<PlanPage> {
                       hintText: "Enter your Capture Title",
                     ),
                   ),
+
                   Container(
                     // margin: EdgeInsets.only(top: 20, bottom: 5),
                     child: CustomTextField(
@@ -460,36 +471,11 @@ class _PlanPageState extends State<PlanPage> {
             ),
           ),
           actions: [
-            // Padding(
-            //   padding: const EdgeInsets.all(15),
-            //   child:
-            //    TextButton(
-            //     style: ButtonStyle(
-            //       foregroundColor: MaterialStatePropertyAll(Colors.white),
-            //       backgroundColor: MaterialStatePropertyAll(
-            //           Color.fromARGB(255, 8, 185, 216)),
-            //       elevation: MaterialStatePropertyAll(2),
-            //       textStyle: MaterialStatePropertyAll(
-            //         TextStyle(color: Colors.white),
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       setState(() {
-            //         plan.name = nameController.text;
-            //         plan.price = priceController.text;
-            //       });
-            //       Navigator.of(context).pop();
-            //     },
-            //     child: Text(
-            //       'Save',
-            //     ),
-            //   ),
-            // ),
-
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  margin: EdgeInsets.only(bottom: 20),
                   width: 100,
                   child: RoundedButton(
                     btnName: "Save",
@@ -502,33 +488,8 @@ class _PlanPageState extends State<PlanPage> {
                     },
                   ),
                 ),
-                Container(
-                  width: 100,
-                  child: RoundedButton(
-                    btnName: "Cancel",
-                    callback: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                )
               ],
             ),
-
-            // TextButton(
-            //   style: ButtonStyle(
-            //     foregroundColor: MaterialStatePropertyAll(Colors.white),
-            //     backgroundColor:
-            //         MaterialStatePropertyAll(Color.fromARGB(255, 8, 185, 216)),
-            //     elevation: MaterialStatePropertyAll(2),
-            //     textStyle: MaterialStatePropertyAll(
-            //       TextStyle(color: Colors.white),
-            //     ),
-            //   ),
-            //   onPressed: () {
-            //     Navigator.of(context).pop();
-            //   },
-            //   child: Text('Cancel'),
-            // ),
           ],
         );
       },
