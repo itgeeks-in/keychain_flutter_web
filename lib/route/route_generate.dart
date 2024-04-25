@@ -10,7 +10,7 @@ class RouteGenerate {
   static const String selectionScreen = "/SelectionScreen";
   static const String passwordRecover = "/passwordRecover";
   static const String signIn = "/signIn";
-  static const String login = "/login";
+  static const String login = "/login_screen";
   static const String analyseResultScreen = "/analyseResultScreen";
   static const String cameraPreviewScreen = "/cameraPreviewScreen";
 
