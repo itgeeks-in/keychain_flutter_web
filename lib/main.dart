@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:key_admin_panel/views/sidebar_drawer/side_drawer.dart';
-import 'package:key_admin_panel/views/login/bloc/SignIn_bloc.dart';
-import 'package:key_admin_panel/views/login/login_page_ui.dart';
+import 'package:key_admin_panel/views/login_screen/login_screen.dart';
 
 const Color darkBlue = Colors.white;
 
@@ -20,10 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: BlocProvider(
-            create: (context) => SignInBloc(),
-            child: const SignInScreen(),
-          ),
+          child: const LoginScreen(),
         ),
       ),
     );
