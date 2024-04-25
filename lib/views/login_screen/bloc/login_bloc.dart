@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/model/user_model.dart';
+import 'package:key_admin_panel/utils/session.dart';
 import 'package:key_admin_panel/views/login_screen/bloc/login_state.dart';
 import 'package:key_admin_panel/views/login_screen/bloc/login_event.dart';
+import 'package:key_admin_panel/views/login_screen/login_screen_presenter.dart';
 class  LoginBloc extends Bloc<LoginEvent,LoginState>{
   LoginBloc() : super(LoginInitialState()){
     // todo : on click login button event
@@ -16,7 +21,7 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
             if(event.password.length < 4){
               emit(PassInvalidState());
             } else {
-              emit(SuccessState());
+              loginAPI(event.email, event.password);
             }
           }
         } else {
@@ -42,5 +47,20 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
         '[a-z0-9]+@[a-z0-9]+.[a-z]{2,3}';
     RegExp regExp = new RegExp(pattern);
     return regExp.hasMatch(value);
+  }
+
+  Future<void> loginAPI(email,password) async {
+   var result = await LoginScreenPresenter().loginAPI(email, password);
+   Session session = Session();
+   Map<String,dynamic> parsed = jsonDecode(result.toString());
+   if(parsed['status']){
+     UserDataModel userDataModel = UserDataModel.fromJson(parsed);
+     await session.setToken(userDataModel.result.token);
+     session.setLoginUserData("$result");
+     emit(SuccessState());
+   }else{
+     print("<<<<<<<<<<<<<<<<<<<<<<<< failed message."+ parsed['message']);
+     emit(FailedState(parsed['message']));
+   }
   }
 }
