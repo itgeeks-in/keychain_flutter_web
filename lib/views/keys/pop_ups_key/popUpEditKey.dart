@@ -1,23 +1,35 @@
-
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:key_admin_panel/utils/CustomImagePicker.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
-import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpAddKeys.dart';
+import 'package:key_admin_panel/views/keys/pop_ups_key/popUpAddKeys.dart';
 
-class PopUpViewKey extends StatefulWidget {
-  const PopUpViewKey({super.key});
+
+class PopUpEditkey extends StatefulWidget {
+  const PopUpEditkey({super.key});
 
   @override
-  State<PopUpViewKey> createState() => _PopUpViewKeyState();
+  State<PopUpEditkey> createState() => _PopUpEditkeyState();
 }
 
-class _PopUpViewKeyState extends State<PopUpViewKey> {
+class _PopUpEditkeyState extends State<PopUpEditkey> {
   bool isPassVisible = false;
+  Uint8List? _image;
+
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = img;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -50,7 +62,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
           ),
           Center(
             child: const Text(
-              "View Key",
+              "Edit Key",
               style: TextStyle(
                   color: Color.fromARGB(255, 8, 185, 216),
                   fontSize: 32,
@@ -90,24 +102,60 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
           Padding(
             padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                    padding: EdgeInsets.all(8.0),
-                    // margin: EdgeInsets.only(top: 20, left: 50),
-                    width: 140,
-                    height: 140,
-                    child: Image.asset("assets/keys.jpg", fit: BoxFit.contain),
-                    // child:picker,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      border: Border.all(
-                        width: 2,
-                        color: Color.fromARGB(255, 8, 185, 216),
+                Column(
+                  children: [
+                    _image != null
+                        ? Container(
+                            padding: EdgeInsets.all(8.0),
+                            width: 140,
+                            height: 140,
+                            // child:
+                            // Image.asset("assets/keys.jpg", fit: BoxFit.contain),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: MemoryImage(_image!),
+                                fit: BoxFit.cover,
+                              ),
+                              color: Colors.white,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20)),
+                              border: Border.all(
+                                width: 2,
+                                color: Color.fromARGB(255, 8, 185, 216),
+                              ),
+                            ))
+                        : Container(
+                            padding: EdgeInsets.all(8.0),
+                            width: 140,
+                            height: 140,
+                            child: Image.asset("assets/keys.jpg",
+                                fit: BoxFit.contain),
+                            decoration: BoxDecoration(
+                              // image: DecorationImage(
+                              //   image: MemoryImage(_image!),
+                              //   fit: BoxFit.cover,
+                              // ),
+                              color: Colors.white,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20)),
+                              border: Border.all(
+                                width: 2,
+                                color: Color.fromARGB(255, 8, 185, 216),
+                              ),
+                            )),
+                    InkWell(
+                      onTap: selectImage,
+                      child: Text(
+                        "Upload Image",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 8, 185, 216),
+                        ),
                       ),
-                    )),
+                    )
+                  ],
+                ),
                 SizedBox(
                   width: 80,
                 ),
@@ -115,15 +163,13 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                     width: 120,
                     // height: 40,
                     child: RoundedButton(
-                      btnName: "Close",
+                      btnName: "Key Update",
                       callback: () {},
                     )
                     //  OutlinedButton(
-                    //   onPressed: () {
-                    //     Navigator.pop(context);
-                    //   },
+                    //   onPressed: () {},
                     //   child: Text(
-                    //     'Close',
+                    //     'key Update',
                     //     style: TextStyle(color: Colors.white),
                     //   ),
                     //   style: OutlinedButton.styleFrom(

@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
-import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpAddKeys.dart';
-import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpEditKey.dart';
-import 'package:key_admin_panel/views/keys/popUpScreenKey/popUpViewKeys.dart';
+import 'package:key_admin_panel/views/keys/pop_ups_key/popUpAddKeys.dart';
+
+import 'package:key_admin_panel/views/keys/pop_ups_key/popUpEditKey.dart';
+import 'package:key_admin_panel/views/keys/pop_ups_key/popUpViewKeys.dart';
 
 class KeyPageUI extends StatefulWidget {
   const KeyPageUI({super.key});

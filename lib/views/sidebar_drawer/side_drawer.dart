@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:key_admin_panel/views/home/homescreen.dart';
+import 'package:key_admin_panel/utils/dialogs.dart';
+import 'package:key_admin_panel/views/home/home_screen.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/plan/plan_ui.dart';
-import 'package:key_admin_panel/views/profile/profilePagea.dart';
+import 'package:key_admin_panel/views/profile/profile_page_ui.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
 import '../../utils/theme_text.dart';
@@ -69,14 +70,21 @@ class _HomePageUIState extends State<SideDrawer> {
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.logout),
+
                 label: Text("Logout"),
               ),
             ],
             selectedIndex: _selectedIndex,
             onDestinationSelected: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
+              print("??????");
+
+                setState(() {
+                  _selectedIndex = index;
+                });
+              if(_selectedIndex==6){
+                Dialogs().logoutPopup(context, "en");
+              }
+
             },
           ),
           Expanded(
@@ -119,7 +127,10 @@ class _HomePageUIState extends State<SideDrawer> {
                       IconButton(
                         icon: Icon(Icons.power_settings_new,
                             color: Colors.black87),
-                        onPressed: () {},
+                        onPressed: () {
+                          Dialogs().logoutPopup(context, "en");
+
+                        },
                       ),
                       const SizedBox(width: 12),
                     ],
@@ -160,8 +171,7 @@ class _HomePageUIState extends State<SideDrawer> {
         return 'Category';
       case 5:
         return 'Profile';
-      case 6:
-        return 'Logout';
+
       default:
         return '';
     }
@@ -179,7 +189,10 @@ class _HomePageUIState extends State<SideDrawer> {
         return const ProfilePage();
       case 3:
         return const PlanPage();
+      case 6:
+        return HomeScreen();
       default:
+
         return Container(
           child: Text("This is Screen Not Present",style: ThemeText.textMediumGrey),
         ); // or any other default widget you prefer

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/dialogs.dart';
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
@@ -10,9 +12,16 @@ class HomeScreen extends StatelessWidget {
     Color.fromARGB(255, 238, 97, 3),
     Colors.red
   ];
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+    return WillPopScope(
+        onWillPop: () async {
+      return Dialogs().isBack(context, "en");
+    },
+    child: Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -21,24 +30,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  // Card(
-                  //   margin: EdgeInsets.zero,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(0),
-                  //   ),
-                  //   child: Container(
-                  //     color: Colors.white,
-                  //     padding: const EdgeInsets.all(20),
-                  //     child: const Row(
-                  //       children: [
-                  //         Text(
-                  //           'Home >',
-                  //           style: TextStyle(color: Colors.black),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
+
                   Row(
                     children: [
                       _container(0, "Total users", "1000"),
@@ -68,43 +60,16 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+    )
     );
   }
 
-//   Widget _container(int index, String heading, String count) {
-//     return Expanded(
-//       child: Container(
-//         color: colors[index],
-//         margin: EdgeInsets.all(20),
-//         // width: 250,
-//         height: 180,
-//         padding: const EdgeInsets.all(10),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Row(
-//               children: [
-//                 Expanded(
-//                   child: Text(
-//                     count,
-//                     style: const TextStyle(fontSize: 24),
-//                   ),
-//                 ),
-//                 const Icon(Icons.more_vert),
-//               ],
-//             ),
-//             Text(heading),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+
 
   Widget _container(int index, String heading, String count) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         // width: 250,
         height: 180,
         padding: const EdgeInsets.all(5),
@@ -120,9 +85,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        count,
-                        style:
-                            const TextStyle(fontSize: 24, color: Colors.white),
+                        count, style: const TextStyle(fontSize: 24, color: Colors.white),
                       ),
                     ),
                     const Icon(Icons.more_vert, color: Colors.white),

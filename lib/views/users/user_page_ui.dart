@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:key_admin_panel/views/users/PopUpScreen/PopUpAddUser.dart';
-import 'package:key_admin_panel/views/users/PopUpScreen/PopUpScreenEdit.dart';
-import 'package:key_admin_panel/views/users/PopUpScreen/PopUpViewUser.dart';
+
+import 'Popups_user/PopUpAddUser.dart';
+import 'Popups_user/PopUpScreenEdit.dart';
+import 'Popups_user/PopUpViewUser.dart';
+
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
