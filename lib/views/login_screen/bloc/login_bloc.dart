@@ -59,7 +59,6 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
      session.setLoginUserData("$result");
      emit(SuccessState());
    }else{
-     print("<<<<<<<<<<<<<<<<<<<<<<<< failed message."+ parsed['message']);
      emit(FailedState(parsed['message']));
    }
   }
