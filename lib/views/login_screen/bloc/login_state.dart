@@ -22,6 +22,9 @@ class FailedState extends LoginState {
   FailedState(this.message);
 }
 
+class NonAdminState extends LoginState{
+
+}
 class OnChangeIconState extends LoginState {
   bool isVisible;
   OnChangeIconState(this.isVisible);

@@ -62,7 +62,8 @@ class Dialogs {
           ButtonWidget().buttonWidgetPrimary("Yes", () async => {
          await   Session().removeValues(),
           Navigator.of(context)
-              .pushReplacementNamed(RouteGenerate.selectionScreen),
+              .pushReplacementNamed(RouteGenerate.login),
+
           }, 80.0, 40.0),
         ],
       ),

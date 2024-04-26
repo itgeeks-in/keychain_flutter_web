@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:key_admin_panel/route/route_generate.dart';
 import 'package:key_admin_panel/views/login_screen/login_screen.dart';
 
 const Color darkBlue = Colors.white;
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
+        onGenerateRoute: RouteGenerate.onCreateRoute,
       home: Scaffold(
         body: Center(
           child: const LoginScreen(),
