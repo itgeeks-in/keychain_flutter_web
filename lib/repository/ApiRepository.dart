@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import '../utils/session.dart';
 import 'api_const.dart';
@@ -6,7 +5,9 @@ import 'api_const.dart';
 class ApiRepository {
   static Dio client = Dio();
 
-  static Future<dynamic> getAPI(String apiName) async {
+  // static Future<dynamic> getAPI(String apiName, {required Map<String, String> headers})
+  static Future<dynamic> getAPI(String apiName,
+      {Map<String, String>? headers}) async {
     try {
       String callingUrl;
       apiName == "health"
@@ -17,7 +18,6 @@ class ApiRepository {
         client.options.headers["authorization"] = "Bearer " + token;
       }
       print("url: ${callingUrl}");
-
 
       var response = await client.get(callingUrl);
       // todo: response come when status is 200 only
@@ -33,7 +33,6 @@ class ApiRepository {
       }
     }
   }
-
 
   static Future<dynamic> putAPI(String apiName, var formData) async {
     try {

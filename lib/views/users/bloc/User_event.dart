@@ -1,2 +1,2 @@
 // ignore: file_names
-abstract class UserEvent {}
+abstract class UsersDataEvent {}

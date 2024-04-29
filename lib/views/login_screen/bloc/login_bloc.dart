@@ -55,11 +55,14 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
    Map<String,dynamic> parsed = jsonDecode(result.toString());
    if(parsed['status']){
      UserDataModel userDataModel = UserDataModel.fromJson(parsed);
-     await session.setToken(userDataModel.result.token);
-     session.setLoginUserData("$result");
-     emit(SuccessState());
+     if(userDataModel.result.isAdmin){
+       await session.setToken(userDataModel.result.token);
+       session.setLoginUserData("$result");
+       emit(SuccessState());
+     }else{
+       emit(NonAdminState());
+     }
    }else{
-     print("<<<<<<<<<<<<<<<<<<<<<<<< failed message."+ parsed['message']);
      emit(FailedState(parsed['message']));
    }
   }

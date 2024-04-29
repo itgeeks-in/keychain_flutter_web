@@ -183,6 +183,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                       if (state is LoadState)
                                         const CircularProgressIndicator(),
+                                      if(state is NonAdminState)
+                                        Text("You are not an admin.",style: TextStyle(color: Colors.red),),
+                                      if(state is FailedState)
+                                        Text(
+                                          "Invalid User,Please try again !!!",
+                                          style: TextStyle(color:Colors.red),
+                                        ),
                                     ],
                                   ),
                                 ),
