@@ -5,24 +5,22 @@ import 'api_const.dart';
 class ApiRepository {
   static Dio client = Dio();
 
-  // static Future<dynamic> getAPI(String apiName, {required Map<String, String> headers})
-  static Future<dynamic> getAPI(String apiName,
-      {Map<String, String>? headers}) async {
+  static Future<dynamic> getAPI(String apiName) async {
     try {
       String callingUrl;
       apiName == "health"
           ? callingUrl = ApiConst.mainUrl + apiName
           : callingUrl = ApiConst.mainUrl + apiName;
       String token = await Session().getToken();
-
       if (token.isNotEmpty) {
         client.options.headers["authorization"] = "Bearer " + token;
       }
       print("url: ${callingUrl}");
 
+
       var response = await client.get(callingUrl);
       // todo: response come when status is 200 only
-     // print("$response");
+      print("$response");
       return response;
     } on DioException catch (e) {
       print("error     " + e.response.toString() + e.error.toString());
