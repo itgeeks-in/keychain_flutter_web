@@ -41,6 +41,17 @@ abstract class ThemeText {
     decoration: TextDecoration.underline,
     decorationColor: ColorConsts.primaryColor,
   );
+  static const TextStyle textSmallBlack = TextStyle(
+    fontSize: fontSmall,
+    fontFamily: family,
+    color:ColorConsts.blackColor,
+  );
+  static const TextStyle textMediumBlack = TextStyle(
+    fontSize: fontLarge,
+    fontFamily: family,
+    color:ColorConsts.blackColor,
+    fontWeight: FontWeight.bold,
+  );
   static const TextStyle textHeaderBlack = TextStyle(
     fontSize: fontLarge,
     fontFamily: family,
