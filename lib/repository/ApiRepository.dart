@@ -14,6 +14,7 @@ class ApiRepository {
           ? callingUrl = ApiConst.mainUrl + apiName
           : callingUrl = ApiConst.mainUrl + apiName;
       String token = await Session().getToken();
+
       if (token.isNotEmpty) {
         client.options.headers["authorization"] = "Bearer " + token;
       }
@@ -21,7 +22,7 @@ class ApiRepository {
 
       var response = await client.get(callingUrl);
       // todo: response come when status is 200 only
-      print("$response");
+     // print("$response");
       return response;
     } on DioException catch (e) {
       print("error     " + e.response.toString() + e.error.toString());

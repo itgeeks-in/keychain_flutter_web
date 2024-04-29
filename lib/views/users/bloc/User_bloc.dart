@@ -13,7 +13,7 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
     allUsersAPI();
   }
 
-  List<Result>? data;
+  List<Result>? data=[];
 
   // String? get accessToken => null;
   Future<void> allUsersAPI() async {
@@ -24,23 +24,29 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
 
     var result = await UserPagePresenter().allUsersAPI(accessToken);
     print("print_____________________2");
+    print("print_____________________2 \n"+result.toString());
     Map<String, dynamic> parsed = jsonDecode(result.toString());
     print("print_____________________3");
 
     if (parsed['status']) {
-      AllUserDataModel allUserDataModel =
-          AllUserDataModel.fromJson(parsed['result']);
+      print("print_____________________3.1");
+      AllUserDataModel allUserDataModel
+      = AllUserDataModel.fromJson(parsed);
 
-      print("print_____________________4");
+      print("print_____________________            4");
+      print("print_____________________            4   "+allUserDataModel.message.toString());
+      print("print_____________________            4   "+allUserDataModel.result!.length.toString());
       data!.addAll(allUserDataModel.result!);
-      print("print_____________________5${data!.first.firstName}");
+      UsersDataLoadSuccessfull(data!);
+     //
+
       // await session.setToken(allUserDataModel.result.token);
       // session.getLoginUserData("$result");
 
       // await session.setToken(userDataModel.result.token);
       // session.setLoginUserData("$result");
 
-      // emit(UsersDataSuccessfull());
+    //  emit(UsersDataSuccessfull());
     } else {
       emit(UsersDataLoadFailedError(parsed['message']));
     }

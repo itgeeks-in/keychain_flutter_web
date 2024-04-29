@@ -5,17 +5,18 @@ import 'package:key_admin_panel/repository/ApiRepository.dart';
 import 'package:key_admin_panel/repository/api_const.dart';
 
 class UserPagePresenter {
-  Future <String > allUsersAPI(String accessToken) async {
+  Future <String> allUsersAPI(String accessToken) async {
     var response = await ApiRepository.getAPI(
       ApiConst.allUsersAPI,
       headers: {
         'Authorization': 'Bearer $accessToken',
       },
     );
-    print("all user get api response -------->>>> $response");
+  //  print("all user get api response -------->>>> $response");
     if (response.statusCode == 200) {
-      print("all user get api response --------2>>>> $response");
-      return response.body;
+      print("all user get api response --------2>>>> ");
+    //  print("all user get api response --------2>>>> "+response.toString());
+      return response.toString();
     } else {
       throw Exception('Failed to load data');
     }

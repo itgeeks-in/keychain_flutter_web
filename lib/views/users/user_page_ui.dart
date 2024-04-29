@@ -421,7 +421,7 @@ class _UserPageState extends State<UserPage> {
                                           // color: Colors.amber,
                                           padding: EdgeInsets.only(left: 10),
                                           child: Text(
-                                            context
+                                           context
                                                         .read<UsersDataBloc>()
                                                         .data![index]
                                                         .firstName ==
