@@ -1,15 +1,9 @@
-
-
 class ApiConst {
-
-
   // // FIXME common base url to change // //
   static const String mainUrl = 'http://167.71.172.213';
   static const String appName = 'KEYPIT';
   static const String comparePercentage = "90";
   static const String imagePath = "$mainUrl/images/image/{user_id}/{image_id}";
-
-
 
   // TODO :   APIs
   static const String compareAPI = '/key/compare';
@@ -18,7 +12,7 @@ class ApiConst {
   static const String singleKeyByIdAPI = '/key/getkey';
   static const String signupAPI = '/auth/signup';
   static const String loginAPI = '/auth/login';
-
+  static const String allUsersAPI = "/auth/getallusers";
 
   //TODO : Api parameter for calling (fields or param)
   static const String email = 'email';
