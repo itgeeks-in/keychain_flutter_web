@@ -5,7 +5,7 @@ import 'package:key_admin_panel/repository/ApiRepository.dart';
 import 'package:key_admin_panel/repository/api_const.dart';
 
 class UserPagePresenter {
-  Future<Map<String, dynamic>> allUsersAPI(String accessToken) async {
+  Future <String > allUsersAPI(String accessToken) async {
     var response = await ApiRepository.getAPI(
       ApiConst.allUsersAPI,
       headers: {
@@ -15,7 +15,7 @@ class UserPagePresenter {
     print("all user get api response -------->>>> $response");
     if (response.statusCode == 200) {
       print("all user get api response --------2>>>> $response");
-      return json.decode(response.body);
+      return response.body;
     } else {
       throw Exception('Failed to load data');
     }
