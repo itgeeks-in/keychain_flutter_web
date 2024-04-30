@@ -7,10 +7,8 @@ import 'package:key_admin_panel/repository/api_const.dart';
 class UserPagePresenter {
   Future <String > allUsersAPI(String accessToken) async {
     var response = await ApiRepository.getAPI(
-      ApiConst.allUsersAPI,
-      headers: {
-        'Authorization': 'Bearer $accessToken',
-      },
+      ApiConst.allUsersAPI
+
     );
     print("all user get api response -------->>>> $response");
     if (response.statusCode == 200) {

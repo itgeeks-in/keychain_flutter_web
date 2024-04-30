@@ -6,8 +6,7 @@ class ApiRepository {
   static Dio client = Dio();
 
   // static Future<dynamic> getAPI(String apiName, {required Map<String, String> headers})
-  static Future<dynamic> getAPI(String apiName,
-      {Map<String, String>? headers}) async {
+  static Future<dynamic> getAPI(String apiName) async {
     try {
       String callingUrl;
       apiName == "health"
