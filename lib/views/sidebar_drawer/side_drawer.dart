@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/views/home/home_screen.dart';
-import 'package:key_admin_panel/views/keys/key_page_ui.dart';
+import 'package:key_admin_panel/views/keys/keys_screen.dart';
 import 'package:key_admin_panel/views/plan/plan_ui.dart';
 import 'package:key_admin_panel/views/profile/profile_page_ui.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
@@ -184,7 +184,7 @@ class _HomePageUIState extends State<SideDrawer> {
       case 1:
         return const UserPage();
       case 2:
-        return const KeyPageUI();
+        return const KeysScreen();
       case 5:
         return const ProfilePage();
       case 3:

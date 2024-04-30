@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'color_const.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 
 abstract class ThemeText {

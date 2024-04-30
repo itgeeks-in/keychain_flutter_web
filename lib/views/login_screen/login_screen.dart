@@ -4,6 +4,7 @@ import 'package:key_admin_panel/views/login_screen/bloc/login_state.dart';
 import 'package:key_admin_panel/views/login_screen/bloc/login_bloc.dart';
 import 'package:key_admin_panel/views/login_screen/bloc/login_event.dart';
 import 'package:key_admin_panel/views/sidebar_drawer/side_drawer.dart';
+import 'package:key_admin_panel/widgets/loader_widget.dart';
 
 import '../../utils/dialogs.dart';
 
@@ -173,22 +174,29 @@ class _LoginScreenState extends State<LoginScreen> {
                                             style: TextStyle(color:Colors.red),
                                           ),
                                         const SizedBox(height: 30),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            BlocProvider.of<LoginBloc>(context).add(
-                                              OnButtonClick(
-                                                emailController.text,
-                                                passwordController.text,
+                                        BlocBuilder<LoginBloc, LoginState>(
+                                          builder: (context, state) {
+                                            return Visibility(
+                                              visible: !(state is LoadState), // Hide the button if state is LoadState
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  BlocProvider.of<LoginBloc>(context).add(
+                                                    OnButtonClick(
+                                                      emailController.text,
+                                                      passwordController.text,
+                                                    ),
+                                                  );
+                                                },
+                                                style: ButtonStyle(
+                                                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 8, 185, 216)),
+                                                ),
+                                                child: const Text('Login', style: TextStyle(color: Colors.white)),
                                               ),
+                                              replacement: Loader().loaderWidget2(), // Show loader when state is LoadState
                                             );
                                           },
-                                          style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 8, 185, 216),),
-                                          ),
-                                          child: const Text('Login',style:TextStyle(color: Colors.white)),
                                         ),
-                                        if (state is LoadState)
-                                          const CircularProgressIndicator(),
+                                        SizedBox(height: 4),
                                         if(state is NonAdminState)
                                           Text("You are not an admin.",style: TextStyle(color: Colors.red),),
                                         if(state is FailedState)
