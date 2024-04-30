@@ -1,17 +1,19 @@
+import 'package:key_admin_panel/model/keys_model.dart';
+
 class KeyState{
 
 }
-class InitialKeysState extends KeyState{
+class InitialState extends KeyState{
 
 }
-class LoadKeysState extends KeyState{
+class LoadState extends KeyState{
 
 }
-class SucessKeysState extends KeyState{
-
-
+class SuccessState extends KeyState{
+  List<KeysData> data;
+  SuccessState(this.data);
 }
-class FailedKeysState extends KeyState{
+class FailedState extends KeyState{
   String msg;
-  FailedKeysState(this.msg);
+  FailedState(this.msg);
 }

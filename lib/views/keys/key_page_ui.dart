@@ -1,27 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/model/keys_model.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
+import 'package:key_admin_panel/views/keys/bloc/key_bloc.dart';
+import 'package:key_admin_panel/views/keys/bloc/key_state.dart';
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpAddKeys.dart';
 
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpEditKey.dart';
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpViewKeys.dart';
-
+import 'package:key_admin_panel/widgets/loader_widget.dart';
 
 class KeyPageUI extends StatefulWidget {
- const KeyPageUI({super.key});
+
+ const KeyPageUI({super.key,});
 
   @override
   State<KeyPageUI> createState() => _KeysScreenState();
+
 }
 
 class _KeysScreenState extends State<KeyPageUI> {
+  @override
+  void initState() {
+    super.initState();
+    // KeyBloc();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return SafeArea(
+      child: Padding(
         padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,132 +87,161 @@ class _KeysScreenState extends State<KeyPageUI> {
               ),
             ),
             KeyHeader(),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 8,
-                itemBuilder: (context, index) {
+
+
+            BlocProvider(
+  create: (context) => KeyBloc(),
+  child: BlocBuilder<KeyBloc,KeyState>(
+            builder: (context, state) {
+             if (state is LoadState)
+               Loader().loaderWidget2();
+             if(state is SuccessState)
+             {
                   return Container(
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        border: Border.all(
-                          width: 2,
-                          color: Color.fromARGB(255, 8, 185, 216),
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(193, 223, 212, 212),
-                            blurRadius: 8,
-                            spreadRadius: 4,
-                          )
-                        ]),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            flex: 2,
-                            child: Container(child: Image.asset("assets/keys.jpg",fit: BoxFit.fill,),
-                            )),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            child: Text(
-                              "Dumpy Key",
-                              style: ThemeText.textSmallBlack,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            padding: EdgeInsets.only(right: 35),
-                            child: const Text(
-                              "Door Key",
-                              style: ThemeText.textSmallBlack,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            // color: Colors.blue,
-                            child: const Text(
-                              "A document description is a USPTO-defined description of forms and documents that are received and processed in the USPTO.",
-                              style: ThemeText.textSmallGrey,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            child: Row(
-                              children: [
-                                Container(
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) =>
-                                        const PopUpViewKey(),
-                                      );
-                                    },
-                                    child: Text(
-                                      'View',
-                                      style: TextStyle(color: Colors.white),
+                    height: MediaQuery.of(context).size.height*0.8,
+                    child: ListView.builder(
+                      itemCount: state.data.length,
+                      itemBuilder: (context, index) {
+                        // var key = state.data[index];
+                        return
+                          Container(
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              border: Border.all(
+                                width: 2,
+                                color: Color.fromARGB(255, 8, 185, 216),
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color.fromARGB(193, 223, 212, 212),
+                                  blurRadius: 8,
+                                  spreadRadius: 4,
+                                )
+                              ]),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    child: Image.asset(
+                                     state.data[index].imagePath,
+                                      fit: BoxFit.cover,
                                     ),
-                                    style: OutlinedButton.styleFrom(
-                                      side: BorderSide(
-                                          color: Colors.white),
-                                      backgroundColor:
-                                      Color.fromARGB(255, 8, 185, 216),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
+                                  )),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  child: Text(
+                                    state.data[index].imageName,
+                                    style: ThemeText.textSmallBlack,
                                   ),
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => PopUpEditkey(),
-                                    );
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(0.0),
-                                    child: Icon(
-                                      Icons.edit_outlined,
-                                      color: Colors.white,
-                                    ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  padding: EdgeInsets.only(right: 35),
+                                  child: Text(
+                                    state.data[index].description,
+                                    style: ThemeText.textSmallBlack,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
                                   ),
-                                  style: ElevatedButton.styleFrom(
-                                    shadowColor:
-                                    Color.fromARGB(255, 8, 185, 216),
-                                    elevation: 10,
-                                    backgroundColor:
-                                    Color.fromARGB(255, 8, 185, 216),
-                                    shape: CircleBorder(),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  // color: Colors.blue,
+                                  child: Text(
+                                    state.data[index].description,
+                                    style: ThemeText.textSmallGrey,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        child: OutlinedButton(
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  const PopUpViewKey(),
+                                            );
+                                          },
+                                          child: Text(
+                                            'View',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          style: OutlinedButton.styleFrom(
+                                            side:
+                                                BorderSide(color: Colors.white),
+                                            backgroundColor: Color.fromARGB(
+                                                255, 8, 185, 216),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) =>
+                                                PopUpEditkey(),
+                                          );
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(0.0),
+                                          child: Icon(
+                                            Icons.edit_outlined,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          shadowColor:
+                                              Color.fromARGB(255, 8, 185, 216),
+                                          elevation: 10,
+                                          backgroundColor:
+                                              Color.fromARGB(255, 8, 185, 216),
+                                          shape: CircleBorder(),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
+                        );
+                      },
                     ),
                   );
-                },
-              ),
-            )
+        }else{
+          return Center(
+           child: Text("Data not Found"),
+          );
+        }
+        },
+),
+),
           ],
         ),
       ),
