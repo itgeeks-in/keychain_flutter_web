@@ -13,14 +13,13 @@ class KeyPageUI extends StatefulWidget {
  const KeyPageUI({super.key});
 
   @override
-  State<KeyPageUI> createState() => _KeyPageUIState();
+  State<KeyPageUI> createState() => _KeysScreenState();
 }
 
-class _KeyPageUIState extends State<KeyPageUI> {
+class _KeysScreenState extends State<KeyPageUI> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(10),

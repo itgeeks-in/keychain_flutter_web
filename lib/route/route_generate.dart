@@ -2,7 +2,7 @@ import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:key_admin_panel/views/keys/keys_screen.dart';
+import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/login_screen/login_screen.dart';
 import '../views/login_screen/bloc/login_bloc.dart';
 import '../views/sidebar_drawer/side_drawer.dart';
@@ -48,7 +48,7 @@ class RouteGenerate {
 
       case keyScreen:
         return MaterialPageRoute(builder: (context) {
-          return KeysScreen();
+          return KeyPageUI();
         });
     }
   }
