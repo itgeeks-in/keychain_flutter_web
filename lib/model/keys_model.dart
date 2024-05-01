@@ -21,9 +21,11 @@ class KeysData {
   String randomImageName;
   String description;
   String id;
+  String categoryName;
+  String categoryId;
 
 
-  KeysData(this.imagePath,this.backImagePath,this.edgedImagePath,this.lockImagePath,this.imageName,this.randomImageName,this.description,this.id);
+  KeysData(this.imagePath,this.backImagePath,this.edgedImagePath,this.lockImagePath,this.imageName,this.randomImageName,this.description,this.id,this.categoryName,this.categoryId);
 
   factory KeysData.fromJson(Map<dynamic, dynamic> json) {
     return KeysData(
@@ -34,8 +36,9 @@ class KeysData {
         json['imageName'] ?? "",
         json['randomImageName'] ?? "",
         json['description'] ?? "",
-        json['_id'] ?? ""
-
+        json['_id'] ?? "",
+        json['categoryName'] ?? "",
+        json['categoryId'] ?? ""
     );
   }
 }

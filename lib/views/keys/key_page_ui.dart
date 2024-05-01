@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:key_admin_panel/model/keys_model.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_bloc.dart';
@@ -26,11 +25,13 @@ class _KeysScreenState extends State<KeyPageUI> {
   @override
   void initState() {
     super.initState();
-    // KeyBloc();
   }
 
   @override
   Widget build(BuildContext context) {
+    double sizeOfHeight = MediaQuery.of(context).size.height;
+    double sizeOfWidth = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.all(10),
@@ -43,8 +44,8 @@ class _KeysScreenState extends State<KeyPageUI> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    height: 40,
+                    height:sizeOfHeight * 0.08,
+                    width: sizeOfWidth * 0.19,
                     child: TextField(
                       textAlignVertical: TextAlignVertical.bottom,
                       decoration: InputDecoration(
@@ -87,27 +88,22 @@ class _KeysScreenState extends State<KeyPageUI> {
               ),
             ),
             KeyHeader(),
-
-
             BlocProvider(
-  create: (context) => KeyBloc(),
-  child: BlocBuilder<KeyBloc,KeyState>(
-            builder: (context, state) {
-             if (state is LoadState)
-               Loader().loaderWidget2();
-             if(state is SuccessState)
-             {
+              create: (context) => KeyBloc(),
+              child: BlocBuilder<KeyBloc,KeyState>(
+              builder: (context, state) {
+              if(state is SuccessState)
+              {
                   return Container(
-                    height: MediaQuery.of(context).size.height*0.8,
+                    height: MediaQuery.of(context).size.height*0.6,
                     child: ListView.builder(
                       itemCount: state.data.length,
                       itemBuilder: (context, index) {
-                        // var key = state.data[index];
-                        return
-                          Container(
-                          height: MediaQuery.of(context).size.height * 0.15,
+                        return Container(
+                          height: sizeOfHeight * 0.14,
+                          width: sizeOfWidth-10,
                           margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius:
@@ -124,108 +120,97 @@ class _KeysScreenState extends State<KeyPageUI> {
                                 )
                               ]),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    child: Image.asset(
-                                     state.data[index].imagePath,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Text(
-                                    state.data[index].imageName,
-                                    style: ThemeText.textSmallBlack,
-                                  ),
+                              Container(
+                                width:50,
+                                height:80 ,
+                                child: Image.network(
+                                 state.data[index].imagePath,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  padding: EdgeInsets.only(right: 35),
-                                  child: Text(
-                                    state.data[index].description,
-                                    style: ThemeText.textSmallBlack,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                  ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                child: Text(
+                                  state.data[index].imageName,
+                                  style: ThemeText.textSmallBlack,
                                 ),
                               ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  // color: Colors.blue,
-                                  child: Text(
-                                    state.data[index].description,
-                                    style: ThemeText.textSmallGrey,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                  ),
+                              Container(
+                                padding: EdgeInsets.only(right: 35),
+                                child: Text(
+                                  state.data[index].categoryName,
+                                  style: ThemeText.textSmallBlack,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
                                 ),
                               ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        child: OutlinedButton(
-                                          onPressed: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  const PopUpViewKey(),
-                                            );
-                                          },
-                                          child: Text(
-                                            'View',
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          style: OutlinedButton.styleFrom(
-                                            side:
-                                                BorderSide(color: Colors.white),
-                                            backgroundColor: Color.fromARGB(
-                                                255, 8, 185, 216),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      ElevatedButton(
+                              Container(
+                                child: Text(
+                                  state.data[index].description,
+                                  style: ThemeText.textSmallGrey,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                ),
+                              ),
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      child: OutlinedButton(
                                         onPressed: () {
                                           showDialog(
                                             context: context,
                                             builder: (context) =>
-                                                PopUpEditkey(),
+                                                const PopUpViewKey(),
                                           );
                                         },
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(0.0),
-                                          child: Icon(
-                                            Icons.edit_outlined,
-                                            color: Colors.white,
+                                        child: Text(
+                                          'View',
+                                          style:
+                                              TextStyle(color: Colors.white),
+                                        ),
+                                        style: OutlinedButton.styleFrom(
+                                          side:
+                                              BorderSide(color: Colors.white),
+                                          backgroundColor: Color.fromARGB(
+                                              255, 8, 185, 216),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                         ),
-                                        style: ElevatedButton.styleFrom(
-                                          shadowColor:
-                                              Color.fromARGB(255, 8, 185, 216),
-                                          elevation: 10,
-                                          backgroundColor:
-                                              Color.fromARGB(255, 8, 185, 216),
-                                          shape: CircleBorder(),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              PopUpEditkey(),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(0.0),
+                                        child: Icon(
+                                          Icons.edit_outlined,
+                                          color: Colors.white,
                                         ),
-                                      )
-                                    ],
-                                  ),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        shadowColor:
+                                            Color.fromARGB(255, 8, 185, 216),
+                                        elevation: 10,
+                                        backgroundColor:
+                                            Color.fromARGB(255, 8, 185, 216),
+                                        shape: CircleBorder(),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               )
                             ],
@@ -234,14 +219,13 @@ class _KeysScreenState extends State<KeyPageUI> {
                       },
                     ),
                   );
-        }else{
-          return Center(
-           child: Text("Data not Found"),
-          );
-        }
-        },
-),
-),
+             }
+              else{
+                    return Center(child: Loader().loaderWidget2());
+              }
+             },
+             ),
+            ),
           ],
         ),
       ),
@@ -255,7 +239,7 @@ class KeyHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.09,
+      height: MediaQuery.of(context).size.height * 0.08,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -277,7 +261,7 @@ class KeyHeader extends StatelessWidget {
             flex: 1,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("Image", style: ThemeText.textMediumBlack, textAlign: TextAlign.start,),
+              child: Text("Image", style: ThemeText.textMediumBlack, textAlign: TextAlign.center,),
             ),
           ),
           Expanded(
@@ -305,7 +289,7 @@ class KeyHeader extends StatelessWidget {
             flex: 1,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("Action", style: ThemeText.textMediumBlack, textAlign: TextAlign.start,),
+              child: Text("Action", style: ThemeText.textMediumBlack, textAlign: TextAlign.center,),
             ),
           ),
         ],
