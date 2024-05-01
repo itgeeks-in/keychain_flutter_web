@@ -1,12 +1,7 @@
-// ignore_for_file: file_names, prefer_typing_uninitialized_variables
-
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:key_admin_panel/model/alluser_datamodel.dart';
 import 'package:key_admin_panel/views/users/bloc/User_bloc.dart';
 import 'package:key_admin_panel/views/users/bloc/User_state.dart';
@@ -35,16 +30,6 @@ class User {
 }
 
 class _UserPageState extends State<UserPage> {
-  // var data;
-  // Future<void> getUserData() async {
-  //   final response =
-  //       await http.get(Uri.parse('http://167.71.172.213/auth/getallusers'));
-  //   if (response.statusCode == 200) {
-  //     data = json.decode(response.body);
-
-  //     print("data response----------" + data + "dfsfds");
-  //   } else {}
-  // }
   void onViewUser(Result result) {
     User user = User(
       firstName: result.firstName ?? 'N/A',
@@ -54,7 +39,7 @@ class _UserPageState extends State<UserPage> {
 
     showDialog(
       context: context,
-      builder: (context) => PopupViewUser(user: user),
+      builder: (context) => PopupViewUser(),
     );
   }
 
@@ -224,7 +209,11 @@ class _UserPageState extends State<UserPage> {
                 child: BlocBuilder<UsersDataBloc, UsersDataState>(
                   builder: (context, state) {
                     if (state is UsersDataLoadSuccessfull) {
-                      return Container(
+                      return
+                          //  Container(
+                          //   child: Text("data found"),
+                          // );
+                          Container(
                         child: ListView.builder(
                           itemCount: state.data.length,
                           itemBuilder: (context, index) {
@@ -260,11 +249,7 @@ class _UserPageState extends State<UserPage> {
                                         // color: Colors.amber,
                                         padding: EdgeInsets.only(left: 10),
                                         child: Text(
-                                          state.data![index].firstName
-                                                  .toString() +
-                                              " " +
-                                              state.data![index].lastName
-                                                  .toString(),
+                                          "${state.data[index].firstName} ${state.data[index].lastName}",
                                           // data!.result![index].firstName
                                           //     .toString(),
                                           // data[index]['name'].toString(),
@@ -279,7 +264,7 @@ class _UserPageState extends State<UserPage> {
                                     Expanded(
                                       flex: 2,
                                       child: Text(
-                                        state.data![index].email.toString(),
+                                        state.data[index].email.toString(),
                                         // data[index]['email'].toString(),
                                         style: const TextStyle(
                                           color: Colors.black,
@@ -316,7 +301,7 @@ class _UserPageState extends State<UserPage> {
                                       flex: 2,
                                       child: Container(
                                         // color: Colors.amber,
-                                        // height: ,
+
                                         child: Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
@@ -327,7 +312,7 @@ class _UserPageState extends State<UserPage> {
                                               width: 80,
                                               child: OutlinedButton(
                                                 onPressed: () => onViewUser(
-                                                    state.data![index]),
+                                                    state.data[index]),
                                                 // onPressed: () {
                                                 //   showDialog(
                                                 //     context: context,

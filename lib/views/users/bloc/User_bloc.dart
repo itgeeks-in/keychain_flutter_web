@@ -23,9 +23,6 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
 
       //Map<String, dynamic> parsed = jsonDecode(dataFromAPi.toString());
 
-      //  UserDataModel userDataModel = UserDataModel.fromJson(parsed);
-
-      // List<Result> ll = [];
       dataFromAPi.forEach((element) {
         data.add(Result.fromJson(element));
       });
@@ -33,14 +30,6 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
       print("--------------<><><><>---------");
       print(data);
       print("-------------<><><><><>----------");
-      // print("---------------------------------");
-      // print("print_____________________1+${allUserData}");
-      // print("---------------------------------");
-
-      // allUserData.forEach((userData) {
-      //   print("---------------------------------");
-      //   print("print_____________________2+${allUserData[2]}");
-      //   print("---------------------------------");
 
       if (data.isNotEmpty) {
         // data.addAll(userData.result!);
@@ -49,9 +38,6 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
         print("print_____________________2.2");
         // print(data.length);
       }
-      // print("print_____________________3");
-
-      // );
     } catch (error) {
       emit(UsersDataLoadFailedError(error.toString()));
     }

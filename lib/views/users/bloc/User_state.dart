@@ -9,14 +9,9 @@ class AllUsersDataInitialState extends UsersDataState {}
 class AllUsersDataLoadingState extends UsersDataState {}
 
 class UsersDataLoadSuccessfull extends UsersDataState {
-  // List<Result> data;
-  // UsersDataLoadSuccessfull(this.data);
+  List<Result> data;
+  UsersDataLoadSuccessfull(this.data);
 }
-
-// class UsersDataSuccessfull extends UsersDataState {
-//   List<Result> dataa;
-//   UsersDataSuccessfull(this.dataa);
-// }
 
 class UsersDataLoadFailedError extends UsersDataState {
   final String message;
