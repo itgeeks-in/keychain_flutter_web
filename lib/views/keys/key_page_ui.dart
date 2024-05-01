@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/theme/app_assets.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_bloc.dart';
@@ -125,7 +126,9 @@ class _KeysScreenState extends State<KeyPageUI> {
                                   child: Container(
                                     height: 100,
                                     width: 80,
-                                    child:Image.network(
+                                    child:state.data[index].imagePath.isEmpty
+                                        ? Image.asset(AppAssets.notFoundImg)
+                                        : Image.network(
                                       state.data[index].imagePath,
                                       fit: BoxFit.cover,
                                     ),
@@ -158,8 +161,8 @@ class _KeysScreenState extends State<KeyPageUI> {
                                 child: Container(
                                   padding: EdgeInsets.only(left: 20),
                                   child: Text(
-                                    state.data[index].imageName,
-                                    style: ThemeText.textSmallBlack,
+                                    state.data[index].imageName.isNotEmpty ? state.data[index].imageName:'Not found',
+                                    style: ThemeText.textMediumSecondary,
                                   ),
                                 ),
                               ),
@@ -168,9 +171,9 @@ class _KeysScreenState extends State<KeyPageUI> {
                                 child: Container(
                                   padding: EdgeInsets.only(right: 35),
                                   child: Text(
-                                    state.data[index].categoryName,
-                                    style: ThemeText.textSmallBlack,
-                                    maxLines: 2,
+                                    state.data[index].categoryName.isNotEmpty ? state.data[index].categoryName:'Not found',
+                                    style: ThemeText.textMediumSecondary,
+                                    maxLines: 3,
                                     overflow: TextOverflow.ellipsis,
                                     softWrap: true,
                                   ),
@@ -181,9 +184,9 @@ class _KeysScreenState extends State<KeyPageUI> {
                                 child: Container(
                                   padding: EdgeInsets.only(right:20),
                                   child:  Text(
-                                    state.data[index].description,
-                                    style: ThemeText.textSmallGrey,
-                                    maxLines: 2,
+                                    state.data[index].description.isNotEmpty ? state.data[index].description : 'Not found',
+                                    style: ThemeText.textMediumSecondary,
+                                    maxLines: 3,
                                     overflow: TextOverflow.ellipsis,
                                     softWrap: true,
                                   ),
@@ -253,6 +256,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                   );
                }
               else{
+                SizedBox(height: 50,);
                     return Center(child: Loader().loaderWidget2());
                }
               },
@@ -297,23 +301,17 @@ class KeyHeader extends StatelessWidget {
               padding: EdgeInsets.only(left: 10),
               child: const Text(
                 "Image",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  style: ThemeText.textMediumPrimary
               ),
             ),
           ),
           Expanded(
             flex: 2,
             child: Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: EdgeInsets.only(left: 15),
               child: const Text(
                 "Key Name",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  style: ThemeText.textMediumPrimary
               ),
             ),
           ),
@@ -322,10 +320,7 @@ class KeyHeader extends StatelessWidget {
             child: Container(
               child: const Text(
                 "Category",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  style: ThemeText.textMediumPrimary
               ),
             ),
           ),
@@ -334,10 +329,7 @@ class KeyHeader extends StatelessWidget {
             child: Container(
               child: const Text(
                 "Description",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  style: ThemeText.textMediumPrimary
               ),
             ),
           ),
@@ -348,10 +340,7 @@ class KeyHeader extends StatelessWidget {
                 padding: EdgeInsets.only(left: 60),
                 child: Text(
                   "Action",
-                  style: TextStyle(
-                      color: Colors.lightBlue,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                    style: ThemeText.textMediumPrimary
                 ),
               ),
             ),
