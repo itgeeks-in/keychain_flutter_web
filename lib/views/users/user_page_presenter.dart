@@ -1,28 +1,23 @@
-import 'dart:convert';
-import 'dart:math';
+// import 'dart:convert';
+// // import 'dart:math';
 
-import 'package:key_admin_panel/repository/ApiRepository.dart';
-import 'package:key_admin_panel/repository/api_const.dart';
+// import 'package:key_admin_panel/repository/ApiRepository.dart';
+// import 'package:key_admin_panel/repository/api_const.dart';
 
-class UserPagePresenter {
-  Future <String> allUsersAPI(String accessToken) async {
-    var response = await ApiRepository.getAPI(
-      ApiConst.allUsersAPI,
-      headers: {
-        'Authorization': 'Bearer $accessToken',
-      },
-    );
-  //  print("all user get api response -------->>>> $response");
-    if (response.statusCode == 200) {
-      print("all user get api response --------2>>>> ");
-    //  print("all user get api response --------2>>>> "+response.toString());
-      return response.toString();
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
-}
-
+// class UserPagePresenter {
+//   Future<Map<String, dynamic>> allUsersAPI() async {
+//     var response = await ApiRepository.getAPI(
+//       ApiConst.allUsersAPI,
+//     );
+//     print("all user get api response -------->>>> $response");
+//     if (response.statusCode == 200) {
+//       print("fdsjfsjdsf");
+//       return json.decode(response.body);
+//     } else {
+//       throw Exception('Failed to load data');
+//     }
+//   }
+// }
 
 // import 'package:dio/dio.dart';
 // import 'package:key_admin_panel/model/alluser_datamodel.dart';
@@ -30,45 +25,68 @@ class UserPagePresenter {
 // import 'package:key_admin_panel/repository/api_const.dart';
 
 // class UserPagePresenter {
-//   Future<List<AllUserDataModel>> getAPI() async {
+//   Future<List<AllUserDataModel>> allUsersAPI() async {
 //     try {
+//       print("object1");
 //       Response response = await ApiRepository.getAPI(ApiConst.allUsersAPI);
-//       List<dynamic> postMaps = response.data;
-//       return postMaps
-//           .map((postMap) => AllUserDataModel.fromJson(postMap))
+//       print("object2");
+//       if (response.data == null) {
+//         throw Exception("Response data is null");
+//       }
+//       print("object3");
+//       Map<String, dynamic> responseData = response.data;
+//       if (responseData['result'] == null) {
+//         throw Exception("Result data is null");
+//       }
+
+//       List<dynamic> usersData = responseData['result'];
+//       print("object4 $usersData");
+//       return usersData
+//           .map((userData) => AllUserDataModel.fromJson(userData))
 //           .toList();
+//       // print(usersData);
 //     } catch (ex) {
+//       print("object5");
 //       throw ex;
 //     }
 //   }
 // }
 
+import 'package:dio/dio.dart';
+import 'package:key_admin_panel/model/alluser_datamodel.dart';
+import 'package:key_admin_panel/repository/ApiRepository.dart';
+import 'package:key_admin_panel/repository/api_const.dart';
 
+class UserPagePresenter {
+  Future<dynamic> allUsersAPI() async {
+    try {
+      //print("object1");
+      Response response = await ApiRepository.getAPI(ApiConst.allUsersAPI);
+      //print("object2");
 
+      if (response.data == null) {
+        throw Exception("Response data is null");
+      }
 
+      Map<String, dynamic> responseData = response.data;
 
+      if (responseData['result'] == null) {
+        throw Exception("Result data is null");
+      }
 
+      List<dynamic> usersData = responseData['result'];
+      // print("--------------<><><><>---------");
+      // print(usersData);
+      // print("-------------<><><><><>----------");
+      return usersData;
+      // return usersData
+      //     .map((userData) =>
+      //         AllUserDataModel.fromJson(userData as Map<String, dynamic>))
+      //     .toList();
+    } catch (ex) {
+      print("object5");
 
-
-
-// import 'dart:convert';
-
-// import 'package:key_admin_panel/repository/ApiRepository.dart';
-// import 'package:key_admin_panel/repository/api_const.dart';
-
-// class UserPagePresenter {
-//   Future<Map<String, dynamic>> allUsersAPI(String accessToken) async {
-//     final response = await ApiRepository.getAPI(
-//       ApiConst.allUsersAPI,
-//       headers: {
-//         'Authorization': 'Bearer $accessToken',
-//       },
-//     );
-
-//     if (response.statusCode == 200) {
-//       return json.decode(response.body);
-//     } else {
-//       throw Exception('Failed to load data');
-//     }
-//   }
-// }
+      throw ex;
+    }
+  }
+}
