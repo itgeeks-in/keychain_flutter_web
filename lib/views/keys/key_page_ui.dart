@@ -29,8 +29,8 @@ class _KeysScreenState extends State<KeyPageUI> {
 
   @override
   Widget build(BuildContext context) {
-    double sizeOfHeight = MediaQuery.of(context).size.height;
-    double sizeOfWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Padding(
@@ -44,8 +44,8 @@ class _KeysScreenState extends State<KeyPageUI> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    height:sizeOfHeight * 0.08,
-                    width: sizeOfWidth * 0.19,
+                    width: 200,
+                    height: 40,
                     child: TextField(
                       textAlignVertical: TextAlignVertical.bottom,
                       decoration: InputDecoration(
@@ -94,22 +94,19 @@ class _KeysScreenState extends State<KeyPageUI> {
               builder: (context, state) {
               if(state is SuccessState)
               {
-                  return Container(
-                    height: MediaQuery.of(context).size.height*0.6,
+                  return   Expanded(
                     child: ListView.builder(
                       itemCount: state.data.length,
                       itemBuilder: (context, index) {
                         return Container(
-                          height: sizeOfHeight * 0.14,
-                          width: sizeOfWidth-10,
-                          margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                          padding: const EdgeInsets.all(10),
+                          height: 100,
+                          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          padding: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                               border: Border.all(
-                                width: 2,
+                                width: 1,
                                 color: Color.fromARGB(255, 8, 185, 216),
                               ),
                               boxShadow: const [
@@ -120,97 +117,132 @@ class _KeysScreenState extends State<KeyPageUI> {
                                 )
                               ]),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                width:50,
-                                height:80 ,
-                                child: Image.network(
-                                 state.data[index].imagePath,
-                                  fit: BoxFit.cover,
+                              Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    height: 100,
+                                    width: 80,
+                                    child:Image.network(
+                                      state.data[index].imagePath,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                              ),
+                              // Expanded(
+                              //     flex: 1,
+                              //     child: Container(
+                              //       child: Row(
+                              //         children: [
+                              //           Container(
+                              //             height: 80,
+                              //             width: 80,
+                              //             child:Image.network(
+                              //               state.data[index].imagePath,
+                              //               fit: BoxFit.cover,
+                              //             ),
+                              //           ),
+                              //           Expanded(
+                              //               flex: 1,
+                              //               child: Container(
+                              //               )
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     )
+                              // ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    state.data[index].imageName,
+                                    style: ThemeText.textSmallBlack,
+                                  ),
                                 ),
                               ),
-                              Container(
-                                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                                child: Text(
-                                  state.data[index].imageName,
-                                  style: ThemeText.textSmallBlack,
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  padding: EdgeInsets.only(right: 35),
+                                  child: Text(
+                                    state.data[index].categoryName,
+                                    style: ThemeText.textSmallBlack,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                  ),
                                 ),
                               ),
-                              Container(
-                                padding: EdgeInsets.only(right: 35),
-                                child: Text(
-                                  state.data[index].categoryName,
-                                  style: ThemeText.textSmallBlack,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  padding: EdgeInsets.only(right:20),
+                                  child:  Text(
+                                    state.data[index].description,
+                                    style: ThemeText.textSmallGrey,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                  ),
                                 ),
                               ),
-                              Container(
-                                child: Text(
-                                  state.data[index].description,
-                                  style: ThemeText.textSmallGrey,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                              Container(
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      child: OutlinedButton(
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) =>
-                                                const PopUpViewKey(),
-                                          );
-                                        },
-                                        child: Text(
-                                          'View',
-                                          style:
-                                              TextStyle(color: Colors.white),
-                                        ),
-                                        style: OutlinedButton.styleFrom(
-                                          side:
-                                              BorderSide(color: Colors.white),
-                                          backgroundColor: Color.fromARGB(
-                                              255, 8, 185, 216),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        child: OutlinedButton(
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                              const PopUpViewKey(),
+                                            );
+                                          },
+                                          child: Text(
+                                            'View',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                          style: OutlinedButton.styleFrom(
+                                            side: BorderSide(
+                                                color: Colors.white),
+                                            backgroundColor:
+                                            Color.fromARGB(255, 8, 185, 216),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) =>
-                                              PopUpEditkey(),
-                                        );
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(0.0),
-                                        child: Icon(
-                                          Icons.edit_outlined,
-                                          color: Colors.white,
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => PopUpEditkey(),
+                                          );
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Icon(
+                                            Icons.edit_outlined,
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        shadowColor:
-                                            Color.fromARGB(255, 8, 185, 216),
-                                        elevation: 10,
-                                        backgroundColor:
-                                            Color.fromARGB(255, 8, 185, 216),
-                                        shape: CircleBorder(),
-                                      ),
-                                    )
-                                  ],
+                                        style: ElevatedButton.styleFrom(
+                                          shadowColor:
+                                          Color.fromARGB(255, 8, 185, 216),
+                                          elevation: 10,
+                                          backgroundColor:
+                                          Color.fromARGB(255, 8, 185, 216),
+                                          shape: CircleBorder(),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               )
                             ],
@@ -219,11 +251,11 @@ class _KeysScreenState extends State<KeyPageUI> {
                       },
                     ),
                   );
-             }
+               }
               else{
                     return Center(child: Loader().loaderWidget2());
-              }
-             },
+               }
+              },
              ),
             ),
           ],
@@ -234,62 +266,94 @@ class _KeysScreenState extends State<KeyPageUI> {
 }
 
 class KeyHeader extends StatelessWidget {
-  const KeyHeader({Key? key}) : super(key: key);
+  const KeyHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.08,
+      padding: EdgeInsets.only(bottom: 10, top: 10),
+      height: 50,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        border: Border.all(
-          width: 2,
-          color: Color.fromARGB(255, 8, 185, 216),
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromARGB(193, 223, 212, 212),
-            blurRadius: 8,
-            spreadRadius: 4,
-          )
-        ],
-      ),
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          border: Border.all(
+            width: 2,
+            color: Color.fromARGB(255, 8, 185, 216),
+          ),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromARGB(193, 223, 212, 212),
+              blurRadius: 8,
+              spreadRadius: 4,
+            )
+          ]),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: 1,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("Image", style: ThemeText.textMediumBlack, textAlign: TextAlign.center,),
+              padding: EdgeInsets.only(left: 10),
+              child: const Text(
+                "Image",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("Key Name", style: ThemeText.textMediumBlack, textAlign: TextAlign.start,),
+              padding: EdgeInsets.only(left: 10),
+              child: const Text(
+                "Key Name",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("Category", style: ThemeText.textMediumBlack, textAlign: TextAlign.start,),
+              child: const Text(
+                "Category",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("Description", style: ThemeText.textMediumBlack, textAlign: TextAlign.start,),
+              child: const Text(
+                "Description",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("Action", style: ThemeText.textMediumBlack, textAlign: TextAlign.center,),
+              child: const Padding(
+                padding: EdgeInsets.only(left: 60),
+                child: Text(
+                  "Action",
+                  style: TextStyle(
+                      color: Colors.lightBlue,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ),
         ],
