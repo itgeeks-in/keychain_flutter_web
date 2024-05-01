@@ -22,6 +22,18 @@ class UserPage extends StatefulWidget {
   State<UserPage> createState() => _UserPageState();
 }
 
+class User {
+  final String firstName;
+  final String lastName;
+  final String email;
+
+  User({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+  });
+}
+
 class _UserPageState extends State<UserPage> {
   // var data;
   // Future<void> getUserData() async {
@@ -33,6 +45,18 @@ class _UserPageState extends State<UserPage> {
   //     print("data response----------" + data + "dfsfds");
   //   } else {}
   // }
+  void onViewUser(Result result) {
+    User user = User(
+      firstName: result.firstName ?? 'N/A',
+      lastName: result.lastName ?? 'N/A',
+      email: result.email ?? 'N/A',
+    );
+
+    showDialog(
+      context: context,
+      builder: (context) => PopupViewUser(user: user),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -302,13 +326,15 @@ class _UserPageState extends State<UserPage> {
                                             Container(
                                               width: 80,
                                               child: OutlinedButton(
-                                                onPressed: () {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (context) =>
-                                                        const PopupViewUser(),
-                                                  );
-                                                },
+                                                onPressed: () => onViewUser(
+                                                    state.data![index]),
+                                                // onPressed: () {
+                                                //   showDialog(
+                                                //     context: context,
+                                                //     builder: (context) =>
+                                                //         const PopupViewUser(),
+                                                //   );
+                                                // },
                                                 child: Text(
                                                   'View',
                                                   style: TextStyle(

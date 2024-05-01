@@ -13,6 +13,8 @@ class ApiConst {
   static const String signupAPI = '/auth/signup';
   static const String loginAPI = '/auth/login';
   static const String allUsersAPI = "/auth/getallusers";
+  static const String getAllKeysAPI = '/key/getKeys';
+
 
   //TODO : Api parameter for calling (fields or param)
   static const String email = 'email';

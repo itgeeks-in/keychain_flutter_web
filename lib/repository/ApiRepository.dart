@@ -5,6 +5,7 @@ import 'api_const.dart';
 class ApiRepository {
   static Dio client = Dio();
 
+  // static Future<dynamic> getAPI(String apiName, {required Map<String, String> headers})
   static Future<dynamic> getAPI(String apiName) async {
     try {
       String callingUrl;
@@ -16,7 +17,6 @@ class ApiRepository {
         client.options.headers["authorization"] = "Bearer " + token;
       }
       print("url: ${callingUrl}");
-
 
       var response = await client.get(callingUrl);
       // todo: response come when status is 200 only

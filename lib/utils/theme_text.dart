@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'color_const.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 
 abstract class ThemeText {
@@ -40,6 +40,17 @@ abstract class ThemeText {
     fontWeight: FontWeight.w600,
     decoration: TextDecoration.underline,
     decorationColor: ColorConsts.primaryColor,
+  );
+  static const TextStyle textSmallBlack = TextStyle(
+    fontSize: fontSmall,
+    fontFamily: family,
+    color:ColorConsts.blackColor,
+  );
+  static const TextStyle textMediumBlack = TextStyle(
+    fontSize: fontLarge,
+    fontFamily: family,
+    color:ColorConsts.blackColor,
+    fontWeight: FontWeight.bold,
   );
   static const TextStyle textHeaderBlack = TextStyle(
     fontSize: fontLarge,
