@@ -1,36 +1,30 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
+import 'package:key_admin_panel/utils/RoundedButton.dart';
 
-class PopupViewUser extends StatefulWidget {
-  const PopupViewUser({super.key});
+class PopUpEditUser extends StatefulWidget {
+  const PopUpEditUser({super.key});
 
   @override
-  State<PopupViewUser> createState() => _PopupViewUserState();
+  State<PopUpEditUser> createState() => _PopUpEditUserState();
 }
 
-class _PopupViewUserState extends State<PopupViewUser> {
+class _PopUpEditUserState extends State<PopUpEditUser> {
   bool isPassVisible = false;
   @override
   Widget build(BuildContext context) {
     return Dialog(
         child: Container(
       width: 500,
-      height: 600,
+      height: 500,
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(21))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: const Text(
-          //     "Profile",
-          //     style: TextStyle(fontSize: 20, color: Colors.black),
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -50,23 +44,14 @@ class _PopupViewUserState extends State<PopupViewUser> {
             ),
           ),
 
-          Center(
-            child: Container(
-              width: 140,
-              color: Colors.white,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(12),
-              height: 140,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset("assets/images.jpg", fit: BoxFit.cover),
-              ),
-            ),
+          const Text(
+            "Edit User",
+            style: TextStyle(
+                color: Color.fromARGB(255, 8, 185, 216),
+                fontSize: 32,
+                fontWeight: FontWeight.bold),
           ),
 
-          const SizedBox(
-            height: 20,
-          ),
           const Padding(
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
@@ -100,25 +85,49 @@ class _PopupViewUserState extends State<PopupViewUser> {
               hintText: "Enter your Mob.",
             )),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 50, right: 90, top: 20),
-                child: Column(
-                  children: [
-                    Text(
-                      "Total Key : 12 ",
-                      style: TextStyle(color: Colors.grey, fontSize: 22),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                  ],
-                ),
+          Padding(
+            padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+            child: Center(
+                child: CustomTextField(
+              labelText: 'Password',
+              prefixIconData: Icons.lock,
+              hintText: 'Enter your password',
+              obscureText: true,
+              suffixIconData: Icons.visibility,
+              suffixIconDataSecond: Icons.visibility_off,
+              isPassVisible: isPassVisible,
+              onSuffixPressed: () {
+                setState(() {
+                  isPassVisible = !isPassVisible;
+                });
+              },
+            )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 50, right: 50, top: 50),
+            child: Container(
+              // width: 120,
+              child: RoundedButton(
+                btnName: "User Update",
+                callback: () {},
               ),
-            ],
+            ),
+            // Center(
+            //     child: ElevatedButton(
+            //         onPressed: () {},
+            //         style: ElevatedButton.styleFrom(
+            //             shadowColor: const Color.fromARGB(255, 8, 185, 216),
+            //             elevation: 12,
+            //             backgroundColor: const Color.fromARGB(255, 8, 185, 216)
+            //             //  (state
+            //             //         is SignInValidState)
+            //             //     ? Colors.green
+            //             //     : Color.fromARGB(255, 8, 185, 216)
+            //             ),
+            //         child: const Text(
+            //           'User Update',
+            //           style: TextStyle(color: Colors.white),
+            //         ))),
           ),
         ],
       ),
