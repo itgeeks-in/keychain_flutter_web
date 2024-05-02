@@ -18,7 +18,7 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
           if(event.password.isEmpty){
             emit(PassRequiredState());
           } else {
-            if(event.password.length < 4){
+            if(event.password.length < 5){
               emit(PassInvalidState());
             } else {
               loginAPI(event.email, event.password);
@@ -51,25 +51,25 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
 
   Future<void> loginAPI(email,password) async {
    var result = await LoginScreenPresenter().loginAPI(email, password);
-   Session session = Session();
-   Map<String,dynamic> parsed = jsonDecode(result.toString());
-   if(parsed['status']){
-     UserDataModel userDataModel = UserDataModel.fromJson(parsed);
-     if(userDataModel.result.isAdmin){
-       await session.setToken(userDataModel.result.token);
-       session.setLoginUserData("$result");
-       emit(SuccessState());
-     }else{
-       emit(NonAdminState());
+   if(result.toString().contains("status")) {
+     Session session = Session();
+     Map<String, dynamic> parsed = jsonDecode(result.toString());
+     if (parsed['status']) {
+       UserDataModel userDataModel = UserDataModel.fromJson(parsed);
+       if (userDataModel.result.isAdmin) {
+         await session.setToken(userDataModel.result.token);
+         session.setLoginUserData("$result");
+         emit(SuccessState());
+       } else {
+         emit(NonAdminState());
+       }
+     } else {
+       emit(FailedState(parsed['message']));
+       print("Failed : " + parsed['message']);
      }
    }else{
-     if(parsed['message'].toString().contains("No User With This Email"))
-     {
-       emit(NoUserWithEmailState(parsed['message']));
-     }else{
-       emit(FailedState(parsed['message']));
-       print("Failed : "+ parsed['message']);
-     }
+     emit(FailedState(result.toString()));
+     print("Failed : " + result.toString());
    }
   }
 }

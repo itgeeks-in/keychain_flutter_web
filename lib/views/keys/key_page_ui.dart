@@ -12,6 +12,7 @@ import 'package:key_admin_panel/views/keys/pop_ups_key/popUpAddKeys.dart';
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpEditKey.dart';
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpViewKeys.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 class KeyPageUI extends StatefulWidget {
 
@@ -129,11 +130,19 @@ class _KeysScreenState extends State<KeyPageUI> {
                                         child:state.data[index].imagePath.isEmpty
                                             ? Image.asset(AppAssets.notFoundImg)
                                             : Image.network(
-                                          state.data[index].imagePath,
-                                          fit: BoxFit.cover,
+                                             state.data[index].imagePath,
+                                             fit: BoxFit.cover,
+                                             loadingBuilder: (context,child,loadingProgress){
+                                             if(loadingProgress == null) return child;
+                                             return Shimmer.fromColors(child:Container(
+                                            height: 100,
+                                            width: 80,
+                                            color: Colors.white,
+                                          ),baseColor: Colors.red[300]!, highlightColor: Colors.green[100]!);
+                                          },
                                         ),
                                       )
-                                  ),
+                                   ),
                                   // Expanded(
                                   //     flex: 1,
                                   //     child: Container(
@@ -162,7 +171,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                                       padding: EdgeInsets.only(left: 20),
                                       child: Text(
                                         state.data[index].imageName.isNotEmpty ? state.data[index].imageName:'Not found',
-                                        style: ThemeText.textMediumSecondary,
+                                        style: state.data[index].imageName.isNotEmpty ? ThemeText.textMediumSecondary:ThemeText.textSmallGrey,
                                       ),
                                     ),
                                   ),
@@ -172,7 +181,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                                       padding: EdgeInsets.only(right: 35),
                                       child: Text(
                                         state.data[index].categoryName.isNotEmpty ? state.data[index].categoryName:'Not found',
-                                        style: ThemeText.textMediumSecondary,
+                                        style:state.data[index].categoryName.isNotEmpty ? ThemeText.textMediumSecondary:ThemeText.textSmallGrey,
                                         maxLines: 3,
                                         overflow: TextOverflow.ellipsis,
                                         softWrap: true,
@@ -185,7 +194,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                                       padding: EdgeInsets.only(right:20),
                                       child:  Text(
                                         state.data[index].description.isNotEmpty ? state.data[index].description : 'Not found',
-                                        style: ThemeText.textMediumSecondary,
+                                        style:state.data[index].description.isNotEmpty ? ThemeText.textMediumSecondary:ThemeText.textSmallGrey,
                                         maxLines: 3,
                                         overflow: TextOverflow.ellipsis,
                                         softWrap: true,
