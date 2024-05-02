@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:key_admin_panel/utils/dialogs.dart';
+import 'package:key_admin_panel/views/category/category_page_ui.dart';
 import 'package:key_admin_panel/views/home/home_screen.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/plan/plan_ui.dart';
@@ -185,6 +186,8 @@ class _HomePageUIState extends State<SideDrawer> {
         return const UserPage();
       case 2:
         return const KeyPageUI();
+      case 4:
+        return const CategoryPageUI();
       case 5:
         return const ProfilePage();
       case 3:
