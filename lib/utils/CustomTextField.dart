@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 class CustomTextField extends StatefulWidget {
   final String labelText;
@@ -33,24 +34,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextField(
       controller: widget.controller,
-      style: TextStyle(color: Colors.grey),
+      style: TextStyle(color: ColorConsts.textColorDark),
       obscureText: widget.obscureText && !widget.isPassVisible,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        labelStyle: TextStyle(color: Colors.grey),
+        labelStyle: TextStyle(color: ColorConsts.textColorDark),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: ColorConsts.backgroundColor,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(11),
           borderSide: BorderSide(
-            color: Color.fromARGB(255, 4, 203, 238),
+            color: ColorConsts.primaryColor,
             width: 2,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(11),
           borderSide: BorderSide(
-            color: Color.fromARGB(255, 4, 203, 238),
+            color: ColorConsts.primaryColor,
           ),
         ),
         disabledBorder: OutlineInputBorder(
@@ -59,7 +60,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         prefixIcon: Icon(
           widget.prefixIconData,
-          color: Color.fromARGB(255, 8, 185, 216),
+          color: ColorConsts.primaryColor,
         ),
         suffixIcon: Padding(
           padding: const EdgeInsets.only(right: 10),
@@ -69,7 +70,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     widget.isPassVisible
                         ? widget.suffixIconData
                         : widget.suffixIconDataSecond,
-                    color: const Color.fromARGB(255, 8, 185, 216),
+                    color: ColorConsts.primaryColor,
                   ),
                   onPressed: widget.onSuffixPressed,
                 )
@@ -77,7 +78,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         hintText: widget.hintText,
         hintStyle: TextStyle(
-          color: Colors.grey,
+          color: ColorConsts.textColorDark,
         ),
       ),
     );

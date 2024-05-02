@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 class PopUpAddUser extends StatefulWidget {
   @override
@@ -9,22 +10,23 @@ class PopUpAddUser extends StatefulWidget {
 
 class _PopUpAddUserState extends State<PopUpAddUser> {
   bool isPassVisible = false;
-
+  bool isAgreed = false;
+  bool isAdmin = false;
   @override
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        width: 500,
-        height: 550,
+        width: 600,
+        height: 700,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 15, top: 15),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -34,17 +36,16 @@ class _PopUpAddUserState extends State<PopUpAddUser> {
                     },
                     child: Icon(
                       Icons.close_outlined,
-                      color: Color.fromARGB(255, 8, 185, 216),
+                      color: ColorConsts.primaryColor,
                     ),
                   )
                 ],
               ),
             ),
-            SizedBox(height: 30),
             Text(
               "Add User",
               style: TextStyle(
-                color: Color.fromARGB(255, 8, 185, 216),
+                color: ColorConsts.primaryColor,
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
               ),
@@ -65,6 +66,17 @@ class _PopUpAddUserState extends State<PopUpAddUser> {
               child: Center(
                 child: CustomTextField(
                   isPassVisible: false,
+                  labelText: "Enter your lastName",
+                  prefixIconData: Icons.person_add_outlined,
+                  hintText: "Enter your lastName",
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+              child: Center(
+                child: CustomTextField(
+                  isPassVisible: false,
                   labelText: "Enter your Email",
                   prefixIconData: Icons.email_outlined,
                   hintText: "Enter your Email",
@@ -76,9 +88,9 @@ class _PopUpAddUserState extends State<PopUpAddUser> {
               child: Center(
                 child: CustomTextField(
                   isPassVisible: false,
-                  labelText: "Enter your Mob.",
-                  prefixIconData: Icons.phone_forwarded_sharp,
-                  hintText: "Enter your Mob.",
+                  labelText: "confirmEmail",
+                  prefixIconData: Icons.email_outlined,
+                  hintText: "Enter your Email",
                 ),
               ),
             ),
@@ -101,25 +113,70 @@ class _PopUpAddUserState extends State<PopUpAddUser> {
               )),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 50),
+              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+              child: Center(
+                  child: CustomTextField(
+                labelText: 'confirmPassword',
+                prefixIconData: Icons.lock,
+                hintText: 'Enter your password',
+                obscureText: true,
+                suffixIconData: Icons.visibility,
+                suffixIconDataSecond: Icons.visibility_off,
+                isPassVisible: isPassVisible,
+                onSuffixPressed: () {
+                  setState(() {
+                    isPassVisible = !isPassVisible;
+                  });
+                },
+              )),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: isAgreed,
+                        onChanged: (value) {
+                          setState(() {
+                            isAgreed = value!;
+                          });
+                        },
+                      ),
+                      Text(
+                        "  IsAgreed",
+                        style: TextStyle(color: ColorConsts.textColorDark),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: isAdmin,
+                        onChanged: (value) {
+                          setState(() {
+                            isAdmin = value!;
+                          });
+                        },
+                      ),
+                      Text(
+                        "  IsAdmin",
+                        style: TextStyle(color: ColorConsts.textColorDark),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 50, right: 50, top: 10),
               child: Container(
                 width: 120,
                 child: RoundedButton(
                   btnName: "Add User",
                   callback: () {},
                 ),
-                // ElevatedButton(
-                //   onPressed: () {},
-                //   style: ElevatedButton.styleFrom(
-                //     shadowColor: Color.fromARGB(255, 8, 185, 216),
-                //     elevation: 12,
-                //     backgroundColor: Color.fromARGB(255, 8, 185, 216),
-                //   ),
-                //   child: Text(
-                //     'Add User',
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-                // ),
               ),
             ),
           ],

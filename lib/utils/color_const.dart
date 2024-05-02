@@ -1,13 +1,14 @@
-
 // to change colors code
 import 'dart:ui';
 
 class ColorConsts {
   static const Color primaryColor = Color(0xc503cccc); //main color
-  static const Color secondaryColor = Color(0xFF01678F);  //main dark color or same if not gradient show
+  static const Color secondaryColor =
+      Color(0xFF01678F); //main dark color or same if not gradient show
   static const Color backgroundColor = Color(0xFFFFFFFF);
-  static const Color textColorLight = Color(0xc503cccc);  // text color white used to shown text
-  static const Color textColorDark = Color(0xFF01678F);// text color black
+  static const Color textColorLight =
+      Color(0xc503cccc); // text color white used to shown text
+  static const Color textColorDark = Color(0xFF01678F); // text color black
 //background: #12262E;
   static const Color hintColor = Color(0xFFa1a3ce);
   static const Color simmer2Color = Color(0xfffafafa);
@@ -33,5 +34,4 @@ class ColorConsts {
   static const Color grayColor = Color(0xFF989898);
   static const Color lightGrayColor = Color(0xFFa8a8a8);
   static const Color green = Color(0xff5dff6a);
-
 }

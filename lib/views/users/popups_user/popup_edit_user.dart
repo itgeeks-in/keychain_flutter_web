@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 class PopUpEditUser extends StatefulWidget {
   const PopUpEditUser({super.key});
@@ -20,7 +21,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
       width: 500,
       height: 500,
       decoration: const BoxDecoration(
-          color: Colors.white,
+          color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -37,7 +38,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                   child: Icon(
                     Icons.close_outlined,
                     // size: 30,
-                    color: Color.fromARGB(255, 8, 185, 216),
+                    color: ColorConsts.primaryColor,
                   ),
                 )
               ],
@@ -47,7 +48,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
           const Text(
             "Edit User",
             style: TextStyle(
-                color: Color.fromARGB(255, 8, 185, 216),
+                color: ColorConsts.primaryColor,
                 fontSize: 32,
                 fontWeight: FontWeight.bold),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 class RoundedButton extends StatelessWidget {
   final String btnName;
@@ -13,8 +14,8 @@ class RoundedButton extends StatelessWidget {
   RoundedButton({
     required this.btnName,
     this.icon,
-    this.bgColor = const Color.fromARGB(255, 8, 185, 216),
-    this.fgColor = Colors.white,
+    this.bgColor = ColorConsts.primaryColor,
+    this.fgColor = ColorConsts.whiteColor,
     this.textStyle,
     this.callback,
   });
@@ -45,7 +46,7 @@ class RoundedButton extends StatelessWidget {
 
         // backgroundColor: Colors.black,
         // color: const Color.fromARGB(255, 77, 70, 70),
-        shadowColor: const Color.fromARGB(255, 8, 185, 216),
+        shadowColor: ColorConsts.primaryColor,
         elevation: 12,
         // shadowColor: Colors.amber,
         // shape: RoundedRectangleBorder(

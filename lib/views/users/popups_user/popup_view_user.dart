@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
 class PopupViewUser extends StatefulWidget {
@@ -31,7 +32,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
         width: 500,
         height: 600,
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21)),
         ),
         child: Column(
@@ -50,7 +51,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                     },
                     child: Icon(
                       Icons.close_outlined,
-                      color: Color.fromARGB(255, 8, 185, 216),
+                      color: ColorConsts.primaryColor,
                     ),
                   )
                 ],
@@ -146,11 +147,14 @@ class _PopupViewUserState extends State<PopupViewUser> {
                         children: [
                           Text(
                             "Total Keys :",
-                            style: TextStyle(color: Colors.grey, fontSize: 22),
+                            style: TextStyle(
+                                color: ColorConsts.textColorLight,
+                                fontSize: 22),
                           ),
                           Text(
                             widget.user.keys!.length.toInt().toString(),
-                            style: TextStyle(color: Colors.grey, fontSize: 22),
+                            style: TextStyle(
+                                color: ColorConsts.textColorDark, fontSize: 22),
                           ),
                         ],
                       ),
