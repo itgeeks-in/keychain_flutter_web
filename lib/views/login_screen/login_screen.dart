@@ -198,10 +198,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                         SizedBox(height: 4),
                                         if(state is NonAdminState)
-                                          Text("You are not an admin.",style: TextStyle(color: Colors.red),),
+                                          Text("You are not a admin.",style: TextStyle(color: Colors.red),),
+                                        if(state is NoUserWithEmailState)
+                                          Text(state.messgage, style: TextStyle(color:Colors.red),),
                                         if(state is FailedState)
                                           Text(
-                                            "Invalid User,Please try again !!!",
+                                            "Connectivity issues, please try again ?",
                                             style: TextStyle(color:Colors.red),
                                           ),
                                       ],

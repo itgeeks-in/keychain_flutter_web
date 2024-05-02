@@ -13,6 +13,10 @@ class SuccessState extends KeyState{
   List<KeysData> data;
   SuccessState(this.data);
 }
+class KeyNotFoundState extends KeyState{
+  String msg;
+  KeyNotFoundState(this.msg);
+}
 class FailedState extends KeyState{
   String msg;
   FailedState(this.msg);
