@@ -164,15 +164,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ),
                                         ),
                                         if (state is PassRequiredState)
-                                          Text(
-                                            "Password is required",
-                                            style: TextStyle(color: Colors.red),
+                                          Text("Password is required", style: TextStyle(color: Colors.red),
                                           ),
                                         if(state is PassInvalidState)
-                                          Text(
-                                            "Incorrect password or password must be 4 digit.",
-                                            style: TextStyle(color:Colors.red),
-                                          ),
+                                          Text("Incorrect password or password must be 5 digit.", style: TextStyle(color:Colors.red),),
                                         const SizedBox(height: 30),
                                         BlocBuilder<LoginBloc, LoginState>(
                                           builder: (context, state) {
@@ -202,10 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         if(state is NoUserWithEmailState)
                                           Text(state.messgage, style: TextStyle(color:Colors.red),),
                                         if(state is FailedState)
-                                          Text(
-                                            "Connectivity issues, please try again ?",
-                                            style: TextStyle(color:Colors.red),
-                                          ),
+                                          Text(state.message, style: TextStyle(color:Colors.red),),
                                       ],
                                     ),
                                   ),
