@@ -6,8 +6,8 @@ class ColorConsts {
   static const Color primaryColor = Color(0xc503cccc); //main color
   static const Color secondaryColor = Color(0xFF01678F);  //main dark color or same if not gradient show
   static const Color backgroundColor = Color(0xFFFFFFFF);
-  static const Color textColorLight = Color(0xFF12262E);  // text color white used to shown text
-  static const Color textColorDark = Color(0xFF12262E);// text color black
+  static const Color textColorLight = Color(0xc503cccc);  // text color white used to shown text
+  static const Color textColorDark = Color(0xFF01678F);// text color black
 //background: #12262E;
   static const Color hintColor = Color(0xFFa1a3ce);
   static const Color simmer2Color = Color(0xfffafafa);
