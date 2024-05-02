@@ -63,7 +63,13 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
        emit(NonAdminState());
      }
    }else{
-     emit(FailedState(parsed['message']));
+     if(parsed['message'].toString().contains("No User With This Email"))
+     {
+       emit(NoUserWithEmailState(parsed['message']));
+     }else{
+       emit(FailedState(parsed['message']));
+       print("Failed : "+ parsed['message']);
+     }
    }
   }
 }

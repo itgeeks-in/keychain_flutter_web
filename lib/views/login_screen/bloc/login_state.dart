@@ -25,6 +25,10 @@ class FailedState extends LoginState {
 class NonAdminState extends LoginState{
 
 }
+class NoUserWithEmailState extends LoginState{
+  final String messgage;
+  NoUserWithEmailState(this.messgage);
+}
 class OnChangeIconState extends LoginState {
   bool isVisible;
   OnChangeIconState(this.isVisible);

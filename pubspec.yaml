@@ -41,7 +41,6 @@ dependencies:
   dio:
   flutter_bloc:
   email_validator:
-  flutter_cors:
 
 dev_dependencies:
   flutter_test:

@@ -30,14 +30,12 @@ class _KeysScreenState extends State<KeyPageUI> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               margin: const EdgeInsets.only(bottom: 10, top: 10),
@@ -89,178 +87,181 @@ class _KeysScreenState extends State<KeyPageUI> {
               ),
             ),
             KeyHeader(),
-            BlocProvider(
-              create: (context) => KeyBloc(),
-              child: BlocBuilder<KeyBloc,KeyState>(
-              builder: (context, state) {
-              if(state is SuccessState)
-              {
-                  return   Expanded(
-                    child: ListView.builder(
-                      itemCount: state.data.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          height: 100,
-                          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                          padding: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              border: Border.all(
-                                width: 1,
-                                color: Color.fromARGB(255, 8, 185, 216),
-                              ),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Color.fromARGB(193, 223, 212, 212),
-                                  blurRadius: 8,
-                                  spreadRadius: 4,
-                                )
-                              ]),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    height: 100,
-                                    width: 80,
-                                    child:state.data[index].imagePath.isEmpty
-                                        ? Image.asset(AppAssets.notFoundImg)
-                                        : Image.network(
-                                      state.data[index].imagePath,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                              ),
-                              // Expanded(
-                              //     flex: 1,
-                              //     child: Container(
-                              //       child: Row(
-                              //         children: [
-                              //           Container(
-                              //             height: 80,
-                              //             width: 80,
-                              //             child:Image.network(
-                              //               state.data[index].imagePath,
-                              //               fit: BoxFit.cover,
-                              //             ),
-                              //           ),
-                              //           Expanded(
-                              //               flex: 1,
-                              //               child: Container(
-                              //               )
-                              //           ),
-                              //         ],
-                              //       ),
-                              //     )
-                              // ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  padding: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    state.data[index].imageName.isNotEmpty ? state.data[index].imageName:'Not found',
-                                    style: ThemeText.textMediumSecondary,
+            Expanded(
+              child: Container(
+                child: BlocProvider(
+                  create: (context) => KeyBloc(),
+                  child: BlocBuilder<KeyBloc,KeyState>(
+                  builder: (context, state) {
+                  if(state is SuccessState)
+                  {
+                      return   Container(
+                        child: ListView.builder(
+                          itemCount: state.data.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: 100,
+                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              padding: const EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Color.fromARGB(255, 8, 185, 216),
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  padding: EdgeInsets.only(right: 35),
-                                  child: Text(
-                                    state.data[index].categoryName.isNotEmpty ? state.data[index].categoryName:'Not found',
-                                    style: ThemeText.textMediumSecondary,
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  padding: EdgeInsets.only(right:20),
-                                  child:  Text(
-                                    state.data[index].description.isNotEmpty ? state.data[index].description : 'Not found',
-                                    style: ThemeText.textMediumSecondary,
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        child: OutlinedButton(
-                                          onPressed: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                              const PopUpViewKey(),
-                                            );
-                                          },
-                                          child: Text(
-                                            'View',
-                                            style: TextStyle(color: Colors.white),
-                                          ),
-                                          style: OutlinedButton.styleFrom(
-                                            side: BorderSide(
-                                                color: Colors.white),
-                                            backgroundColor:
-                                            Color.fromARGB(255, 8, 185, 216),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) => PopUpEditkey(),
-                                          );
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Icon(
-                                            Icons.edit_outlined,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          shadowColor:
-                                          Color.fromARGB(255, 8, 185, 216),
-                                          elevation: 10,
-                                          backgroundColor:
-                                          Color.fromARGB(255, 8, 185, 216),
-                                          shape: CircleBorder(),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color.fromARGB(193, 223, 212, 212),
+                                      blurRadius: 8,
+                                      spreadRadius: 4,
+                                    )
+                                  ]),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        height: 100,
+                                        width: 80,
+                                        child:state.data[index].imagePath.isEmpty
+                                            ? Image.asset(AppAssets.notFoundImg)
+                                            : Image.network(
+                                          state.data[index].imagePath,
+                                          fit: BoxFit.cover,
                                         ),
                                       )
-                                    ],
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-               }
-              else{
-                SizedBox(height: 50,);
-                    return Center(child: Loader().loaderWidget2());
-               }
-              },
-             ),
+                                  // Expanded(
+                                  //     flex: 1,
+                                  //     child: Container(
+                                  //       child: Row(
+                                  //         children: [
+                                  //           Container(
+                                  //             height: 80,
+                                  //             width: 80,
+                                  //             child:Image.network(
+                                  //               state.data[index].imagePath,
+                                  //               fit: BoxFit.cover,
+                                  //             ),
+                                  //           ),
+                                  //           Expanded(
+                                  //               flex: 1,
+                                  //               child: Container(
+                                  //               )
+                                  //           ),
+                                  //         ],
+                                  //       ),
+                                  //     )
+                                  // ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 20),
+                                      child: Text(
+                                        state.data[index].imageName.isNotEmpty ? state.data[index].imageName:'Not found',
+                                        style: ThemeText.textMediumSecondary,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      padding: EdgeInsets.only(right: 35),
+                                      child: Text(
+                                        state.data[index].categoryName.isNotEmpty ? state.data[index].categoryName:'Not found',
+                                        style: ThemeText.textMediumSecondary,
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                        softWrap: true,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      padding: EdgeInsets.only(right:20),
+                                      child:  Text(
+                                        state.data[index].description.isNotEmpty ? state.data[index].description : 'Not found',
+                                        style: ThemeText.textMediumSecondary,
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                        softWrap: true,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            child: OutlinedButton(
+                                              onPressed: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                  const PopUpViewKey(),
+                                                );
+                                              },
+                                              child: Text(
+                                                'View',
+                                                style: TextStyle(color: Colors.white),
+                                              ),
+                                              style: OutlinedButton.styleFrom(
+                                                side: BorderSide(
+                                                    color: Colors.white),
+                                                backgroundColor:
+                                                Color.fromARGB(255, 8, 185, 216),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) => PopUpEditkey(),
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Icon(
+                                                Icons.edit_outlined,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                              shadowColor:
+                                              Color.fromARGB(255, 8, 185, 216),
+                                              elevation: 10,
+                                              backgroundColor:
+                                              Color.fromARGB(255, 8, 185, 216),
+                                              shape: CircleBorder(),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                    else if(state is KeyNotFoundState){
+                       return Center(child: Text(state.msg, style: ThemeText.textMediumSecondaryBold,),);
+                   }else{return Center(child: Loader().loaderWidget2());}
+                    },
+                 ),
+                ),
+              ),
             ),
           ],
         ),
