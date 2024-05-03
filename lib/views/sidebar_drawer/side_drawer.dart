@@ -29,6 +29,7 @@ class _HomePageUIState extends State<SideDrawer> {
       body: Row(
         children: [
           NavigationRail(
+            minExtendedWidth: MediaQuery.of(context).size.width/6,
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Image.asset("assets/img.jpg",
@@ -111,7 +112,7 @@ class _HomePageUIState extends State<SideDrawer> {
                             isExpanded = !isExpanded;
                           });
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.menu,
                           color: ColorConsts.primaryColor,
                         ),
