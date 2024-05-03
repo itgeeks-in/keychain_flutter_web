@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
 import 'package:key_admin_panel/views/category/category_page_ui.dart';
+import 'package:key_admin_panel/views/category/popup_category/popup_add_category.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_bloc.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/login_screen/login_screen.dart';
@@ -66,7 +67,6 @@ class RouteGenerate {
               },
               child: const CategoryPageUI());
         });
-
     }
   }
 }
