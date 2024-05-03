@@ -241,6 +241,7 @@ class _UserPageState extends State<UserPage> {
                                               " " +
                                               state.data![index].lastName
                                                   .toString(),
+                                          maxLines: 1,
                                           // data!.result![index].firstName
                                           //     .toString(),
                                           // data[index]['name'].toString(),
@@ -257,6 +258,7 @@ class _UserPageState extends State<UserPage> {
                                       child: Text(
                                         state.data![index].email.toString(),
                                         // data[index]['email'].toString(),
+                                        maxLines: 1,
                                         style: const TextStyle(
                                           color: ColorConsts.textColorDark,
                                           fontSize: 16,
@@ -277,94 +279,187 @@ class _UserPageState extends State<UserPage> {
                                     // ),
                                     Expanded(
                                       flex: 1,
-                                      child: Text(
-                                        state.data[index].keys!.length
-                                            .toInt()
-                                            .toString(),
-                                        style: TextStyle(
-                                          color: ColorConsts.textColorDark,
-                                          fontSize: 16,
-                                          // fontWeight: FontWeight.bold,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 5),
+                                        child: Text(
+                                          state.data[index].keys!.length
+                                              .toInt()
+                                              .toString(),
+                                          style: TextStyle(
+                                            color: ColorConsts.textColorDark,
+                                            fontSize: 16,
+                                            // fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                     ),
                                     Expanded(
                                       flex: 2,
-                                      child: Container(
-                                        // color: Colors.amber,
-                                        // height: ,
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              width: 80,
-                                              child: OutlinedButton(
-                                                onPressed: () => onViewUser(
-                                                    state.data![index]),
-                                                // onPressed: () {
-                                                //   showDialog(
-                                                //     context: context,
-                                                //     builder: (context) =>
-                                                //         const PopupViewUser(),
-                                                //   );
-                                                // },
-                                                child: Text(
-                                                  'View',
-                                                  style: TextStyle(
-                                                      color: ColorConsts
-                                                          .whiteColor),
-                                                ),
-                                                style: OutlinedButton.styleFrom(
-                                                  side: const BorderSide(
-                                                    // width: 5.0,
-                                                    color: ColorConsts
-                                                        .primaryColor,
-                                                  ),
-                                                  backgroundColor:
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Spacer(),
+                                          InkResponse(
+                                            onTap: () =>
+                                                onViewUser(state.data![index]),
+                                            child: Container(
+                                              height: 32,
+                                              width: 32,
+                                              decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
                                                       ColorConsts.primaryColor,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                      ColorConsts.primaryColor,
+                                                    ],
+                                                    begin: Alignment.centerLeft,
+                                                    end: Alignment.centerRight,
                                                   ),
-                                                ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          25.0),
+                                                  boxShadow: [
+                                                    new BoxShadow(
+                                                      color: ColorConsts
+                                                          .primaryColor,
+                                                      blurRadius: 1.0,
+                                                      offset: Offset(1, 2),
+                                                    ),
+                                                  ]),
+                                              padding:
+                                                  const EdgeInsets.all(1.0),
+                                              child: Icon(
+                                                Icons.remove_red_eye_rounded,
+                                                color: ColorConsts.whiteColor,
+                                                size: 20,
                                               ),
                                             ),
-                                            const SizedBox(
-                                              width: 10,
+                                          ),
+                                          Spacer(),
+                                          InkResponse(
+                                            onTap: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    PopUpEditUser(),
+                                              );
+                                            },
+                                            child: Container(
+                                              height: 32,
+                                              width: 32,
+                                              decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      ColorConsts.primaryColor,
+                                                      ColorConsts.primaryColor,
+                                                    ],
+                                                    begin: Alignment.centerLeft,
+                                                    end: Alignment.centerRight,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          25.0),
+                                                  boxShadow: [
+                                                    new BoxShadow(
+                                                      color: ColorConsts
+                                                          .primaryColor,
+                                                      blurRadius: 1.0,
+                                                      offset: Offset(1, 2),
+                                                    ),
+                                                  ]),
+                                              padding:
+                                                  const EdgeInsets.all(1.0),
+                                              child: Icon(
+                                                Icons.edit_outlined,
+                                                color: ColorConsts.whiteColor,
+                                                size: 20,
+                                              ),
                                             ),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      PopUpEditUser(),
-                                                );
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(4),
-                                                child: Icon(
-                                                  Icons.edit_outlined,
-                                                  color: ColorConsts.whiteColor,
-                                                ),
-                                              ),
-                                              style: ElevatedButton.styleFrom(
-                                                shadowColor:
-                                                    ColorConsts.primaryColor,
-                                                elevation: 10,
-                                                backgroundColor:
-                                                    ColorConsts.primaryColor,
-                                                shape: CircleBorder(),
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
                                     )
+
+                                    // Expanded(
+                                    //   flex: 2,
+                                    //   child: Container(
+                                    //     // color: Colors.amber,
+                                    //     // height: ,
+                                    //     child: Row(
+                                    //       crossAxisAlignment:
+                                    //           CrossAxisAlignment.center,
+                                    //       mainAxisAlignment:
+                                    //           MainAxisAlignment.center,
+                                    //       children: [
+                                    //         Container(
+                                    //           width: 80,
+                                    //           child: OutlinedButton(
+                                    //             onPressed: () => onViewUser(
+                                    //                 state.data![index]),
+                                    //             // onPressed: () {
+                                    //             //   showDialog(
+                                    //             //     context: context,
+                                    //             //     builder: (context) =>
+                                    //             //         const PopupViewUser(user: null,),
+                                    //             //   );
+                                    //             // },
+                                    //             child: Text(
+                                    //               'View',
+                                    //               style: TextStyle(
+                                    //                   color: ColorConsts
+                                    //                       .whiteColor),
+                                    //             ),
+                                    //             style: OutlinedButton.styleFrom(
+                                    //               side: const BorderSide(
+                                    //                 // width: 5.0,
+                                    //                 color: ColorConsts
+                                    //                     .primaryColor,
+                                    //               ),
+                                    //               backgroundColor:
+                                    //                   ColorConsts.primaryColor,
+                                    //               shape: RoundedRectangleBorder(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.circular(
+                                    //                         10),
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //         const SizedBox(
+                                    //           width: 10,
+                                    //         ),
+                                    //         ElevatedButton(
+                                    //           onPressed: () {
+                                    //             showDialog(
+                                    //               context: context,
+                                    //               builder: (context) =>
+                                    //                   PopUpEditUser(),
+                                    //             );
+                                    //           },
+                                    //           child: Padding(
+                                    //             padding:
+                                    //                 const EdgeInsets.all(4),
+                                    //             child: Icon(
+                                    //               Icons.edit_outlined,
+                                    //               color: ColorConsts.whiteColor,
+                                    //             ),
+                                    //           ),
+                                    //           style: ElevatedButton.styleFrom(
+                                    //             shadowColor:
+                                    //                 ColorConsts.primaryColor,
+                                    //             elevation: 10,
+                                    //             backgroundColor:
+                                    //                 ColorConsts.primaryColor,
+                                    //             shape: CircleBorder(),
+                                    //           ),
+                                    //         )
+                                    //       ],
+                                    //     ),
+                                    //   ),
+                                    // )
                                   ],
                                 ),
                               ),

@@ -30,7 +30,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
     return Dialog(
       child: Container(
         width: 500,
-        height: 600,
+        // height: 600,
         decoration: const BoxDecoration(
           color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21)),
@@ -140,21 +140,22 @@ class _PopupViewUserState extends State<PopupViewUser> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 50, right: 90, top: 20),
+                  padding:
+                      EdgeInsets.only(left: 50, right: 90, top: 20, bottom: 30),
                   child: Column(
                     children: [
                       Row(
                         children: [
                           Text(
-                            "Total Keys :",
+                            "Total Keys :  ",
                             style: TextStyle(
                                 color: ColorConsts.textColorLight,
-                                fontSize: 22),
+                                fontSize: 18),
                           ),
                           Text(
                             widget.user.keys!.length.toInt().toString(),
                             style: TextStyle(
-                                color: ColorConsts.textColorDark, fontSize: 22),
+                                color: ColorConsts.textColorDark, fontSize: 18),
                           ),
                         ],
                       ),

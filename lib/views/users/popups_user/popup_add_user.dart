@@ -17,7 +17,7 @@ class _PopUpAddUserState extends State<PopUpAddUser> {
     return Dialog(
       child: Container(
         width: 600,
-        height: 700,
+        // height: 700,
         decoration: BoxDecoration(
           color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21)),
@@ -46,7 +46,7 @@ class _PopUpAddUserState extends State<PopUpAddUser> {
               "Add User",
               style: TextStyle(
                 color: ColorConsts.primaryColor,
-                fontSize: 32,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -170,7 +170,8 @@ class _PopUpAddUserState extends State<PopUpAddUser> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 10),
+              padding: const EdgeInsets.only(
+                  left: 50, right: 50, top: 10, bottom: 20),
               child: Container(
                 width: 120,
                 child: RoundedButton(

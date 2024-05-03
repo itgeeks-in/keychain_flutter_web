@@ -19,7 +19,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
     return Dialog(
         child: Container(
       width: 500,
-      height: 500,
+      // height: 500,
       decoration: const BoxDecoration(
           color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21))),
@@ -49,7 +49,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
             "Edit User",
             style: TextStyle(
                 color: ColorConsts.primaryColor,
-                fontSize: 32,
+                fontSize: 20,
                 fontWeight: FontWeight.bold),
           ),
 
@@ -105,7 +105,8 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
             )),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 50, right: 50, top: 50),
+            padding:
+                const EdgeInsets.only(left: 50, right: 50, top: 50, bottom: 20),
             child: Container(
               // width: 120,
               child: RoundedButton(
