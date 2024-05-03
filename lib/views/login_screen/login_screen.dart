@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/views/login_screen/bloc/login_state.dart';
 import 'package:key_admin_panel/views/login_screen/bloc/login_bloc.dart';
 import 'package:key_admin_panel/views/login_screen/bloc/login_event.dart';
@@ -54,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             const Text(
                               "Login",
                               style: TextStyle(
-                                color: Color.fromARGB(255, 8, 185, 216),
+                                color: ColorConsts.primaryColor,
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -62,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             const SizedBox(height: 10),
                             Center(
                               child: PhysicalModel(
-                                color: Colors.white,
+                                color: ColorConsts.backgroundColor,
                                 elevation: 25,
                                 borderRadius: BorderRadius.circular(20),
                                 child: Container(
@@ -71,13 +72,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                   width: 400,
                                   height: 400,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                    const BorderRadius.all(Radius.circular(21)),
-                                    border: Border.all(width: 2, color: Colors.white),
+                                    color: ColorConsts.backgroundColor,
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(21)),
+                                    border: Border.all(
+                                        width: 2,
+                                        color: ColorConsts.backgroundColor),
                                     boxShadow: const [
                                       BoxShadow(
-                                        color: Color.fromARGB(193, 223, 212, 212),
+                                        color: ColorConsts.boxShadowColor,
                                         blurRadius: 8,
                                         spreadRadius: 4,
                                       )
@@ -85,97 +88,128 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   child: Center(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         TextField(
-                                          style: const TextStyle(color: Colors.black),
+                                          style: const TextStyle(
+                                              color: ColorConsts.textColorDark),
                                           controller: emailController,
                                           decoration: InputDecoration(
                                             filled: true,
-                                            fillColor: Colors.white,
+                                            fillColor:
+                                                ColorConsts.backgroundColor,
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(11),
+                                              borderRadius:
+                                                  BorderRadius.circular(11),
                                               borderSide: const BorderSide(
-                                                  color: Color.fromARGB(255, 8, 185, 216),
+                                                  color:
+                                                      ColorConsts.primaryColor,
                                                   width: 2),
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(11),
+                                              borderRadius:
+                                                  BorderRadius.circular(11),
                                               borderSide: const BorderSide(
-                                                  color: Color.fromARGB(255, 8, 185, 216)),
+                                                  color:
+                                                      ColorConsts.primaryColor),
                                             ),
                                             hintText: "Enter your Email",
-                                            hintStyle: const TextStyle(color: Colors.grey),
+                                            hintStyle: const TextStyle(
+                                                color:
+                                                    ColorConsts.textColorLight),
                                             prefixIcon: const Icon(
                                               Icons.email,
-                                              color: Color.fromARGB(255, 8, 185, 216),
+                                              color: ColorConsts.primaryColor,
                                             ),
                                           ),
                                         ),
                                         if (state is EmailRequiredState)
                                           Text(
                                             "Email is required",
-                                            style: TextStyle(color: Colors.red),
+                                            style: TextStyle(
+                                                color: ColorConsts.redColor),
                                           ),
                                         if (state is EmailInvalidState)
                                           Text(
                                             "Invalid email format",
-                                            style: TextStyle(color: Colors.red),
+                                            style: TextStyle(
+                                                color: ColorConsts.redColor),
                                           ),
                                         const SizedBox(height: 20),
                                         TextField(
-                                          style: const TextStyle(color: Colors.black),
+                                          style: const TextStyle(
+                                              color: ColorConsts.textColorDark),
                                           controller: passwordController,
                                           obscureText: !isPassVisible,
                                           decoration: InputDecoration(
                                             filled: true,
-                                            fillColor: Colors.white,
+                                            fillColor:
+                                                ColorConsts.backgroundColor,
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(11),
+                                              borderRadius:
+                                                  BorderRadius.circular(11),
                                               borderSide: const BorderSide(
-                                                  color: Color.fromARGB(255, 8, 185, 216),
+                                                  color:
+                                                      ColorConsts.primaryColor,
                                                   width: 2),
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(11),
+                                              borderRadius:
+                                                  BorderRadius.circular(11),
                                               borderSide: const BorderSide(
-                                                  color: Color.fromARGB(255, 8, 185, 216)),
+                                                  color:
+                                                      ColorConsts.primaryColor),
                                             ),
                                             hintText: "Enter your password",
-                                            hintStyle: const TextStyle(color: Colors.grey),
+                                            hintStyle: const TextStyle(
+                                                color:
+                                                    ColorConsts.textColorLight),
                                             prefixIcon: const Icon(
                                               Icons.lock,
-                                              color: Color.fromARGB(255, 8, 185, 216),
+                                              color: ColorConsts.primaryColor,
                                             ),
                                             suffixIcon: IconButton(
                                               icon: Icon(
                                                 isPassVisible
                                                     ? Icons.visibility_off
                                                     : Icons.visibility,
-                                                color: const Color.fromARGB(255, 8, 185, 216),
+                                                color: ColorConsts.primaryColor,
                                               ),
                                               onPressed: () {
                                                 setState(() {
-                                                  isPassVisible = !isPassVisible;
+                                                  isPassVisible =
+                                                      !isPassVisible;
                                                 });
                                               },
                                             ),
                                           ),
                                         ),
                                         if (state is PassRequiredState)
-                                          Text("Password is required", style: TextStyle(color: Colors.red),
+                                          Text(
+                                            "Password is required",
+                                            style: TextStyle(
+                                                color: ColorConsts.redColor),
                                           ),
-                                        if(state is PassInvalidState)
-                                          Text("Incorrect password or password must be 5 digit.", style: TextStyle(color:Colors.red),),
+                                        if (state is PassInvalidState)
+                                          Text(
+                                            "Incorrect password or password must be 5 digit.",
+                                            style: TextStyle(
+                                                color: ColorConsts.redColor),
+                                          ),
                                         const SizedBox(height: 30),
                                         BlocBuilder<LoginBloc, LoginState>(
                                           builder: (context, state) {
                                             return Visibility(
-                                              visible: !(state is LoadState), // Hide the button if state is LoadState
+                                              visible: !(state
+                                                  is LoadState), // Hide the button if state is LoadState
                                               child: ElevatedButton(
                                                 onPressed: () {
-                                                  BlocProvider.of<LoginBloc>(context).add(
+                                                  BlocProvider.of<LoginBloc>(
+                                                          context)
+                                                      .add(
                                                     OnButtonClick(
                                                       emailController.text,
                                                       passwordController.text,
@@ -183,21 +217,42 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   );
                                                 },
                                                 style: ButtonStyle(
-                                                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 8, 185, 216)),
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                          Color>(
+                                                    ColorConsts.primaryColor,
+                                                  ),
                                                 ),
-                                                child: const Text('Login', style: TextStyle(color: Colors.white)),
+                                                child: const Text('Login',
+                                                    style: TextStyle(
+                                                      color: ColorConsts
+                                                          .whiteColor,
+                                                    )),
                                               ),
-                                              replacement: Loader().loaderWidget2(), // Show loader when state is LoadState
+                                              replacement: Loader()
+                                                  .loaderWidget2(), // Show loader when state is LoadState
                                             );
                                           },
                                         ),
                                         SizedBox(height: 4),
-                                        if(state is NonAdminState)
-                                          Text("You are not a admin.",style: TextStyle(color: Colors.red),),
-                                        if(state is NoUserWithEmailState)
-                                          Text(state.messgage, style: TextStyle(color:Colors.red),),
-                                        if(state is FailedState)
-                                          Text(state.message, style: TextStyle(color:Colors.red),),
+                                        if (state is NonAdminState)
+                                          Text(
+                                            "You are not a admin.",
+                                            style: TextStyle(
+                                                color: ColorConsts.redColor),
+                                          ),
+                                        if (state is NoUserWithEmailState)
+                                          Text(
+                                            state.messgage,
+                                            style: TextStyle(
+                                                color: ColorConsts.redColor),
+                                          ),
+                                        if (state is FailedState)
+                                          Text(
+                                            state.message,
+                                            style: TextStyle(
+                                                color: ColorConsts.redColor),
+                                          ),
                                       ],
                                     ),
                                   ),
