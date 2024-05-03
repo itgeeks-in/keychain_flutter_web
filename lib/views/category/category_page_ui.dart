@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
-import 'package:key_admin_panel/widgets/buttons.dart';
+import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
+import 'package:key_admin_panel/views/category/bloc/category_page_state.dart';
+
+import '../../widgets/loader_widget.dart';
 class CategoryPageUI extends StatefulWidget {
   const CategoryPageUI({super.key});
 
@@ -13,14 +16,19 @@ class CategoryPageUI extends StatefulWidget {
 
 class _CategoryPageUIState extends State<CategoryPageUI> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: ColorConsts.whiteColor,
-         padding: EdgeInsets.all(10.0),
-        margin: EdgeInsets.all(10.0),
+         padding: const EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -57,64 +65,144 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                           color: Color.fromARGB(255, 8, 185, 216),
                         ),
                         hintText: "Search",
-                        hintStyle: TextStyle(color: Colors.grey)),
+                        hintStyle: const TextStyle(color: Colors.grey)),
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () {
                   },
-                  child: const Text(
-                    'Add Category',
-                    style:ThemeText.textSmallWhiteBold,
-                  ),
-                   style: ElevatedButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
                     shadowColor: ColorConsts.primaryColor,
                     elevation: 10,
                     backgroundColor: ColorConsts.primaryColor,
                   ),
+                  child: const Text(
+                    'Add Category',
+                    style:ThemeText.textSmallWhiteBold,
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: 20,),
-            Expanded(
-             child:  GridView.count(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: (180/100),
-                  children: List.generate(6, (index){
-                      return Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: ColorConsts.primaryColor,
-                          border: Border.all(
-                            color: ColorConsts.secondaryColor,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Category Name',
-                              style: ThemeText.textMediumSecondaryBold,
-                            ),
-                            SizedBox(height: 10,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ButtonWidget().buttonWidgetSmallPrimary('Edit', () => {},75.0,40.0),
-                                SizedBox(width: 20,),
-                                ButtonWidget().buttonWidgetSmallPrimary('Delete', () => {},75.0,40.0),
+            const SizedBox(height: 20,),
+            BlocProvider(
+            create: (context) => CategoryPageBloc(),
+              child: BlocBuilder<CategoryPageBloc,CategoryPageState>(
+               builder: (context, state) {
+               if(state is CategorySuccessState) {
+                 return Expanded(
+                     child: GridView.count(
+                       crossAxisCount: 4,
+                       crossAxisSpacing: 10,
+                       mainAxisSpacing: 10,
+                       childAspectRatio: (180 / 100),
+                       children: List.generate(state.data.length, (index) {
+                         return Container(
+                           alignment: Alignment.center,
+                           decoration: BoxDecoration(
+                             color: ColorConsts.whiteColor,
+                             border: Border.all(
+                               color: ColorConsts.secondaryColor,
+                               width: 1.0,
+                             ),
+                             borderRadius: BorderRadius.circular(10.0),
+                           ),
+                           child: Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceAround,
+                             children: [Text(state.data[index].categoryName,
+                                 style: ThemeText.textMediumSecondaryBold,
+                               ),
+                               const SizedBox(height: 10,),
+                               Column(
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                   InkResponse(
+                                     onTap: () {
+                                     },
+                                     child: Container(
+                                       height: 32,
+                                       width: 32,
+                                       decoration: BoxDecoration(
+                                           gradient: LinearGradient(
+                                             colors: [
+                                               ColorConsts.primaryColor,
+                                               ColorConsts.primaryColor,
+                                             ],
+                                             begin: Alignment.centerLeft,
+                                             end: Alignment.centerRight,
+                                           ),
+                                           borderRadius:
+                                           BorderRadius.circular(25.0)
+                                           ,boxShadow: [new BoxShadow(
+                                         color: ColorConsts.primaryColor,
+                                         blurRadius: 1.0,
+                                         offset: Offset(1, 2),
+                                       ),]
+                                       ),
+                                       padding:
+                                       const EdgeInsets.all(1.0),
+                                       child: Icon(
+                                         Icons.edit_outlined,
+                                         color: ColorConsts.whiteColor,size: 20,
+                                       ),
+                                     ),
+
+                                   ),
+                                   const SizedBox(height: 10,),
+                                   InkResponse(
+                                     onTap: () {
+                                     },
+                                     child: Container(
+                                       height: 32,
+                                       width: 32,
+                                       decoration: BoxDecoration(
+                                           gradient: LinearGradient(
+                                             colors: [
+                                               ColorConsts.primaryColor,
+                                               ColorConsts.primaryColor,
+                                             ],
+                                             begin: Alignment.centerLeft,
+                                             end: Alignment.centerRight,
+                                           ),
+                                           borderRadius:
+                                           BorderRadius.circular(25.0)
+
+                                           ,boxShadow: [new BoxShadow(
+                                         color: ColorConsts.primaryColor,
+                                         blurRadius: 1.0,
+                                         offset: Offset(1, 2),
+                                       ),]
+                                       ),
+                                       padding:
+                                       const EdgeInsets.all(1.0),
+                                       child: Icon(
+                                         Icons.delete_forever,
+                                         color: ColorConsts.whiteColor,size: 20,
+                                       ),
+                                     ),
+
+                                   ),
+                                  ],
+                                ),
                               ],
                             ),
-                          ],
-                        ),
-                       );
-                      }
-                     ),
-                )
-             )
+                          );
+                        }
+                       ),
+                     )
+                  );
+               }else if(state is CategoryNotFoundState){
+                 return Center(
+                   child: Text(
+                     state.msg,
+                     style: ThemeText.textMediumSecondaryBold,
+                    ),
+                  );
+                }else{
+                 return Center(child: Loader().loaderWidget2());
+               }
+              },
+             ),
+            )
            ],
          ),
        ),
