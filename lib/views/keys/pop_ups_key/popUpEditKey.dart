@@ -9,8 +9,8 @@ import 'package:key_admin_panel/utils/CustomImagePicker.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpAddKeys.dart';
-
 
 class PopUpEditkey extends StatefulWidget {
   const PopUpEditkey({super.key});
@@ -37,7 +37,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
       width: 500,
       height: 650,
       decoration: const BoxDecoration(
-          color: Colors.white,
+          color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -54,7 +54,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
                   },
                   child: Icon(
                     Icons.close_outlined,
-                    color: Color.fromARGB(255, 8, 185, 216),
+                    color: ColorConsts.primaryColor,
                   ),
                 )
               ],
@@ -64,7 +64,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
             child: const Text(
               "Edit Key",
               style: TextStyle(
-                  color: Color.fromARGB(255, 8, 185, 216),
+                  color: ColorConsts.primaryColor,
                   fontSize: 32,
                   fontWeight: FontWeight.bold),
             ),
@@ -118,12 +118,12 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
                                 image: MemoryImage(_image!),
                                 fit: BoxFit.cover,
                               ),
-                              color: Colors.white,
+                              color: ColorConsts.backgroundColor,
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               border: Border.all(
                                 width: 2,
-                                color: Color.fromARGB(255, 8, 185, 216),
+                                color: ColorConsts.primaryColor,
                               ),
                             ))
                         : Container(
@@ -137,12 +137,12 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
                               //   image: MemoryImage(_image!),
                               //   fit: BoxFit.cover,
                               // ),
-                              color: Colors.white,
+                              color: ColorConsts.backgroundColor,
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               border: Border.all(
                                 width: 2,
-                                color: Color.fromARGB(255, 8, 185, 216),
+                                color: ColorConsts.primaryColor,
                               ),
                             )),
                     InkWell(
@@ -150,7 +150,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
                       child: Text(
                         "Upload Image",
                         style: TextStyle(
-                          color: Color.fromARGB(255, 8, 185, 216),
+                          color: ColorConsts.primaryColor,
                         ),
                       ),
                     )
@@ -176,7 +176,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
                     //     side: BorderSide(
                     //         // width: 5.0,
                     //         color: Colors.white),
-                    //     backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                    //     backgroundColor: ColorConsts.primaryColor,
                     //     shape: RoundedRectangleBorder(
                     //       borderRadius: BorderRadius.circular(10),
                     //     ),

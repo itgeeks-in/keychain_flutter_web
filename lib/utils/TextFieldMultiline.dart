@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 class TextFieldMultiline extends StatelessWidget {
   final String labelText;
@@ -14,28 +15,28 @@ class TextFieldMultiline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      style: TextStyle(color: Colors.grey),
+      style: TextStyle(color: ColorConsts.textColorDark),
       keyboardType: TextInputType.multiline,
       maxLines: 3, // Allows for an unlimited number of lines
       decoration: InputDecoration(
         labelText: "Description",
         alignLabelWithHint: true,
         labelStyle: TextStyle(
-          color: Colors.grey,
+          color: ColorConsts.textColorLight,
         ),
         filled: true,
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(11),
           borderSide: BorderSide(
-            color: Color.fromARGB(255, 4, 203, 238),
+            color: ColorConsts.primaryColor,
             width: 2,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(11),
           borderSide: BorderSide(
-            color: Color.fromARGB(255, 4, 203, 238),
+            color: ColorConsts.primaryColor,
           ),
         ),
         disabledBorder: OutlineInputBorder(
@@ -44,7 +45,7 @@ class TextFieldMultiline extends StatelessWidget {
         ),
         hintText: "Enter your text here...",
         hintStyle: TextStyle(
-          color: Colors.grey,
+          color: ColorConsts.textColorLight,
         ),
       ),
     );

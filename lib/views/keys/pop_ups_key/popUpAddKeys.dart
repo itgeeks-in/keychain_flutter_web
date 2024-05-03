@@ -10,6 +10,7 @@ import 'package:key_admin_panel/utils/CustomImagePicker.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 class PopUpAddKeys extends StatefulWidget {
   const PopUpAddKeys({super.key});
@@ -36,7 +37,7 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
       width: 500,
       height: 650,
       decoration: const BoxDecoration(
-          color: Colors.white,
+          color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -53,7 +54,7 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
                   },
                   child: Icon(
                     Icons.close_outlined,
-                    color: Color.fromARGB(255, 8, 185, 216),
+                    color: ColorConsts.primaryColor,
                   ),
                 )
               ],
@@ -63,7 +64,7 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
             child: const Text(
               "Add Key",
               style: TextStyle(
-                  color: Color.fromARGB(255, 8, 185, 216),
+                  color: ColorConsts.primaryColor,
                   fontSize: 32,
                   fontWeight: FontWeight.bold),
             ),
@@ -117,12 +118,12 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
                                 image: MemoryImage(_image!),
                                 fit: BoxFit.cover,
                               ),
-                              color: Colors.white,
+                              color: ColorConsts.backgroundColor,
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               border: Border.all(
                                 width: 2,
-                                color: Color.fromARGB(255, 8, 185, 216),
+                                color: ColorConsts.primaryColor,
                               ),
                             ))
                         : Container(
@@ -133,16 +134,17 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
                             child: Center(
                                 child: Text(
                               "Upload Keys Image",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 12),
+                              style: TextStyle(
+                                  color: ColorConsts.textColorLight,
+                                  fontSize: 12),
                             )),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: ColorConsts.backgroundColor,
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               border: Border.all(
                                 width: 2,
-                                color: Color.fromARGB(255, 8, 185, 216),
+                                color: ColorConsts.primaryColor,
                               ),
                             )),
                     InkWell(
@@ -150,7 +152,7 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
                       child: Text(
                         "Upload Image",
                         style: TextStyle(
-                          color: Color.fromARGB(255, 8, 185, 216),
+                          color: ColorConsts.primaryColor,
                         ),
                       ),
                     )
@@ -177,7 +179,7 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
                     //     side: BorderSide(
                     //         // width: 5.0,
                     //         color: Colors.white),
-                    //     backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                    //     backgroundColor: ColorConsts.primaryColor,
                     //     shape: RoundedRectangleBorder(
                     //       borderRadius: BorderRadius.circular(10),
                     //     ),
@@ -207,56 +209,57 @@ class DropdownMenuList extends StatelessWidget {
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(11)),
             borderSide: BorderSide(
-              color: Color.fromARGB(255, 8, 185, 216),
+              color: ColorConsts.primaryColor,
               width: 2,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(11),
             borderSide: const BorderSide(
-              color: Color.fromARGB(255, 4, 203, 238),
+              color: ColorConsts.primaryColor,
               width: 2,
             ),
           ),
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(11)),
             borderSide: BorderSide(
-              color: Color.fromARGB(255, 4, 203, 238),
+              color: ColorConsts.primaryColor,
             ),
           ),
         ),
         leadingIcon: const Icon(
           Icons.category_rounded,
-          color: Color.fromARGB(255, 8, 185, 216),
+          color: ColorConsts.primaryColor,
         ),
         label: const Text(
           "Categories",
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: ColorConsts.textColorLight),
         ),
-        textStyle: TextStyle(color: Colors.grey),
+        textStyle: TextStyle(color: ColorConsts.textColorLight),
         trailingIcon: Icon(
           Icons.arrow_drop_down_outlined,
-          color: Color.fromARGB(255, 8, 185, 216),
+          color: ColorConsts.primaryColor,
         ),
         selectedTrailingIcon: Icon(
           Icons.arrow_drop_up_sharp,
-          color: Color.fromARGB(255, 8, 185, 216),
+          color: ColorConsts.primaryColor,
         ),
         requestFocusOnTap: true,
         menuStyle: MenuStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.selected)) {
-                return Color.fromARGB(255, 8, 185,
-                    216); // Change the selected background color here
+                return ColorConsts
+                    .primaryColor; // Change the selected background color here
               }
-              return Colors.white; // Change the default background color here
+              return ColorConsts
+                  .backgroundColor; // Change the default background color here
             },
           ),
         ),
         dropdownMenuEntries: const <DropdownMenuEntry>[
           DropdownMenuEntry(
-            value: Color.fromARGB(255, 8, 185, 216),
+            value: ColorConsts.primaryColor,
             label: "KeyLock",
             // labelWidget: Text(
             //   "dsfsdfj",
@@ -264,35 +267,37 @@ class DropdownMenuList extends StatelessWidget {
             // ),
             leadingIcon: Icon(
               Icons.key_rounded,
-              color: Color.fromARGB(255, 8, 185, 216),
+              color: ColorConsts.primaryColor,
             ),
             style: ButtonStyle(
               foregroundColor:
-                  MaterialStatePropertyAll(Color.fromARGB(255, 8, 185, 216)),
-              backgroundColor: MaterialStatePropertyAll(Colors.white),
+                  MaterialStatePropertyAll(ColorConsts.primaryColor),
+              backgroundColor:
+                  MaterialStatePropertyAll(ColorConsts.backgroundColor),
               elevation: MaterialStatePropertyAll(11),
               textStyle: MaterialStatePropertyAll(
                 TextStyle(
-                  color: Color.fromARGB(255, 8, 185, 216),
+                  color: ColorConsts.primaryColor,
                 ),
               ),
             ),
           ),
           DropdownMenuEntry(
-            value: Color.fromARGB(255, 8, 185, 216),
+            value: ColorConsts.primaryColor,
             label: "KeyLock1",
             leadingIcon: Icon(
               Icons.key_rounded,
-              color: Color.fromARGB(255, 8, 185, 216),
+              color: ColorConsts.primaryColor,
             ),
             style: ButtonStyle(
               foregroundColor:
-                  MaterialStatePropertyAll(Color.fromARGB(255, 8, 185, 216)),
-              backgroundColor: MaterialStatePropertyAll(Colors.white),
+                  MaterialStatePropertyAll(ColorConsts.primaryColor),
+              backgroundColor:
+                  MaterialStatePropertyAll(ColorConsts.backgroundColor),
               elevation: MaterialStatePropertyAll(11),
               textStyle: MaterialStatePropertyAll(
                 TextStyle(
-                  color: Color.fromARGB(255, 8, 185, 216),
+                  color: ColorConsts.primaryColor,
                 ),
               ),
             ),
@@ -302,16 +307,17 @@ class DropdownMenuList extends StatelessWidget {
             label: "KeyLock2",
             leadingIcon: Icon(
               Icons.key_rounded,
-              color: Color.fromARGB(255, 8, 185, 216),
+              color: ColorConsts.primaryColor,
             ),
             style: ButtonStyle(
               foregroundColor:
-                  MaterialStatePropertyAll(Color.fromARGB(255, 8, 185, 216)),
-              backgroundColor: MaterialStatePropertyAll(Colors.white),
+                  MaterialStatePropertyAll(ColorConsts.primaryColor),
+              backgroundColor:
+                  MaterialStatePropertyAll(ColorConsts.backgroundColor),
               elevation: MaterialStatePropertyAll(11),
               textStyle: MaterialStatePropertyAll(
                 TextStyle(
-                  color: Color.fromARGB(255, 8, 185, 216),
+                  color: ColorConsts.primaryColor,
                 ),
               ),
             ),

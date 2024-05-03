@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpAddKeys.dart';
-
 
 class PopUpViewKey extends StatefulWidget {
   const PopUpViewKey({super.key});
@@ -26,7 +24,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
       width: 500,
       height: 650,
       decoration: const BoxDecoration(
-          color: Colors.white,
+          color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -43,7 +41,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                   },
                   child: Icon(
                     Icons.close_outlined,
-                    color: Color.fromARGB(255, 8, 185, 216),
+                    color: ColorConsts.primaryColor,
                   ),
                 )
               ],
@@ -53,7 +51,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
             child: const Text(
               "View Key",
               style: TextStyle(
-                  color: Color.fromARGB(255, 8, 185, 216),
+                  color: ColorConsts.primaryColor,
                   fontSize: 32,
                   fontWeight: FontWeight.bold),
             ),
@@ -102,11 +100,11 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                     child: Image.asset("assets/keys.jpg", fit: BoxFit.contain),
                     // child:picker,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: ColorConsts.backgroundColor,
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       border: Border.all(
                         width: 2,
-                        color: Color.fromARGB(255, 8, 185, 216),
+                        color: ColorConsts.primaryColor,
                       ),
                     )),
                 SizedBox(
@@ -131,7 +129,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                     //     side: BorderSide(
                     //         // width: 5.0,
                     //         color: Colors.white),
-                    //     backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                    //     backgroundColor: ColorConsts.primaryColor,
                     //     shape: RoundedRectangleBorder(
                     //       borderRadius: BorderRadius.circular(10),
                     //     ),
