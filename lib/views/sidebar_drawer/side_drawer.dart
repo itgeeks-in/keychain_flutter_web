@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/views/category/category_page_ui.dart';
 import 'package:key_admin_panel/views/home/home_screen.dart';
@@ -33,15 +34,17 @@ class _HomePageUIState extends State<SideDrawer> {
               child: Image.asset("assets/img.jpg",
                   height: 62, width: 62, fit: BoxFit.cover),
             ),
-            indicatorColor: Colors.white,
+            indicatorColor: ColorConsts.backgroundColor,
             extended: isExpanded,
-            backgroundColor: Color.fromARGB(255, 8, 185, 216),
-            unselectedIconTheme: IconThemeData(color: Colors.white, opacity: 1),
-            unselectedLabelTextStyle: TextStyle(
-              color: Colors.white,
-            ),
+            backgroundColor: ColorConsts.primaryColor,
+            unselectedIconTheme:
+                IconThemeData(color: ColorConsts.whiteColor, opacity: 1),
+            selectedLabelTextStyle:
+                TextStyle(color: ColorConsts.whiteColor, fontSize: 16),
+            unselectedLabelTextStyle:
+                TextStyle(color: ColorConsts.whiteColor, fontSize: 13),
             selectedIconTheme: IconThemeData(
-              color: Color.fromARGB(255, 8, 185, 216),
+              color: ColorConsts.primaryColor,
             ),
             destinations: [
               NavigationRailDestination(
@@ -71,7 +74,6 @@ class _HomePageUIState extends State<SideDrawer> {
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.logout),
-
                 label: Text("Logout"),
               ),
             ],
@@ -79,27 +81,27 @@ class _HomePageUIState extends State<SideDrawer> {
             onDestinationSelected: (int index) {
               print("??????");
 
-                setState(() {
-                  _selectedIndex = index;
-                });
-              if(_selectedIndex==6){
+              setState(() {
+                _selectedIndex = index;
+              });
+              if (_selectedIndex == 6) {
                 Dialogs().logoutPopup(context, "en");
               }
-
             },
           ),
           Expanded(
             child: Column(
               children: [
                 Container(
-                  decoration:
-                      BoxDecoration(color: Colors.white, boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white,
-                      blurRadius: 4,
-                      spreadRadius: 2,
-                    )
-                  ]),
+                  decoration: BoxDecoration(
+                      color: ColorConsts.backgroundColor,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: ColorConsts.backgroundColor,
+                          blurRadius: 2,
+                          spreadRadius: 2,
+                        )
+                      ]),
                   padding: const EdgeInsets.all(8),
                   child: Row(
                     children: [
@@ -109,28 +111,30 @@ class _HomePageUIState extends State<SideDrawer> {
                             isExpanded = !isExpanded;
                           });
                         },
-                        icon: Icon(Icons.menu),
+                        icon: Icon(
+                          Icons.menu,
+                          color: ColorConsts.primaryColor,
+                        ),
                       ),
                       TextButton(
                         child: Text(
                           _getLabelForIndex(_selectedIndex),
-                          style: TextStyle(color: Colors.black87),
+                          style: TextStyle(color: ColorConsts.primaryColor),
                         ),
                         onPressed: () {},
                       ),
                       const Spacer(),
                       IconButton(
                         icon: Icon(Icons.notification_important,
-                            color: Colors.black87),
+                            color: ColorConsts.primaryColor),
                         onPressed: () {},
                       ),
                       const SizedBox(width: 12),
                       IconButton(
                         icon: Icon(Icons.power_settings_new,
-                            color: Colors.black87),
+                            color: ColorConsts.primaryColor),
                         onPressed: () {
                           Dialogs().logoutPopup(context, "en");
-
                         },
                       ),
                       const SizedBox(width: 12),
@@ -195,9 +199,9 @@ class _HomePageUIState extends State<SideDrawer> {
       case 6:
         return HomeScreen();
       default:
-
         return Container(
-          child: Text("This is Screen Not Present",style: ThemeText.textMediumGrey),
+          child: Text("This is Screen Not Present",
+              style: ThemeText.textMediumGrey),
         ); // or any other default widget you prefer
     }
   }
