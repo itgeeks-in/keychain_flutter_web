@@ -10,7 +10,6 @@ import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_bloc.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_state.dart';
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpAddKeys.dart';
-
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpEditKey.dart';
 import 'package:key_admin_panel/views/keys/pop_ups_key/popUpViewKeys.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
@@ -121,8 +120,9 @@ class _KeysScreenState extends State<KeyPageUI> {
                                                   fit: BoxFit.cover,
                                                   loadingBuilder: (context,
                                                       child, loadingProgress) {
-                                                    if (loadingProgress == null)
+                                                    if (loadingProgress == null) {
                                                       return child;
+                                                    }
                                                     return Shimmer.fromColors(
                                                         child: Container(
                                                           height: 100,
