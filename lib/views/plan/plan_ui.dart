@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 class Plan {
   String name;
@@ -239,16 +240,14 @@ class _PlanPageState extends State<PlanPage> {
                     margin: const EdgeInsets.all(10.0),
                     height: 45,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: ColorConsts.backgroundColor,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10)),
                         border: Border.all(
-                          width: 1,
-                          color: Color.fromARGB(255, 8, 185, 216),
-                        ),
+                            width: 1, color: ColorConsts.primaryColor),
                         boxShadow: const [
                           BoxShadow(
-                            color: Color.fromARGB(193, 223, 212, 212),
+                            color: ColorConsts.boxShadowColor,
                             blurRadius: 8,
                             spreadRadius: 4,
                             // offset: Offset(0, 10),
@@ -266,7 +265,7 @@ class _PlanPageState extends State<PlanPage> {
                             child: Text(
                               data.name,
                               style: const TextStyle(
-                                color: Colors.black,
+                                color: ColorConsts.textColorDark,
                                 fontSize: 16,
                                 // fontWeight: FontWeight.bold
                               ),
@@ -278,7 +277,7 @@ class _PlanPageState extends State<PlanPage> {
                           child: Text(
                             data.email,
                             style: const TextStyle(
-                              color: Colors.black,
+                              color: ColorConsts.textColorDark,
                               fontSize: 16,
                               // fontWeight: FontWeight.bold,
                             ),
@@ -289,7 +288,7 @@ class _PlanPageState extends State<PlanPage> {
                           child: Text(
                             data.startDate,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: ColorConsts.textColorDark,
                               fontSize: 16,
                               // fontWeight: FontWeight.bold,
                             ),
@@ -300,7 +299,7 @@ class _PlanPageState extends State<PlanPage> {
                           child: Text(
                             data.expiryDate,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: ColorConsts.textColorDark,
                               fontSize: 16,
                               // fontWeight: FontWeight.bold,
                             ),
@@ -313,7 +312,7 @@ class _PlanPageState extends State<PlanPage> {
                             child: Text(
                               data.purchasePlan,
                               style: TextStyle(
-                                color: Colors.black,
+                                color: ColorConsts.textColorDark,
                                 fontSize: 16,
                                 // fontWeight: FontWeight.bold,
                               ),
@@ -340,15 +339,15 @@ class _PlanPageState extends State<PlanPage> {
       alignment: Alignment.centerLeft,
       width: 250,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConsts.backgroundColor,
         borderRadius: const BorderRadius.all(Radius.circular(21)),
         border: Border.all(
           width: 2,
-          color: Color.fromARGB(255, 8, 185, 216),
+          color: ColorConsts.primaryColor,
         ),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromARGB(193, 223, 212, 212),
+            color: ColorConsts.boxShadowColor,
             blurRadius: 8,
             spreadRadius: 4,
           )
@@ -369,7 +368,7 @@ class _PlanPageState extends State<PlanPage> {
                     padding: const EdgeInsets.all(4),
                     child: Icon(
                       Icons.edit_outlined,
-                      color: Color.fromARGB(255, 8, 185, 216),
+                      color: ColorConsts.primaryColor,
                     ),
                   ),
                 ),
@@ -386,8 +385,7 @@ class _PlanPageState extends State<PlanPage> {
               margin: EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
                 price,
-                style: TextStyle(
-                    color: Color.fromARGB(255, 8, 185, 216), fontSize: 16),
+                style: TextStyle(color: ColorConsts.primaryColor, fontSize: 16),
               ),
             ),
           ],
@@ -406,18 +404,20 @@ class _PlanPageState extends State<PlanPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Colors.white,
+          backgroundColor: ColorConsts.backgroundColor,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Edit Plan',
-                style: TextStyle(color: Color.fromARGB(255, 8, 185, 216)),
+                style: TextStyle(
+                  color: ColorConsts.primaryColor,
+                ),
               ),
               InkWell(
                 child: Icon(
                   Icons.close_outlined,
-                  color: Color.fromARGB(255, 8, 185, 216),
+                  color: ColorConsts.primaryColor,
                 ),
               )
             ],
@@ -507,15 +507,15 @@ class SubscriptionHeading extends StatelessWidget {
       margin: const EdgeInsets.only(top: 20, bottom: 10, left: 10, right: 10),
       height: 50,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(10)),
           border: Border.all(
             width: 2,
-            color: Color.fromARGB(255, 8, 185, 216),
+            color: ColorConsts.primaryColor,
           ),
           boxShadow: const [
             BoxShadow(
-              color: Color.fromARGB(193, 223, 212, 212),
+              color: ColorConsts.boxShadowColor,
               blurRadius: 8,
               spreadRadius: 4,
               // offset: Offset(0, 10),
@@ -530,7 +530,7 @@ class SubscriptionHeading extends StatelessWidget {
               child: const Text(
                 "UserName",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: ColorConsts.textColorLight,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
@@ -542,7 +542,7 @@ class SubscriptionHeading extends StatelessWidget {
               child: const Text(
                 "Email",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: ColorConsts.textColorLight,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
@@ -555,7 +555,7 @@ class SubscriptionHeading extends StatelessWidget {
               child: const Text(
                 "Start Date ",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: ColorConsts.textColorLight,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
@@ -568,7 +568,7 @@ class SubscriptionHeading extends StatelessWidget {
               child: const Text(
                 "Expiry Date",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: ColorConsts.textColorLight,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
@@ -583,7 +583,7 @@ class SubscriptionHeading extends StatelessWidget {
                 child: Text(
                   "Plan",
                   style: TextStyle(
-                      color: Colors.lightBlue,
+                      color: ColorConsts.textColorLight,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),

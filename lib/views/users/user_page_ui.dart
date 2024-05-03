@@ -78,34 +78,6 @@ class _UserPageState extends State<UserPage> {
                         hintText: "Search",
                       ),
                     ),
-                    // child: TextField(
-                    //   textAlignVertical: TextAlignVertical.bottom,
-                    //   decoration: InputDecoration(
-                    //       filled: true,
-                    //       fillColor: Colors.white,
-                    //       focusedBorder: OutlineInputBorder(
-                    //         borderRadius: BorderRadius.circular(11),
-                    //         borderSide: const BorderSide(
-                    //             color: Color.fromARGB(255, 8, 185, 216),
-                    //             width: 2),
-                    //       ),
-                    //       enabledBorder: OutlineInputBorder(
-                    //         borderRadius: BorderRadius.circular(11),
-                    //         borderSide: const BorderSide(
-                    //             color: Color.fromARGB(255, 8, 185, 216)),
-                    //       ),
-                    //       disabledBorder: OutlineInputBorder(
-                    //         borderRadius: BorderRadius.circular(11),
-                    //         borderSide: const BorderSide(
-                    //             color: Colors.black45, width: 2),
-                    //       ),
-                    //       prefixIcon: const Icon(
-                    //         Icons.person_search_sharp,
-                    //         color: Color.fromARGB(255, 8, 185, 216),
-                    //       ),
-                    //       hintText: "Search",
-                    //       hintStyle: TextStyle(color: Colors.grey)),
-                    // ),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -143,7 +115,7 @@ class _UserPageState extends State<UserPage> {
                     ),
                     boxShadow: const [
                       BoxShadow(
-                        color: Color.fromARGB(193, 223, 212, 212),
+                        color: ColorConsts.boxShadowColor,
                         blurRadius: 8,
                         spreadRadius: 4,
                         // offset: Offset(0, 10),
@@ -248,8 +220,7 @@ class _UserPageState extends State<UserPage> {
                                     ),
                                     boxShadow: const [
                                       BoxShadow(
-                                        color:
-                                            Color.fromARGB(193, 223, 212, 212),
+                                        color: ColorConsts.boxShadowColor,
                                         blurRadius: 8,
                                         spreadRadius: 4,
                                         // offset: Offset(0, 10),

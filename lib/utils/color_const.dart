@@ -9,6 +9,14 @@ class ColorConsts {
   static const Color textColorLight =
       Color(0xc503cccc); // text color white used to shown text
   static const Color textColorDark = Color(0xFF01678F); // text color black
+  static const Color boxShadowColor =
+      Color.fromARGB(193, 223, 212, 212); // text color black
+
+/////home containers color
+  static const Color userColor = Color.fromARGB(190, 5, 224, 213);
+  static const Color keyColor = Color.fromARGB(255, 22, 206, 160);
+  static const Color PlansColor = Color.fromARGB(255, 238, 97, 3);
+
 //background: #12262E;
   static const Color hintColor = Color(0xFFa1a3ce);
   static const Color simmer2Color = Color(0xfffafafa);

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:key_admin_panel/utils/CustomImagePicker.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
+import 'package:key_admin_panel/utils/color_const.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -25,32 +26,6 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               Row(
                 children: [
-                  // Expanded(
-                  //   flex: 2,
-                  //   child: Container(
-                  //     width: double.infinity,
-                  //     height: 700,
-                  //     // color: const Color(0xFFE7E7E7),
-                  //     padding: const EdgeInsets.all(16),
-                  //     child: Card(
-                  //       color: Colors.white,
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.all(8.0),
-                  //         child: Column(
-                  //           children: [
-                  //             Container(
-                  //               padding: const EdgeInsets.all(16),
-                  //               child: const Text(
-                  //                 'Plans',
-                  //                 style: TextStyle(color: Colors.black87),
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Expanded(
                     flex: 1,
                     child: Container(
@@ -60,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       // color: const Color(0xFFE7E7E7),
                       margin: const EdgeInsets.only(left: 150, right: 150),
                       child: Card(
-                        color: Colors.white,
+                        color: ColorConsts.backgroundColor,
                         child: Padding(
                           padding: const EdgeInsets.all(24),
                           child: Column(
@@ -75,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: const Text(
                                       'Profile Details',
                                       style: TextStyle(
-                                          color: Colors.black87,
+                                          color: ColorConsts.textColorLight,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
                                     ),
@@ -93,7 +68,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: Text(
                                           "Edit",
                                           style: TextStyle(
-                                              color: Colors.blue, fontSize: 18),
+                                              color: ColorConsts.textColorLight,
+                                              fontSize: 18),
                                         ),
                                       ))
                                 ],
@@ -108,27 +84,27 @@ class _ProfilePageState extends State<ProfilePage> {
                                   icon: Icons.person, text: "Patrici Lebsack"),
                               Container(
                                 height: 2,
-                                color: Colors.black12,
+                                color: ColorConsts.blackColor,
                               ),
                               ReuseableRow(
                                   icon: Icons.email,
                                   text: "example123@gmail.com"),
                               Container(
                                 height: 2,
-                                color: Colors.black12,
+                                color: ColorConsts.blackColor,
                               ),
                               ReuseableRow(
                                   icon: Icons.phone, text: "9638520741"),
                               Container(
                                 height: 2,
-                                color: Colors.black12,
+                                color: ColorConsts.blackColor,
                               ),
                               Container(
                                 margin: const EdgeInsets.only(top: 25),
                                 child: const Text(
                                   'plan',
                                   style: TextStyle(
-                                      color: Colors.black87,
+                                      color: ColorConsts.textColorLight,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
@@ -138,7 +114,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: Text(
                                   softWrap: true,
                                   "It seems like you're asking about a  seems like you're asking about a 'key plan description,' but could you please provide more context or specify what exactly you're looking for? Are you referring to a strategic plan 'key plan description,' but could you please provide more context or specify what exactly you're looking for? Are you referring to a strategic plan for a project, a description of a plan for a particular activity, or something else? The more details you provide, the better I can assist you!",
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                    color: ColorConsts.textColorDark,
+                                  ),
                                 ),
                               )
                             ],
@@ -178,12 +156,12 @@ class ReuseableRow extends StatelessWidget {
             margin: EdgeInsets.only(right: 12),
             child: Icon(
               icon,
-              color: const Color.fromARGB(255, 8, 185, 216),
+              color: ColorConsts.primaryColor,
             ),
           ),
           Text(
             text,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: ColorConsts.textColorDark),
           ),
         ],
       ),
@@ -214,7 +192,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
       width: 500,
       height: 600,
       decoration: const BoxDecoration(
-          color: Colors.white,
+          color: ColorConsts.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(21))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -233,7 +211,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                   child: Icon(
                     Icons.close_outlined,
                     // size: 30,
-                    color: Color.fromARGB(255, 8, 185, 216),
+                    color: ColorConsts.primaryColor,
                   ),
                 )
               ],
@@ -258,7 +236,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     child: IconButton(
                       icon: Icon(
                         Icons.add_a_photo_outlined,
-                        color: Color.fromARGB(255, 8, 185, 216),
+                        color: ColorConsts.primaryColor,
                       ),
                       onPressed: selectImage,
                     ))
@@ -326,13 +304,13 @@ class _EditUserProfileState extends State<EditUserProfile> {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  shadowColor: Color.fromARGB(255, 8, 185, 216),
+                  shadowColor: ColorConsts.primaryColor,
                   elevation: 12,
-                  backgroundColor: Color.fromARGB(255, 8, 185, 216),
+                  backgroundColor: ColorConsts.primaryColor,
                 ),
                 child: Text(
                   'Update',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: ColorConsts.whiteColor),
                 ),
               ),
             ),
