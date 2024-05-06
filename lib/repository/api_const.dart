@@ -15,6 +15,7 @@ class ApiConst {
   static const String allUsersAPI = "/auth/getallusers";
   static const String getAllKeysAPI = '/key/getKeys';
   static const String getAllCategoryAPI = '/key/getkeycategory';
+  static const String addKeyCategoryAPI = '/key/addkeycategory';
 
 
   //TODO : Api parameter for calling (fields or param)
@@ -32,4 +33,5 @@ class ApiConst {
   static const String confirmPassword = 'confirmPassword';
   static const String confirmEmail = "confirmEmail";
   static const String isAgreed = "isAgreed";
+  static const String categoryName = "category";
 }

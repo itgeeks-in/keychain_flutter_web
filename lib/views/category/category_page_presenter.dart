@@ -6,4 +6,12 @@ class CategoryPagePresenter{
     var response =await ApiRepository.getAPI(ApiConst.getAllCategoryAPI);
     return response;
   }
+  
+  Future<dynamic> addKeyCategory(String categoryName) async{
+    final jsonFormData = {
+      ApiConst.categoryName : categoryName,
+    };
+    var response = await ApiRepository.postAPI(ApiConst.addKeyCategoryAPI, jsonFormData);
+    return response;
+  }
 }

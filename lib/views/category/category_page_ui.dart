@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:key_admin_panel/route/route_generate.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
+import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_state.dart';
-import 'package:key_admin_panel/views/category/popup_category/popup_add_category.dart';
-import 'package:key_admin_panel/widgets/buttons.dart';
+import 'package:key_admin_panel/views/category/popup_add_category/popup_add_category.dart';
 
 import '../../widgets/loader_widget.dart';
 class CategoryPageUI extends StatefulWidget {
@@ -72,9 +71,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    showDialog(context: context,
-                        builder: (context) => PopupAddCategory(),
-                    );
+                    Dialogs().addKeyCategory(context);
                   },
                     style: ElevatedButton.styleFrom(
                     shadowColor: ColorConsts.primaryColor,
@@ -122,6 +119,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                  children: [
                                    InkResponse(
                                      onTap: () {
+                                       Dialogs().editKeyCategory(context,state.data[index].categoryName);
                                      },
                                      child: Container(
                                        height: 32,
@@ -155,6 +153,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                    const SizedBox(height: 10,),
                                    InkResponse(
                                      onTap: () {
+                                      Dialogs().deleteKeyCategory(context);
                                      },
                                      child: Container(
                                        height: 32,
@@ -195,7 +194,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                        ),
                      )
                   );
-               }else if(state is CategoryNotFoundState){
+                }else if(state is CategoryNotFoundState){
                  return Center(
                    child: Text(
                      state.msg,

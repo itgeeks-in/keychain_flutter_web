@@ -18,8 +18,6 @@ class _PopupAddCategoryState extends State<PopupAddCategory> {
       child:  Container(
         height:300,
         width:250,
-         // height: MediaQuery.of(context).size.height * 0.4,
-         // width:  MediaQuery.of(context).size.width * 0.1,
          padding: EdgeInsets.all(10.0),
          decoration:  BoxDecoration(
            color: ColorConsts.whiteColor,
