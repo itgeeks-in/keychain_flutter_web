@@ -66,7 +66,6 @@ class RouteGenerate {
               },
               child: const CategoryPageUI());
         });
-
     }
   }
 }

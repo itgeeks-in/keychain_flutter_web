@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
+import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_state.dart';
+import 'package:key_admin_panel/views/category/popup_add_category/popup_add_category.dart';
 
 import '../../widgets/loader_widget.dart';
 class CategoryPageUI extends StatefulWidget {
@@ -70,6 +71,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    Dialogs().addKeyCategory(context);
                   },
                     style: ElevatedButton.styleFrom(
                     shadowColor: ColorConsts.primaryColor,
@@ -117,12 +119,13 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                  children: [
                                    InkResponse(
                                      onTap: () {
+                                       Dialogs().editKeyCategory(context,state.data[index].categoryName);
                                      },
                                      child: Container(
                                        height: 32,
                                        width: 32,
                                        decoration: BoxDecoration(
-                                           gradient: LinearGradient(
+                                           gradient: const LinearGradient(
                                              colors: [
                                                ColorConsts.primaryColor,
                                                ColorConsts.primaryColor,
@@ -132,7 +135,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                            ),
                                            borderRadius:
                                            BorderRadius.circular(25.0)
-                                           ,boxShadow: [new BoxShadow(
+                                           ,boxShadow: const [BoxShadow(
                                          color: ColorConsts.primaryColor,
                                          blurRadius: 1.0,
                                          offset: Offset(1, 2),
@@ -140,7 +143,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                        ),
                                        padding:
                                        const EdgeInsets.all(1.0),
-                                       child: Icon(
+                                       child: const Icon(
                                          Icons.edit_outlined,
                                          color: ColorConsts.whiteColor,size: 20,
                                        ),
@@ -150,12 +153,13 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                    const SizedBox(height: 10,),
                                    InkResponse(
                                      onTap: () {
+                                      Dialogs().deleteKeyCategory(context);
                                      },
                                      child: Container(
                                        height: 32,
                                        width: 32,
                                        decoration: BoxDecoration(
-                                           gradient: LinearGradient(
+                                           gradient: const LinearGradient(
                                              colors: [
                                                ColorConsts.primaryColor,
                                                ColorConsts.primaryColor,
@@ -166,7 +170,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                            borderRadius:
                                            BorderRadius.circular(25.0)
 
-                                           ,boxShadow: [new BoxShadow(
+                                           ,boxShadow: const [BoxShadow(
                                          color: ColorConsts.primaryColor,
                                          blurRadius: 1.0,
                                          offset: Offset(1, 2),
@@ -174,7 +178,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                        ),
                                        padding:
                                        const EdgeInsets.all(1.0),
-                                       child: Icon(
+                                       child: const Icon(
                                          Icons.delete_forever,
                                          color: ColorConsts.whiteColor,size: 20,
                                        ),
@@ -190,7 +194,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                        ),
                      )
                   );
-               }else if(state is CategoryNotFoundState){
+                }else if(state is CategoryNotFoundState){
                  return Center(
                    child: Text(
                      state.msg,
