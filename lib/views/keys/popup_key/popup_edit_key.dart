@@ -5,23 +5,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:key_admin_panel/model/keys_model.dart';
 import 'package:key_admin_panel/utils/CustomImagePicker.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
+import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/keys/popup_key/popUpAddKeys.dart';
 
 class PopUpEditkey extends StatefulWidget {
-  const PopUpEditkey({super.key});
+  final KeysData keysData;
+  const PopUpEditkey({Key? key,required this.keysData}) : super(key: key);
 
   @override
   State<PopUpEditkey> createState() => _PopUpEditkeyState();
 }
 
 class _PopUpEditkeyState extends State<PopUpEditkey> {
-  bool isPassVisible = false;
+   TextEditingController _keyNameController =  TextEditingController();
+   TextEditingController _descriptionNameController = TextEditingController();
+   TextEditingController _categoryNameController = TextEditingController();
+
+   bool isPassVisible = false;
   Uint8List? _image;
 
   void selectImage() async {
@@ -29,6 +36,15 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
     setState(() {
       _image = img;
     });
+  }
+  @override
+  void initState() {
+    super.initState();
+    if(widget.keysData!= null){
+      _keyNameController.text = widget.keysData.imageName ?? '';
+      _descriptionNameController.text = widget.keysData.description ?? '';
+      _categoryNameController.text = widget.keysData.categoryName ?? '';
+    }
   }
 
   @override
@@ -68,29 +84,31 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
                 style: ThemeText.textLargeSecondaryBold,
               ),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
+                controller: _keyNameController,
                 isPassVisible: false,
                 labelText: "Key name",
                 prefixIconData: Icons.vpn_key_outlined,
                 hintText: "Enter key name",
               )),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
                 isPassVisible: false,
-                labelText: "Title",
+                labelText: "Category name",
                 prefixIconData: Icons.screen_search_desktop_outlined,
-                hintText: "Enter title",
+                hintText: "Enter category",
               )),
             ),
-            const Padding(
+             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
               child: TextFieldMultiline(
+                controller: _descriptionNameController,
                 labelText: "Description",
                 hintText: "Enter description",
               ),
@@ -165,7 +183,6 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
           ],
         ),
       ),
-    )
-    );
+    ));
   }
 }

@@ -35,23 +35,21 @@ class _KeysScreenState extends State<KeyPageUI> {
         padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
             Container(
               margin: const EdgeInsets.only(bottom: 10, top: 8),
-
-                    width: MediaQuery.of(context).size.width/2,
-                    height: 70,
-                    child: const Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: CustomTextField(
-                        isPassVisible: false,
-                        labelText: "Search",
-                        prefixIconData: Icons.person_search_sharp,
-                        hintText: "Search",
-                      ),
-                    ),
-                  ),
+              width: MediaQuery.of(context).size.width / 2,
+              height: 70,
+              child: const Padding(
+                padding: EdgeInsets.all(2.0),
+                child: CustomTextField(
+                  isPassVisible: false,
+                  labelText: "Search",
+                  prefixIconData: Icons.person_search_sharp,
+                  hintText: "Search",
+                ),
+              ),
+            ),
             const KeyHeader(),
             Expanded(
               child: BlocProvider(
@@ -83,40 +81,38 @@ class _KeysScreenState extends State<KeyPageUI> {
                                 ]),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
                                     flex: 1,
                                     child: SizedBox(
                                       height: 80,
                                       width: 80,
-                                      child: state
-                                              .data[index].imagePath.isEmpty
-                                          ? Image.asset(
-                                              AppAssets.notFoundImg)
-                                          : ClipRRect(borderRadius: BorderRadius.circular(8.0),
-                                          child:Image.network(
-                                              state.data[index].imagePath,
-                                              fit: BoxFit.cover,
-                                              loadingBuilder: (context,
-                                                  child, loadingProgress) {
-                                                if (loadingProgress == null) {
-                                                  return child;
-                                                }
-                                                return Shimmer.fromColors(
-                                                    child: Container(
-                                                      height: 100,
-                                                      width: 80,
-                                                      color: Colors.white,
-                                                    ),
-                                                    baseColor:
-                                                        Colors.red[300]!,
-                                                    highlightColor:
-                                                        Colors.green[100]!);
-                                              },
-                                            )
-                                      ),
+                                      child: state.data[index].imagePath.isEmpty
+                                          ? Image.asset(AppAssets.notFoundImg)
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                state.data[index].imagePath,
+                                                fit: BoxFit.cover,
+                                                loadingBuilder: (context, child,
+                                                    loadingProgress) {
+                                                  if (loadingProgress == null) {
+                                                    return child;
+                                                  }
+                                                  return Shimmer.fromColors(
+                                                      child: Container(
+                                                        height: 100,
+                                                        width: 80,
+                                                        color: Colors.white,
+                                                      ),
+                                                      baseColor:
+                                                          Colors.red[300]!,
+                                                      highlightColor:
+                                                          Colors.green[100]!);
+                                                },
+                                              )),
                                     )),
                                 Expanded(
                                   flex: 2,
@@ -126,10 +122,10 @@ class _KeysScreenState extends State<KeyPageUI> {
                                       state.data[index].imageName.isNotEmpty
                                           ? state.data[index].imageName
                                           : 'Not found',
-                                      style: state.data[index].imageName
-                                              .isNotEmpty
-                                          ? ThemeText.textMediumSecondary
-                                          : ThemeText.textSmallGrey,
+                                      style:
+                                          state.data[index].imageName.isNotEmpty
+                                              ? ThemeText.textMediumSecondary
+                                              : ThemeText.textSmallGrey,
                                     ),
                                   ),
                                 ),
@@ -138,8 +134,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                                   child: Container(
                                     padding: EdgeInsets.only(right: 35),
                                     child: Text(
-                                      state.data[index].categoryName
-                                              .isNotEmpty
+                                      state.data[index].categoryName.isNotEmpty
                                           ? state.data[index].categoryName
                                           : 'Not found',
                                       style: state.data[index].categoryName
@@ -157,8 +152,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                                   child: Container(
                                     padding: EdgeInsets.only(right: 20),
                                     child: Text(
-                                      state.data[index].description
-                                              .isNotEmpty
+                                      state.data[index].description.isNotEmpty
                                           ? state.data[index].description
                                           : 'Not found',
                                       style: state.data[index].description
@@ -174,19 +168,17 @@ class _KeysScreenState extends State<KeyPageUI> {
                                 Expanded(
                                   flex: 2,
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-
-
                                       Spacer(),
-
                                       InkResponse(
                                         onTap: () {
                                           showDialog(
                                             context: context,
                                             builder: (context) =>
-                                            const PopUpViewKey(),
+                                                const PopUpViewKey(),
                                           );
                                         },
                                         child: Container(
@@ -202,30 +194,30 @@ class _KeysScreenState extends State<KeyPageUI> {
                                                 end: Alignment.centerRight,
                                               ),
                                               borderRadius:
-                                              BorderRadius.circular(25.0)
-
-                                              ,boxShadow: [new BoxShadow(
-                                            color: ColorConsts.primaryColor,
-                                            blurRadius: 1.0,
-                                            offset: Offset(1, 2),
-                                          ),]
-                                          ),
-                                          padding:
-                                          const EdgeInsets.all(1.0),
+                                                  BorderRadius.circular(25.0),
+                                              boxShadow: [
+                                                new BoxShadow(
+                                                  color:
+                                                      ColorConsts.primaryColor,
+                                                  blurRadius: 1.0,
+                                                  offset: Offset(1, 2),
+                                                ),
+                                              ]),
+                                          padding: const EdgeInsets.all(1.0),
                                           child: Icon(
                                             Icons.remove_red_eye_rounded,
-                                            color: ColorConsts.whiteColor,size: 20,
+                                            color: ColorConsts.whiteColor,
+                                            size: 20,
                                           ),
                                         ),
-
                                       ),
-                                    Spacer(),
+                                      Spacer(),
                                       InkResponse(
                                         onTap: () {
                                           showDialog(
                                             context: context,
-                                            builder: (context) =>
-                                                PopUpEditkey(),
+                                            builder: (context) => PopUpEditkey(
+                                                keysData: state.data[index]),
                                           );
                                         },
                                         child: Container(
@@ -241,22 +233,22 @@ class _KeysScreenState extends State<KeyPageUI> {
                                                 end: Alignment.centerRight,
                                               ),
                                               borderRadius:
-                                              BorderRadius.circular(25.0)
-
-                                              ,boxShadow: [new BoxShadow(
-                                            color: ColorConsts.primaryColor,
-                                            blurRadius: 1.0,
-                                            offset: Offset(1, 2),
-                                          ),]
-                                          ),
-                                          padding:
-                                              const EdgeInsets.all(1.0),
+                                                  BorderRadius.circular(25.0),
+                                              boxShadow: [
+                                                new BoxShadow(
+                                                  color:
+                                                      ColorConsts.primaryColor,
+                                                  blurRadius: 1.0,
+                                                  offset: Offset(1, 2),
+                                                ),
+                                              ]),
+                                          padding: const EdgeInsets.all(1.0),
                                           child: Icon(
                                             Icons.edit_outlined,
-                                            color: ColorConsts.whiteColor,size: 20,
+                                            color: ColorConsts.whiteColor,
+                                            size: 20,
                                           ),
                                         ),
-
                                       ),
                                       Spacer(),
                                     ],
@@ -311,34 +303,38 @@ class KeyHeader extends StatelessWidget {
             )
           ]),
       child: Row(
-
         children: [
           Expanded(
             flex: 1,
             child: Container(
               padding: EdgeInsets.only(left: 10),
-              child: const Text("Image", style: ThemeText.textLargePrimaryBold,maxLines: 1),
+              child: const Text("Image",
+                  style: ThemeText.textLargePrimaryBold, maxLines: 1),
             ),
           ),
           Expanded(
             flex: 2,
             child: Container(
               padding: EdgeInsets.only(left: 15),
-              child: const Text("Key Name", style: ThemeText.textLargePrimaryBold,maxLines: 1),
+              child: const Text("Key Name",
+                  style: ThemeText.textLargePrimaryBold, maxLines: 1),
             ),
           ),
           Expanded(
             flex: 2,
-            child: const Text("Category", style: ThemeText.textLargePrimaryBold,maxLines: 1),
+            child: const Text("Category",
+                style: ThemeText.textLargePrimaryBold, maxLines: 1),
           ),
           Expanded(
             flex: 2,
-            child: const Text("Description", style: ThemeText.textLargePrimaryBold,maxLines: 1),
+            child: const Text("Description",
+                style: ThemeText.textLargePrimaryBold, maxLines: 1),
           ),
           const Expanded(
             flex: 2,
             child: Center(
-              child: Text("Action", style: ThemeText.textLargePrimaryBold,maxLines: 1),
+              child: Text("Action",
+                  style: ThemeText.textLargePrimaryBold, maxLines: 1),
             ),
           ),
         ],
