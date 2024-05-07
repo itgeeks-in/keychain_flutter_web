@@ -260,17 +260,6 @@ class _UserPageState extends State<UserPage> {
                                         ),
                                       ),
                                     ),
-                                    // Expanded(
-                                    //   flex: 2,
-                                    //   child: const Text(
-                                    //     "9638520741",
-                                    //     style: TextStyle(
-                                    //       color: Colors.black,
-                                    //       fontSize: 16,
-                                    //       // fontWeight: FontWeight.bold,
-                                    //     ),
-                                    //   ),
-                                    // ),
                                     Expanded(
                                       flex: 1,
                                       child: Padding(
