@@ -134,6 +134,7 @@ class Dialogs {
               height: 100,
               child: TextField(
                 controller: categoryController,
+                style: ThemeText.textMediumSecondary,
                 keyboardType: TextInputType.text,
                  onChanged:(value) {
                   setState(() {

@@ -38,7 +38,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.obscureText && !widget.isPassVisible,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        labelStyle: TextStyle(color: ColorConsts.textColorDark),
+        labelStyle: TextStyle(color: ColorConsts.primaryColor),
         filled: true,
         fillColor: ColorConsts.backgroundColor,
         focusedBorder: OutlineInputBorder(
@@ -78,7 +78,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         hintText: widget.hintText,
         hintStyle: TextStyle(
-          color: ColorConsts.textColorDark,
+          color: ColorConsts.primaryColor,
         ),
       ),
     );

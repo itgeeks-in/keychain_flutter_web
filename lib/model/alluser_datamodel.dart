@@ -11,24 +11,24 @@ class AllUserDataModel {
     if (json['result'] != null) {
       result = <Result>[];
       json['result'].forEach((v) {
-        result!.add(new Result.fromJson(v));
+        result!.add(Result.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
-    if (this.result != null) {
-      data['result'] = this.result!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['message'] = message;
+    if (result != null) {
+      data['result'] = result!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Result {
-  int? totalkey;
+  List<String>? keysId;
   String? sId;
   String? firstName;
   String? lastName;
@@ -37,30 +37,31 @@ class Result {
   String? hash;
   bool? isAgreed;
   bool? isAdmin;
-  List<Keys>? keys;
+  List<Key>? keys;
+  int? totalkey;
+  String? resetLink;
   int? iV;
   String? profileImage;
-  String? plan;
-  int? keyAdded;
 
-  Result(
-      {this.totalkey,
-      this.sId,
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.salt,
-      this.hash,
-      this.isAgreed,
-      this.isAdmin,
-      this.keys,
-      this.iV,
-      this.profileImage,
-      this.plan,
-      this.keyAdded});
+  Result({
+    this.keysId,
+    this.sId,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.salt,
+    this.hash,
+    this.isAgreed,
+    this.isAdmin,
+    this.keys,
+    this.totalkey,
+    this.resetLink,
+    this.iV,
+    this.profileImage,
+  });
 
   Result.fromJson(Map<String, dynamic> json) {
-    totalkey = json['totalkey'];
+    keysId = json['keysId'].cast<String>();
     sId = json['_id'];
     firstName = json['firstName'];
     lastName = json['lastName'];
@@ -70,88 +71,54 @@ class Result {
     isAgreed = json['isAgreed'];
     isAdmin = json['isAdmin'];
     if (json['keys'] != null) {
-      keys = <Keys>[];
+      keys = <Key>[];
       json['keys'].forEach((v) {
-        keys!.add(new Keys.fromJson(v));
+        keys!.add(Key.fromJson(v));
       });
     }
+    totalkey = json['totalkey'];
+    resetLink = json['resetLink'];
     iV = json['__v'];
     profileImage = json['profileImage'];
-    plan = json['plan'];
-    keyAdded = json['keyAdded'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['totalkey'] = this.totalkey;
-    data['_id'] = this.sId;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['email'] = this.email;
-    data['salt'] = this.salt;
-    data['hash'] = this.hash;
-    data['isAgreed'] = this.isAgreed;
-    data['isAdmin'] = this.isAdmin;
-    if (this.keys != null) {
-      data['keys'] = this.keys!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['keysId'] = keysId;
+    data['_id'] = sId;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['email'] = email;
+    data['salt'] = salt;
+    data['hash'] = hash;
+    data['isAgreed'] = isAgreed;
+    data['isAdmin'] = isAdmin;
+    if (keys != null) {
+      data['keys'] = keys!.map((v) => v.toJson()).toList();
     }
-    data['__v'] = this.iV;
-    data['profileImage'] = this.profileImage;
-    data['plan'] = this.plan;
-    data['keyAdded'] = this.keyAdded;
+    data['totalkey'] = totalkey;
+    data['resetLink'] = resetLink;
+    data['__v'] = iV;
+    data['profileImage'] = profileImage;
     return data;
   }
 }
 
-class Keys {
-  String? imageName;
-  String? imagePath;
-  String? backImagePath;
-  String? edgedImagePath;
-  String? lockImagePath;
-  String? description;
-  int? edges;
-  String? sId;
-  String? categoryName;
-  String? categoryId;
+class Key {
+  String? keyId;
+  String? keyName;
 
-  Keys(
-      {this.imageName,
-      this.imagePath,
-      this.backImagePath,
-      this.edgedImagePath,
-      this.lockImagePath,
-      this.description,
-      this.edges,
-      this.sId,
-      this.categoryName,
-      this.categoryId});
+  Key({this.keyId, this.keyName});
 
-  Keys.fromJson(Map<String, dynamic> json) {
-    imageName = json['imageName'];
-    imagePath = json['imagePath'];
-    backImagePath = json['backImagePath'];
-    edgedImagePath = json['edgedImagePath'];
-    lockImagePath = json['lockImagePath'];
-    description = json['description'];
-    edges = json['edges'];
-    sId = json['_id'];
-    categoryName = json['categoryName'];
-    categoryId = json['categoryId'];
+  Key.fromJson(Map<String, dynamic> json) {
+    keyId = json['keyId'];
+    keyName = json['keyName'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['imageName'] = this.imageName;
-    data['imagePath'] = this.imagePath;
-    data['backImagePath'] = this.backImagePath;
-    data['edgedImagePath'] = this.edgedImagePath;
-    data['lockImagePath'] = this.lockImagePath;
-    data['description'] = this.description;
-    data['edges'] = this.edges;
-    data['_id'] = this.sId;
-    data['categoryName'] = this.categoryName;
-    data['categoryId'] = this.categoryId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['keyId'] = keyId;
+    data['keyName'] = keyName;
     return data;
   }
 }

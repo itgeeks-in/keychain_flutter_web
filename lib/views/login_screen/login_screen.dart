@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   color:
                                                       ColorConsts.primaryColor),
                                             ),
-                                            hintText: "Enter your Email",
+                                            hintText: "Enter your email",
                                             hintStyle: const TextStyle(
                                                 color:
                                                     ColorConsts.textColorLight),
@@ -203,8 +203,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         BlocBuilder<LoginBloc, LoginState>(
                                           builder: (context, state) {
                                             return Visibility(
-                                              visible: !(state
-                                                  is LoadState), // Hide the button if state is LoadState
+                                              visible: !(state is LoadState),
+                                              // Hide the button if state is LoadState
                                               child: ElevatedButton(
                                                 onPressed: () {
                                                   BlocProvider.of<LoginBloc>(
