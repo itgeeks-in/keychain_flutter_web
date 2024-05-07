@@ -16,14 +16,22 @@ class AddUserBloc extends Bloc<AddUserEvent, AddUserState> {
         emit(LastNameRequiredState());
       } else if (event.email.isEmpty) {
         emit(EmailRequiredState());
+      } else if (!validateEmailStructure(event.email)) {
+        emit(EmailInvalidState());
       } else if (event.confirmEmail.isEmpty) {
-        emit(EmailRequiredState());
+        emit(ConfirmEmailRequiredState());
+      } else if (event.confirmEmail != event.email) {
+        emit(EmailNotMatchState());
       } else if (event.password.isEmpty) {
+        emit(PasswordRequiredState());
+      } else if (event.password.length < 5) {
         emit(PasswordInvalidState());
       } else if (event.confirmPassword.isEmpty) {
-        emit(PasswordInvalidState());
-      } else if (event.termAndCond != true) {
-        emit(TermAndConditionRequiredState());
+        emit(ConfirmPasswordRequiredState());
+      } else if (event.confirmPassword != event.password) {
+        emit(PasswordNotMatchState());
+      } else if (event.isAgreed != true) {
+        emit(IsAgreedRequiredState());
       } else {
         AddUserAPI(
             event.firstName,
@@ -32,7 +40,7 @@ class AddUserBloc extends Bloc<AddUserEvent, AddUserState> {
             event.confirmEmail,
             event.password,
             event.confirmPassword,
-            event.termAndCond);
+            event.isAgreed);
       }
     });
   }
@@ -50,12 +58,12 @@ class AddUserBloc extends Bloc<AddUserEvent, AddUserState> {
     print("???????????   " + result.toString());
 
     if (result.toString().contains("status")) {
-      Session session = Session();
+     // Session session = Session();
       Map<String, dynamic> parsed = json.decode(result.toString());
       if (parsed['status']) {
         UserDataModel userDataModel = UserDataModel.fromJson(parsed);
-        await session.setToken(userDataModel.result.token);
-        session.setLoginUserData("$result");
+        //await session.setToken(userDataModel.result.token);
+       // session.setLoginUserData("$result");
         emit(AddUserSuccessState());
       } else {
         emit(FailedState(parsed['message']));

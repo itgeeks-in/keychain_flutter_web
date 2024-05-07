@@ -8,8 +8,8 @@ import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_bloc.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_state.dart';
-import 'package:key_admin_panel/views/keys/pop_ups_key/popUpEditKey.dart';
-import 'package:key_admin_panel/views/keys/pop_ups_key/popUpViewKeys.dart';
+import 'package:key_admin_panel/views/keys/popup_key/popup_edit_key.dart';
+import 'package:key_admin_panel/views/keys/popup_key/popup_view_key.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
 import 'package:shimmer/shimmer.dart';
 

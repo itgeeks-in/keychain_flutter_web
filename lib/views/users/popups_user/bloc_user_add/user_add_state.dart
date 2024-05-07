@@ -14,7 +14,9 @@ class EmailRequiredState extends AddUserState {}
 
 class EmailInvalidState extends AddUserState {}
 
-class MobileRequiredState extends AddUserState {}
+class ConfirmEmailRequiredState extends AddUserState {}
+
+class EmailNotMatchState extends AddUserState {}
 
 class PasswordRequiredState extends AddUserState {}
 
@@ -22,11 +24,9 @@ class PasswordInvalidState extends AddUserState {}
 
 class ConfirmPasswordRequiredState extends AddUserState {}
 
-class ConfirmPasswordInvalidState extends AddUserState {}
+class PasswordNotMatchState extends AddUserState {}
 
-class TermAndConditionRequiredState extends AddUserState {}
-
-class DisclaimerRequiredState extends AddUserState {}
+class IsAgreedRequiredState extends AddUserState {}
 
 class AddUserSuccessState extends AddUserState {
   AddUserSuccessState();

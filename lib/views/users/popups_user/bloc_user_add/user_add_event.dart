@@ -7,7 +7,7 @@ class OnAddUserButtonClick extends AddUserEvent {
   String confirmEmail;
   String password;
   String confirmPassword;
-  bool termAndCond;
+  bool isAgreed;
 
   OnAddUserButtonClick(
     this.firstName,
@@ -16,6 +16,6 @@ class OnAddUserButtonClick extends AddUserEvent {
     this.confirmEmail,
     this.password,
     this.confirmPassword,
-    this.termAndCond,
+    this.isAgreed,
   );
 }
