@@ -2,7 +2,8 @@
 import 'dart:ui';
 
 class ColorConsts {
-  static const Color primaryColor = Color(0xc503cccc); //main color
+  // static const Color primaryColor = Color(0xc503cccc); //main color
+  static const Color primaryColor = Color.fromARGB(255, 8, 185, 216);
   static const Color secondaryColor =
       Color(0xFF01678F); //main dark color or same if not gradient show
   static const Color backgroundColor = Color(0xFFFFFFFF);

@@ -8,9 +8,11 @@ import 'package:key_admin_panel/utils/color_const.dart';
 
 import 'package:key_admin_panel/views/users/bloc/User_bloc.dart';
 import 'package:key_admin_panel/views/users/bloc/User_state.dart';
+import 'package:key_admin_panel/views/users/popups_user/bloc_user_add/user_add_bloc.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_add_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_edit_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_view_user.dart';
+import 'package:key_admin_panel/model/alluser_datamodel.dart' as UserKey;
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -24,7 +26,7 @@ class User {
   final String lastName;
   final String email;
   final String profileImage;
-  List<Keys>? keys;
+  List<UserKey.Key>? keys;
 
   User({
     required this.firstName,
@@ -38,12 +40,13 @@ class User {
 class _UserPageState extends State<UserPage> {
   void onViewUser(Result result) {
     User user = User(
-        firstName: result.firstName ?? 'N/A',
-        lastName: result.lastName ?? 'N/A',
-        email: result.email ?? 'N/A',
-        profileImage: result.profileImage ??
-            "https://images.pexels.com/photos/3771639/pexels-photo-3771639.jpeg?auto=compress&cs=tinysrgb&w=600",
-        keys: result.keys!);
+      firstName: result.firstName ?? 'N/A',
+      lastName: result.lastName ?? 'N/A',
+      email: result.email ?? 'N/A',
+      profileImage: result.profileImage ??
+          "https://images.pexels.com/photos/3771639/pexels-photo-3771639.jpeg?auto=compress&cs=tinysrgb&w=600",
+      keys: result.keys ?? [], // Ensure keys is not null
+    );
 
     showDialog(
       context: context,
@@ -69,8 +72,8 @@ class _UserPageState extends State<UserPage> {
                   Container(
                     width: 200,
                     height: 70,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: CustomTextField(
                         isPassVisible: false,
                         labelText: "Search",
@@ -83,7 +86,11 @@ class _UserPageState extends State<UserPage> {
                     onPressed: () {
                       showDialog(
                         context: context,
-                        builder: (context) => PopUpAddUser(),
+                        builder: (context) => BlocProvider(
+                          create: (_) => AddUserBloc(),
+                          child:
+                              PopUpAddUser(), // Assuming PopUpAddUser is your dialog widget
+                        ),
                       );
                     },
                     child: const Text(
@@ -148,19 +155,6 @@ class _UserPageState extends State<UserPage> {
                         ),
                       ),
                     ),
-                    // Expanded(
-                    //   flex: 2,
-                    //   child: Container(
-                    //     // color: Colors.amber,
-                    //     child: const Text(
-                    //       "Mobile Number",
-                    //       style: TextStyle(
-                    //           color: Colors.black,
-                    //           fontSize: 16,
-                    //           fontWeight: FontWeight.bold),
-                    //     ),
-                    //   ),
-                    // ),
                     Expanded(
                       flex: 1,
                       child: Container(
@@ -282,9 +276,11 @@ class _UserPageState extends State<UserPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.only(left: 5),
                                         child: Text(
-                                          state.data[index].keys!.length
-                                              .toInt()
-                                              .toString(),
+                                          // "12",
+                                          state.data[index].keys != null
+                                              ? state.data[index].keys!.length
+                                                  .toString()
+                                              : '0',
                                           style: TextStyle(
                                             color: ColorConsts.textColorDark,
                                             fontSize: 16,
@@ -382,84 +378,6 @@ class _UserPageState extends State<UserPage> {
                                         ],
                                       ),
                                     )
-
-                                    // Expanded(
-                                    //   flex: 2,
-                                    //   child: Container(
-                                    //     // color: Colors.amber,
-                                    //     // height: ,
-                                    //     child: Row(
-                                    //       crossAxisAlignment:
-                                    //           CrossAxisAlignment.center,
-                                    //       mainAxisAlignment:
-                                    //           MainAxisAlignment.center,
-                                    //       children: [
-                                    //         Container(
-                                    //           width: 80,
-                                    //           child: OutlinedButton(
-                                    //             onPressed: () => onViewUser(
-                                    //                 state.data![index]),
-                                    //             // onPressed: () {
-                                    //             //   showDialog(
-                                    //             //     context: context,
-                                    //             //     builder: (context) =>
-                                    //             //         const PopupViewUser(user: null,),
-                                    //             //   );
-                                    //             // },
-                                    //             child: Text(
-                                    //               'View',
-                                    //               style: TextStyle(
-                                    //                   color: ColorConsts
-                                    //                       .whiteColor),
-                                    //             ),
-                                    //             style: OutlinedButton.styleFrom(
-                                    //               side: const BorderSide(
-                                    //                 // width: 5.0,
-                                    //                 color: ColorConsts
-                                    //                     .primaryColor,
-                                    //               ),
-                                    //               backgroundColor:
-                                    //                   ColorConsts.primaryColor,
-                                    //               shape: RoundedRectangleBorder(
-                                    //                 borderRadius:
-                                    //                     BorderRadius.circular(
-                                    //                         10),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //         ),
-                                    //         const SizedBox(
-                                    //           width: 10,
-                                    //         ),
-                                    //         ElevatedButton(
-                                    //           onPressed: () {
-                                    //             showDialog(
-                                    //               context: context,
-                                    //               builder: (context) =>
-                                    //                   PopUpEditUser(),
-                                    //             );
-                                    //           },
-                                    //           child: Padding(
-                                    //             padding:
-                                    //                 const EdgeInsets.all(4),
-                                    //             child: Icon(
-                                    //               Icons.edit_outlined,
-                                    //               color: ColorConsts.whiteColor,
-                                    //             ),
-                                    //           ),
-                                    //           style: ElevatedButton.styleFrom(
-                                    //             shadowColor:
-                                    //                 ColorConsts.primaryColor,
-                                    //             elevation: 10,
-                                    //             backgroundColor:
-                                    //                 ColorConsts.primaryColor,
-                                    //             shape: CircleBorder(),
-                                    //           ),
-                                    //         )
-                                    //       ],
-                                    //     ),
-                                    //   ),
-                                    // )
                                   ],
                                 ),
                               ),
