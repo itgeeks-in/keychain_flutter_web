@@ -13,6 +13,7 @@ import 'package:key_admin_panel/views/users/popups_user/popup_add_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_edit_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_view_user.dart';
 import 'package:key_admin_panel/model/all_user_model.dart' as UserKey;
+import 'package:key_admin_panel/widgets/loader_widget.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -242,7 +243,14 @@ class _UserPageState extends State<UserPage> {
                                         children: [
                                           Spacer(),
                                           InkResponse(
-                                            onTap: () => PopupViewUser(userData: state.data[index],),
+                                            onTap: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) => PopupViewUser(
+                                                    userData: state.data[index]),
+                                              );
+                                            },
+                                            //onTap: () => PopupViewUser(userData: state.data[index],),
                                             child: Container(
                                               height: 32,
                                               width: 32,
@@ -281,7 +289,7 @@ class _UserPageState extends State<UserPage> {
                                               showDialog(
                                                 context: context,
                                                 builder: (context) =>
-                                                    PopUpEditUser(),
+                                                    PopUpEditUser(userData: state.data[index],),
                                               );
                                             },
                                             child: Container(
@@ -327,11 +335,15 @@ class _UserPageState extends State<UserPage> {
                           },
                         ),
                       );
-                    } else {
+                    } else if(state is UserNotFoundState){
                       return Center(
-                          child: CircularProgressIndicator(
-                        color: ColorConsts.primaryColor,
-                      ));
+                        child: Text(
+                          state.msg,
+                          style: ThemeText.textMediumSecondaryBold,
+                        ),
+                      );
+                    }else{
+                      return Center(child: Loader().loaderWidget2());
                     }
                   },
                 ),

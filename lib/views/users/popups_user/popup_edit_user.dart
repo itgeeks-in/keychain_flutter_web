@@ -1,19 +1,34 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:key_admin_panel/model/all_user_model.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 
 class PopUpEditUser extends StatefulWidget {
-  const PopUpEditUser({super.key});
+  final UserData userData;
+  const PopUpEditUser({super.key,required this.userData});
 
   @override
   State<PopUpEditUser> createState() => _PopUpEditUserState();
 }
 
 class _PopUpEditUserState extends State<PopUpEditUser> {
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   bool isPassVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.userData != null) {
+      _firstNameController.text = widget.userData.firstName ?? '';
+      _lastNameController.text = widget.userData.lastName ?? '';
+      _emailController.text = widget.userData.email ?? '';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,34 +66,37 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
+                    controller: _firstNameController,
                 isPassVisible: false,
                 labelText: "First name",
                 prefixIconData: Icons.person_add_outlined,
                 hintText: "Enter first name",
               )),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
+                    controller:_lastNameController ,
                 isPassVisible: false,
-                labelText: "Email",
-                prefixIconData: Icons.email_outlined,
-                hintText: "Enter email",
+                labelText: "Last name",
+                prefixIconData: Icons.person_add_outlined,
+                hintText: "Enter last name",
               )),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
+                    controller: _emailController,
                 isPassVisible: false,
-                labelText: "Mobile",
-                prefixIconData: Icons.phone_forwarded_sharp,
-                hintText: "Enter mobile number.",
+                labelText: "Email",
+                prefixIconData: Icons.email,
+                hintText: "Enter email",
               )),
             ),
             Padding(

@@ -16,6 +16,7 @@ class PopupViewUser extends StatefulWidget {
 class _PopupViewUserState extends State<PopupViewUser> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   bool isPassVisible = false;
 
@@ -25,6 +26,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
     if (widget.userData != null) {
       _firstNameController.text = widget.userData.firstName ?? '';
       _lastNameController.text = widget.userData.lastName ?? '';
+      _emailController.text = widget.userData.email ?? '';
     }
   }
 
@@ -99,9 +101,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                 padding: EdgeInsets.only(left: 50, right: 50, top: 20),
                 child: Center(
                   child: CustomTextField(
-                    controller: TextEditingController(
-                      //text: 'Email: ${widget.user.email}',
-                    ),
+                    controller: _emailController,
                     isPassVisible: false,
                     labelText: "Email",
                     prefixIconData: Icons.email_outlined,
