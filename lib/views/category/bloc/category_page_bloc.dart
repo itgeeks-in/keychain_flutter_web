@@ -5,6 +5,8 @@ import 'package:key_admin_panel/views/category/category_page_presenter.dart';
 import 'category_page_state.dart';
 import 'category_page_event.dart';
 class CategoryPageBloc extends Bloc<CategoryPageEvent,CategoryPageState> {
+  CategoryData? selectOptionCategory ;
+  List<CategoryData> resultCategoryList=[];
   CategoryPageBloc() :super(CategoryInitialState()) {
     getAllCategory();
   }

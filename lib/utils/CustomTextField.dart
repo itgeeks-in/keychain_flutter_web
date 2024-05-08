@@ -11,6 +11,7 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final bool isPassVisible;
   final VoidCallback? onSuffixPressed;
+  final bool enable;
 
   const CustomTextField({
     Key? key,
@@ -23,6 +24,7 @@ class CustomTextField extends StatefulWidget {
     this.controller,
     required this.isPassVisible,
     this.onSuffixPressed,
+    this.enable = true,
   }) : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: widget.enable,
       controller: widget.controller,
       style: TextStyle(color: ColorConsts.textColorDark),
       obscureText: widget.obscureText && !widget.isPassVisible,
@@ -56,7 +59,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(11),
-          borderSide: BorderSide(color: Colors.black45, width: 2),
+          borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
         ),
         prefixIcon: Icon(
           widget.prefixIconData,

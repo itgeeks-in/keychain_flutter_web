@@ -70,7 +70,7 @@ class _UserPageState extends State<UserPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: 200,
+                    width: MediaQuery.of(context).size.width / 3,
                     height: 70,
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),

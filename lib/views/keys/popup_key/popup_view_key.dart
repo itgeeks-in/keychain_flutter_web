@@ -2,21 +2,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:key_admin_panel/model/keys_model.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
-import 'package:key_admin_panel/utils/RoundedButton.dart';
-import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
-import 'package:key_admin_panel/views/keys/popup_key/popUpAddKeys.dart';
+import 'package:key_admin_panel/utils/theme_text.dart';
 
 class PopUpViewKey extends StatefulWidget {
-  const PopUpViewKey({super.key});
+  final KeysData keysData;
+  const PopUpViewKey({super.key,required this.keysData});
 
   @override
   State<PopUpViewKey> createState() => _PopUpViewKeyState();
 }
 
 class _PopUpViewKeyState extends State<PopUpViewKey> {
+  String categoryIdSelect="";
+  TextEditingController _keyNameController =  TextEditingController();
+  TextEditingController _descriptionNameController = TextEditingController();
+  TextEditingController _categoryNameController  = TextEditingController();
+
   bool isPassVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _keyNameController.text = widget.keysData.imageName;
+    _descriptionNameController.text = widget.keysData.description;
+    _categoryNameController.text = widget.keysData.categoryName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +37,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
         child: SingleChildScrollView(
       child: Container(
         width: 500,
-        height: 600,
+        height: 500,
         decoration: const BoxDecoration(
             color: ColorConsts.backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(21))),
@@ -52,71 +65,86 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
             Center(
               child: const Text(
                 "View Key",
-                style: TextStyle(
-                    color: ColorConsts.primaryColor,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold),
+                style: ThemeText.textLargeSecondaryBold,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
-                isPassVisible: false,
-                labelText: "",
-                prefixIconData: Icons.vpn_key_outlined,
-                hintText: "Enter your Key Name",
-              )),
+                    enable: false,
+                    controller: _keyNameController,
+                    isPassVisible: false,
+                    labelText: "Key name",
+                    prefixIconData: Icons.vpn_key_outlined,
+                    hintText: '',
+                  )),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 50, right: 50, top: 20),
-              child: Center(
-                  child: CustomTextField(
-                isPassVisible: false,
-                labelText: "Enter Capture Title",
-                prefixIconData: Icons.screen_search_desktop_outlined,
-                hintText: "Enter your Capture Title",
-              )),
-            ),
-            const Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
-              child: TextFieldMultiline(
-                labelText: "Description",
-                hintText: "Enter your Description",
-              ),
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 50, right: 50, top: 20),
-                child: DropdownMenuList()),
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+              child: CustomTextField(
+                enable: false,
+                prefixIconData: Icons.description_outlined,
+                isPassVisible: false,
+                controller: _descriptionNameController,
+                labelText: "Description",
+                hintText:'',
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 50, right: 50, top: 20),
+              child: Center(
+                  child: CustomTextField(
+                    enable: false,
+                    controller: _categoryNameController,
+                    isPassVisible: false,
+                    labelText: "Category name",
+                    prefixIconData: Icons.vpn_key_outlined,
+                    hintText: '',
+                  )),
+            ),
+            SizedBox(height: 5,),
+            Container(
+              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                      padding: EdgeInsets.all(8.0),
-                      width: 140,
-                      height: 140,
-                      child:
-                          Image.asset("assets/keys.jpg", fit: BoxFit.contain),
-                      decoration: BoxDecoration(
-                        color: ColorConsts.backgroundColor,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
-                        border: Border.all(
-                          width: 2,
-                          color: ColorConsts.primaryColor,
-                        ),
-                      )),
-                  SizedBox(
-                    width: 80,
+                  Column(
+                    children: [
+                      Image.network(
+                        widget.keysData.imagePath,
+                        height: 80,
+                        width: 80,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: 2),
+                      Text("Front Image" , style: ThemeText.textMediumSecondary,),
+                    ],
                   ),
-                  Container(
-                      width: 120,
-                      child: RoundedButton(
-                        btnName: "Close",
-                        callback: () {},
-                      )),
+                  Column(
+                    children: [
+                      Image.network(
+                        widget.keysData.backImagePath,
+                        height: 80,
+                        width: 80,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: 2),
+                      Text("Back Image" , style: ThemeText.textMediumSecondary,),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Image.network(
+                        widget.keysData.lockImagePath,
+                        height: 80,
+                        width: 80,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: 2),
+                      Text("Lock Image" , style: ThemeText.textMediumSecondary,),
+                    ],
+                  ),
                 ],
               ),
             ),

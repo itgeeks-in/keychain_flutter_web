@@ -38,7 +38,7 @@ class _KeysScreenState extends State<KeyPageUI> {
           children: [
             Container(
               margin: const EdgeInsets.only(bottom: 10, top: 8),
-              width: MediaQuery.of(context).size.width / 2,
+              width: MediaQuery.of(context).size.width / 3,
               height: 70,
               child: const Padding(
                 padding: EdgeInsets.all(2.0),
@@ -178,7 +178,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                                           showDialog(
                                             context: context,
                                             builder: (context) =>
-                                                const PopUpViewKey(),
+                                                 PopUpViewKey(keysData: state.data[index],),
                                           );
                                         },
                                         child: Container(

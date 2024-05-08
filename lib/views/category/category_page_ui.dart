@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
@@ -38,35 +39,17 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 200,
-                  height: 40,
-                  child: TextField(
-                    textAlignVertical: TextAlignVertical.bottom,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 8, 185, 216),
-                              width: 2),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 8, 185, 216)),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: const BorderSide(
-                              color: Colors.black45, width: 2),
-                        ),
-                        prefixIcon: const Icon(
-                          Icons.person_search_sharp,
-                          color: Color.fromARGB(255, 8, 185, 216),
-                        ),
-                        hintText: "Search",
-                        hintStyle: const TextStyle(color: Colors.grey)),
+                  margin: const EdgeInsets.only(bottom: 10, top: 8),
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: 70,
+                  child: const Padding(
+                    padding: EdgeInsets.all(2.0),
+                    child: CustomTextField(
+                      isPassVisible: false,
+                      labelText: "Search",
+                      prefixIconData: Icons.person_search_sharp,
+                      hintText: "Search",
+                    ),
                   ),
                 ),
                 ElevatedButton(
