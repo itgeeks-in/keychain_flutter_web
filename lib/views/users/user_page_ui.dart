@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:key_admin_panel/model/alluser_datamodel.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
+import 'package:key_admin_panel/utils/theme_text.dart';
 
-import 'package:key_admin_panel/views/users/bloc/User_bloc.dart';
-import 'package:key_admin_panel/views/users/bloc/User_state.dart';
+import 'package:key_admin_panel/views/users/bloc/user_bloc.dart';
+import 'package:key_admin_panel/views/users/bloc/user_state.dart';
 import 'package:key_admin_panel/views/users/popups_user/bloc_user_add/user_add_bloc.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_add_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_edit_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_view_user.dart';
-import 'package:key_admin_panel/model/alluser_datamodel.dart' as UserKey;
+import 'package:key_admin_panel/model/all_user_model.dart' as UserKey;
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -21,38 +21,7 @@ class UserPage extends StatefulWidget {
   State<UserPage> createState() => _UserPageState();
 }
 
-class User {
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String profileImage;
-  List<UserKey.Key>? keys;
-
-  User({
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.profileImage,
-    required this.keys,
-  });
-}
-
 class _UserPageState extends State<UserPage> {
-  void onViewUser(Result result) {
-    User user = User(
-      firstName: result.firstName ?? 'N/A',
-      lastName: result.lastName ?? 'N/A',
-      email: result.email ?? 'N/A',
-      profileImage: result.profileImage ??
-          "https://images.pexels.com/photos/3771639/pexels-photo-3771639.jpeg?auto=compress&cs=tinysrgb&w=600",
-      keys: result.keys ?? [], // Ensure keys is not null
-    );
-
-    showDialog(
-      context: context,
-      builder: (context) => PopupViewUser(user: user),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +94,6 @@ class _UserPageState extends State<UserPage> {
                         color: ColorConsts.boxShadowColor,
                         blurRadius: 8,
                         spreadRadius: 4,
-                        // offset: Offset(0, 10),
                       )
                     ]),
                 child: Row(
@@ -171,7 +139,6 @@ class _UserPageState extends State<UserPage> {
                     Expanded(
                       flex: 2,
                       child: Container(
-                        // color: Colors.amber,
                         child: const Padding(
                           padding: EdgeInsets.only(left: 60),
                           child: Text(
@@ -194,7 +161,7 @@ class _UserPageState extends State<UserPage> {
                 create: (context) => UsersDataBloc(),
                 child: BlocBuilder<UsersDataBloc, UsersDataState>(
                   builder: (context, state) {
-                    if (state is UsersDataLoadSuccessfull) {
+                    if (state is SuccessState) {
                       return Container(
                         child: ListView.builder(
                           itemCount: state.data.length,
@@ -217,7 +184,6 @@ class _UserPageState extends State<UserPage> {
                                         color: ColorConsts.boxShadowColor,
                                         blurRadius: 8,
                                         spreadRadius: 4,
-                                        // offset: Offset(0, 10),
                                       )
                                     ]),
                                 child: Row(
@@ -227,7 +193,6 @@ class _UserPageState extends State<UserPage> {
                                     Expanded(
                                       flex: 2,
                                       child: Container(
-                                        // color: Colors.amber,
                                         padding: EdgeInsets.only(left: 10),
                                         child: Text(
                                           state.data![index].firstName
@@ -236,13 +201,9 @@ class _UserPageState extends State<UserPage> {
                                               state.data![index].lastName
                                                   .toString(),
                                           maxLines: 1,
-                                          // data!.result![index].firstName
-                                          //     .toString(),
-                                          // data[index]['name'].toString(),
                                           style: const TextStyle(
                                             color: ColorConsts.textColorDark,
                                             fontSize: 16,
-                                            // fontWeight: FontWeight.bold
                                           ),
                                         ),
                                       ),
@@ -251,13 +212,8 @@ class _UserPageState extends State<UserPage> {
                                       flex: 2,
                                       child: Text(
                                         state.data![index].email.toString(),
-                                        // data[index]['email'].toString(),
                                         maxLines: 1,
-                                        style: const TextStyle(
-                                          color: ColorConsts.textColorDark,
-                                          fontSize: 16,
-                                          // fontWeight: FontWeight.bold,
-                                        ),
+                                        style: ThemeText.textMediumSecondary,
                                       ),
                                     ),
                                     Expanded(
@@ -265,7 +221,6 @@ class _UserPageState extends State<UserPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.only(left: 5),
                                         child: Text(
-                                          // "12",
                                           state.data[index].keys != null
                                               ? state.data[index].keys!.length
                                                   .toString()
@@ -273,7 +228,6 @@ class _UserPageState extends State<UserPage> {
                                           style: TextStyle(
                                             color: ColorConsts.textColorDark,
                                             fontSize: 16,
-                                            // fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
@@ -288,8 +242,7 @@ class _UserPageState extends State<UserPage> {
                                         children: [
                                           Spacer(),
                                           InkResponse(
-                                            onTap: () =>
-                                                onViewUser(state.data![index]),
+                                            onTap: () => PopupViewUser(userData: state.data[index],),
                                             child: Container(
                                               height: 32,
                                               width: 32,

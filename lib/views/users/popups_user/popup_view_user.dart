@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:key_admin_panel/model/all_user_model.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
 class PopupViewUser extends StatefulWidget {
-  final User user;
+ final UserData userData;
 
-  const PopupViewUser({Key? key, required this.user}) : super(key: key);
+  const PopupViewUser({Key? key,required this.userData }) : super(key: key);
 
   @override
   State<PopupViewUser> createState() => _PopupViewUserState();
@@ -21,9 +22,9 @@ class _PopupViewUserState extends State<PopupViewUser> {
   @override
   void initState() {
     super.initState();
-    if (widget.user != null) {
-      _firstNameController.text = widget.user.firstName ?? '';
-      _lastNameController.text = widget.user.lastName ?? '';
+    if (widget.userData != null) {
+      _firstNameController.text = widget.userData.firstName ?? '';
+      _lastNameController.text = widget.userData.lastName ?? '';
     }
   }
 
@@ -62,9 +63,10 @@ class _PopupViewUserState extends State<PopupViewUser> {
               Center(
                 child: CircleAvatar(
                     radius: 74,
-                    backgroundImage: NetworkImage(
-                      widget.user.profileImage,
-                    )),
+                    // backgroundImage: NetworkImage(
+                    //   widget.user.profileImage,
+                    // )
+                ),
               ),
               SizedBox(
                 height: 20,
@@ -75,9 +77,9 @@ class _PopupViewUserState extends State<PopupViewUser> {
                   child: CustomTextField(
                     controller: _firstNameController,
                     isPassVisible: false,
-                    labelText: "Enter your Name",
+                    labelText: "First name",
                     prefixIconData: Icons.person_add_outlined,
-                    hintText: "Enter your Name",
+                    hintText: "Enter first name",
                   ),
                 ),
               ),
@@ -87,9 +89,9 @@ class _PopupViewUserState extends State<PopupViewUser> {
                   child: CustomTextField(
                     controller: _lastNameController,
                     isPassVisible: false,
-                    labelText: "Enter your lastName",
+                    labelText: "Last name",
                     prefixIconData: Icons.person_add_outlined,
-                    hintText: "Enter your lastName",
+                    hintText: "Enter last name",
                   ),
                 ),
               ),
@@ -98,12 +100,12 @@ class _PopupViewUserState extends State<PopupViewUser> {
                 child: Center(
                   child: CustomTextField(
                     controller: TextEditingController(
-                      text: 'Email: ${widget.user.email}',
+                      //text: 'Email: ${widget.user.email}',
                     ),
                     isPassVisible: false,
-                    labelText: "Enter your Email",
+                    labelText: "Email",
                     prefixIconData: Icons.email_outlined,
-                    hintText: "Enter your Email",
+                    hintText: "Enter email",
                   ),
                 ),
               ),
@@ -125,8 +127,8 @@ class _PopupViewUserState extends State<PopupViewUser> {
                                   fontSize: 18),
                             ),
                             Text(
-                              widget.user.keys != null
-                                  ? widget.user.keys!.length.toString()
+                              widget.userData.keys != null
+                                  ? widget.userData.keys!.length.toString()
                                   : '0',
                               style: TextStyle(
                                   color: ColorConsts.textColorDark,
