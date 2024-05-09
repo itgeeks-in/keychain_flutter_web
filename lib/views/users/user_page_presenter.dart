@@ -4,7 +4,7 @@ import 'package:key_admin_panel/repository/api_const.dart';
 
 class UserPagePresenter {
   Future<dynamic> allUsersAPI() async {
-      Response response = await ApiRepository.getAPI(ApiConst.allUsersAPI);
+      Response response = await ApiRepository.getAPI(ApiConst.allUsersAPI,{});
       return response;
   }
 }

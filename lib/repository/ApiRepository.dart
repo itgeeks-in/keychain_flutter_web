@@ -6,7 +6,7 @@ class ApiRepository {
   static Dio client = Dio();
 
   // static Future<dynamic> getAPI(String apiName, {required Map<String, String> headers})
-  static Future<dynamic> getAPI(String apiName) async {
+  static Future<dynamic> getAPI(String apiName,  requestBody) async {
     try {
       String callingUrl;
       apiName == "health"
@@ -18,7 +18,7 @@ class ApiRepository {
       }
       print("url: ${callingUrl}");
 
-      var response = await client.get(callingUrl);
+      var response = await client.get(callingUrl,data: requestBody);
       // todo: response come when status is 200 only
       print("$response");
       return response;
@@ -97,36 +97,6 @@ class ApiRepository {
       }
     }
   }
-
-  // This API is written for, when we want to send  limit and offset value.
-  static Future<dynamic> getApiForPagination(String apiName,String offset,int limit) async {
-    try {
-      String callingUrl;
-      apiName == "health"
-          ? callingUrl = ApiConst.mainUrl + apiName
-          : callingUrl = ApiConst.mainUrl + apiName;
-      String token = await Session().getToken();
-      if (token.isNotEmpty) {
-        client.options.headers["authorization"] = "Bearer " + token;
-      }
-      Map<String, dynamic> requestBody = {
-        "offset": offset,
-        "limit": limit
-      };
-      print("url: ${callingUrl}");
-
-      var response = await client.get(callingUrl,data: requestBody);
-      // todo: response come when status is 200 only
-      print("$response");
-      return response;
-    } on DioException catch (e) {
-      print("error     " + e.response.toString() + e.error.toString());
-      if (e.response != null) {
-        return e.response;
-      } else {
-        var err = {'"status"': 'false', '"message"': '"${e.message}"'};
-        return err;
-      }
-    }
-  }
 }
+
+

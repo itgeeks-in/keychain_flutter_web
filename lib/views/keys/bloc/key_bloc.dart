@@ -12,7 +12,7 @@ class KeyBloc extends Bloc<KeyEvent,KeyState>{
   }
 
   Future<void> getAllKeysAPI() async{
-    var result = await KeyPagePresenter().getAllKeyAPI();
+    var result = await KeyPagePresenter().getAllKeyAPI("0",100);
     Map<String,dynamic> parsed = jsonDecode(result.toString());
     if(parsed['status']){
     KeysModel keysModel = KeysModel.fromJson(parsed);
