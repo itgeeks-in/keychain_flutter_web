@@ -6,7 +6,7 @@ import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_state.dart';
-import 'package:key_admin_panel/views/category/popup_add_category/popup_add_category.dart';
+import 'package:key_admin_panel/widgets/buttons.dart';
 
 import '../../widgets/loader_widget.dart';
 class CategoryPageUI extends StatefulWidget {
@@ -52,20 +52,9 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Dialogs().addKeyCategory(context);
-                  },
-                    style: ElevatedButton.styleFrom(
-                    shadowColor: ColorConsts.primaryColor,
-                    elevation: 10,
-                    backgroundColor: ColorConsts.primaryColor,
-                  ),
-                  child: const Text(
-                    'Add Category',
-                    style:ThemeText.textSmallWhiteBold,
-                  ),
-                ),
+                ButtonWidget().buttonWidgetSimple('Add Category+', () => {
+                Dialogs().addKeyCategory(context),
+                }, 140.0, 40.0)
               ],
             ),
             const SizedBox(height: 20,),

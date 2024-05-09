@@ -12,7 +12,7 @@ import 'package:key_admin_panel/views/users/popups_user/bloc_user_add/user_add_b
 import 'package:key_admin_panel/views/users/popups_user/popup_add_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_edit_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_view_user.dart';
-import 'package:key_admin_panel/model/all_user_model.dart' as UserKey;
+import 'package:key_admin_panel/widgets/buttons.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
 
 class UserPage extends StatefulWidget {
@@ -52,29 +52,14 @@ class _UserPageState extends State<UserPage> {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => BlocProvider(
-                          create: (_) => AddUserBloc(),
-                          child:
-                              PopUpAddUser(), // Assuming PopUpAddUser is your dialog widget
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Add User +',
-                      style: TextStyle(
-                        color: ColorConsts.whiteColor,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      shadowColor: ColorConsts.primaryColor,
-                      elevation: 10,
-                      backgroundColor: ColorConsts.primaryColor,
-                    ),
-                  )
+                  ButtonWidget().buttonWidgetSimple('Add User+', () =>{
+                  showDialog(
+                  context: context,
+                  builder: (context) => BlocProvider(
+                  create: (_) => AddUserBloc(),
+                  child:PopUpAddUser(), ),
+                  ),
+                  }, 120, 40),
                 ],
               ),
             ),

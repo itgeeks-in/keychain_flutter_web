@@ -91,4 +91,25 @@ class ButtonWidget{
     )
     );
   }
+  // Button created by me.
+  Widget buttonWidgetSimple(String text,Function() onclick,width,height){
+    return  InkResponse(onTap: () {
+      onclick.call();
+    },child:Container(
+        width: width,
+        height: height,
+        margin: EdgeInsets.fromLTRB(8, 10, 8, 10),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(50.0),
+          color: ColorConsts.primaryColor,
+        ),
+        child:Text(text,
+            style: ThemeText.textMediumWhiteBold
+        )
+    )
+    );
+  }
+
 }

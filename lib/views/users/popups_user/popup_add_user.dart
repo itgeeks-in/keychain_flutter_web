@@ -9,6 +9,7 @@ import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/users/popups_user/bloc_user_add/user_add_bloc.dart';
 import 'package:key_admin_panel/views/users/popups_user/bloc_user_add/user_add_event.dart';
 import 'package:key_admin_panel/views/users/popups_user/bloc_user_add/user_add_state.dart';
+import 'package:key_admin_panel/widgets/buttons.dart';
 
 class PopUpAddUser extends StatefulWidget {
   @override
@@ -246,26 +247,16 @@ class _PopUpAddUserState extends State<PopUpAddUser> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 50, right: 50, top: 10, bottom: 20),
-                    child: Container(
-                      width: 120,
-                      child: RoundedButton(
-                        btnName: "Add User",
-                        callback: () {
-                          _userBloc.add(OnAddUserButtonClick(
-                              firstNameController.text,
-                              lastNameController.text,
-                              emailController.text,
-                              confirmEmailController.text,
-                              passwordController.text,
-                              confirmPasswordController.text,
-                              isAgreed));
-                        },
-                      ),
-                    ),
-                  ),
+                  ButtonWidget().buttonWidgetSimple('Add', () =>{
+                  _userBloc.add(OnAddUserButtonClick(
+                  firstNameController.text,
+                  lastNameController.text,
+                  emailController.text,
+                  confirmEmailController.text,
+                  passwordController.text,
+                  confirmPasswordController.text,
+                  isAgreed)),
+                  }, 100.0,40.0)
                 ],
               ),
             ),

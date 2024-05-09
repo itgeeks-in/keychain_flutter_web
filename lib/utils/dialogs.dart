@@ -38,7 +38,7 @@ class Dialogs {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: ColorConsts.secondaryColor),
             ),
             actions: [
-              ButtonWidget().buttonWidgetSmallPrimary("OK", () => Navigator.pop(context, false), 70.0, 40.0),
+              ButtonWidget().buttonWidgetSimple("OK", () => Navigator.pop(context, false), 70.0, 40.0),
             ],
           ),
         )) ??
@@ -63,8 +63,8 @@ class Dialogs {
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: ColorConsts.secondaryColor),
         ),
         actions: [
-          ButtonWidget().buttonWidgetPrimary("No", () => Navigator.pop(context, false), 80.0, 40.0),
-          ButtonWidget().buttonWidgetPrimary("Yes", () async => {
+          ButtonWidget().buttonWidgetSimple("No", () => Navigator.pop(context, false), 80.0, 40.0),
+          ButtonWidget().buttonWidgetSimple("Yes", () async => {
          await   Session().removeValues(),
           Navigator.of(context)
               .pushReplacementNamed(RouteGenerate.login),
@@ -82,13 +82,14 @@ class Dialogs {
           contentPadding: EdgeInsets.all(22),
           elevation: 8,
           backgroundColor: ColorConsts.whiteColor,
-          title: Text(
-            "Do you want to delete category ? ",
-            style: ThemeText.textMediumSecondary,
-          ),
-          actions: [
-            ButtonWidget().buttonWidgetPrimary("No", () => Navigator.pop(context, false), 80.0, 40.0),
-            ButtonWidget().buttonWidgetPrimary("Yes", () async => {
+          title:Text(
+          "Are you sure to delete this category ? This action may affect associated key types.",
+          style: ThemeText.textMediumSecondary,
+        ),
+
+      actions: [
+            ButtonWidget().buttonWidgetSimple("No", () => Navigator.pop(context, false), 80.0, 40.0),
+            ButtonWidget().buttonWidgetSimple("Yes", () async => {
             }, 80.0, 40.0),
           ],
         )
@@ -109,8 +110,8 @@ class Dialogs {
             child: TextFieldCustom().textFieldWidget(editingController,TextInputType.text,"Enter Category") ,
           ),
           actions: [
-            ButtonWidget().buttonWidgetPrimary("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
-            ButtonWidget().buttonWidgetPrimary("Submit", () async => {
+            ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
+            ButtonWidget().buttonWidgetSimple("Submit", () async => {
             }, 80.0, 40.0),
           ],
         )
@@ -155,8 +156,8 @@ class Dialogs {
               ),
             ),
             actions: [
-              ButtonWidget().buttonWidgetPrimary("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
-              ButtonWidget().buttonWidgetPrimary("Add", () {
+              ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
+              ButtonWidget().buttonWidgetSimple("Add", () {
                 if(isCategoryValid){
                   CategoryPagePresenter().addKeyCategory(categoryController.text);
                   ScaffoldMessenger.of(context).showSnackBar(

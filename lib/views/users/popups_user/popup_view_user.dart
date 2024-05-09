@@ -5,6 +5,8 @@ import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
+import '../../../utils/theme_text.dart';
+
 class PopupViewUser extends StatefulWidget {
  final UserData userData;
 
@@ -64,17 +66,22 @@ class _PopupViewUserState extends State<PopupViewUser> {
                 ),
               ),
               Center(
-                child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage:AssetImage(AppAssets.notFoundImg),
-                  // backgroundImage: widget.userData.profileImage != null
-                  //     ? NetworkImage(widget.userData.email)
-                  //     : AssetImage(AppAssets.notFoundImg),
+                child: const Text(
+                  "View User",
+                  style: ThemeText.textLargeSecondaryBold,
                 ),
               ),
-              SizedBox(
-                height: 10,
+              SizedBox(height: 8,),
+              Center(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: widget.userData.profileImage.isNotEmpty
+                      ? NetworkImage(widget.userData.profileImage)
+                      : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
+                ),
               ),
+
+              SizedBox(height: 5,),
               Padding(
                 padding: EdgeInsets.only(left: 50, right: 50, top: 20),
                 child: Center(
