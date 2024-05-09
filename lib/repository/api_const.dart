@@ -16,6 +16,7 @@ class ApiConst {
   static const String getAllKeysAPI = '/key/getKeys';
   static const String getAllCategoryAPI = '/key/getkeycategory';
   static const String addKeyCategoryAPI = '/key/addkeycategory';
+  static const String getDashboardDetailAPI = '/admin/dashboard';
 
 
   //TODO : Api parameter for calling (fields or param)

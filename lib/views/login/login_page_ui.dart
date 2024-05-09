@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
-import 'package:key_admin_panel/views/login_screen/bloc/login_state.dart';
-import 'package:key_admin_panel/views/login_screen/bloc/login_bloc.dart';
-import 'package:key_admin_panel/views/login_screen/bloc/login_event.dart';
+import 'package:key_admin_panel/views/login/bloc/login_state.dart';
+import 'package:key_admin_panel/views/login/bloc/login_bloc.dart';
+import 'package:key_admin_panel/views/login/bloc/login_event.dart';
 import 'package:key_admin_panel/views/sidebar_drawer/side_drawer.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
 
 import '../../utils/dialogs.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginPageUI extends StatefulWidget {
+  const LoginPageUI({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginPageUI> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginPageUI> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isPassVisible = false;

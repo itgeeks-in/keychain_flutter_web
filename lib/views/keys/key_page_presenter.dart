@@ -7,7 +7,7 @@ class KeyPagePresenter{
    "offset": offset,
    "limit": limit
   };
- var response =await ApiRepository.getAPI(ApiConst.getAllKeysAPI, requestBody);
+ var response =await ApiRepository.postAPI(ApiConst.getAllKeysAPI, requestBody);
  return response;
  }
 }
