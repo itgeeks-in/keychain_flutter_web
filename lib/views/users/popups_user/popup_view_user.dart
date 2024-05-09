@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/model/all_user_model.dart';
+import 'package:key_admin_panel/theme/app_assets.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
@@ -24,9 +25,9 @@ class _PopupViewUserState extends State<PopupViewUser> {
   void initState() {
     super.initState();
     if (widget.userData != null) {
-      _firstNameController.text = widget.userData.firstName ?? '';
-      _lastNameController.text = widget.userData.lastName ?? '';
-      _emailController.text = widget.userData.email ?? '';
+      _firstNameController.text = widget.userData.firstName;
+      _lastNameController.text = widget.userData.lastName;
+      _emailController.text = widget.userData.email;
     }
   }
 
@@ -64,19 +65,21 @@ class _PopupViewUserState extends State<PopupViewUser> {
               ),
               Center(
                 child: CircleAvatar(
-                    radius: 74,
-                    // backgroundImage: NetworkImage(
-                    //   widget.user.profileImage,
-                    // )
+                    radius: 50,
+                    backgroundImage:AssetImage(AppAssets.notFoundImg),
+                  // backgroundImage: widget.userData.profileImage != null
+                  //     ? NetworkImage(widget.userData.email)
+                  //     : AssetImage(AppAssets.notFoundImg),
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Padding(
                 padding: EdgeInsets.only(left: 50, right: 50, top: 20),
                 child: Center(
                   child: CustomTextField(
+                    enable: false,
                     controller: _firstNameController,
                     isPassVisible: false,
                     labelText: "First name",
@@ -89,6 +92,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                 padding: EdgeInsets.only(left: 50, right: 50, top: 20),
                 child: Center(
                   child: CustomTextField(
+                    enable: false,
                     controller: _lastNameController,
                     isPassVisible: false,
                     labelText: "Last name",
@@ -101,6 +105,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                 padding: EdgeInsets.only(left: 50, right: 50, top: 20),
                 child: Center(
                   child: CustomTextField(
+                    enable: false,
                     controller: _emailController,
                     isPassVisible: false,
                     labelText: "Email",
