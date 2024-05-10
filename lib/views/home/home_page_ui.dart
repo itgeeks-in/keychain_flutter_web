@@ -21,7 +21,7 @@ class HomePageUI extends StatefulWidget {
 class _HomePageUIState extends State<HomePageUI> {
   @override
   Widget build(BuildContext context) {
-    double widthSize = MediaQuery.of(context).size.width/4;
+    double widthSize = MediaQuery.of(context).size.width/4.5;
     double heightSize = MediaQuery.of(context).size.height/4;
     return Scaffold(
       body: BlocProvider(
@@ -40,8 +40,6 @@ class _HomePageUIState extends State<HomePageUI> {
                         Container(
                           height: heightSize ,
                           width: widthSize,
-                          padding: EdgeInsets.all(5.0),
-                          margin: EdgeInsets.all(8.0),
                           child: Center(
                               child: Text(state.homeData.totalKey.toString()
                                   +'\nTotal Key',
@@ -53,8 +51,6 @@ class _HomePageUIState extends State<HomePageUI> {
                         Container(
                           height: heightSize ,
                           width: widthSize ,
-                          padding: EdgeInsets.all(5.0),
-                          margin: EdgeInsets.all(8.0),
                           child: Center(
                               child:Text(state.homeData.totalUser.toString()
                                   +'\nTotal User',
@@ -66,8 +62,6 @@ class _HomePageUIState extends State<HomePageUI> {
                         Container(
                           height: heightSize ,
                           width: widthSize ,
-                          padding: EdgeInsets.all(5.0),
-                          margin: EdgeInsets.all(8.0),
                           child: Center(
                               child: Text(state.homeData.totalPlan.toString()
                                   +'\nTotal Plan',
@@ -78,10 +72,8 @@ class _HomePageUIState extends State<HomePageUI> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height:56,
-                    ),
-                SizedBox(height:205,
+                    Spacer(),
+                SizedBox(height:MediaQuery.of(context).size.height/3,
   child:    ChartPieDis().pieChartUI(context,state.homeData.totalKey.toDouble(),state.homeData.totalUser.toDouble(),state.homeData.totalPlan.toDouble()))
                   ],
                 ),

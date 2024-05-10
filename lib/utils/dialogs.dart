@@ -84,7 +84,7 @@ class Dialogs {
           backgroundColor: ColorConsts.whiteColor,
           title:Text(
           "Are you sure to delete this category ? This action may affect associated key types.",
-          style: ThemeText.textMediumSecondary,
+          style:TextStyle(color: ColorConsts.redColor,fontSize: 16),
         ),
 
       actions: [

@@ -65,11 +65,11 @@ class _PlanPageState extends State<PlanPage> {
               ],
             ),
             SubscriptionHeading(),
+            SizedBox(height: 50,),
+            Center(child: Text('We are still working on Plan page functionality ,sorry for inconvenience !',style: TextStyle(color: ColorConsts.redColor,fontSize: 20),),),
             Container(
               margin: EdgeInsets.only(top: 10),
               height: MediaQuery.of(context).size.height * 0.6,
-              // decoration: BoxDecoration(
-              //     border: Border.all(width: 2, color: Colors.black)),
               child: ListView.builder(
                 itemCount: users.length,
                 itemBuilder: (context, index) {
@@ -247,7 +247,7 @@ class _PlanPageState extends State<PlanPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Edit Plan',
+                'Edit plan',
                 style: TextStyle(
                   color: ColorConsts.primaryColor,
                 ),
@@ -271,39 +271,21 @@ class _PlanPageState extends State<PlanPage> {
                     child: CustomTextField(
                       controller: nameController,
                       isPassVisible: false,
-                      labelText: "Enter Capture Title",
+                      labelText: "Title",
                       prefixIconData: Icons.subscriptions,
-                      hintText: "Enter your Capture Title",
+                      hintText: "Enter title",
                     ),
                   ),
-
                   Container(
                     // margin: EdgeInsets.only(top: 20, bottom: 5),
                     child: CustomTextField(
                       controller: priceController,
                       isPassVisible: false,
-                      labelText: "Enter Plan Price",
+                      labelText: "Plan price",
                       prefixIconData: Icons.price_change_outlined,
-                      hintText: "Enter Plan Price",
+                      hintText: "Enter price",
                     ),
                   ),
-                  // TextField(
-                  //   controller: nameController,
-                  //   style: TextStyle(color: Colors.grey),
-                  //   decoration: InputDecoration(
-                  //       labelText: 'Plan Name',
-                  //       labelStyle: TextStyle(
-                  //           fontWeight: FontWeight.bold,
-                  //           color: Color.fromARGB(255, 8, 185, 216))),
-                  // ),
-                  // TextField(
-                  //   style: TextStyle(color: Colors.grey),
-                  //   controller: priceController,
-                  //   decoration: InputDecoration(
-                  //       labelText: 'Plan Price',
-                  //       labelStyle: TextStyle(
-                  //           color: const Color.fromARGB(255, 8, 185, 216))),
-                  // ),
                 ],
               ),
             ),
@@ -366,7 +348,7 @@ class SubscriptionHeading extends StatelessWidget {
             flex: 2,
             child: Container(
               child: const Text(
-                "UserName",
+                "User Name",
                 style: TextStyle(
                     color: ColorConsts.textColorLight,
                     fontSize: 16,
@@ -391,7 +373,7 @@ class SubscriptionHeading extends StatelessWidget {
             child: Container(
               // color: Colors.amber,
               child: const Text(
-                "Start Date ",
+                "Start date ",
                 style: TextStyle(
                     color: ColorConsts.textColorLight,
                     fontSize: 16,
@@ -404,7 +386,7 @@ class SubscriptionHeading extends StatelessWidget {
             child: Container(
               // color: Colors.blue,
               child: const Text(
-                "Expiry Date",
+                "Expiry date",
                 style: TextStyle(
                     color: ColorConsts.textColorLight,
                     fontSize: 16,
