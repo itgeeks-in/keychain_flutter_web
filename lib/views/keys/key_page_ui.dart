@@ -13,6 +13,8 @@ import 'package:key_admin_panel/views/keys/popup_key/popup_view_key.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'bloc/key_event.dart';
+
 class KeyPageUI extends StatefulWidget {
   const KeyPageUI({
     super.key,
@@ -23,6 +25,9 @@ class KeyPageUI extends StatefulWidget {
 }
 
 class _KeysScreenState extends State<KeyPageUI> {
+  int currentPage = 1;
+  bool IsLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -57,9 +62,33 @@ class _KeysScreenState extends State<KeyPageUI> {
                 child: BlocBuilder<KeyBloc, KeyState>(
                   builder: (context, state) {
                     if (state is SuccessState) {
-                      return ListView.builder(
+                      return   NotificationListener<ScrollEndNotification>(
+                          onNotification: (ScrollEndNotification scrollInfo) {
+                            if (scrollInfo.metrics.pixels ==
+                                scrollInfo.metrics.maxScrollExtent) {
+                              if (IsLoading == false) {
+                                IsLoading = true;
+                                currentPage++;
+                                context
+                                    .read<KeyBloc>()
+                                    .add(OnScrollPageEvent(currentPage, 0));
+                              }
+                              return true;
+                            }
+                            return false;
+                          },
+                          child: ListView.builder(
                         itemCount: state.data.length,
                         itemBuilder: (context, index) {
+
+                          if (index == state.data.length - 1 &&
+                              state.LoadMore &&
+                              state.data.length > 4) {
+                            return Center(
+                              child: Loader().loaderWidget2(),
+                            );
+                          }
+
                           return Container(
                             height: 100,
                             margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -258,7 +287,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                             ),
                           );
                         },
-                      );
+                      ));
                     } else if (state is KeyNotFoundState) {
                       return Center(
                         child: Text(

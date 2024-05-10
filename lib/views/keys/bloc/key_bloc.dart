@@ -9,7 +9,7 @@ import 'package:key_admin_panel/views/keys/key_page_presenter.dart';
 import 'key_event.dart';
 
 class KeyBloc extends Bloc<KeyEvent,KeyState>{
-  int limit = 3, offset = 0;
+  int limit = 5, offset = 0;
   int current_page = 1;
   List<KeysData> data = [];
   bool LoadMore = true;

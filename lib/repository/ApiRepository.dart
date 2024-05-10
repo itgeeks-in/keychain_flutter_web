@@ -86,7 +86,7 @@ class ApiRepository {
       String callUrl = ApiConst.mainUrl + apiName;
 
       String token = await Session().getToken();
-      print("<<<<<<<<<<<<<<<<<   $callUrl ");
+      print("<<<<<<<<<<<<<<<<<   $callUrl \n$formData");
 
       if (token.isNotEmpty) {
         client.options.headers["authorization"] = "Bearer $token";
