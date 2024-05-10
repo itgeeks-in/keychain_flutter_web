@@ -7,28 +7,22 @@ class HomeModel {
 
   factory HomeModel.fromJson(Map<dynamic, dynamic> json) {
     return HomeModel(
-      json['status'],
-      json['message'],
-      HomeData.fromJson(json['result']),
-    );
+        json['status'], json['message'], new HomeData.fromJson(json['result']));
   }
 }
 
 class HomeData {
-  String totalUser;
-  String totalKey;
-  String totalPlan;
+  int totalUser;
+  int totalKey;
+  int totalPlan;
 
   HomeData(this.totalUser, this.totalKey, this.totalPlan);
 
   factory HomeData.fromJson(Map<dynamic, dynamic> json) {
     return HomeData(
-      json['totalUser'] ?? "",
-      json['totalKey'] ?? "",
-      json['totalPlan'] ?? "",
+      json['totalUser'] ?? 0,
+      json['totalKey'] ?? 0,
+      json['totalPlan'] ?? 0,
     );
   }
 }
-
-
-
