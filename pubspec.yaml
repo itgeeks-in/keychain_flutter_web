@@ -43,6 +43,7 @@ dependencies:
   email_validator:
   shimmer:
   equatable: ^2.0.5
+  pie_chart :
 
 dev_dependencies:
   flutter_test:
