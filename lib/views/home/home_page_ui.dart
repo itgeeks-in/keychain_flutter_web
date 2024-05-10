@@ -36,43 +36,40 @@ class _HomePageUIState extends State<HomePageUI> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          height: heightSize / 3,
+                          height: heightSize / 4,
                           width: widthSize * 0.2,
                           padding: EdgeInsets.all(5.0),
                           margin: EdgeInsets.all(8.0),
                           child: Center(
-                              child: Text(
-                                  'Total Key :- ' +
-                                      state.homeData.totalKey.toString(),
-                                  style: ThemeText.textMediumWhiteBold)),
+                              child: Text(state.homeData.totalKey.toString()
+                                  +'\nTotal Key',
+                                  style: ThemeText.textLargeWhiteBold,textAlign: TextAlign.center,)),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25.0),
                               color: ColorConsts.primaryColor),
                         ),
                         Container(
-                          height: heightSize / 3,
+                          height: heightSize / 4,
                           width: widthSize * 0.2,
                           padding: EdgeInsets.all(5.0),
                           margin: EdgeInsets.all(8.0),
                           child: Center(
-                              child: Text(
-                                  'Total User :- ' +
-                                      state.homeData.totalUser.toString(),
-                                  style: ThemeText.textMediumWhiteBold)),
+                              child:Text(state.homeData.totalUser.toString()
+                                  +'\nTotal User',
+                                  style: ThemeText.textLargeWhiteBold,textAlign: TextAlign.center,)),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25.0),
                               color: ColorConsts.primaryColor),
                         ),
                         Container(
-                          height: heightSize / 3,
+                          height: heightSize / 4,
                           width: widthSize * 0.2,
                           padding: EdgeInsets.all(5.0),
                           margin: EdgeInsets.all(8.0),
                           child: Center(
-                              child: Text(
-                                  'Total Plan :- ' +
-                                      state.homeData.totalPlan.toString(),
-                                  style: ThemeText.textMediumWhiteBold)),
+                              child: Text(state.homeData.totalPlan.toString()
+                                  +'\nTotal Plan',
+                                  style: ThemeText.textLargeWhiteBold,textAlign: TextAlign.center,)),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25.0),
                               color: ColorConsts.primaryColor),
