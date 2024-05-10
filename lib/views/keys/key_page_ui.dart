@@ -62,10 +62,12 @@ class _KeysScreenState extends State<KeyPageUI> {
                 child: BlocBuilder<KeyBloc, KeyState>(
                   builder: (context, state) {
                     if (state is SuccessState) {
+                      IsLoading = false;
                       return   NotificationListener<ScrollEndNotification>(
                           onNotification: (ScrollEndNotification scrollInfo) {
                             if (scrollInfo.metrics.pixels ==
                                 scrollInfo.metrics.maxScrollExtent) {
+                              print("on scroll $currentPage");
                               if (IsLoading == false) {
                                 IsLoading = true;
                                 currentPage++;
