@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/model/user_model.dart';
 import 'package:key_admin_panel/utils/session.dart';
-import 'package:key_admin_panel/views/login_screen/bloc/login_state.dart';
-import 'package:key_admin_panel/views/login_screen/bloc/login_event.dart';
-import 'package:key_admin_panel/views/login_screen/login_screen_presenter.dart';
+import 'package:key_admin_panel/views/login/bloc/login_state.dart';
+import 'package:key_admin_panel/views/login/bloc/login_event.dart';
+
+import '../login_page_presenter.dart';
 class  LoginBloc extends Bloc<LoginEvent,LoginState>{
   LoginBloc() : super(LoginInitialState()){
     // todo : on click login button event
@@ -50,7 +51,7 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
   }
 
   Future<void> loginAPI(email,password) async {
-   var result = await LoginScreenPresenter().loginAPI(email, password);
+   var result = await LoginPagePresenter().loginAPI(email, password);
    if(result.toString().contains("status")) {
      Session session = Session();
      Map<String, dynamic> parsed = jsonDecode(result.toString());

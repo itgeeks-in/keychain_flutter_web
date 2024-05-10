@@ -6,6 +6,9 @@ import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 
+import '../../../theme/app_assets.dart';
+import '../../../utils/theme_text.dart';
+
 class PopUpEditUser extends StatefulWidget {
   final UserData userData;
   const PopUpEditUser({super.key,required this.userData});
@@ -18,15 +21,18 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _confirmEmailController = TextEditingController();
+
   bool isPassVisible = false;
 
   @override
   void initState() {
     super.initState();
     if (widget.userData != null) {
-      _firstNameController.text = widget.userData.firstName ?? '';
-      _lastNameController.text = widget.userData.lastName ?? '';
-      _emailController.text = widget.userData.email ?? '';
+      _firstNameController.text = widget.userData.firstName;
+      _lastNameController.text = widget.userData.lastName;
+      _emailController.text = widget.userData.email;
+      _confirmEmailController.text = widget.userData.email;
     }
   }
 
@@ -59,13 +65,22 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 ],
               ),
             ),
-            const Text(
-              "Edit User",
-              style: TextStyle(
-                  color: ColorConsts.primaryColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+            Center(
+              child: const Text(
+                "Edit User",
+                style: ThemeText.textLargeSecondaryBold,
+              ),
             ),
+            SizedBox(height: 8,),
+            Center(
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: widget.userData.profileImage.isNotEmpty
+                    ? NetworkImage(widget.userData.profileImage)
+                    : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
+              ),
+            ),
+            SizedBox(height: 5,),
              Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
@@ -88,7 +103,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 hintText: "Enter last name",
               )),
             ),
-            Padding(
+             Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
@@ -99,30 +114,12 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 hintText: "Enter email",
               )),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
-              child: Center(
-                  child: CustomTextField(
-                labelText: 'Password',
-                prefixIconData: Icons.lock,
-                hintText: 'Enter password',
-                obscureText: true,
-                suffixIconData: Icons.visibility,
-                suffixIconDataSecond: Icons.visibility_off,
-                isPassVisible: isPassVisible,
-                onSuffixPressed: () {
-                  setState(() {
-                    isPassVisible = !isPassVisible;
-                  });
-                },
-              )),
-            ),
-            Padding(
+             Padding(
               padding: const EdgeInsets.only(
                   left: 50, right: 50, top: 50, bottom: 20),
               child: Container(
                 child: RoundedButton(
-                  btnName: "User Update",
+                  btnName: "Update",
                   callback: () {},
                 ),
               ),

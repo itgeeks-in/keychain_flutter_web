@@ -6,8 +6,8 @@ import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
 import 'package:key_admin_panel/views/category/category_page_ui.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_bloc.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
-import 'package:key_admin_panel/views/login_screen/login_screen.dart';
-import '../views/login_screen/bloc/login_bloc.dart';
+import 'package:key_admin_panel/views/login/login_page_ui.dart';
+import '../views/login/bloc/login_bloc.dart';
 import '../views/sidebar_drawer/side_drawer.dart';
 
 class RouteGenerate {
@@ -41,7 +41,7 @@ class RouteGenerate {
               create: (context) {
                 return LoginBloc();
               },
-              child: const LoginScreen());
+              child: const LoginPageUI());
         });
 
       case homeScreen:

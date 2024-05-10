@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/views/category/category_page_ui.dart';
-import 'package:key_admin_panel/views/home/home_screen.dart';
+import 'package:key_admin_panel/views/home/home_page_ui.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/plan/plan_ui.dart';
 import 'package:key_admin_panel/views/profile/profile_page_ui.dart';
@@ -186,7 +186,7 @@ class _HomePageUIState extends State<SideDrawer> {
   Widget buildPages() {
     switch (_selectedIndex) {
       case 0:
-        return HomeScreen();
+        return  HomePageUI();
       case 1:
         return const UserPage();
       case 2:
@@ -198,7 +198,7 @@ class _HomePageUIState extends State<SideDrawer> {
       case 3:
         return const PlanPage();
       case 6:
-        return HomeScreen();
+        return  HomePageUI();
       default:
         return Container(
           child: Text("This is Screen Not Present",

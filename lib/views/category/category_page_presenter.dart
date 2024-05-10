@@ -3,7 +3,7 @@ import 'package:key_admin_panel/repository/api_const.dart';
 
 class CategoryPagePresenter{
   Future<dynamic> getAllCategoryAPI() async {
-    var response =await ApiRepository.getAPI(ApiConst.getAllCategoryAPI,{});
+    var response =await ApiRepository.postAPI(ApiConst.getAllCategoryAPI,{});
     return response;
   }
   

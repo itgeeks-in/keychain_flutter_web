@@ -1,7 +1,7 @@
 import 'package:key_admin_panel/repository/ApiRepository.dart';
 import 'package:key_admin_panel/repository/api_const.dart';
 
-class LoginScreenPresenter {
+class LoginPagePresenter {
   Future<dynamic> loginAPI(String email, String password) async {
     final jsonFormData = {
       ApiConst.email: email,

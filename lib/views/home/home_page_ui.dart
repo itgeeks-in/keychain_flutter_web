@@ -4,8 +4,8 @@ import 'package:key_admin_panel/utils/color_const.dart';
 
 import '../../utils/dialogs.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomePageUI extends StatelessWidget {
+  HomePageUI({super.key});
 
   final colors = <Color>[
     ColorConsts.userColor,
@@ -38,7 +38,6 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         height: 400,
-                        // color: const Color(0xFFE7E7E7),
                         padding: const EdgeInsets.all(16),
                         child: Card(
                           color: ColorConsts.backgroundColor,
@@ -65,11 +64,9 @@ class HomeScreen extends StatelessWidget {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.all(20),
-        // width: 250,
         height: 180,
         padding: const EdgeInsets.all(5),
         child: Card(
-          // elevation: 12,
           color: colors[index],
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -85,7 +82,6 @@ class HomeScreen extends StatelessWidget {
                             fontSize: 24, color: ColorConsts.whiteColor),
                       ),
                     ),
-                    // const Icon(Icons.more_vert, color: Colors.white),
                   ],
                 ),
                 Text(
@@ -100,3 +96,68 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:key_admin_panel/views/home/bloc/home_bloc.dart';
+// import 'package:key_admin_panel/views/home/bloc/home_state.dart';
+//
+// import '../../utils/color_const.dart';
+//
+// class HomePageUI extends StatefulWidget {
+//   const HomePageUI({super.key});
+//
+//   @override
+//   State<HomePageUI> createState() => _HomePageUIState();
+// }
+//
+// class _HomePageUIState extends State<HomePageUI> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: BlocProvider(
+//         create: (context) => HomeBloc(),
+//         child: BlocBuilder<HomeBloc, HomeState>(
+//           builder: (context, state) {
+//             return Container(
+//               padding: EdgeInsets.all(20.0),
+//               child: Column(
+//                 children: [
+//                   // Row of three containers
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                     children: [
+//                       Container(
+//                         width: 100,
+//                         height: 100,
+//                         color: Colors.red,
+//                         child: Center(child: Text('Container 1')),
+//                       ),
+//                       Container(
+//                         width: 100,
+//                         height: 100,
+//                         color: Colors.green,
+//                         child: Center(child: Text('Container 2')),
+//                       ),
+//                       Container(
+//                         width: 100,
+//                         height: 100,
+//                         color: Colors.blue,
+//                         child: Center(child: Text('Container 3')),
+//                       ),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             );
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+

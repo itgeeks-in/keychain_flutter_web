@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/model/all_user_model.dart';
+import 'package:key_admin_panel/theme/app_assets.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
+
+import '../../../utils/theme_text.dart';
 
 class PopupViewUser extends StatefulWidget {
  final UserData userData;
@@ -24,9 +27,9 @@ class _PopupViewUserState extends State<PopupViewUser> {
   void initState() {
     super.initState();
     if (widget.userData != null) {
-      _firstNameController.text = widget.userData.firstName ?? '';
-      _lastNameController.text = widget.userData.lastName ?? '';
-      _emailController.text = widget.userData.email ?? '';
+      _firstNameController.text = widget.userData.firstName;
+      _lastNameController.text = widget.userData.lastName;
+      _emailController.text = widget.userData.email;
     }
   }
 
@@ -63,20 +66,27 @@ class _PopupViewUserState extends State<PopupViewUser> {
                 ),
               ),
               Center(
-                child: CircleAvatar(
-                    radius: 74,
-                    // backgroundImage: NetworkImage(
-                    //   widget.user.profileImage,
-                    // )
+                child: const Text(
+                  "View User",
+                  style: ThemeText.textLargeSecondaryBold,
                 ),
               ),
-              SizedBox(
-                height: 20,
+              SizedBox(height: 8,),
+              Center(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: widget.userData.profileImage.isNotEmpty
+                      ? NetworkImage(widget.userData.profileImage)
+                      : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
+                ),
               ),
+
+              SizedBox(height: 5,),
               Padding(
                 padding: EdgeInsets.only(left: 50, right: 50, top: 20),
                 child: Center(
                   child: CustomTextField(
+                    enable: false,
                     controller: _firstNameController,
                     isPassVisible: false,
                     labelText: "First name",
@@ -89,6 +99,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                 padding: EdgeInsets.only(left: 50, right: 50, top: 20),
                 child: Center(
                   child: CustomTextField(
+                    enable: false,
                     controller: _lastNameController,
                     isPassVisible: false,
                     labelText: "Last name",
@@ -101,6 +112,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                 padding: EdgeInsets.only(left: 50, right: 50, top: 20),
                 child: Center(
                   child: CustomTextField(
+                    enable: false,
                     controller: _emailController,
                     isPassVisible: false,
                     labelText: "Email",
