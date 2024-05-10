@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
 import '../utils/session.dart';
 import 'api_const.dart';
@@ -5,8 +7,10 @@ import 'api_const.dart';
 class ApiRepository {
   static Dio client = Dio();
 
-  // static Future<dynamic> getAPI(String apiName, {required Map<String, String> headers})
-  static Future<dynamic> getAPI(String apiName,  requestBody) async {
+// ...
+
+
+  static Future<dynamic> getAPI(String apiName,var data) async {
     try {
       String callingUrl;
       apiName == "health"
@@ -16,12 +20,17 @@ class ApiRepository {
       if (token.isNotEmpty) {
         client.options.headers["authorization"] = "Bearer " + token;
       }
-      print("url: ${callingUrl}");
+      print("url:- ${callingUrl}");
+      print("data:- ${data.toString()}");
+      client.httpClientAdapter = BrowserHttpClientAdapter();
 
-      var response = await client.get(callingUrl,data: requestBody);
+      var response = await client.get(callingUrl);
+
       // todo: response come when status is 200 only
-      print("$response");
+     // print("$response");
+
       return response;
+
     } on DioException catch (e) {
       print("error     " + e.response.toString() + e.error.toString());
       if (e.response != null) {

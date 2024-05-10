@@ -4,12 +4,17 @@ class KeyState {}
 
 class InitialState extends KeyState {}
 
+
+
+
 class LoadState extends KeyState {}
 
 class SuccessState extends KeyState {
   List<KeysData> data;
+  int current_page;
 
-  SuccessState(this.data);
+  bool LoadMore;
+  SuccessState(this.current_page,this.data, this.LoadMore);
 }
 
 class KeyNotFoundState extends KeyState {
