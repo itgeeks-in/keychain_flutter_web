@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/views/home/bloc/home_bloc.dart';
 import 'package:key_admin_panel/views/home/bloc/home_state.dart';
+import 'package:key_admin_panel/views/home/chart_pie.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 import '../../utils/color_const.dart';
 import '../../utils/theme_text.dart';
@@ -19,8 +21,8 @@ class HomePageUI extends StatefulWidget {
 class _HomePageUIState extends State<HomePageUI> {
   @override
   Widget build(BuildContext context) {
-    double widthSize = MediaQuery.of(context).size.width;
-    double heightSize = MediaQuery.of(context).size.height;
+    double widthSize = MediaQuery.of(context).size.width/4;
+    double heightSize = MediaQuery.of(context).size.height/4;
     return Scaffold(
       body: BlocProvider(
         create: (context) => HomeBloc(),
@@ -36,8 +38,8 @@ class _HomePageUIState extends State<HomePageUI> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          height: heightSize / 4,
-                          width: widthSize * 0.2,
+                          height: heightSize ,
+                          width: widthSize,
                           padding: EdgeInsets.all(5.0),
                           margin: EdgeInsets.all(8.0),
                           child: Center(
@@ -49,8 +51,8 @@ class _HomePageUIState extends State<HomePageUI> {
                               color: ColorConsts.primaryColor),
                         ),
                         Container(
-                          height: heightSize / 4,
-                          width: widthSize * 0.2,
+                          height: heightSize ,
+                          width: widthSize ,
                           padding: EdgeInsets.all(5.0),
                           margin: EdgeInsets.all(8.0),
                           child: Center(
@@ -62,8 +64,8 @@ class _HomePageUIState extends State<HomePageUI> {
                               color: ColorConsts.primaryColor),
                         ),
                         Container(
-                          height: heightSize / 4,
-                          width: widthSize * 0.2,
+                          height: heightSize ,
+                          width: widthSize ,
                           padding: EdgeInsets.all(5.0),
                           margin: EdgeInsets.all(8.0),
                           child: Center(
@@ -77,8 +79,10 @@ class _HomePageUIState extends State<HomePageUI> {
                       ],
                     ),
                     SizedBox(
-                      height: 10,
+                      height:56,
                     ),
+                SizedBox(height:205,
+  child:    ChartPieDis().pieChartUI(context))
                   ],
                 ),
               );
