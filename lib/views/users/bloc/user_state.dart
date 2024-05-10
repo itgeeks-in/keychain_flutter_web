@@ -10,8 +10,11 @@ class LoadState extends UsersDataState {}
 
 class SuccessState extends UsersDataState {
   List<UserData> data;
+  int current_page;
 
-  SuccessState(this.data);
+  bool LoadMore;
+
+  SuccessState(this.current_page,this.data,this.LoadMore);
 }
 
 class FailedState extends UsersDataState {

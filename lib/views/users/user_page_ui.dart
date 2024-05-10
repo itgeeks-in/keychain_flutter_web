@@ -7,6 +7,7 @@ import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 
 import 'package:key_admin_panel/views/users/bloc/user_bloc.dart';
+import 'package:key_admin_panel/views/users/bloc/user_event.dart';
 import 'package:key_admin_panel/views/users/bloc/user_state.dart';
 import 'package:key_admin_panel/views/users/popups_user/bloc_user_add/user_add_bloc.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_add_user.dart';
@@ -23,6 +24,8 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  int currentPage = 1;
+  bool IsLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -148,10 +151,33 @@ class _UserPageState extends State<UserPage> {
                 child: BlocBuilder<UsersDataBloc, UsersDataState>(
                   builder: (context, state) {
                     if (state is SuccessState) {
-                      return Container(
+                      IsLoading = false;
+                      return NotificationListener<ScrollEndNotification>(
+                        onNotification: (ScrollEndNotification scrollInfo){
+                          if (scrollInfo.metrics.pixels ==
+                              scrollInfo.metrics.maxScrollExtent) {
+                            print("on scroll $currentPage");
+                            if (IsLoading == false) {
+                              IsLoading = true;
+                              currentPage++;
+                              context
+                                  .read<UsersDataBloc>()
+                                  .add(OnScrollPageEvent(currentPage, 0));
+                            }
+                            return true;
+                          }
+                          return false;
+                        },
                         child: ListView.builder(
                           itemCount: state.data.length,
                           itemBuilder: (context, index) {
+                            if (index == state.data.length - 1 &&
+                                state.LoadMore &&
+                                state.data.length > 4) {
+                              return Center(
+                                child: Loader().loaderWidget2(),
+                              );
+                            }
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(

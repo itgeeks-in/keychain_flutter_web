@@ -3,13 +3,18 @@ import 'package:pie_chart/pie_chart.dart';
 
 import '../../utils/color_const.dart';
 class ChartPieDis{
-  late Map<String, double> dataMap= <String, double>{
-  "Total keys": 5,
-  "Total users": 3,
-  "Total plans": 2,
-
-  };
-  Widget pieChartUI(BuildContext context){
+  // late Map<String, double> dataMap= <String, double>{
+  // "Total keys": 5,
+  // "Total users": 3,
+  // "Total plans": 2,
+  //
+  // };
+  Widget pieChartUI(BuildContext context,double key, double user , double plan){
+     Map<String, double> dataMap= <String, double>{
+      "Total keys": key,
+      "Total users": user,
+      "Total plans": plan,
+    };
     return PieChart(
       dataMap: dataMap,
       animationDuration: Duration(milliseconds: 900),

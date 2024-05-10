@@ -7,19 +7,40 @@ import 'package:key_admin_panel/views/users/bloc/user_state.dart';
 import 'package:key_admin_panel/views/users/user_page_presenter.dart';
 
 class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
+  int limit = 5, offset = 0;
+  int current_page = 1;
+  bool LoadMore = true;
+  List<UserData> data = [];
+
   UsersDataBloc() : super(InitialState()) {
-    allUsersDataAPI();
+    on<OnScrollPageEvent>((event, emit) {
+      // TODO: implement event handler
+      if (LoadMore) {
+        current_page = event.index;
+        // offset = event.offset;
+        if (current_page == 1) {
+          offset = 0;
+        } else {
+          offset = offset + limit;
+        }
+        getAllUserAPI();
+      }
+    });
+    getAllUserAPI();
   }
 
-  Future<void> allUsersDataAPI() async{
-    var result = await UserPagePresenter().allUsersAPI();
+  Future<void> getAllUserAPI() async{
+    var result = await UserPagePresenter().getAllUserAPI();
     Map<String,dynamic> parsed = jsonDecode(result.toString());
     if(parsed['status']){
       AllUserModel allUserModel = AllUserModel.fromJson(parsed);
-      if(allUserModel.result.isNotEmpty){
-        emit(SuccessState(allUserModel.result));
+      if(allUserModel.result.isEmpty){
+        LoadMore = false;
+        emit(SuccessState(current_page,data,LoadMore));
       }else{
-        emit(UserNotFoundState("Key not found."));
+        LoadMore = true;
+        data.addAll(allUserModel.result);
+        emit(SuccessState(current_page,  data, LoadMore));
       }
     }else{
       emit(FailedState(parsed['message']));

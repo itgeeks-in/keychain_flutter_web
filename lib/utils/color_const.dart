@@ -28,9 +28,9 @@ class ColorConsts {
   static const Color orangeColor = Color(0xEDF6935E);
   static const Color orangeColorS = Color.fromARGB(255, 251, 207, 74);
   static const Color yelloColor = Color(0xFFEAC42D);
-  static const Color blueLytColor = Color(0xFFEBF2F5);
+  static const Color blueLytColor = Color(0xFF7BD6FD);
   static const Color blueColor = Color(0xFF0214AF);
-  static const Color blueColorlyt = Color(0xFF5163F8);
+  static const Color blueColorlyt = Color(0xFF7BC4E7);
   static const Color textColor = Color(0xFF2D2D2D);
   static const Color themeBackgroundColor = Color(0xFFedf3fa);
   static const Color themeColor = Color(0xFF34d3fc);

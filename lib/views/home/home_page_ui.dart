@@ -48,7 +48,7 @@ class _HomePageUIState extends State<HomePageUI> {
                                   style: ThemeText.textLargeWhiteBold,textAlign: TextAlign.center,)),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25.0),
-                              color: ColorConsts.primaryColor),
+                              color:  ColorConsts.blueColorlyt,),
                         ),
                         Container(
                           height: heightSize ,
@@ -74,7 +74,7 @@ class _HomePageUIState extends State<HomePageUI> {
                                   style: ThemeText.textLargeWhiteBold,textAlign: TextAlign.center,)),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25.0),
-                              color: ColorConsts.primaryColor),
+                              color:         ColorConsts.secondaryColor,),
                         ),
                       ],
                     ),
@@ -82,7 +82,7 @@ class _HomePageUIState extends State<HomePageUI> {
                       height:56,
                     ),
                 SizedBox(height:205,
-  child:    ChartPieDis().pieChartUI(context))
+  child:    ChartPieDis().pieChartUI(context,state.homeData.totalKey.toDouble(),state.homeData.totalUser.toDouble(),state.homeData.totalPlan.toDouble()))
                   ],
                 ),
               );
