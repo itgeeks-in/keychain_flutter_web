@@ -173,7 +173,7 @@ class _UserPageState extends State<UserPage> {
                           itemBuilder: (context, index) {
                             if (index == state.data.length - 1 &&
                                 state.LoadMore &&
-                                state.data.length > 4) {
+                                state.data.length > 5) {
                               return Center(
                                 child: Loader().loaderWidget2(),
                               );
@@ -233,9 +233,8 @@ class _UserPageState extends State<UserPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.only(left: 5),
                                         child: Text(
-                                          state.data[index].keys != null
-                                              ? state.data[index].keys!.length
-                                                  .toString()
+                                          state.data[index].totalKey != null
+                                              ? state.data[index].totalKey
                                               : '0',
                                           style: TextStyle(
                                             color: ColorConsts.textColorDark,
