@@ -7,6 +7,8 @@ import 'package:key_admin_panel/views/category/category_page_ui.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_bloc.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/login/login_page_ui.dart';
+import 'package:key_admin_panel/views/plan/bloc/plan_bloc.dart';
+import 'package:key_admin_panel/views/plan/plan_page_ui.dart';
 import '../views/login/bloc/login_bloc.dart';
 import '../views/sidebar_drawer/side_drawer.dart';
 import '../views/users/bloc/user_bloc.dart';
@@ -24,6 +26,8 @@ class RouteGenerate {
   static const String analyseResultScreen = "/analyseResultScreen";
   static const String cameraPreviewScreen = "/cameraPreviewScreen";
   static const String categoryPageUI = "/categoryPageUI";
+  static const String planPageUI = "/planPageUI";
+
 
   static Route<dynamic>? onCreateRoute(RouteSettings routeSettings) {
     var arg = routeSettings.arguments;
@@ -77,6 +81,14 @@ class RouteGenerate {
                 return CategoryPageBloc();
               },
               child: const CategoryPageUI());
+        });
+      case planPageUI:
+        return MaterialPageRoute(builder: (context){
+          return BlocProvider(
+              create: (context){
+                return PlanBloc();
+              },
+            child:  PlanPageUI());
         });
     }
   }
