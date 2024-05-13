@@ -9,10 +9,13 @@ import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/login/login_page_ui.dart';
 import '../views/login/bloc/login_bloc.dart';
 import '../views/sidebar_drawer/side_drawer.dart';
+import '../views/users/bloc/user_bloc.dart';
+import '../views/users/user_page_ui.dart';
 
 class RouteGenerate {
   static const String splashScreen = "/splash";
   static const String homeScreen = "/home_page_ui";
+  static const String uerPage = "/UserPage";
   static const String keyPageUI = "/key_page_ui";
   static const String selectionScreen = "/SelectionScreen";
   static const String passwordRecover = "/passwordRecover";
@@ -56,6 +59,15 @@ class RouteGenerate {
                 return KeyBloc();
               },
               child:  KeyPageUI());
+        });
+
+      case uerPage:
+        return MaterialPageRoute(builder: (context){
+          return BlocProvider(
+              create: (context) {
+                return UsersDataBloc();
+              },
+              child:  UserPage());
         });
 
       case categoryPageUI:

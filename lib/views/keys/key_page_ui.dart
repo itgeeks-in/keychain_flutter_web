@@ -107,7 +107,7 @@ class _KeysScreenState extends State<KeyPageUI> {
           },child: Container(width: 60,height: 55,
              margin: EdgeInsets.fromLTRB(12, 3, 0, 0),
              decoration: BoxDecoration(
-                 color: ColorConsts.backgroundColor,
+                 color: ColorConsts.primaryColor,
                  borderRadius:
                  BorderRadius.all(Radius.circular(10)),
                  border: Border.all(
@@ -115,7 +115,9 @@ class _KeysScreenState extends State<KeyPageUI> {
                    color: ColorConsts.primaryColor,
                  ),),
 
-               child: Icon(Icons.filter_alt_rounded,size: 25,color: ColorConsts.primaryColor,)))
+               child: Icon(Icons.search
+                 ,size: 25,
+                 color: ColorConsts.whiteColor,)))
            ],),
             SizedBox(height: 10),
             const KeyHeader(),
@@ -401,7 +403,7 @@ class KeyHeader extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.only(left: 10),
               child: const Text("Image",
-                  style: ThemeText.textLargePrimaryBold, maxLines: 1),
+                  style: ThemeText.textMediumPrimaryBold, maxLines: 1),
             ),
           ),
           Expanded(
@@ -409,24 +411,24 @@ class KeyHeader extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.only(left: 15),
               child: const Text("Key Name",
-                  style: ThemeText.textLargePrimaryBold, maxLines: 1),
+                  style: ThemeText.textMediumPrimaryBold, maxLines: 1),
             ),
           ),
           Expanded(
             flex: 2,
             child: const Text("Category",
-                style: ThemeText.textLargePrimaryBold, maxLines: 1),
+                style: ThemeText.textMediumPrimaryBold, maxLines: 1),
           ),
           Expanded(
             flex: 2,
             child: const Text("Description",
-                style: ThemeText.textLargePrimaryBold, maxLines: 1),
+                style: ThemeText.textMediumPrimaryBold, maxLines: 1),
           ),
-          const Expanded(
+         Expanded(
             flex: 2,
             child: Center(
-              child: Text("Action",
-                  style: ThemeText.textLargePrimaryBold, maxLines: 1),
+              child :Text("Action",
+                  style: ThemeText.textMediumPrimaryBold, maxLines: 1),
             ),
           ),
         ],

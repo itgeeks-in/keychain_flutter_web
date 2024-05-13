@@ -13,6 +13,7 @@ import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
 import '../../utils/theme_text.dart';
 import '../keys/bloc/key_bloc.dart';
+import '../users/bloc/user_bloc.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({Key? key}) : super(key: key);
@@ -190,18 +191,24 @@ class _HomePageUIState extends State<SideDrawer> {
       case 0:
         return  HomePageUI();
       case 1:
-        return const UserPage();
+        return BlocProvider(
+        create: (context) {
+    return UsersDataBloc();
+    },child: UserPage());
+
+
       case 2:
         return BlocProvider(
             create: (context) {
               return KeyBloc();
             },child: KeyPageUI());
+
       case 4:
         return const CategoryPageUI();
       case 5:
-        return const ProfilePage();
+        return ProfilePage();
       case 3:
-        return const PlanPage();
+        return  PlanPage();
       case 6:
         return  HomePageUI();
       default:

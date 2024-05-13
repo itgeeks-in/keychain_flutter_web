@@ -11,6 +11,7 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
   int current_page = 1;
   bool LoadMore = true;
   List<UserData> data = [];
+  String query="";
 
   UsersDataBloc() : super(InitialState()) {
     on<OnScrollPageEvent>((event, emit) {
@@ -30,7 +31,7 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
   }
 
   Future<void> getAllUserAPI() async{
-    var result = await UserPagePresenter().getAllUserAPI();
+    var result = await UserPagePresenter().getAllUserAPI(offset,limit,query);
     Map<String,dynamic> parsed = jsonDecode(result.toString());
     if(parsed['status']){
       AllUserModel allUserModel = AllUserModel.fromJson(parsed);
@@ -47,4 +48,21 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
       print("Failed : " + parsed['message']);
     }
      }
+
+
+
+  filtered(String query1) {
+    emit(LoadState() );
+    query = query1;
+    offset = 0;
+    current_page = 1;
+    LoadMore = true;
+    data.clear();
+    print("object>>>>>>>>>>>>$query");
+    getAllUserAPI();
+  }
+
+
+
+
     }
