@@ -20,10 +20,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String imagePath = "";
-  String? fullName;
-  String? email;
-  String? plan;
+  UserDataModel? userDataModel;
 
   @override
   void initState() {
@@ -32,13 +29,8 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> loadProfileData() async {
-    UserDataModel userDataModel = await Session().getLoginUserData('');
-    setState(() {
-      fullName =
-          userDataModel.result.firstName + " " + userDataModel.result.lastName;
-      email = userDataModel.result.email;
-      plan = userDataModel.result.lastName;
-    });
+    userDataModel = await Session().getLoginUserData('');
+    setState(() {});
   }
 
   @override
@@ -73,7 +65,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                             showDialog(
                                               context: context,
                                               builder: (context) =>
-                                                  EditUserProfile(),
+                                                  EditUserProfile(
+                                                      userDataModel!),
                                             )
                                           },
                                       100.0,
@@ -82,22 +75,31 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               Center(
                                 child: CircleAvatar(
-                                    radius: 64,
-                                      backgroundImage: imagePath.isNotEmpty
-                                      ? NetworkImage(imagePath)
-                                      : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
-                                   ),
+                                  radius: 64,
+                                  backgroundImage: userDataModel?.result
+                                              .profileImage.isNotEmpty ??
+                                          false
+                                      ? NetworkImage(
+                                          userDataModel!.result.profileImage)
+                                      : AssetImage(AppAssets.notFoundImg)
+                                          as ImageProvider<Object>,
+                                ),
                               ),
                               ReuseableRow(
-                                  icon: Icons.person, text: '$fullName'),
+                                  icon: Icons.person,
+                                text: userDataModel != null
+                                    ? '${userDataModel!.result.firstName} ${userDataModel!.result.lastName}'
+                                    : '',),
                               Container(
                                 height: 2,
-                                color: ColorConsts.blackColor,
+                                color: ColorConsts.primaryColor,
                               ),
-                              ReuseableRow(icon: Icons.email, text: "$email"),
+                              ReuseableRow(
+                                  icon: Icons.email,
+                                  text: userDataModel?.result.email ?? ''),
                               Container(
                                 height: 2,
-                                color: ColorConsts.blackColor,
+                                color: ColorConsts.primaryColor,
                               ),
                             ],
                           ),
@@ -128,7 +130,6 @@ class ReuseableRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // margin: margin,
       margin: const EdgeInsets.only(top: 22, bottom: 10),
       child: Row(
         children: [
@@ -150,6 +151,10 @@ class ReuseableRow extends StatelessWidget {
 }
 
 class EditUserProfile extends StatefulWidget {
+  UserDataModel userDataModel;
+
+  EditUserProfile(this.userDataModel);
+
   @override
   _EditUserProfileState createState() => _EditUserProfileState();
 }
@@ -157,7 +162,7 @@ class EditUserProfile extends StatefulWidget {
 class _EditUserProfileState extends State<EditUserProfile> {
   bool isPassVisible = false;
   Uint8List? _image;
-  String imagePath ="";
+  String imagePath = "";
   TextEditingController _firstNameController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -172,15 +177,10 @@ class _EditUserProfileState extends State<EditUserProfile> {
   @override
   void initState() {
     super.initState();
-    loadProfile();
-  }
-
-  Future<void> loadProfile() async {
-    UserDataModel userDataModel = await Session().getLoginUserData('');
-    _firstNameController.text = userDataModel.result.firstName;
-    _lastNameController.text = userDataModel.result.lastName;
-    _emailController.text = userDataModel.result.email;
-    imagePath = userDataModel.result.profileImage;
+    _firstNameController.text = widget.userDataModel.result.firstName;
+    _lastNameController.text = widget.userDataModel.result.lastName;
+    _emailController.text = widget.userDataModel.result.email;
+    imagePath = widget.userDataModel.result.profileImage;
   }
 
   @override
@@ -209,7 +209,6 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     },
                     child: Icon(
                       Icons.close_outlined,
-                      // size: 30,
                       color: ColorConsts.primaryColor,
                     ),
                   )
@@ -227,9 +226,10 @@ class _EditUserProfileState extends State<EditUserProfile> {
                       : CircleAvatar(
                           radius: 64,
                           backgroundImage: imagePath.isNotEmpty
-                         ? NetworkImage(imagePath)
-                         : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
-                         ),
+                              ? NetworkImage(imagePath)
+                              : AssetImage(AppAssets.notFoundImg)
+                                  as ImageProvider<Object>,
+                        ),
                   Positioned(
                       bottom: -10,
                       left: 80,
