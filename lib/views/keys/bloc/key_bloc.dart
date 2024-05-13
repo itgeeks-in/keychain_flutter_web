@@ -13,6 +13,7 @@ class KeyBloc extends Bloc<KeyEvent,KeyState>{
   int current_page = 1;
   List<KeysData> data = [];
   bool LoadMore = true;
+  String query="";
 
   KeyBloc():super(InitialState()){
 
@@ -34,7 +35,7 @@ class KeyBloc extends Bloc<KeyEvent,KeyState>{
 
   Future<void> getAllKeysAPI() async{
 
-    var result = await KeyPagePresenter().getAllKeyAPI(offset.toString(),limit);
+    var result = await KeyPagePresenter().getAllKeyAPI(offset.toString(),limit,query);
     Map<String,dynamic> parsed = jsonDecode(result.toString());
     if(parsed['status']){
     KeysModel keysModel = KeysModel.fromJson(parsed);
@@ -51,6 +52,19 @@ print("object======================= "+keysModel.result.length.toString());
       emit(FailedState(parsed['message']));
     }
   }
+
+
+  filtered(String query1) {
+    emit(LoadState() );
+    query = query1;
+    offset = 0;
+    current_page = 1;
+    LoadMore = true;
+    data.clear();
+    print("object>>>>>>>>>>>>$query");
+    getAllKeysAPI();
+  }
+
 }
 
 

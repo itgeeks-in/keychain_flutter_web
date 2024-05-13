@@ -16,7 +16,7 @@ import 'package:shimmer/shimmer.dart';
 import 'bloc/key_event.dart';
 
 class KeyPageUI extends StatefulWidget {
-  const KeyPageUI({
+  KeyPageUI({
     super.key,
   });
 
@@ -27,6 +27,7 @@ class KeyPageUI extends StatefulWidget {
 class _KeysScreenState extends State<KeyPageUI> {
   int currentPage = 1;
   bool IsLoading = false;
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -41,25 +42,85 @@ class _KeysScreenState extends State<KeyPageUI> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 10, top: 8),
+           Row(crossAxisAlignment: CrossAxisAlignment.start,children: [ Container(
+
               width: MediaQuery.of(context).size.width / 3,
-              height: 70,
-              child: const Padding(
-                padding: EdgeInsets.all(2.0),
-                child: CustomTextField(
+              height: 60,
+              child:  Padding(
+                padding: EdgeInsets.all(1.0),
+                child: /*CustomTextField(
                   isPassVisible: false,
                   labelText: "Search",
                   prefixIconData: Icons.person_search_sharp,
                   hintText: "Search",
+
+                )*/TextField(
+
+                controller: searchController,
+                style: TextStyle(color: ColorConsts.textColorDark),
+
+                decoration: InputDecoration(
+                  labelText: "Search",
+                  labelStyle: TextStyle(color: ColorConsts.primaryColor),
+                  filled: true,
+                  fillColor: ColorConsts.backgroundColor,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(11),
+                    borderSide: BorderSide(
+                      color: ColorConsts.primaryColor,
+                      width: 2,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(11),
+                    borderSide: BorderSide(
+                      color: ColorConsts.primaryColor,
+                    ),
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(11),
+                    borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
+                  ),
+                  prefixIcon: Icon(
+                    Icons.person_search_sharp,
+                    color: ColorConsts.primaryColor,
+                  ),
+
+                  hintText: "Search keys",
+                  hintStyle: TextStyle(
+                    color: ColorConsts.primaryColor,
+                  ),
                 ),
+                  onChanged: (value) {
+
+                  },
+              )
+
+
+                ,
               ),
             ),
+          InkResponse(onTap: () {
+            context
+                .read<KeyBloc>()
+                .filtered(searchController.text);
+          },child: Container(width: 60,height: 55,
+             margin: EdgeInsets.fromLTRB(12, 3, 0, 0),
+             decoration: BoxDecoration(
+                 color: ColorConsts.backgroundColor,
+                 borderRadius:
+                 BorderRadius.all(Radius.circular(10)),
+                 border: Border.all(
+                   width: 1,
+                   color: ColorConsts.primaryColor,
+                 ),),
+
+               child: Icon(Icons.filter_alt_rounded,size: 25,color: ColorConsts.primaryColor,)))
+           ],),
+            SizedBox(height: 10),
             const KeyHeader(),
             Expanded(
-              child: BlocProvider(
-                create: (context) => KeyBloc(),
-                child: BlocBuilder<KeyBloc, KeyState>(
+              child:  BlocBuilder<KeyBloc, KeyState>(
                   builder: (context, state) {
                     if (state is SuccessState) {
                       IsLoading = false;
@@ -303,7 +364,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                   },
                 ),
               ),
-            ),
+
           ],
         ),
       ),

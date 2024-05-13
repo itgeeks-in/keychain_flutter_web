@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/views/category/category_page_ui.dart';
@@ -11,6 +12,7 @@ import 'package:key_admin_panel/views/profile/profile_page_ui.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
 import '../../utils/theme_text.dart';
+import '../keys/bloc/key_bloc.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({Key? key}) : super(key: key);
@@ -190,7 +192,10 @@ class _HomePageUIState extends State<SideDrawer> {
       case 1:
         return const UserPage();
       case 2:
-        return const KeyPageUI();
+        return BlocProvider(
+            create: (context) {
+              return KeyBloc();
+            },child: KeyPageUI());
       case 4:
         return const CategoryPageUI();
       case 5:
