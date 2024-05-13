@@ -9,6 +9,7 @@ import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 
 import '../../model/user_model.dart';
+import '../../theme/app_assets.dart';
 import '../../utils/session.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -19,10 +20,10 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-    String imagePath = "";
-    String? fullName;
-    String? email;
-    String? plan;
+  String imagePath = "";
+  String? fullName;
+  String? email;
+  String? plan;
 
   @override
   void initState() {
@@ -31,19 +32,17 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> loadProfileData() async {
-    UserDataModel userDataModel= await Session().getLoginUserData('');
+    UserDataModel userDataModel = await Session().getLoginUserData('');
     setState(() {
-      fullName = userDataModel.result.firstName +" "+ userDataModel.result.lastName;
+      fullName =
+          userDataModel.result.firstName + " " + userDataModel.result.lastName;
       email = userDataModel.result.email;
       plan = userDataModel.result.lastName;
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    double widthSize = MediaQuery.of(context).size.width;
-    double heightSize = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
       body: SingleChildScrollView(
@@ -68,43 +67,38 @@ class _ProfilePageState extends State<ProfilePage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  ButtonWidget().buttonWidgetSimple('Update', () => {
-                                    showDialog(context: context,
-                                        builder: (context) => EditUserProfile(),
-                                    )
-                                  },100.0,40.0)
-
+                                  ButtonWidget().buttonWidgetSimple(
+                                      'Update',
+                                      () => {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  EditUserProfile(),
+                                            )
+                                          },
+                                      100.0,
+                                      40.0)
                                 ],
                               ),
                               Center(
                                 child: CircleAvatar(
                                     radius: 64,
-                                    backgroundImage: NetworkImage(
-                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrcxU00aT_8732RpJ6wVOf9zsgT4kA2UBlxg&s')),
+                                      backgroundImage: imagePath.isNotEmpty
+                                      ? NetworkImage(imagePath)
+                                      : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
+                                   ),
                               ),
                               ReuseableRow(
-                                  icon: Icons.person, text:'$fullName'),
+                                  icon: Icons.person, text: '$fullName'),
                               Container(
                                 height: 2,
                                 color: ColorConsts.blackColor,
                               ),
-                              ReuseableRow(
-                                  icon: Icons.email,
-                                  text: "$email"),
+                              ReuseableRow(icon: Icons.email, text: "$email"),
                               Container(
                                 height: 2,
                                 color: ColorConsts.blackColor,
                               ),
-                              // Container(
-                              //   margin: const EdgeInsets.only(top: 15),
-                              //   child: Text(
-                              //     softWrap: true,
-                              //     "$plan",
-                              //     style: TextStyle(
-                              //       color: ColorConsts.textColorDark,
-                              //     ),
-                              //   ),
-                              // )
                             ],
                           ),
                         ),
@@ -163,6 +157,10 @@ class EditUserProfile extends StatefulWidget {
 class _EditUserProfileState extends State<EditUserProfile> {
   bool isPassVisible = false;
   Uint8List? _image;
+  String imagePath ="";
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
 
   void selectImage() async {
     Uint8List img = await pickImage(ImageSource.gallery);
@@ -172,16 +170,30 @@ class _EditUserProfileState extends State<EditUserProfile> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    loadProfile();
+  }
+
+  Future<void> loadProfile() async {
+    UserDataModel userDataModel = await Session().getLoginUserData('');
+    _firstNameController.text = userDataModel.result.firstName;
+    _lastNameController.text = userDataModel.result.lastName;
+    _emailController.text = userDataModel.result.email;
+    imagePath = userDataModel.result.profileImage;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Dialog(
         child: SingleChildScrollView(
-          child: Container(
-                width: 500,
-                height: 600,
-                decoration: const BoxDecoration(
+      child: Container(
+        width: 500,
+        height: 600,
+        decoration: const BoxDecoration(
             color: ColorConsts.backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(21))),
-                child: Column(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -204,7 +216,6 @@ class _EditUserProfileState extends State<EditUserProfile> {
                 ],
               ),
             ),
-          
             Center(
               child: Stack(
                 children: [
@@ -215,8 +226,10 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         )
                       : CircleAvatar(
                           radius: 64,
-                          backgroundImage: NetworkImage(
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrcxU00aT_8732RpJ6wVOf9zsgT4kA2UBlxg&s')),
+                          backgroundImage: imagePath.isNotEmpty
+                         ? NetworkImage(imagePath)
+                         : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
+                         ),
                   Positioned(
                       bottom: -10,
                       left: 80,
@@ -230,34 +243,36 @@ class _EditUserProfileState extends State<EditUserProfile> {
                 ],
               ),
             ),
-          
             const SizedBox(
               height: 20,
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
+                controller: _firstNameController,
                 isPassVisible: false,
                 labelText: "First name",
                 prefixIconData: Icons.person_add_outlined,
                 hintText: "Enter first Name",
               )),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
-                    isPassVisible: false,
-                    labelText: "Last name",
-                    prefixIconData: Icons.person_add_outlined,
-                    hintText: "Enter last Name",
-                  )),
+                controller: _lastNameController,
+                isPassVisible: false,
+                labelText: "Last name",
+                prefixIconData: Icons.person_add_outlined,
+                hintText: "Enter last Name",
+              )),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
+                controller: _emailController,
                 isPassVisible: false,
                 labelText: "Email",
                 prefixIconData: Icons.email_outlined,
@@ -265,14 +280,12 @@ class _EditUserProfileState extends State<EditUserProfile> {
               )),
             ),
             Center(
-              child: ButtonWidget().buttonWidgetSimple('Update', () => {
-
-              }, 100.0, 40.0),
+              child: ButtonWidget()
+                  .buttonWidgetSimple('Update', () => {}, 100.0, 40.0),
             )
-
           ],
-                ),
-              ),
-        ));
+        ),
+      ),
+    ));
   }
 }
