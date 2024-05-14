@@ -16,8 +16,10 @@ class ApiConst {
   static const String getAllKeysAPI = '/key/getKeys';
   static const String getAllCategoryAPI = '/key/getkeycategory';
   static const String addKeyCategoryAPI = '/key/addkeycategory';
+  static const String updateCategoryAPI = '/admin/update-category';
   static const String getDashboardDetailAPI = '/admin/dashboard';
   static const String getAllUserPlanDetail = '/admin/user-plan';
+  static const String deleteCategory = '/admin/delete-category';
 
 
   //TODO : Api parameter for calling (fields or param)
@@ -35,7 +37,7 @@ class ApiConst {
   static const String confirmPassword = 'confirmPassword';
   static const String confirmEmail = "confirmEmail";
   static const String isAgreed = "isAgreed";
-  static const String categoryName = "category";
+  static const String category = "category";
   static const String searchTerm = "searchterm";
   static const String offset= "offset";
   static const String limit = "limit";

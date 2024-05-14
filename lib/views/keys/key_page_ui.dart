@@ -91,6 +91,11 @@ class _KeysScreenState extends State<KeyPageUI> {
                   onChanged: (value) {
 
                   },
+                  onSubmitted: (value) {
+                    context
+                        .read<KeyBloc>()
+                        .filtered(searchController.text);
+                  },
               )
 
 

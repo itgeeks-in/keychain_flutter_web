@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
-
 import 'package:key_admin_panel/views/users/bloc/user_bloc.dart';
 import 'package:key_admin_panel/views/users/bloc/user_event.dart';
 import 'package:key_admin_panel/views/users/bloc/user_state.dart';
@@ -30,6 +28,7 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: ColorConsts.backgroundColor,
       body: Padding(
@@ -48,10 +47,8 @@ class _UserPageState extends State<UserPage> {
                     width: MediaQuery.of(context).size.width / 3,
                     height: 70,
                     child:  TextField(
-
                           controller: searchController,
                           style: TextStyle(color: ColorConsts.textColorDark),
-
                           decoration: InputDecoration(
                             labelText: "Search",
                             labelStyle: TextStyle(color: ColorConsts.primaryColor),
@@ -87,6 +84,11 @@ class _UserPageState extends State<UserPage> {
                           onChanged: (value) {
 
                           },
+                      onSubmitted: (value) {
+                        context
+                            .read<UsersDataBloc>()
+                            .filtered(searchController.text);
+                      },
                         )
                   ),
                   InkResponse(onTap: () {
@@ -199,7 +201,7 @@ class _UserPageState extends State<UserPage> {
                             itemBuilder: (context, index) {
                               if (index == state.data.length - 1 &&
                                   state.LoadMore &&
-                                  state.data.length > 7) {
+                                  state.data.length > 8) {
                                 return Center(
                                   child: Loader().loaderWidget2(),
                                 );
@@ -243,7 +245,7 @@ class _UserPageState extends State<UserPage> {
                                       Expanded(
                                         flex: 2,
                                         child: Text(
-                                          state.data![index].email.toString(),
+                                          state.data[index].email.toString(),
                                           maxLines: 1,
                                           style: ThemeText.textMediumSecondary,
                                         ),
@@ -253,9 +255,7 @@ class _UserPageState extends State<UserPage> {
                                         child: Padding(
                                           padding: const EdgeInsets.only(left: 5),
                                           child: Text(
-                                            state.data[index].totalKey != null
-                                                ? state.data[index].totalKey
-                                                : '0',
+                                            state.data[index].totalKey,
                                             style: TextStyle(
                                               color: ColorConsts.textColorDark,
                                               fontSize: 16,

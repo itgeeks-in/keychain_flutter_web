@@ -1,5 +1,4 @@
 import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/views/home/bloc/home_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:key_admin_panel/views/home/bloc/home_state.dart';
 import 'package:key_admin_panel/views/home/chart_pie.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
 import 'package:pie_chart/pie_chart.dart';
-
 import '../../utils/color_const.dart';
 import '../../utils/theme_text.dart';
 
@@ -73,8 +71,9 @@ class _HomePageUIState extends State<HomePageUI> {
                       ],
                     ),
                     Spacer(),
-                SizedBox(height:MediaQuery.of(context).size.height/3,
-  child:    ChartPieDis().pieChartUI(context,state.homeData.totalKey.toDouble(),state.homeData.totalUser.toDouble(),state.homeData.totalPlan.toDouble()))
+                SizedBox(height:MediaQuery.of(context).size.height/2.5,
+               child:    ChartPieDis().pieChartUI(context,state.homeData.totalKey.toDouble(),
+                   state.homeData.totalUser.toDouble(),state.homeData.totalPlan.toDouble()))
                   ],
                 ),
               );

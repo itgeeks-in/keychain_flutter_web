@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/utils/ShowSnackBar.dart';
@@ -8,7 +10,11 @@ import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_state.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 
+import '../../utils/loading_dialog.dart';
 import '../../widgets/loader_widget.dart';
+import 'category_page_presenter.dart';
+
+
 class CategoryPageUI extends StatefulWidget {
   CategoryPageUI({super.key});
 
@@ -18,16 +24,71 @@ class CategoryPageUI extends StatefulWidget {
 
 class _CategoryPageUIState extends State<CategoryPageUI> {
   TextEditingController searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
   }
 
 
-  deleteAPICall(){
+  deleteAPICall(String id) async {
+    LoadingDialog.show(context);
+    var result=await CategoryPagePresenter().deleteCategory(id);
+    print("Working");
+    LoadingDialog.hide(context);
+    if(result.toString().contains("status")){
+      Map<String, dynamic> parsed = json.decode(result.toString());
+      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+
     Navigator.pop(context);
-    ShowSnackBar().snackBarSuccessShow(context, "Working on delete");
+      context
+          .read<CategoryPageBloc>()
+          .filtered(searchController.text);
+  }else{
+      Navigator.pop(context);
+      ShowSnackBar().snackBarSuccessShow(context, "Try Again !");
+    }
   }
+
+
+  addAPICall(String name) async {
+    LoadingDialog.show(context);
+    var result=await CategoryPagePresenter().addKeyCategory(name);
+    LoadingDialog.hide(context);
+    if(result.toString().contains("status")){
+      Map<String, dynamic> parsed = json.decode(result.toString());
+      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+
+      Navigator.pop(context);
+      context
+          .read<CategoryPageBloc>()
+          .filtered(searchController.text);
+    }else{
+      Navigator.pop(context);
+      ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
+    }
+  }
+
+
+
+  editAPICall(String name,String id) async {
+    LoadingDialog.show(context);
+    var result=await CategoryPagePresenter().editCategory(name,id);
+    LoadingDialog.hide(context);
+    if(result.toString().contains("status")){
+      Map<String, dynamic> parsed = json.decode(result.toString());
+      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+
+      Navigator.pop(context);
+      context
+          .read<CategoryPageBloc>()
+          .filtered(searchController.text);
+    }else{
+      Navigator.pop(context);
+      ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +119,12 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
 
                       decoration: InputDecoration(
                         labelText: "Search",
-                        labelStyle: TextStyle(color: ColorConsts.primaryColor),
+                        labelStyle: const TextStyle(color: ColorConsts.primaryColor),
                         filled: true,
                         fillColor: ColorConsts.backgroundColor,
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: ColorConsts.primaryColor,
                             width: 2,
                           ),
@@ -78,18 +139,23 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                           borderRadius: BorderRadius.circular(11),
                           borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
                         ),
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.person_search_sharp,
                           color: ColorConsts.primaryColor,
                         ),
 
                         hintText: "Search keys",
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           color: ColorConsts.primaryColor,
                         ),
                       ),
                       onChanged: (value) {
 
+                      },
+                      onSubmitted: (value) {
+                        context
+                            .read<CategoryPageBloc>()
+                            .filtered(searchController.text);
                       },
                     )
 
@@ -102,7 +168,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                       .read<CategoryPageBloc>()
                       .filtered(searchController.text);
                 },child: Container(width: 60,height: 55,
-                    margin: EdgeInsets.fromLTRB(12, 3, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(12, 3, 0, 0),
                     decoration: BoxDecoration(
                       color: ColorConsts.primaryColor,
                       borderRadius:
@@ -112,20 +178,20 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                         color: ColorConsts.primaryColor,
                       ),),
 
-                    child: Icon(Icons.search
+                    child: const Icon(Icons.search
                       ,size: 25,
                       color: ColorConsts.whiteColor,))),
                 Spacer(),
                 ButtonWidget().buttonWidgetSimple('Add Category+', () => {
-                  Dialogs().addKeyCategory(context,() {
-
+                  Dialogs().addKeyCategory(context,(s) {
+                    addAPICall(s);
                   }),
                 }, 140.0, 40.0)
               ],)
 
 
 
-          , SizedBox(height: 20,),
+          , const SizedBox(height: 20,),
             BlocBuilder<CategoryPageBloc,CategoryPageState>(
                builder: (context, state) {
                if(state is CategorySuccessState) {
@@ -157,7 +223,11 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                  children: [
                                    InkResponse(
                                      onTap: () {
-                                       Dialogs().editKeyCategory(context,state.data[index].categoryName);
+                                       Dialogs().editKeyCategory(context,
+                                           state.data[index].categoryName,state.data[index].categoryId,
+                                             (name, id) {
+                                               editAPICall(name, id);
+                                           },);
                                      },
                                      child: Container(
                                        height: 32,
@@ -192,7 +262,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                    InkResponse(
                                      onTap: () {
                                       Dialogs().deleteKeyCategory(context,() {
-                                        deleteAPICall();
+                                        deleteAPICall(state.data[index].categoryId);
                                       },);
                                      },
                                      child: Container(

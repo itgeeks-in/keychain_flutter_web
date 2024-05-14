@@ -130,11 +130,11 @@ class _HomePageUIState extends State<SideDrawer> {
                         onPressed: () {},
                       ),
                       const Spacer(),
-                      IconButton(
+                 /*     IconButton(
                         icon: Icon(Icons.notification_important,
                             color: ColorConsts.primaryColor),
                         onPressed: () {},
-                      ),
+                      ),*/
                       const SizedBox(width: 12),
                       IconButton(
                         icon: Icon(Icons.power_settings_new,
