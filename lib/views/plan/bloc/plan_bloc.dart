@@ -20,7 +20,6 @@ class PlanBloc extends Bloc<PlanEvent,PlanState>{
     if(parsed['status']){
       AllUserPlanModel allUserPlanModel = AllUserPlanModel.fromJson(parsed);
       if(allUserPlanModel.result.isNotEmpty){
-        print("result is :"+ allUserPlanModel.result[0].plan.planName);
         emit(SuccessState(allUserPlanModel.result));
       }else if(allUserPlanModel.result.isEmpty){
         emit(DataNotFoundState(allUserPlanModel.message));

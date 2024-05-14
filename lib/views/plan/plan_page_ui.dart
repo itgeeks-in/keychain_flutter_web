@@ -34,7 +34,7 @@ class _PlanPageState extends State<PlanPageUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE7E7E7),
+      backgroundColor: ColorConsts.backgroundColor,
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: Column(
@@ -52,7 +52,6 @@ class _PlanPageState extends State<PlanPageUI> {
             ),
             SubscriptionHeading(),
             Container(
-              margin: EdgeInsets.only(top: 5),
               height: MediaQuery.of(context).size.height * 0.6,
               child:
                   BlocBuilder<PlanBloc, PlanState>(builder: (context, state) {
@@ -61,21 +60,15 @@ class _PlanPageState extends State<PlanPageUI> {
                     itemCount: state.userDataPlan.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        margin: const EdgeInsets.all(10.0),
+                        margin: const EdgeInsets.all(8.0),
                         height: 45,
                         decoration: BoxDecoration(
-                            color: ColorConsts.backgroundColor,
+                            color: ColorConsts.whiteColor,
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10)),
                             border: Border.all(
                                 width: 1, color: ColorConsts.primaryColor),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: ColorConsts.boxShadowColor,
-                                blurRadius: 8,
-                                spreadRadius: 4,
-                              )
-                            ]),
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -312,13 +305,7 @@ class SubscriptionHeading extends StatelessWidget {
             width: 2,
             color: ColorConsts.primaryColor,
           ),
-          boxShadow: const [
-            BoxShadow(
-              color: ColorConsts.boxShadowColor,
-              blurRadius: 8,
-              spreadRadius: 4,
-            )
-          ]),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

@@ -160,8 +160,8 @@ class _KeysScreenState extends State<KeyPageUI> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
                                 border: Border.all(
-                                  width: 0.2,
-                                  color: ColorConsts.grayColor,
+                                  width: 1,
+                                  color: ColorConsts.primaryColor,
                                 ),
                                 boxShadow: const [
                                   BoxShadow(
