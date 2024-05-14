@@ -2,8 +2,11 @@ import 'package:key_admin_panel/repository/ApiRepository.dart';
 import 'package:key_admin_panel/repository/api_const.dart';
 
 class CategoryPagePresenter{
-  Future<dynamic> getAllCategoryAPI() async {
-    var response =await ApiRepository.postAPI(ApiConst.getAllCategoryAPI,{});
+  Future<dynamic> getAllCategoryAPI(query) async {
+    final jsonFormData = {
+      ApiConst.searchTerm : query,
+    };
+    var response =await ApiRepository.postAPI(ApiConst.getAllCategoryAPI,jsonFormData);
     return response;
   }
   

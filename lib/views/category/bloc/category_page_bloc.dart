@@ -8,11 +8,11 @@ class CategoryPageBloc extends Bloc<CategoryPageEvent,CategoryPageState> {
   CategoryData? selectOptionCategory ;
   List<CategoryData> resultCategoryList=[];
   CategoryPageBloc() :super(CategoryInitialState()) {
-    getAllCategory();
+    getAllCategory("");
   }
 
-  Future<void> getAllCategory() async {
-    var result = await CategoryPagePresenter().getAllCategoryAPI();
+  Future<void> getAllCategory(query1) async {
+    var result = await CategoryPagePresenter().getAllCategoryAPI(query1);
     Map<String, dynamic> parsed = jsonDecode(result.toString());
     if (result.toString().contains("status")) {
       Map<String, dynamic> parsed = jsonDecode(result.toString());
@@ -31,5 +31,14 @@ class CategoryPageBloc extends Bloc<CategoryPageEvent,CategoryPageState> {
       emit(CategoryFailedState(result.toString()));
       print("Failed : "+result.toString());
     }
+  }
+
+
+
+  filtered(String query1) {
+    emit(CategoryLoadState() );
+
+
+    getAllCategory(query1);
   }
 }

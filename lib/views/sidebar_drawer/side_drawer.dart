@@ -12,6 +12,7 @@ import 'package:key_admin_panel/views/profile/profile_page_ui.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
 import '../../utils/theme_text.dart';
+import '../category/bloc/category_page_bloc.dart';
 import '../keys/bloc/key_bloc.dart';
 import '../users/bloc/user_bloc.dart';
 
@@ -204,7 +205,10 @@ class _HomePageUIState extends State<SideDrawer> {
             },child: KeyPageUI());
 
       case 4:
-        return const CategoryPageUI();
+        return BlocProvider(
+            create: (context) {
+              return CategoryPageBloc();
+            },child: CategoryPageUI());
       case 5:
         return ProfilePage();
       case 3:

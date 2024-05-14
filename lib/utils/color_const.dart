@@ -42,5 +42,5 @@ class ColorConsts {
   static const Color blackColor = Color(0xFF000000);
   static const Color grayColor = Color(0xFF989898);
   static const Color lightGrayColor = Color(0xFFa8a8a8);
-  static const Color green = Color(0xff5dff6a);
+  static const Color green = Color(0xff01b410);
 }

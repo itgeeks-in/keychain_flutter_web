@@ -7,7 +7,7 @@ import 'package:key_admin_panel/views/users/bloc/user_state.dart';
 import 'package:key_admin_panel/views/users/user_page_presenter.dart';
 
 class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
-  int limit = 5, offset = 0;
+  int limit = 8, offset = 0;
   int current_page = 1;
   bool LoadMore = true;
   List<UserData> data = [];

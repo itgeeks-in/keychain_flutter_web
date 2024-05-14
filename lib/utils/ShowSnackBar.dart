@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
+import 'package:key_admin_panel/utils/theme_text.dart';
 
 class ShowSnackBar {
   void snackBarErrorShow(BuildContext context, String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       backgroundColor: ColorConsts.redColor,
       content: Text(msg,
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+          style: ThemeText.textMediumWhiteBold),
     ));
   }
 
@@ -14,7 +15,7 @@ class ShowSnackBar {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       backgroundColor: ColorConsts.green,
       content: Text(msg,
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+          style: ThemeText.textMediumWhiteBold),
     ));
   }
 }

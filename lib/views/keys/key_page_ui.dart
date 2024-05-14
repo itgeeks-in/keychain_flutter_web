@@ -42,19 +42,16 @@ class _KeysScreenState extends State<KeyPageUI> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           Row(crossAxisAlignment: CrossAxisAlignment.start,children: [ Container(
+           Row(crossAxisAlignment: CrossAxisAlignment.start,children: [
+
+
+             SizedBox(
 
               width: MediaQuery.of(context).size.width / 3,
               height: 60,
               child:  Padding(
                 padding: EdgeInsets.all(1.0),
-                child: /*CustomTextField(
-                  isPassVisible: false,
-                  labelText: "Search",
-                  prefixIconData: Icons.person_search_sharp,
-                  hintText: "Search",
-
-                )*/TextField(
+                child: TextField(
 
                 controller: searchController,
                 style: TextStyle(color: ColorConsts.textColorDark),

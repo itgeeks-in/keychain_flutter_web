@@ -35,6 +35,7 @@ class ApiConst {
   static const String confirmEmail = "confirmEmail";
   static const String isAgreed = "isAgreed";
   static const String categoryName = "category";
+  static const String searchTerm = "searchterm";
   static const String offset= "offset";
   static const String limit = "limit";
 

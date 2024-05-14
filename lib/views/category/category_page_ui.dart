@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:key_admin_panel/utils/CustomTextField.dart';
+import 'package:key_admin_panel/utils/ShowSnackBar.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
@@ -10,16 +10,23 @@ import 'package:key_admin_panel/widgets/buttons.dart';
 
 import '../../widgets/loader_widget.dart';
 class CategoryPageUI extends StatefulWidget {
-  const CategoryPageUI({super.key});
+  CategoryPageUI({super.key});
 
   @override
   State<CategoryPageUI> createState() => _CategoryPageUIState();
 }
 
 class _CategoryPageUIState extends State<CategoryPageUI> {
+  TextEditingController searchController = TextEditingController();
   @override
   void initState() {
     super.initState();
+  }
+
+
+  deleteAPICall(){
+    Navigator.pop(context);
+    ShowSnackBar().snackBarSuccessShow(context, "Working on delete");
   }
 
   @override
@@ -35,32 +42,91 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 10, top: 8),
+                SizedBox(
+
                   width: MediaQuery.of(context).size.width / 3,
-                  height: 70,
-                  child: const Padding(
-                    padding: EdgeInsets.all(2.0),
-                    child: CustomTextField(
-                      isPassVisible: false,
-                      labelText: "Search",
-                      prefixIconData: Icons.person_search_sharp,
-                      hintText: "Search",
-                    ),
+                  height: 60,
+                  child:  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: TextField(
+
+                      controller: searchController,
+                      style: TextStyle(color: ColorConsts.textColorDark),
+
+                      decoration: InputDecoration(
+                        labelText: "Search",
+                        labelStyle: TextStyle(color: ColorConsts.primaryColor),
+                        filled: true,
+                        fillColor: ColorConsts.backgroundColor,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(11),
+                          borderSide: BorderSide(
+                            color: ColorConsts.primaryColor,
+                            width: 2,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(11),
+                          borderSide: BorderSide(
+                            color: ColorConsts.primaryColor,
+                          ),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(11),
+                          borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
+                        ),
+                        prefixIcon: Icon(
+                          Icons.person_search_sharp,
+                          color: ColorConsts.primaryColor,
+                        ),
+
+                        hintText: "Search keys",
+                        hintStyle: TextStyle(
+                          color: ColorConsts.primaryColor,
+                        ),
+                      ),
+                      onChanged: (value) {
+
+                      },
+                    )
+
+
+                    ,
                   ),
                 ),
+                InkResponse(onTap: () {
+                  context
+                      .read<CategoryPageBloc>()
+                      .filtered(searchController.text);
+                },child: Container(width: 60,height: 55,
+                    margin: EdgeInsets.fromLTRB(12, 3, 0, 0),
+                    decoration: BoxDecoration(
+                      color: ColorConsts.primaryColor,
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(10)),
+                      border: Border.all(
+                        width: 1,
+                        color: ColorConsts.primaryColor,
+                      ),),
+
+                    child: Icon(Icons.search
+                      ,size: 25,
+                      color: ColorConsts.whiteColor,))),
+                Spacer(),
                 ButtonWidget().buttonWidgetSimple('Add Category+', () => {
-                Dialogs().addKeyCategory(context),
+                  Dialogs().addKeyCategory(context,() {
+
+                  }),
                 }, 140.0, 40.0)
-              ],
-            ),
-            const SizedBox(height: 20,),
-            BlocProvider(
-            create: (context) => CategoryPageBloc(),
-              child: BlocBuilder<CategoryPageBloc,CategoryPageState>(
+              ],)
+
+
+
+          , SizedBox(height: 20,),
+            BlocBuilder<CategoryPageBloc,CategoryPageState>(
                builder: (context, state) {
                if(state is CategorySuccessState) {
                  return Expanded(
@@ -125,7 +191,9 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                                    const SizedBox(height: 10,),
                                    InkResponse(
                                      onTap: () {
-                                      Dialogs().deleteKeyCategory(context);
+                                      Dialogs().deleteKeyCategory(context,() {
+                                        deleteAPICall();
+                                      },);
                                      },
                                      child: Container(
                                        height: 32,
@@ -177,7 +245,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                  return Center(child: Loader().loaderWidget2());
                }
               },
-             ),
+
             )
            ],
          ),

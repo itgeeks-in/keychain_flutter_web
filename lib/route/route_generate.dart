@@ -76,7 +76,7 @@ class RouteGenerate {
               create: (context) {
                 return CategoryPageBloc();
               },
-              child: const CategoryPageUI());
+              child: CategoryPageUI());
         });
     }
   }

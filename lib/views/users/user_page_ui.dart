@@ -41,7 +41,7 @@ class _UserPageState extends State<UserPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-mainAxisAlignment: MainAxisAlignment.center,
+                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
@@ -132,8 +132,8 @@ mainAxisAlignment: MainAxisAlignment.center,
                     boxShadow: const [
                       BoxShadow(
                         color: ColorConsts.boxShadowColor,
-                        blurRadius: 4,
-                        spreadRadius: 2,
+                        blurRadius: 1,
+                        spreadRadius: 1,
                       )
                     ]),
                 child: const Row(
@@ -199,7 +199,7 @@ mainAxisAlignment: MainAxisAlignment.center,
                             itemBuilder: (context, index) {
                               if (index == state.data.length - 1 &&
                                   state.LoadMore &&
-                                  state.data.length > 5) {
+                                  state.data.length > 7) {
                                 return Center(
                                   child: Loader().loaderWidget2(),
                                 );
@@ -217,13 +217,7 @@ mainAxisAlignment: MainAxisAlignment.center,
                                         width: 1,
                                         color: ColorConsts.primaryColor,
                                       ),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: ColorConsts.boxShadowColor,
-                                          blurRadius: 8,
-                                          spreadRadius: 4,
-                                        )
-                                      ]),
+                                   ),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -312,14 +306,14 @@ mainAxisAlignment: MainAxisAlignment.center,
                                                     ]),
                                                 padding:
                                                     const EdgeInsets.all(1.0),
-                                                child: Icon(
+                                                child: const Icon(
                                                   Icons.remove_red_eye_rounded,
                                                   color: ColorConsts.whiteColor,
                                                   size: 20,
                                                 ),
                                               ),
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             InkResponse(
                                               onTap: () {
                                                 showDialog(

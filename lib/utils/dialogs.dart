@@ -75,21 +75,25 @@ class Dialogs {
     )) ??
         false;
   }
-  Future<bool> deleteKeyCategory(BuildContext context) async {
+
+
+  Future<bool> deleteKeyCategory(BuildContext context,Function() onClick) async {
     return( await showDialog(
         context: context,
         builder: (context) => new AlertDialog(
-          contentPadding: EdgeInsets.all(22),
+          contentPadding: EdgeInsets.all(30),
           elevation: 8,
           backgroundColor: ColorConsts.whiteColor,
           title:Text(
-          "Are you sure to delete this category ? This action may affect associated key types.",
-          style:TextStyle(color: ColorConsts.redColor,fontSize: 16),
+          "\nAre you sure.. you want to delete this category ? \nWARNING: This action may affect associated key types.",
+
+          style:TextStyle(color: ColorConsts.secondaryColor,fontSize: 16),
         ),
 
       actions: [
-            ButtonWidget().buttonWidgetSimple("No", () => Navigator.pop(context, false), 80.0, 40.0),
-            ButtonWidget().buttonWidgetSimple("Yes", () async => {
+            ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
+            ButtonWidget().buttonWidgetSimple("Continue", () async => {
+              onClick.call(),
             }, 80.0, 40.0),
           ],
         )
@@ -119,7 +123,7 @@ class Dialogs {
   }
 
 
-  Future<bool> addKeyCategory(BuildContext context) async {
+  Future<bool> addKeyCategory(BuildContext context,Function() onClick) async {
     TextEditingController categoryController = TextEditingController();
     bool isCategoryValid = false;
     return (await showDialog(
@@ -130,17 +134,17 @@ class Dialogs {
             contentPadding: EdgeInsets.all(22.0),
             elevation: 8,
             backgroundColor: ColorConsts.whiteColor,
-            title: Center(child: Text("Add Category", style: ThemeText.textLargeSecondaryBold)),
-            content: Container(
+            title: const Center(child: Text("Add Category", style: ThemeText.textLargeSecondaryBold)),
+            content: SizedBox(
               height: 100,
               child: TextField(
                 controller: categoryController,
                 style: ThemeText.textMediumSecondary,
                 keyboardType: TextInputType.text,
                  onChanged:(value) {
-                  setState(() {
+
                     isCategoryValid = value.trim().isNotEmpty;
-                  });
+
                 },
                 decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
@@ -157,15 +161,13 @@ class Dialogs {
             ),
             actions: [
               ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
-              ButtonWidget().buttonWidgetSimple("Add", () {
-                if(isCategoryValid){
-                  CategoryPagePresenter().addKeyCategory(categoryController.text);
+              ButtonWidget().buttonWidgetSimple("Add", () async {
+                if(categoryController.text.isNotEmpty){
+                await  CategoryPagePresenter().addKeyCategory(categoryController.text);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Category added successfuly.',style: TextStyle(color: ColorConsts.green)),duration: Duration(seconds: 2),backgroundColor: ColorConsts.whiteColor),
                   );
-                  Future.delayed(Duration(seconds: 1), () {
-                    Navigator.pop(context, true);
-                  });
+                Navigator.pop(context, false);
                 }else if(!isCategoryValid){
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Category name is required.',style: TextStyle(color: ColorConsts.redColor)),duration: Duration(seconds: 2),backgroundColor: ColorConsts.whiteColor,),
