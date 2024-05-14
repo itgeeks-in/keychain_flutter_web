@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
+import 'package:key_admin_panel/utils/theme_text.dart';
+import 'package:key_admin_panel/views/plan/bloc/plan_state.dart';
+
+import '../../widgets/loader_widget.dart';
+import 'bloc/plan_bloc.dart';
 
 class Plan {
   String name;
@@ -11,38 +17,18 @@ class Plan {
   Plan({required this.name, required this.price});
 }
 
-class Person {
-  final String name;
-  final String email;
-
-  final String startDate;
-  final String expiryDate;
-  final String purchasePlan;
-
-  Person({
-    required this.name,
-    required this.email,
-    required this.startDate,
-    required this.expiryDate,
-    required this.purchasePlan,
-  });
-}
-
-class PlanPage extends StatefulWidget {
-  const PlanPage({Key? key}) : super(key: key);
+class PlanPageUI extends StatefulWidget {
+  const PlanPageUI({Key? key}) : super(key: key);
 
   @override
-  State<PlanPage> createState() => _PlanPageState();
+  State<PlanPageUI> createState() => _PlanPageState();
 }
 
-class _PlanPageState extends State<PlanPage> {
+class _PlanPageState extends State<PlanPageUI> {
   List<Plan> plans = [
     Plan(name: "Basic", price: "\$0"),
     Plan(name: "Advanced", price: "\$3.9"),
     Plan(name: "Premium", price: "\$10.9"),
-  ];
-  final List<Person> users = [
-    // Add more persons here
   ];
 
   @override
@@ -65,103 +51,97 @@ class _PlanPageState extends State<PlanPage> {
               ],
             ),
             SubscriptionHeading(),
-            SizedBox(height: 50,),
-            Center(child: Text('We are still working on Plan page functionality ,sorry for inconvenience !',style: TextStyle(color: ColorConsts.redColor,fontSize: 20),),),
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 5),
               height: MediaQuery.of(context).size.height * 0.6,
-              child: ListView.builder(
-                itemCount: users.length,
-                itemBuilder: (context, index) {
-                  final data = users[index];
-                  return Container(
-                    margin: const EdgeInsets.all(10.0),
-                    height: 45,
-                    decoration: BoxDecoration(
-                        color: ColorConsts.backgroundColor,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                        border: Border.all(
-                            width: 1, color: ColorConsts.primaryColor),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: ColorConsts.boxShadowColor,
-                            blurRadius: 8,
-                            spreadRadius: 4,
-                            // offset: Offset(0, 10),
-                          )
-                        ]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      // crossAxisAlignment: CrossAxisAlignment.,
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            // color: Colors.amber,
-                            padding: EdgeInsets.only(left: 10),
-                            child: Text(
-                              data.name,
-                              style: const TextStyle(
-                                color: ColorConsts.textColorDark,
-                                fontSize: 16,
-                                // fontWeight: FontWeight.bold
+              child:
+                  BlocBuilder<PlanBloc, PlanState>(builder: (context, state) {
+                if (state is SuccessState) {
+                  return ListView.builder(
+                    itemCount: state.userDataPlan.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.all(10.0),
+                        height: 45,
+                        decoration: BoxDecoration(
+                            color: ColorConsts.backgroundColor,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            border: Border.all(
+                                width: 1, color: ColorConsts.primaryColor),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: ColorConsts.boxShadowColor,
+                                blurRadius: 8,
+                                spreadRadius: 4,
+                              )
+                            ]),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  state.userDataPlan[index].firstName.isNotEmpty
+                                      ? state.userDataPlan[index].firstName +
+                                          " " +
+                                          state.userDataPlan[index].lastName
+                                      : 'NA',
+                                  style: ThemeText.textMediumSecondary,
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            data.email,
-                            style: const TextStyle(
-                              color: ColorConsts.textColorDark,
-                              fontSize: 16,
-                              // fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            data.startDate,
-                            style: TextStyle(
-                              color: ColorConsts.textColorDark,
-                              fontSize: 16,
-                              // fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            data.expiryDate,
-                            style: TextStyle(
-                              color: ColorConsts.textColorDark,
-                              fontSize: 16,
-                              // fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 50),
-                            child: Text(
-                              data.purchasePlan,
-                              style: TextStyle(
-                                color: ColorConsts.textColorDark,
-                                fontSize: 16,
-                                // fontWeight: FontWeight.bold,
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                state.userDataPlan[index].email.isNotEmpty
+                                    ? state.userDataPlan[index].email
+                                    : 'NA',
+                                style: ThemeText.textMediumSecondary,
                               ),
                             ),
-                          ),
-                        )
-                      ],
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                state.userDataPlan[index].plan.createdAt
+                                        .isNotEmpty
+                                    ? state.userDataPlan[index].createdAt
+                                        .split("T")[0]
+                                    : 'NA',
+                                style: ThemeText.textMediumSecondary,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                padding: const EdgeInsets.only(left: 50),
+                                child: Text(
+                                  state.userDataPlan[index].plan.planName
+                                          .isNotEmpty
+                                      ? state.userDataPlan[index].plan.planName
+                                      : 'NA',
+                                  style: ThemeText.textMediumSecondary,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                } else if (state is DataNotFoundState) {
+                  return Center(
+                    child: Text(
+                      state.msg,
+                      style: ThemeText.textMediumSecondaryBold,
                     ),
                   );
-                },
-              ),
+                } else {
+                  return Center(child: Loader().loaderWidget2());
+                }
+              }),
             ),
           ],
         ),
@@ -277,7 +257,6 @@ class _PlanPageState extends State<PlanPage> {
                     ),
                   ),
                   Container(
-                    // margin: EdgeInsets.only(top: 20, bottom: 5),
                     child: CustomTextField(
                       controller: priceController,
                       isPassVisible: false,
@@ -338,7 +317,6 @@ class SubscriptionHeading extends StatelessWidget {
               color: ColorConsts.boxShadowColor,
               blurRadius: 8,
               spreadRadius: 4,
-              // offset: Offset(0, 10),
             )
           ]),
       child: Row(
@@ -349,65 +327,32 @@ class SubscriptionHeading extends StatelessWidget {
             child: Container(
               child: const Text(
                 "User Name",
-                style: TextStyle(
-                    color: ColorConsts.textColorLight,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                style: ThemeText.textMediumPrimaryBold,
+                maxLines: 1,
               ),
             ),
           ),
           Expanded(
             flex: 2,
             child: Container(
-              child: const Text(
-                "Email",
-                style: TextStyle(
-                    color: ColorConsts.textColorLight,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
+              child: const Text("Email",
+                  style: ThemeText.textMediumPrimaryBold, maxLines: 1),
             ),
           ),
           Expanded(
             flex: 2,
             child: Container(
-              // color: Colors.amber,
-              child: const Text(
-                "Start date ",
-                style: TextStyle(
-                    color: ColorConsts.textColorLight,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              // color: Colors.blue,
-              child: const Text(
-                "Expiry date",
-                style: TextStyle(
-                    color: ColorConsts.textColorLight,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
+              child: const Text("Start date",
+                  style: ThemeText.textMediumPrimaryBold, maxLines: 1),
             ),
           ),
           Expanded(
             flex: 2,
             child: Container(
-              // color: Colors.amber,
               child: const Padding(
-                padding: EdgeInsets.only(left: 60),
-                child: Text(
-                  "Plan",
-                  style: TextStyle(
-                      color: ColorConsts.textColorLight,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+                  padding: EdgeInsets.only(left: 60),
+                  child: Text("Plan",
+                      style: ThemeText.textMediumPrimaryBold, maxLines: 1)),
             ),
           )
         ],

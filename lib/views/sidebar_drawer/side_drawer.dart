@@ -7,13 +7,14 @@ import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/views/category/category_page_ui.dart';
 import 'package:key_admin_panel/views/home/home_page_ui.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
-import 'package:key_admin_panel/views/plan/plan_ui.dart';
+import 'package:key_admin_panel/views/plan/bloc/plan_bloc.dart';
 import 'package:key_admin_panel/views/profile/profile_page_ui.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
 import '../../utils/theme_text.dart';
 import '../category/bloc/category_page_bloc.dart';
 import '../keys/bloc/key_bloc.dart';
+import '../plan/plan_page_ui.dart';
 import '../users/bloc/user_bloc.dart';
 
 class SideDrawer extends StatefulWidget {
@@ -212,7 +213,9 @@ class _HomePageUIState extends State<SideDrawer> {
       case 5:
         return ProfilePage();
       case 3:
-        return  PlanPage();
+        return  BlocProvider(create:(context){
+          return PlanBloc();
+        },child: PlanPageUI());
       case 6:
         return  HomePageUI();
       default:
