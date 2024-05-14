@@ -76,9 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               Center(
                                 child: CircleAvatar(
                                   radius: 64,
-                                  backgroundImage: userDataModel?.result
-                                              .profileImage.isNotEmpty ??
-                                          false
+                                  backgroundImage: userDataModel?.result.profileImage.isNotEmpty ?? false
                                       ? NetworkImage(
                                           userDataModel!.result.profileImage)
                                       : AssetImage(AppAssets.notFoundImg)

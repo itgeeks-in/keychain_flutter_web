@@ -71,7 +71,7 @@ class Plan {
       json['price'] ?? "",
       json['keyCount'] ?? "",
       json['createdAt'] ?? "",
-      json['updateAt'] ?? ""
+      json['updatedAt'] ?? ""
     );
   }
 }

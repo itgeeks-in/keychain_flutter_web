@@ -3,25 +3,26 @@ import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/model/all_user_model.dart';
 import 'package:key_admin_panel/model/all_user_plan_model.dart';
+import 'package:key_admin_panel/model/plan_model.dart';
 import 'package:key_admin_panel/views/plan/bloc/plan_event.dart';
 import 'package:key_admin_panel/views/plan/bloc/plan_state.dart';
 import 'package:key_admin_panel/views/plan/plan_page_presenter.dart';
 
 class PlanBloc extends Bloc<PlanEvent,PlanState>{
-  List<UserDataPlan> data = [];
+  List<PlanDetail> planDetail = [];
   PlanBloc():super(InitialState()){
+   // getAllPlan();
     getAllUserPlanDetail();
   }
 
   Future<void> getAllUserPlanDetail() async{
 
-    var result = await PlanPagePresener().getAllUserPlanDetail();
+    var result = await PlanPagePresenter().getAllUserPlanDetail();
     Map<String,dynamic> parsed = jsonDecode(result.toString());
     if(parsed['status']){
       AllUserPlanModel allUserPlanModel = AllUserPlanModel.fromJson(parsed);
       if(allUserPlanModel.result.isNotEmpty){
-        print("result is :"+ allUserPlanModel.result[0].plan.planName);
-        emit(SuccessState(allUserPlanModel.result));
+        emit(SuccessState(allUserPlanModel.result,));
       }else if(allUserPlanModel.result.isEmpty){
         emit(DataNotFoundState(allUserPlanModel.message));
       }
@@ -30,6 +31,16 @@ class PlanBloc extends Bloc<PlanEvent,PlanState>{
       print("Failed : " + parsed['message']);
     }
   }
+
+  // Future<void> getAllPlan() async{
+  //   var result = await PlanPagePresenter().getAllPlan();
+  //   Map<String,dynamic> parsed = jsonDecode(result.toString());
+  //   if(parsed['status']){
+  //     PlanModel planModel = PlanModel.fromJson(parsed);
+  //     planDetail.addAll(planModel.result);
+  //     print("List data is:------------------------------"+ planDetail[0].planName);
+  //   }
+  // }
 }
 
 
