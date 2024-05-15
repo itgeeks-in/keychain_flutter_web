@@ -4,6 +4,8 @@ class PlanListState{}
 
 class PlanInitialState extends PlanListState{}
 
+class PlanLoadSate extends PlanListState{}
+
 class PlanSuccessState extends PlanListState{
   List<PlanDetail> planDetail;
   PlanSuccessState(this.planDetail);

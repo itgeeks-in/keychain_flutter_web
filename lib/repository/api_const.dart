@@ -26,6 +26,10 @@ class ApiConst {
   static const String deleteCategory = '/admin/delete-category';
 
   static const String getAllPlans = '/plan/getplans';
+  static const String updatePlan = '/plan/updateplan';
+  static const String deletePlan = '/plan/deleteplan';
+
+
 
 
 
@@ -49,5 +53,8 @@ class ApiConst {
   static const String searchTerm = "searchterm";
   static const String offset= "offset";
   static const String limit = "limit";
+
+  static const String planName = "planName";
+  static const String price = "price";
 
 }

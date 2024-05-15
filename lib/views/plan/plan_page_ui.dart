@@ -1,15 +1,20 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:key_admin_panel/utils/CustomTextField.dart';
-import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/plan/bloc/plan_state.dart';
 import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_bloc.dart';
 import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_state.dart';
+import 'package:key_admin_panel/views/plan/plan_page_presenter.dart';
 
 import '../../model/plan_model.dart';
+import '../../utils/ShowSnackBar.dart';
+import '../../utils/loading_dialog.dart';
+import '../../widgets/buttons.dart';
 import '../../widgets/loader_widget.dart';
 import 'bloc/plan_bloc.dart';
 
@@ -21,6 +26,43 @@ class PlanPageUI extends StatefulWidget {
 }
 
 class _PlanPageState extends State<PlanPageUI> {
+
+
+  editAPICall(id, planName, price) async {
+    LoadingDialog.show(context);
+    var result = await PlanPagePresenter().editPlan(id, planName, price);
+    LoadingDialog.hide(context);
+    if (result.toString().contains("status")) {
+      Map<String, dynamic> parsed = json.decode(result.toString());
+      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+      Navigator.pop(context);
+      context.read<PlanListBloc>()
+       .filtered();
+    } else {
+      Navigator.pop(context);
+      ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
+    }
+  }
+
+  deleteAPICall(String id) async {
+    LoadingDialog.show(context);
+    var result=await PlanPagePresenter().deletePlan(id);
+    print("Working");
+    LoadingDialog.hide(context);
+    if(result.toString().contains("status")){
+      Map<String, dynamic> parsed = json.decode(result.toString());
+      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+
+      Navigator.pop(context);
+      context
+          .read<PlanListBloc>()
+          .filtered();
+    }else{
+      Navigator.pop(context);
+      ShowSnackBar().snackBarSuccessShow(context, "Try Again !");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,131 +70,150 @@ class _PlanPageState extends State<PlanPageUI> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            BlocProvider(
-              create: (context) => PlanListBloc(),
-              child: BlocBuilder<PlanListBloc, PlanListState>(
-                builder: (context, state) {
-                  if (state is PlanSuccessState) {
-                    return Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.all(8.0),
-                      height: 180,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: state.planDetail.length,
-                        itemBuilder: (context, index) {
-                          final plan = state.planDetail[index];
-                          return Padding(
+            BlocBuilder<PlanListBloc, PlanListState>(
+              builder: (context, state) {
+                if (state is PlanSuccessState) {
+                  return Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(8.0),
+                    height: 180,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.planDetail.length,
+                      itemBuilder: (context, index) {
+                        final planDetail = state.planDetail[index];
+                        return Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Container(
+                            margin: EdgeInsets.all(10.0),
                             padding: EdgeInsets.all(8.0),
-                            child: Container(
-                              margin: EdgeInsets.all(10.0),
-                              padding: EdgeInsets.all(8.0),
-                              width: 275,
-                              decoration: BoxDecoration(
-                                color: ColorConsts.backgroundColor,
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                    width: 1,
-                                    color: ColorConsts.secondaryColor),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(plan.planName  ,
-                                    style: ThemeText.textMediumPrimaryBold,textAlign: TextAlign.start,),
-                                  Text("\$"+plan.price +"\n"+
-                                      (plan.keyCount.toString().contains("unlimited")?"Unlimited keys":"You can scan upto " +
-                                          plan.keyCount.toString()+
-                                          " Keys"),
-                                    style: ThemeText.textMediumGrey,textAlign: TextAlign.start,)
-                                  ,]),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      InkResponse(
-                                        onTap: () => _showEditDialog(plan),
-                                        child: Container(
-                                          height: 32,
-                                          width: 32,
-                                          decoration: BoxDecoration(
-                                              gradient: const LinearGradient(
-                                                colors: [
-                                                  ColorConsts.primaryColor,
-                                                  ColorConsts.primaryColor,
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                              ),
-                                              borderRadius:
-                                              BorderRadius.circular(25.0)
-                                              ,boxShadow: const [BoxShadow(
-                                            color: ColorConsts.primaryColor,
-                                            blurRadius: 1.0,
-                                            offset: Offset(1, 2),
-                                          ),]
-                                          ),
-                                          padding:
-                                          const EdgeInsets.all(1.0),
-                                          child: const Icon(
-                                            Icons.edit_outlined,
-                                            color: ColorConsts.whiteColor,size: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 10,),
-                                      InkResponse(
-                                        onTap: () {
-                                        },
-                                        child: Container(
-                                          height: 32,
-                                          width: 32,
-                                          decoration: BoxDecoration(
-                                              gradient: const LinearGradient(
-                                                colors: [
-                                                  ColorConsts.primaryColor,
-                                                  ColorConsts.primaryColor,
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                              ),
-                                              borderRadius:
-                                              BorderRadius.circular(25.0)
-
-                                              ,boxShadow: const [BoxShadow(
-                                            color: ColorConsts.primaryColor,
-                                            blurRadius: 1.0,
-                                            offset: Offset(1, 2),
-                                          ),]
-                                          ),
-                                          padding:
-                                          const EdgeInsets.all(1.0),
-                                          child: const Icon(
-                                            Icons.delete_forever,
-                                            color: ColorConsts.whiteColor,size: 20,
-                                          ),
-                                        ),
-
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                            width: 275,
+                            decoration: BoxDecoration(
+                              color: ColorConsts.backgroundColor,
+                              borderRadius: BorderRadius.circular(10.0),
+                              border: Border.all(
+                                  width: 1, color: ColorConsts.secondaryColor),
                             ),
-                          );
-                        },
-                      ),
-                    );
-                  } else if (state is PlanNotFoundState) {
-                    return Center(child: Text('Plans not found.'));
-                  } else {
-                    return Center(child: Loader().loaderWidget2());
-                  }
-                },
-              ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        planDetail.planName,
+                                        style: ThemeText.textMediumPrimaryBold,
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      Text(
+                                        "\$" +
+                                            planDetail.price +
+                                            "\n" +
+                                            (planDetail.keyCount
+                                                    .toString()
+                                                    .contains("unlimited")
+                                                ? "Unlimited keys"
+                                                : "You can scan upto " +
+                                                    planDetail.keyCount
+                                                        .toString() +
+                                                    " Keys"),
+                                        style: ThemeText.textMediumGrey,
+                                        textAlign: TextAlign.start,
+                                      ),
+                                    ]),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkResponse(
+                                      onTap: () =>
+                                          _showEditDialog(context, planDetail,
+                                              (name, id, price) {
+                                        editAPICall(id, name, price);
+                                      }),
+                                      child: Container(
+                                        height: 32,
+                                        width: 32,
+                                        decoration: BoxDecoration(
+                                            gradient: const LinearGradient(
+                                              colors: [
+                                                ColorConsts.primaryColor,
+                                                ColorConsts.primaryColor,
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(25.0),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: ColorConsts.primaryColor,
+                                                blurRadius: 1.0,
+                                                offset: Offset(1, 2),
+                                              ),
+                                            ]),
+                                        padding: const EdgeInsets.all(1.0),
+                                        child: const Icon(
+                                          Icons.edit_outlined,
+                                          color: ColorConsts.whiteColor,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    InkResponse(
+                                      onTap: () =>
+                                          _showDeleteDialog(context,
+                                                  () {
+                                                deleteAPICall(state.planDetail[index].id);
+                                              }),
+                                      child: Container(
+                                        height: 32,
+                                        width: 32,
+                                        decoration: BoxDecoration(
+                                            gradient: const LinearGradient(
+                                              colors: [
+                                                ColorConsts.primaryColor,
+                                                ColorConsts.primaryColor,
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(25.0),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: ColorConsts.primaryColor,
+                                                blurRadius: 1.0,
+                                                offset: Offset(1, 2),
+                                              ),
+                                            ]),
+                                        padding: const EdgeInsets.all(1.0),
+                                        child: const Icon(
+                                          Icons.delete_forever,
+                                          color: ColorConsts.whiteColor,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else if (state is PlanNotFoundState) {
+                  return Center(child: Text('Plans not found.'));
+                } else {
+                  return Center(child: Loader().loaderWidget2());
+                }
+              },
             ),
             Center(
               child: Text(
@@ -192,7 +253,10 @@ class _PlanPageState extends State<PlanPageUI> {
                                           " " +
                                           state.userDataPlan[index].lastName
                                       : 'NA',
-                                  style:state.userDataPlan[index].firstName.isNotEmpty ? ThemeText.textMediumSecondary : ThemeText.textMediumGrey,
+                                  style: state.userDataPlan[index].firstName
+                                          .isNotEmpty
+                                      ? ThemeText.textMediumSecondary
+                                      : ThemeText.textMediumGrey,
                                 ),
                               ),
                             ),
@@ -202,7 +266,10 @@ class _PlanPageState extends State<PlanPageUI> {
                                 state.userDataPlan[index].email.isNotEmpty
                                     ? state.userDataPlan[index].email
                                     : 'NA',
-                                style:state.userDataPlan[index].email.isNotEmpty ? ThemeText.textMediumSecondary : ThemeText.textMediumGrey,
+                                style:
+                                    state.userDataPlan[index].email.isNotEmpty
+                                        ? ThemeText.textMediumSecondary
+                                        : ThemeText.textMediumGrey,
                               ),
                             ),
                             Expanded(
@@ -213,7 +280,10 @@ class _PlanPageState extends State<PlanPageUI> {
                                     ? state.userDataPlan[index].createdAt
                                         .split("T")[0]
                                     : 'NA',
-                                style:state.userDataPlan[index].plan.createdAt.isNotEmpty ? ThemeText.textMediumSecondary : ThemeText.textMediumGrey,
+                                style: state.userDataPlan[index].plan.createdAt
+                                        .isNotEmpty
+                                    ? ThemeText.textMediumSecondary
+                                    : ThemeText.textMediumGrey,
                               ),
                             ),
                             Expanded(
@@ -225,7 +295,10 @@ class _PlanPageState extends State<PlanPageUI> {
                                           .isNotEmpty
                                       ? state.userDataPlan[index].plan.planName
                                       : 'NA',
-                                  style:state.userDataPlan[index].plan.planName.isNotEmpty ? ThemeText.textMediumSecondary : ThemeText.textMediumGrey,
+                                  style: state.userDataPlan[index].plan.planName
+                                          .isNotEmpty
+                                      ? ThemeText.textMediumSecondary
+                                      : ThemeText.textMediumGrey,
                                 ),
                               ),
                             )
@@ -252,87 +325,172 @@ class _PlanPageState extends State<PlanPageUI> {
     );
   }
 
-  void _showEditDialog(PlanDetail plan) {
-    TextEditingController nameController =
-        TextEditingController(text: plan.planName);
-    TextEditingController priceController =
-        TextEditingController(text: plan.price);
+  Future<bool> _showEditDialog(BuildContext context, PlanDetail planDetail,
+      Function(String name, String id, String price) onClick) async {
+    TextEditingController planNameController = TextEditingController();
+    TextEditingController planPriceController = TextEditingController();
+    bool isNameValid = false;
+    bool isPriceValid = false;
+    return (await showDialog(
+            context: context,
+            builder: (context) => StatefulBuilder(builder: (context, setState) {
+                  planNameController.text = planDetail.planName;
+                  planPriceController.text = planDetail.price;
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height / 2.5,
+                    child: AlertDialog(
+                      contentPadding: EdgeInsets.all(18.0),
+                      elevation: 8,
+                      backgroundColor: ColorConsts.backgroundColor,
+                      content: SizedBox(
+                        height: MediaQuery.of(context).size.height / 2.5,
+                        width: MediaQuery.of(context).size.height / 2,
+                        child: Column(
+                          children: [
+                            Center(
+                                child: Text("Edit Plan",
+                                    style: ThemeText.textLargeSecondaryBold)),
+                            SizedBox(height: 35),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.height / 2,
+                              child: TextField(
+                                onChanged: (value) {
+                                  if (planNameController.text.isNotEmpty) {
+                                    isNameValid = true;
+                                  } else {
+                                    isNameValid = false;
+                                  }
+                                },
+                                controller: planNameController,
+                                style: ThemeText.textMediumSecondary,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: ColorConsts.primaryColor,
+                                          width: 2.0),
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: ColorConsts.primaryColor,
+                                          width: 2.0),
+                                    ),
+                                    labelText: "Plan name",
+                                    labelStyle: ThemeText.textMediumPrimary,
+                                    alignLabelWithHint: true,
+                                    hintText: "Enter plan name"),
+                              ),
+                            ),
+                            if (isNameValid)
+                              Text(
+                                "Add plan name to continue..",
+                                style: TextStyle(
+                                    color: ColorConsts.redColor, fontSize: 14),
+                              ),
+                            SizedBox(height: 35),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.height / 2,
+                              child: TextField(
+                                onChanged: (value) {
+                                  if (planPriceController.text.isNotEmpty) {
+                                    isPriceValid = true;
+                                  } else {
+                                    isPriceValid = false;
+                                  }
+                                },
+                                controller: planPriceController,
+                                style: ThemeText.textMediumSecondary,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: ColorConsts.primaryColor,
+                                          width: 2.0),
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: ColorConsts.primaryColor,
+                                          width: 2.0),
+                                    ),
+                                    labelText: "Plan price",
+                                    labelStyle: ThemeText.textMediumPrimary,
+                                    alignLabelWithHint: true,
+                                    hintText: "Enter plan price"),
+                              ),
+                            ),
+                            if (isPriceValid)
+                              Text(
+                                "Add plan price to continue..",
+                                style: TextStyle(
+                                    color: ColorConsts.redColor, fontSize: 14),
+                              ),
+                          ],
+                        ),
+                      ),
+                      actions: [
+                        ButtonWidget().buttonWidgetSimple("Cancel",
+                            () => Navigator.pop(context, false), 80.0, 40.0),
+                        ButtonWidget().buttonWidgetSimple("Update", () async {
+                          if (planNameController.text.isNotEmpty) {
+                            isNameValid = false;
+                            setState(
+                              () {},
+                            );
+                          } else {
+                            isNameValid = true;
+                            setState(
+                              () {},
+                            );
+                          }
+                          if (planPriceController.text.isNotEmpty) {
+                            isPriceValid = false;
+                            setState(
+                              () {},
+                            );
+                          } else {
+                            isPriceValid = true;
+                            setState(
+                              () {},
+                            );
+                          }
+                          if (planNameController.text.isNotEmpty &&
+                              planPriceController.text.isNotEmpty) {
+                            onClick(planNameController.text, planDetail.id,
+                                planPriceController.text);
+                          }
+                        }, 80.0, 40.0),
+                      ],
+                    ),
+                  );
+                }))) ??
+        false;
+  }
 
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: ColorConsts.backgroundColor,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Edit plan',
-                style: TextStyle(
-                  color: ColorConsts.primaryColor,
-                ),
-              ),
-              InkWell(
-                child: Icon(
-                  Icons.close_outlined,
-                  color: ColorConsts.primaryColor,
-                ),
-              )
-            ],
-          ),
-          content: Container(
-            width: 350,
-            height: 250,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    child: CustomTextField(
-                      controller: nameController,
-                      isPassVisible: false,
-                      labelText: "Title",
-                      prefixIconData: Icons.subscriptions,
-                      hintText: "Enter title",
-                    ),
-                  ),
-                  Container(
-                    child: CustomTextField(
-                      controller: priceController,
-                      isPassVisible: false,
-                      labelText: "Plan price",
-                      prefixIconData: Icons.price_change_outlined,
-                      hintText: "Enter price",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+
+  Future<bool> _showDeleteDialog(BuildContext context,Function() onClick) async {
+    return( await showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+          contentPadding: EdgeInsets.all(30),
+          elevation: 8,
+          backgroundColor: ColorConsts.whiteColor,
+          content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(children: [Text(
+            "\nAre you sure.. you want to delete this plan ? ",
+
+            style:TextStyle(color: ColorConsts.secondaryColor,fontWeight: FontWeight.w500,fontSize: 22),
+          ),Text(
+            "\nWARNING: This action may affect associated user plans.",
+
+            style:TextStyle(color: ColorConsts.redColor,fontSize: 15,fontWeight: FontWeight.w300),
+          )])),
           actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  width: 100,
-                  child: RoundedButton(
-                    btnName: "Save",
-                    callback: () {
-                      setState(() {
-                        plan.planName = nameController.text;
-                        plan.price = priceController.text;
-                      });
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
-              ],
-            ),
+            ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
+            ButtonWidget().buttonWidgetSimple("Continue", () async => {
+              onClick.call(),
+            }, 80.0, 40.0),
           ],
-        );
-      },
-    );
+        )
+    )) ?? false;
   }
 }
 
