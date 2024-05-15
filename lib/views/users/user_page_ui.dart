@@ -14,6 +14,10 @@ import 'package:key_admin_panel/views/users/popups_user/popup_view_user.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
 
+import '../../model/all_user_model.dart';
+import '../../theme/app_assets.dart';
+import '../../widgets/text_field_custom.dart';
+
 class UserPage extends StatefulWidget {
   UserPage({super.key});
 
@@ -382,4 +386,100 @@ class _UserPageState extends State<UserPage> {
       ),
     );
   }
+  Future<bool> _showEditDialog(BuildContext context,UserData userData,
+      Function() onClick) async {
+      TextEditingController _firstNameController = TextEditingController();
+      TextEditingController _lastNameController = TextEditingController();
+      TextEditingController _emailController = TextEditingController();
+     return (await showDialog(
+        context: context,
+        builder: (context) => StatefulBuilder(builder: (context, setState) {
+          _firstNameController.text = userData.firstName;
+          _lastNameController.text = userData.lastName;
+          _emailController.text = userData.email;
+
+          bool isFirstNameValid = false;
+          bool isLastNameValid = false;
+          bool isEmailValid = false;
+
+          return SizedBox(
+            height: MediaQuery.of(context).size.height / 2.5,
+            child: AlertDialog(
+              contentPadding: EdgeInsets.all(18.0),
+              elevation: 8,
+              backgroundColor: ColorConsts.backgroundColor,
+              content: SizedBox(
+                height: MediaQuery.of(context).size.height / 2.5,
+                width: MediaQuery.of(context).size.height / 2,
+                child: Column(
+                  children: [
+                    Center(
+                        child: Text("Edit User",
+                            style: ThemeText.textLargeSecondaryBold)),
+                    SizedBox(height: 35),
+                    Center(
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: userData.profileImage.isNotEmpty
+                            ? NetworkImage(userData.profileImage)
+                            : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.height / 2,
+                      child: TextFieldCustom().textFieldForDialog(_firstNameController, "First name","Enter first name", (value) => {
+                      if(_firstNameController.text.isNotEmpty){
+                          isFirstNameValid=true,
+                          }else{
+                          isFirstNameValid = false,
+                          }
+                      }, Icons.person_add_outlined)
+                    ),
+                    if(isFirstNameValid)Text("Add first name to continue..",
+                      style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
+                    ),
+                    SizedBox(height: 10),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.height / 2,
+                        child: TextFieldCustom().textFieldForDialog(_lastNameController, "First name","Enter first name", (value) => {
+                          if(_lastNameController.text.isNotEmpty){
+                            isLastNameValid=true,
+                          }else{
+                            isLastNameValid = false,
+                          }
+                        }, Icons.person_add_outlined)
+                    ),
+                    if(isLastNameValid)Text("Add last name to continue..",
+                      style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
+                    ),
+                    SizedBox(height: 10),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.height / 2,
+                        child: TextFieldCustom().textFieldForDialog(_emailController, "First name","Enter first name", (value) => {
+                          if(_emailController.text.isNotEmpty){
+                            isEmailValid=true,
+                          }else{
+                            isEmailValid = false,
+                          }
+                        }, Icons.person_add_outlined)
+                    ),
+                    if(isEmailValid)Text("Add email to continue..",
+                      style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                ButtonWidget().buttonWidgetSimple("Cancel",
+                        () => Navigator.pop(context, false), 80.0, 40.0),
+                ButtonWidget().buttonWidgetSimple("Update", () async {
+                }, 80.0, 40.0),
+              ],
+            ),
+          );
+        }))) ??
+        false;
+   }
 }
+

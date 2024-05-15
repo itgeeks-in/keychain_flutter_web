@@ -18,7 +18,6 @@ class PlanListBloc extends Bloc<PlanListEvent,PlanListState>{
     Map<String,dynamic> parsed = jsonDecode(result.toString());
     if(parsed['status']){
       PlanModel planModel = PlanModel.fromJson(parsed);
-      planDetail.clear();
       planDetail.addAll(planModel.result);
       if(planModel.result.isNotEmpty){
         emit(PlanSuccessState(planDetail));
@@ -34,6 +33,7 @@ class PlanListBloc extends Bloc<PlanListEvent,PlanListState>{
   }
 
   filtered() {
+    planDetail.clear();
     emit(PlanLoadSate());
     getAllPlan();
   }

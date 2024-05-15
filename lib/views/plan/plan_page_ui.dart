@@ -67,14 +67,15 @@ class _PlanPageState extends State<PlanPageUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConsts.backgroundColor,
-      body: SingleChildScrollView(
+      body: Expanded(
+        //margin: EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BlocBuilder<PlanListBloc, PlanListState>(
               builder: (context, state) {
                 if (state is PlanSuccessState) {
                   return Container(
-                    alignment: Alignment.center,
                     margin: EdgeInsets.all(8.0),
                     height: 180,
                     child: ListView.builder(
@@ -215,15 +216,15 @@ class _PlanPageState extends State<PlanPageUI> {
                 }
               },
             ),
-            Center(
+            Container(
+             margin: EdgeInsets.only(left: 15.0),
               child: Text(
                 'History',
                 style: ThemeText.textLargeSecondaryBold,
               ),
             ),
             SubscriptionHeading(),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.6,
+            Expanded(
               child:
                   BlocBuilder<PlanBloc, PlanState>(builder: (context, state) {
                 if (state is SuccessState) {
