@@ -6,21 +6,27 @@ class ApiConst {
   static const String imagePath = "$mainUrl/images/image/{user_id}/{image_id}";
 
   // TODO :   APIs
+  static const String signupAPI = '/auth/signup';
+  static const String loginAPI = '/auth/login';
+  static const String allUsersAPI = "/auth/getallusers";
+  static const String updateUserAPI = '/auth/update';
+  static const String addProfileImgAPI = '/profile/addprofile';
+
   static const String compareAPI = '/key/compare';
   static const String addkeyAPI = '/key/addkey';
   static const String getKeyByUserAPI = '/key/getuserkeys';
   static const String singleKeyByIdAPI = '/key/getkey';
-  static const String signupAPI = '/auth/signup';
-  static const String loginAPI = '/auth/login';
-  static const String allUsersAPI = "/auth/getallusers";
   static const String getAllKeysAPI = '/key/getKeys';
   static const String getAllCategoryAPI = '/key/getkeycategory';
   static const String addKeyCategoryAPI = '/key/addkeycategory';
+
   static const String updateCategoryAPI = '/admin/update-category';
   static const String getDashboardDetailAPI = '/admin/dashboard';
   static const String getAllUserPlanDetail = '/admin/user-plan';
   static const String deleteCategory = '/admin/delete-category';
+
   static const String getAllPlans = '/plan/getplans';
+
 
 
 

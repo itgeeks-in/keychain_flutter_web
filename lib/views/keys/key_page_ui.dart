@@ -46,7 +46,6 @@ class _KeysScreenState extends State<KeyPageUI> {
 
 
              SizedBox(
-
               width: MediaQuery.of(context).size.width / 3,
               height: 60,
               child:  Padding(

@@ -49,7 +49,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.fromLTRB(12, 12, 12, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -67,11 +67,11 @@ class _PopupViewUserState extends State<PopupViewUser> {
               ),
               Center(
                 child: const Text(
-                  "View User",
+                  "User Details",
                   style: ThemeText.textLargeSecondaryBold,
                 ),
               ),
-              SizedBox(height: 8,),
+              SizedBox(height: 14,),
               Center(
                 child: CircleAvatar(
                   radius: 50,

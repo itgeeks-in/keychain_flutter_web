@@ -29,7 +29,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
   List<CategoryData> categoryList = [];
    TextEditingController _keyNameController =  TextEditingController();
    TextEditingController _descriptionNameController = TextEditingController();
-
+String error="";
    bool isPassVisible = false;
    Uint8List? _image;
 
@@ -49,11 +49,13 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
 
   @override
   Widget build(BuildContext context) {
+    double sizeW=MediaQuery.of(context).size.width/2.4;
+    double sizeH=MediaQuery.of(context).size.height/1.3;
     return Dialog(
         child: SingleChildScrollView(
       child: Container(
-        width: 500,
-        height: 550,
+        width: sizeW,
+        height: sizeH,
         decoration: const BoxDecoration(
             color: ColorConsts.backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(21))),
@@ -62,7 +64,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.fromLTRB(10, 6, 16, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -85,7 +87,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
               ),
             ),
              Padding(
-              padding: EdgeInsets.only(left: 50, right: 50, top: 20),
+              padding: EdgeInsets.only(left: 40, right: 40, top: 19),
               child: Center(
                   child: CustomTextField(
                 controller: _keyNameController,
@@ -96,7 +98,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
               )),
             ),
              Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+              padding: const EdgeInsets.only(left: 40, right: 40, top: 20),
               child: CustomTextField(
                 prefixIconData: Icons.description_outlined,
                 isPassVisible: false,
@@ -107,8 +109,8 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
             ),
             Container(
                 height: 55,
-                width: 400,
-                margin: EdgeInsets.fromLTRB(50, 20, 12, 10),
+                width: sizeW,
+                margin: EdgeInsets.fromLTRB(40, 20, 40, 10),
                 padding: EdgeInsets.fromLTRB(8, 0, 4, 0),
                 decoration: new BoxDecoration(
                     border: Border.all(
@@ -166,16 +168,16 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
             ),
             SizedBox(height: 5,),
             Container(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 15),
               child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
                   children: [
                     Image.network(
                       widget.keysData.imagePath,
-                      height: 80,
-                      width: 80,
+                      height: 105,
+                      width: sizeW/3.6,
                       fit: BoxFit.cover,
                     ),
                     SizedBox(height: 2),
@@ -186,8 +188,8 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
                   children: [
                     Image.network(
                       widget.keysData.backImagePath,
-                      height: 80,
-                      width: 80,
+                      height: 105,
+                      width: sizeW/3.6,
                       fit: BoxFit.cover,
                     ),
                     SizedBox(height: 2),
@@ -198,8 +200,8 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
                   children: [
                     Image.network(
                       widget.keysData.lockImagePath,
-                      height: 80,
-                      width: 80,
+                      height: 105,
+                      width: sizeW/3.6,
                       fit: BoxFit.cover,
                     ),
                     SizedBox(height: 2),
@@ -209,10 +211,22 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 5,),
+
           Center(child: ButtonWidget().buttonWidgetSimple('Update',
-                  () => null,
+               () {
+            if(_descriptionNameController.text.isNotEmpty && _keyNameController.text.isNotEmpty) {
+
+            }else{
+              error = "Required all fields";
+              setState(() {
+
+              });
+            }
+               },
               100.0, 40.0)),
+            Center(child: Text(""+error,style: TextStyle(color: ColorConsts.redColor))),
+
           ],
         ),
       ),

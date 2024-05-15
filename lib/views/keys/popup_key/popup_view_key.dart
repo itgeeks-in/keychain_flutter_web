@@ -33,11 +33,13 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
 
   @override
   Widget build(BuildContext context) {
+    double sizeW=MediaQuery.of(context).size.width/2.4;
+    double sizeH=MediaQuery.of(context).size.height/1.3;
     return Dialog(
         child: SingleChildScrollView(
       child: Container(
-        width: 500,
-        height: 500,
+        width: sizeW,
+        height: sizeH,
         decoration: const BoxDecoration(
             color: ColorConsts.backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(21))),
@@ -64,12 +66,12 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
             ),
             Center(
               child: const Text(
-                "View Key",
+                "Key Details",
                 style: ThemeText.textLargeSecondaryBold,
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 50, right: 50, top: 20),
+              padding: EdgeInsets.only(left:25, right: 25, top: 20),
               child: Center(
                   child: CustomTextField(
                     enable: false,
@@ -81,7 +83,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                   )),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 20),
               child: CustomTextField(
                 enable: false,
                 prefixIconData: Icons.description_outlined,
@@ -92,7 +94,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 50, right: 50, top: 20),
+              padding: EdgeInsets.only(left: 25, right: 25, top: 20),
               child: Center(
                   child: CustomTextField(
                     enable: false,
@@ -105,19 +107,19 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
             ),
             SizedBox(height: 5,),
             Container(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+              padding: const EdgeInsets.only( top: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
                     children: [
                       Image.network(
                         widget.keysData.imagePath,
-                        height: 80,
-                        width: 80,
+                        height: sizeH/3,
+                        width: sizeW/3.6,
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(height: 2),
+                      SizedBox(height: 4),
                       Text("Front Image" , style: ThemeText.textMediumSecondary,),
                     ],
                   ),
@@ -125,11 +127,11 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                     children: [
                       Image.network(
                         widget.keysData.backImagePath,
-                        height: 80,
-                        width: 80,
+                        height: sizeH/3,
+                        width: sizeW/3.6,
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(height: 2),
+                      SizedBox(height: 4),
                       Text("Back Image" , style: ThemeText.textMediumSecondary,),
                     ],
                   ),
@@ -137,11 +139,11 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                     children: [
                       Image.network(
                         widget.keysData.lockImagePath,
-                        height: 80,
-                        width: 80,
+                        height: sizeH/3,
+                        width: sizeW/3.6,
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(height: 2),
+                      SizedBox(height: 4),
                       Text("Lock Image" , style: ThemeText.textMediumSecondary,),
                     ],
                   ),
