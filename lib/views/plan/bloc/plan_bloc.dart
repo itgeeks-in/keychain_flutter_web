@@ -31,16 +31,6 @@ class PlanBloc extends Bloc<PlanEvent,PlanState>{
       print("Failed : " + parsed['message']);
     }
   }
-
-  // Future<void> getAllPlan() async{
-  //   var result = await PlanPagePresenter().getAllPlan();
-  //   Map<String,dynamic> parsed = jsonDecode(result.toString());
-  //   if(parsed['status']){
-  //     PlanModel planModel = PlanModel.fromJson(parsed);
-  //     planDetail.addAll(planModel.result);
-  //     print("List data is:------------------------------"+ planDetail[0].planName);
-  //   }
-  // }
 }
 
 

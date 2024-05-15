@@ -8,6 +8,7 @@ import 'package:key_admin_panel/views/category/category_page_ui.dart';
 import 'package:key_admin_panel/views/home/home_page_ui.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/plan/bloc/plan_bloc.dart';
+import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_bloc.dart';
 import 'package:key_admin_panel/views/profile/profile_page_ui.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
@@ -212,10 +213,21 @@ class _HomePageUIState extends State<SideDrawer> {
             },child: CategoryPageUI());
       case 5:
         return ProfilePage();
+      // case 3:
+      //   return  BlocProvider(create:(context){
+      //     return PlanBloc();
+      //   },child: PlanPageUI());
       case 3:
-        return  BlocProvider(create:(context){
-          return PlanBloc();
-        },child: PlanPageUI());
+        return  MultiBlocProvider(providers:[
+          BlocProvider<PlanListBloc>(
+            create: (context) => PlanListBloc(),
+            child: PlanPageUI(),
+          ),
+          BlocProvider<PlanBloc>(
+            create: (context) => PlanBloc(),
+            child: PlanPageUI(),
+          ),
+        ], child: PlanPageUI());
       case 6:
         return  HomePageUI();
       default:
