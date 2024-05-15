@@ -39,38 +39,64 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: const Color(0xFFE7E7E7),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(18.0),
           child: Column(
             children: [
               Row(
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Container(
+                    child: SizedBox(
                       height: 500,
                       width: 500,
                       child: Card(
                         color: ColorConsts.backgroundColor,
                         child: Padding(
-                          padding: const EdgeInsets.all(24),
+                          padding: const EdgeInsets.all(27),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  ButtonWidget().buttonWidgetSimple(
-                                      'Update',
-                                      () => {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  EditUserProfile(
-                                                      userDataModel!),
-                                            )
-                                          },
-                                      100.0,
-                                      40.0)
+                                  InkResponse(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            EditUserProfile(
+                                                userDataModel!),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 32,
+                                      width: 32,
+                                      decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              ColorConsts.primaryColor,
+                                              ColorConsts.primaryColor,
+                                            ],
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                          ),
+                                          borderRadius:
+                                          BorderRadius.circular(25.0)
+                                          ,boxShadow: const [BoxShadow(
+                                        color: ColorConsts.primaryColor,
+                                        blurRadius: 1.0,
+                                        offset: Offset(1, 2),
+                                      ),]
+                                      ),
+                                      padding:
+                                      const EdgeInsets.all(1.0),
+                                      child: const Icon(
+                                        Icons.edit_outlined,
+                                        color: ColorConsts.whiteColor,size: 20,
+                                      ),
+                                    ),
+                                  ),
+
                                 ],
                               ),
                               Center(

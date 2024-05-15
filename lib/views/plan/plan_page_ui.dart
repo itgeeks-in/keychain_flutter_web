@@ -58,9 +58,18 @@ class _PlanPageState extends State<PlanPageUI> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(plan.planName +"\n\$"+plan.price +"\n"+(plan.keyCount.toString().contains("unlimited")?"Unlimited keys":"You can scan upto " +
-                                      plan.keyCount.toString()+
-                                      " Keys"), style: ThemeText.textMediumSecondaryBold,textAlign: TextAlign.start,),
+                                Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(plan.planName  ,
+                                    style: ThemeText.textMediumPrimaryBold,textAlign: TextAlign.start,),
+                                  Text("\$"+plan.price +"\n"+
+                                      (plan.keyCount.toString().contains("unlimited")?"Unlimited keys":"You can scan upto " +
+                                          plan.keyCount.toString()+
+                                          " Keys"),
+                                    style: ThemeText.textMediumGrey,textAlign: TextAlign.start,)
+                                  ,]),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
