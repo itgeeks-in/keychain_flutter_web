@@ -33,7 +33,10 @@ class CategoryPageBloc extends Bloc<CategoryPageEvent,CategoryPageState> {
     }
   }
 
-
+  refresh(){
+    print("refresh called cate bloc issue");
+    emit(RefreshChangeState());
+  }
 
   filtered(String query1) {
     emit(CategoryLoadState() );

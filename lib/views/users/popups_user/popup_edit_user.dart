@@ -117,11 +117,9 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
              Padding(
               padding: const EdgeInsets.only(
                   left: 50, right: 50, top: 50, bottom: 20),
-              child: Container(
-                child: RoundedButton(
-                  btnName: "Update",
-                  callback: () {},
-                ),
+              child: RoundedButton(
+                btnName: "Update",
+                callback: () {},
               ),
             ),
           ],

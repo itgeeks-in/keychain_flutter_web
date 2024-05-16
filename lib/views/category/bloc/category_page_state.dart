@@ -14,6 +14,10 @@ class CategorySuccessState extends CategoryPageState{
   CategorySuccessState(this.data);
 
 }
+
+class RefreshChangeState extends CategoryPageState{
+
+}
 class CategoryNotFoundState extends CategoryPageState{
   String msg;
   CategoryNotFoundState(this.msg);

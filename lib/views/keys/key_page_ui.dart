@@ -186,11 +186,14 @@ class _KeysScreenState extends State<KeyPageUI> {
                                       child: state.data[index].imagePath.isEmpty
                                           ? Image.asset(AppAssets.notFoundImg)
                                           : ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                              borderRadius: BorderRadius.circular(8.0),
                                               child: Image.network(
                                                 state.data[index].imagePath,
                                                 fit: BoxFit.cover,
+errorBuilder: (context, error, stackTrace) {
+  return Container(color: ColorConsts.primaryColor,    height: 80,
+    width: 80,);
+},
                                                 loadingBuilder: (context, child,
                                                     loadingProgress) {
                                                   if (loadingProgress == null) {
@@ -198,7 +201,7 @@ class _KeysScreenState extends State<KeyPageUI> {
                                                   }
                                                   return Shimmer.fromColors(
                                                       child: Container(
-                                                        height: 100,
+                                                        height: 80,
                                                         width: 80,
                                                         color: Colors.white,
                                                       ),
@@ -313,7 +316,11 @@ class _KeysScreenState extends State<KeyPageUI> {
                                             context: context,
                                             builder: (context) => PopUpEditkey(
                                                 keysData: state.data[index]),
-                                          );
+                                          ).then((value) {
+                                            context
+                                                .read<KeyBloc>()
+                                                .filtered(searchController.text);
+                                          },);
                                         },
                                         child: Container(
                                           height: 32,

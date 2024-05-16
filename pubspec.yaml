@@ -44,6 +44,7 @@ dependencies:
   shimmer:
   equatable: ^2.0.5
   pie_chart :
+  intl :
 
 dev_dependencies:
   flutter_test:

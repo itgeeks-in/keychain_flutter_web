@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:html';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/model/keys_model.dart';
 import 'package:key_admin_panel/views/keys/bloc/key_state.dart';
@@ -36,6 +35,7 @@ class KeyBloc extends Bloc<KeyEvent,KeyState>{
   Future<void> getAllKeysAPI() async{
 
     var result = await KeyPagePresenter().getAllKeyAPI(offset.toString(),limit,query);
+  //  print("object======================= $result");
     Map<String,dynamic> parsed = jsonDecode(result.toString());
     if(parsed['status']){
     KeysModel keysModel = KeysModel.fromJson(parsed);
@@ -44,7 +44,7 @@ class KeyBloc extends Bloc<KeyEvent,KeyState>{
       emit(SuccessState(current_page,  data, LoadMore));
     }else{
       LoadMore = true;
-print("object======================= "+keysModel.result.length.toString());
+
       data.addAll(keysModel.result);
       emit(SuccessState(current_page,  data, LoadMore));
     }

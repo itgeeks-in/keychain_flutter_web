@@ -6,7 +6,7 @@ import 'package:key_admin_panel/model/keys_model.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
-
+import 'package:intl/intl.dart';
 class PopUpViewKey extends StatefulWidget {
   final KeysData keysData;
   const PopUpViewKey({super.key,required this.keysData});
@@ -20,6 +20,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
   TextEditingController _keyNameController =  TextEditingController();
   TextEditingController _descriptionNameController = TextEditingController();
   TextEditingController _categoryNameController  = TextEditingController();
+  TextEditingController _dateCreatedController  = TextEditingController();
 
   bool isPassVisible = false;
 
@@ -29,12 +30,17 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
     _keyNameController.text = widget.keysData.imageName;
     _descriptionNameController.text = widget.keysData.description;
     _categoryNameController.text = widget.keysData.categoryName;
+//2024-05-10T16:03:24.410Z"
+    var dateString = widget.keysData.createdAt;
+    var dateTime = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(dateString);
+
+    _dateCreatedController.text = DateFormat('d MMMM yyyy hh:mm').format(dateTime);
   }
 
   @override
   Widget build(BuildContext context) {
     double sizeW=MediaQuery.of(context).size.width/2.4;
-    double sizeH=MediaQuery.of(context).size.height/1.3;
+    double sizeH=MediaQuery.of(context).size.height/1.2;
     return Dialog(
         child: SingleChildScrollView(
       child: Container(
@@ -48,7 +54,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(8, 8, 18, 6),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -93,6 +99,20 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                 hintText:'',
               ),
             ),
+
+
+            Padding(
+              padding: EdgeInsets.only(left: 25, right: 25, top: 20),
+              child: Center(
+                  child: CustomTextField(
+                    enable: false,
+                    controller: _dateCreatedController,
+                    isPassVisible: false,
+                    labelText: "Key added on",
+                    prefixIconData: Icons.calendar_month,
+                    hintText: '',
+                  )),
+            ),
             Padding(
               padding: EdgeInsets.only(left: 25, right: 25, top: 20),
               child: Center(
@@ -113,37 +133,60 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                 children: [
                   Column(
                     children: [
-                      Image.network(
+              ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child:  Image.network(
                         widget.keysData.imagePath,
-                        height: sizeH/3,
+                        height: sizeH/3.33,
                         width: sizeW/3.6,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(height: 4),
+                        fit: BoxFit.cover ,errorBuilder: (context, error, stackTrace) {
+                        return Container(color: ColorConsts.primaryColor,
+                          height: sizeH/3.33,
+                          width: sizeW/3.6,
+                        );
+                      },
+                      )),
+                      SizedBox(height: 3),
                       Text("Front Image" , style: ThemeText.textMediumSecondary,),
                     ],
                   ),
                   Column(
                     children: [
-                      Image.network(
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child:   Image.network(
                         widget.keysData.backImagePath,
-                        height: sizeH/3,
+                        height: sizeH/3.33,
                         width: sizeW/3.6,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(height: 4),
+                        fit: BoxFit.cover
+                          ,errorBuilder: (context, error, stackTrace) {
+                          return Container(color: ColorConsts.primaryColor,
+                            height: sizeH/3.33,
+                            width: sizeW/3.6,
+                          );
+                        },
+                      )),
+                      SizedBox(height: 3),
                       Text("Back Image" , style: ThemeText.textMediumSecondary,),
                     ],
                   ),
                   Column(
                     children: [
-                      Image.network(
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child:   Image.network(
                         widget.keysData.lockImagePath,
-                        height: sizeH/3,
+                        height: sizeH/3.33,
                         width: sizeW/3.6,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(height: 4),
+                        fit: BoxFit.cover
+                      ,errorBuilder: (context, error, stackTrace) {
+        return Container(color: ColorConsts.primaryColor,
+        height: sizeH/3.33,
+        width: sizeW/3.6,
+        );
+        },
+                      )),
+                      SizedBox(height: 3),
                       Text("Lock Image" , style: ThemeText.textMediumSecondary,),
                     ],
                   ),

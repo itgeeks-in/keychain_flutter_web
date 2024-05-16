@@ -31,15 +31,17 @@ class _HomePageUIState extends State<SideDrawer> {
 
   @override
   Widget build(BuildContext context) {
+ double size=   MediaQuery.of(context).size.height/12;
     return Scaffold(
       body: Row(
         children: [
           NavigationRail(
             minExtendedWidth: MediaQuery.of(context).size.width/6,
+
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Image.asset("assets/img.jpg",
-                  height: 62, width: 62, fit: BoxFit.cover),
+                  height: 65, width: 65, fit: BoxFit.cover),
             ),
             indicatorColor: ColorConsts.backgroundColor,
             extended: isExpanded,
@@ -47,41 +49,44 @@ class _HomePageUIState extends State<SideDrawer> {
             unselectedIconTheme:
                 IconThemeData(color: ColorConsts.whiteColor, opacity: 1),
             selectedLabelTextStyle:
-                TextStyle(color: ColorConsts.whiteColor, fontSize: 16),
+                TextStyle(color: ColorConsts.whiteColor, fontSize: 18),
             unselectedLabelTextStyle:
                 TextStyle(color: ColorConsts.whiteColor, fontSize: 13),
-            selectedIconTheme: IconThemeData(
+            selectedIconTheme: const IconThemeData(
               color: ColorConsts.primaryColor,
             ),
+
             destinations: [
+
               NavigationRailDestination(
-                icon: Icon(Icons.home),
-                padding: EdgeInsets.only(top: 30),
-                label: Text("Dashboard"),
+                icon: SizedBox(height: size,child: const Icon(Icons.home)),
+                padding: const EdgeInsets.only(top: 30),
+                label: const Text("Dashboard"),
+
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.people_outline_sharp),
-                label: Text("Users"),
+                icon: SizedBox(height: size,child:const Icon(Icons.people_outline_sharp)),
+                label: const Text("Users"),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.vpn_key_outlined),
-                label: Text("Keys"),
+                icon: SizedBox(height: size,child:const Icon(Icons.vpn_key_outlined)),
+                label: const Text("Keys"),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.playlist_add_rounded),
-                label: Text("Plans"),
+                icon: SizedBox(height: size,child:const Icon(Icons.playlist_add_rounded)),
+                label: const Text("Plans"),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.palette_rounded),
-                label: Text("Category"),
+                icon:SizedBox(height: size,child: const Icon(Icons.palette_rounded)),
+                label: const Text("Category"),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.person_rounded),
-                label: Text("Profile"),
+                icon:SizedBox(height: size,child: const Icon(Icons.person_rounded)),
+                label: const Text("Profile"),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.logout),
-                label: Text("Logout"),
+                icon: SizedBox(height: size,child:const Icon(Icons.logout)),
+                label: const Text("Logout"),
               ),
             ],
             selectedIndex: _selectedIndex,
