@@ -1,13 +1,16 @@
 // ignore_for_file: file_names
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:key_admin_panel/model/all_user_model.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
-import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
+import 'package:key_admin_panel/views/users/user_page_presenter.dart';
 
-import '../../../theme/app_assets.dart';
+import '../../../utils/loading_dialog.dart';
 import '../../../utils/theme_text.dart';
+import '../../../widgets/buttons.dart';
 
 class PopUpEditUser extends StatefulWidget {
   final UserData userData;
@@ -21,27 +24,44 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _confirmEmailController = TextEditingController();
-
-  bool isPassVisible = false;
+  String error="";
 
   @override
   void initState() {
     super.initState();
-    if (widget.userData != null) {
       _firstNameController.text = widget.userData.firstName;
       _lastNameController.text = widget.userData.lastName;
       _emailController.text = widget.userData.email;
-      _confirmEmailController.text = widget.userData.email;
+  }
+  apiCall() async {
+    LoadingDialog.show(context);
+    var res =    await  UserPagePresenter().editUserDetailAPI(widget.userData.id,_firstNameController.text,_lastNameController.text,_emailController.text);
+    LoadingDialog.hide(context);
+    if(res.toString().contains("status")){
+      Map<String,dynamic> parsed = json.decode(res.toString());
+      if (parsed['status']) {
+        error="Updated successfully.";
+        Navigator.pop(context);
+      }else{
+        error="Not updated.";
+      }
+    }else{
+      error="Not updated";
     }
+    setState(() {
+
+    },);
   }
 
   @override
   Widget build(BuildContext context) {
+    double sizeW=MediaQuery.of(context).size.width/2.5;
+    double sizeH=MediaQuery.of(context).size.height/1.5;
     return Dialog(
         child: SingleChildScrollView(
       child: Container(
-        width: 500,
+        width: sizeW,
+        height: sizeH,
         decoration: const BoxDecoration(
             color: ColorConsts.backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(21))),
@@ -71,16 +91,6 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 style: ThemeText.textLargeSecondaryBold,
               ),
             ),
-            SizedBox(height: 8,),
-            Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: widget.userData.profileImage.isNotEmpty
-                    ? NetworkImage(widget.userData.profileImage)
-                    : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
-              ),
-            ),
-            SizedBox(height: 5,),
              Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
@@ -114,14 +124,20 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 hintText: "Enter email",
               )),
             ),
-             Padding(
-              padding: const EdgeInsets.only(
-                  left: 50, right: 50, top: 50, bottom: 20),
-              child: RoundedButton(
-                btnName: "Update",
-                callback: () {},
-              ),
-            ),
+            SizedBox(height: 11,),
+            Center(child: ButtonWidget().buttonWidgetSimple('Update',
+                    () {
+                  if(_firstNameController.text.isNotEmpty && _lastNameController.text.isNotEmpty && _emailController.text.isNotEmpty) {
+                    apiCall();
+                  }else{
+                    error = "Required all fields";
+                    setState(() {
+
+                    });
+                  }
+                },
+                100.0, 40.0)),
+            Center(child: Text(""+error,style: TextStyle(color: ColorConsts.redColor))),
           ],
         ),
       ),

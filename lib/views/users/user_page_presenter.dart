@@ -13,4 +13,12 @@ class UserPagePresenter {
       Response response = await ApiRepository.postAPI(ApiConst.allUsersAPI,requestBody);
       return response;
   }
+  Future<dynamic> editUserDetailAPI(String id,String firstName,String lastName,String email) async{
+    final jsonFormData = {
+      ApiConst.id : id, ApiConst.firstName:firstName,  ApiConst.lastName : lastName , ApiConst.email : email
+    };
+    var response = await ApiRepository.putAPI(ApiConst.updateUserAPI, jsonFormData);
+    print(response);
+    return response;
+  }
 }

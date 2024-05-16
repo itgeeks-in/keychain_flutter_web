@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/users/bloc/user_bloc.dart';
@@ -14,9 +15,6 @@ import 'package:key_admin_panel/views/users/popups_user/popup_view_user.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
 
-import '../../model/all_user_model.dart';
-import '../../theme/app_assets.dart';
-import '../../widgets/text_field_custom.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({super.key});
@@ -26,13 +24,13 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+
   int currentPage = 1;
   bool IsLoading = false;
   TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: ColorConsts.backgroundColor,
       body: Padding(
@@ -44,82 +42,92 @@ class _UserPageState extends State<UserPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 3,
-                    height: 70,
-                    child:  TextField(
-                          controller: searchController,
-                          style: TextStyle(color: ColorConsts.textColorDark),
-                          decoration: InputDecoration(
-                            labelText: "Search",
-                            labelStyle: TextStyle(color: ColorConsts.primaryColor),
-                            filled: true,
-                            fillColor: ColorConsts.backgroundColor,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(
-                                color: ColorConsts.primaryColor,
-                                width: 2,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(
-                                color: ColorConsts.primaryColor,
-                              ),
-                            ),
-                            disabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
-                            ),
-                            prefixIcon: Icon(
-                              Icons.person_search_sharp,
+                      width: MediaQuery.of(context).size.width / 3,
+                      height: 70,
+                      child: TextField(
+                        controller: searchController,
+                        style: TextStyle(color: ColorConsts.textColorDark),
+                        decoration: InputDecoration(
+                          labelText: "Search",
+                          labelStyle:
+                              TextStyle(color: ColorConsts.primaryColor),
+                          filled: true,
+                          fillColor: ColorConsts.backgroundColor,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(11),
+                            borderSide: BorderSide(
                               color: ColorConsts.primaryColor,
+                              width: 2,
                             ),
-
-                            hintText: "Search keys",
-                            hintStyle: TextStyle(
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(11),
+                            borderSide: BorderSide(
                               color: ColorConsts.primaryColor,
                             ),
                           ),
-                          onChanged: (value) {
-
-                          },
-                      onSubmitted: (value) {
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(11),
+                            borderSide: BorderSide(
+                                color: ColorConsts.primaryColor, width: 2),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.person_search_sharp,
+                            color: ColorConsts.primaryColor,
+                          ),
+                          hintText: "Search keys",
+                          hintStyle: TextStyle(
+                            color: ColorConsts.primaryColor,
+                          ),
+                        ),
+                        onChanged: (value) {},
+                        onSubmitted: (value) {
+                          context
+                              .read<UsersDataBloc>()
+                              .filtered(searchController.text);
+                        },
+                      )),
+                  InkResponse(
+                      onTap: () {
                         context
                             .read<UsersDataBloc>()
                             .filtered(searchController.text);
                       },
-                        )
-                  ),
-                  InkResponse(onTap: () {
-                    context
-                        .read<UsersDataBloc>()
-                        .filtered(searchController.text);
-                  },child: Container(width: 60,height: 56,
-                      margin: EdgeInsets.fromLTRB(12,0, 0, 9),
-                      decoration: BoxDecoration(
-                        color: ColorConsts.primaryColor,
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(10)),
-                        border: Border.all(
-                          width: 1,
-                          color: ColorConsts.primaryColor,
-                        ),),
-
-                      child: Icon(Icons.search,size: 25,color: ColorConsts.whiteColor,))),
+                      child: Container(
+                          width: 60,
+                          height: 56,
+                          margin: EdgeInsets.fromLTRB(12, 0, 0, 9),
+                          decoration: BoxDecoration(
+                            color: ColorConsts.primaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            border: Border.all(
+                              width: 1,
+                              color: ColorConsts.primaryColor,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.search,
+                            size: 25,
+                            color: ColorConsts.whiteColor,
+                          ))),
                   Spacer(),
-                  ButtonWidget().buttonWidgetSimple('Add User+', () =>{
-                  showDialog(
-                  context: context,
-                  builder: (context) => BlocProvider(
-                  create: (_) => AddUserBloc(),
-                  child:PopUpAddUser(), ),
-                  ),
-                  }, 120, 40),
+                  ButtonWidget().buttonWidgetSimple(
+                      'Add User+',
+                      () => {
+                            showDialog(
+                              context: context,
+                              builder: (context) => BlocProvider(
+                                create: (_) => AddUserBloc(),
+                                child: PopUpAddUser(),
+                              ),
+                            ),
+                          },
+                      120,
+                      40),
                 ],
               ),
             ),
@@ -179,307 +187,204 @@ class _UserPageState extends State<UserPage> {
                 ),
               ),
             ),
-            Expanded(
-                child:  BlocBuilder<UsersDataBloc, UsersDataState>(
-                    builder: (context, state) {
-                      if (state is SuccessState) {
-                        IsLoading = false;
-                        return NotificationListener<ScrollEndNotification>(
-                          onNotification: (ScrollEndNotification scrollInfo){
-                            if (scrollInfo.metrics.pixels ==
-                                scrollInfo.metrics.maxScrollExtent) {
-                              print("on scroll $currentPage");
-                              if (IsLoading == false) {
-                                IsLoading = true;
-                                currentPage++;
-                                context
-                                    .read<UsersDataBloc>()
-                                    .add(OnScrollPageEvent(currentPage, 0));
-                              }
-                              return true;
-                            }
-                            return false;
-                          },
-                          child: ListView.builder(
-                            itemCount: state.data.length,
-                            itemBuilder: (context, index) {
-                              if (index == state.data.length - 1 &&
-                                  state.LoadMore &&
-                                  state.data.length > 8) {
-                                return Center(
-                                  child: Loader().loaderWidget2(),
-                                );
-                              }
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  padding: const EdgeInsets.all(4.0),
-                                  height: 45,
-                                  decoration: BoxDecoration(
-                                      color: ColorConsts.backgroundColor,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(10)),
-                                      border: Border.all(
-                                        width: 1,
-                                        color: ColorConsts.primaryColor,
+            Expanded(child: BlocBuilder<UsersDataBloc, UsersDataState>(
+              builder: (context, state) {
+                if (state is SuccessState) {
+                  IsLoading = false;
+                  return NotificationListener<ScrollEndNotification>(
+                    onNotification: (ScrollEndNotification scrollInfo) {
+                      if (scrollInfo.metrics.pixels ==
+                          scrollInfo.metrics.maxScrollExtent) {
+                        print("on scroll $currentPage");
+                        if (IsLoading == false) {
+                          IsLoading = true;
+                          currentPage++;
+                          context
+                              .read<UsersDataBloc>()
+                              .add(OnScrollPageEvent(currentPage, 0));
+                        }
+                        return true;
+                      }
+                      return false;
+                    },
+                    child: ListView.builder(
+                      itemCount: state.data.length,
+                      itemBuilder: (context, index) {
+                        if (index == state.data.length - 1 &&
+                            state.LoadMore &&
+                            state.data.length > 8) {
+                          return Center(
+                            child: Loader().loaderWidget2(),
+                          );
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            padding: const EdgeInsets.all(4.0),
+                            height: 45,
+                            decoration: BoxDecoration(
+                              color: ColorConsts.backgroundColor,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                              border: Border.all(
+                                width: 1,
+                                color: ColorConsts.primaryColor,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      state.data![index].firstName.toString() +
+                                          " " +
+                                          state.data![index].lastName
+                                              .toString(),
+                                      maxLines: 1,
+                                      style: const TextStyle(
+                                        color: ColorConsts.textColorDark,
+                                        fontSize: 16,
                                       ),
-                                   ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            state.data![index].firstName
-                                                    .toString() +
-                                                " " +
-                                                state.data![index].lastName
-                                                    .toString(),
-                                            maxLines: 1,
-                                            style: const TextStyle(
-                                              color: ColorConsts.textColorDark,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text(
-                                          state.data[index].email.toString(),
-                                          maxLines: 1,
-                                          style: ThemeText.textMediumSecondary,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(left: 5),
-                                          child: Text(
-                                            state.data[index].totalKey,
-                                            style: TextStyle(
-                                              color: ColorConsts.textColorDark,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Spacer(),
-                                            InkResponse(
-                                              onTap: () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (context) => PopupViewUser(
-                                                      userData: state.data[index]),
-                                                );
-                                              },
-                                              //onTap: () => PopupViewUser(userData: state.data[index],),
-                                              child: Container(
-                                                height: 32,
-                                                width: 32,
-                                                decoration: BoxDecoration(
-                                                    gradient: LinearGradient(
-                                                      colors: [
-                                                        ColorConsts.primaryColor,
-                                                        ColorConsts.primaryColor,
-                                                      ],
-                                                      begin: Alignment.centerLeft,
-                                                      end: Alignment.centerRight,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            25.0),
-                                                    boxShadow: [
-                                                      new BoxShadow(
-                                                        color: ColorConsts
-                                                            .primaryColor,
-                                                        blurRadius: 1.0,
-                                                        offset: Offset(1, 2),
-                                                      ),
-                                                    ]),
-                                                padding:
-                                                    const EdgeInsets.all(1.0),
-                                                child: const Icon(
-                                                  Icons.remove_red_eye_rounded,
-                                                  color: ColorConsts.whiteColor,
-                                                  size: 20,
-                                                ),
-                                              ),
-                                            ),
-                                            const Spacer(),
-                                            InkResponse(
-                                              onTap: () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      PopUpEditUser(userData: state.data[index],),
-                                                );
-                                              },
-                                              child: Container(
-                                                height: 32,
-                                                width: 32,
-                                                decoration: BoxDecoration(
-                                                    gradient: LinearGradient(
-                                                      colors: [
-                                                        ColorConsts.primaryColor,
-                                                        ColorConsts.primaryColor,
-                                                      ],
-                                                      begin: Alignment.centerLeft,
-                                                      end: Alignment.centerRight,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            25.0),
-                                                    boxShadow: [
-                                                      new BoxShadow(
-                                                        color: ColorConsts
-                                                            .primaryColor,
-                                                        blurRadius: 1.0,
-                                                        offset: Offset(1, 2),
-                                                      ),
-                                                    ]),
-                                                padding:
-                                                    const EdgeInsets.all(1.0),
-                                                child: Icon(
-                                                  Icons.edit_outlined,
-                                                  color: ColorConsts.whiteColor,
-                                                  size: 20,
-                                                ),
-                                              ),
-                                            ),
-                                            Spacer(),
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              );
-                            },
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    state.data[index].email.toString(),
+                                    maxLines: 1,
+                                    style: ThemeText.textMediumSecondary,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      state.data[index].totalKey,
+                                      style: TextStyle(
+                                        color: ColorConsts.textColorDark,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Spacer(),
+                                      InkResponse(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => PopupViewUser(
+                                                userData: state.data[index]),
+                                          );
+                                        },
+                                        //onTap: () => PopupViewUser(userData: state.data[index],),
+                                        child: Container(
+                                          height: 32,
+                                          width: 32,
+                                          decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  ColorConsts.primaryColor,
+                                                  ColorConsts.primaryColor,
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(25.0),
+                                              boxShadow: [
+                                                new BoxShadow(
+                                                  color:
+                                                      ColorConsts.primaryColor,
+                                                  blurRadius: 1.0,
+                                                  offset: Offset(1, 2),
+                                                ),
+                                              ]),
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: const Icon(
+                                            Icons.remove_red_eye_rounded,
+                                            color: ColorConsts.whiteColor,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      InkResponse(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => PopUpEditUser(
+                                              userData: state.data[index],
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 32,
+                                          width: 32,
+                                          decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  ColorConsts.primaryColor,
+                                                  ColorConsts.primaryColor,
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(25.0),
+                                              boxShadow: [
+                                                new BoxShadow(
+                                                  color:
+                                                      ColorConsts.primaryColor,
+                                                  blurRadius: 1.0,
+                                                  offset: Offset(1, 2),
+                                                ),
+                                              ]),
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: Icon(
+                                            Icons.edit_outlined,
+                                            color: ColorConsts.whiteColor,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         );
-                      } else if(state is UserNotFoundState){
-                        return Center(
-                          child: Text(
-                            state.msg,
-                            style: ThemeText.textMediumSecondaryBold,
-                          ),
-                        );
-                      }else{
-                        return Center(child: Loader().loaderWidget2());
-                      }
-                    },
-                ))
+                      },
+                    ),
+                  );
+                } else if (state is UserNotFoundState) {
+                  return Center(
+                    child: Text(
+                      state.msg,
+                      style: ThemeText.textMediumSecondaryBold,
+                    ),
+                  );
+                } else {
+                  return Center(child: Loader().loaderWidget2());
+                }
+              },
+            ))
           ],
         )),
       ),
     );
   }
-  Future<bool> _showEditDialog(BuildContext context,UserData userData,
-      Function() onClick) async {
-      TextEditingController _firstNameController = TextEditingController();
-      TextEditingController _lastNameController = TextEditingController();
-      TextEditingController _emailController = TextEditingController();
-     return (await showDialog(
-        context: context,
-        builder: (context) => StatefulBuilder(builder: (context, setState) {
-          _firstNameController.text = userData.firstName;
-          _lastNameController.text = userData.lastName;
-          _emailController.text = userData.email;
-
-          bool isFirstNameValid = false;
-          bool isLastNameValid = false;
-          bool isEmailValid = false;
-
-          return SizedBox(
-            height: MediaQuery.of(context).size.height / 2.5,
-            child: AlertDialog(
-              contentPadding: EdgeInsets.all(18.0),
-              elevation: 8,
-              backgroundColor: ColorConsts.backgroundColor,
-              content: SizedBox(
-                height: MediaQuery.of(context).size.height / 2.5,
-                width: MediaQuery.of(context).size.height / 2,
-                child: Column(
-                  children: [
-                    Center(
-                        child: Text("Edit User",
-                            style: ThemeText.textLargeSecondaryBold)),
-                    SizedBox(height: 35),
-                    Center(
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: userData.profileImage.isNotEmpty
-                            ? NetworkImage(userData.profileImage)
-                            : AssetImage(AppAssets.notFoundImg) as ImageProvider<Object>,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.height / 2,
-                      child: TextFieldCustom().textFieldForDialog(_firstNameController, "First name","Enter first name", (value) => {
-                      if(_firstNameController.text.isNotEmpty){
-                          isFirstNameValid=true,
-                          }else{
-                          isFirstNameValid = false,
-                          }
-                      }, Icons.person_add_outlined)
-                    ),
-                    if(isFirstNameValid)Text("Add first name to continue..",
-                      style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
-                    ),
-                    SizedBox(height: 10),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.height / 2,
-                        child: TextFieldCustom().textFieldForDialog(_lastNameController, "First name","Enter first name", (value) => {
-                          if(_lastNameController.text.isNotEmpty){
-                            isLastNameValid=true,
-                          }else{
-                            isLastNameValid = false,
-                          }
-                        }, Icons.person_add_outlined)
-                    ),
-                    if(isLastNameValid)Text("Add last name to continue..",
-                      style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
-                    ),
-                    SizedBox(height: 10),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.height / 2,
-                        child: TextFieldCustom().textFieldForDialog(_emailController, "First name","Enter first name", (value) => {
-                          if(_emailController.text.isNotEmpty){
-                            isEmailValid=true,
-                          }else{
-                            isEmailValid = false,
-                          }
-                        }, Icons.person_add_outlined)
-                    ),
-                    if(isEmailValid)Text("Add email to continue..",
-                      style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
-                    ),
-                  ],
-                ),
-              ),
-              actions: [
-                ButtonWidget().buttonWidgetSimple("Cancel",
-                        () => Navigator.pop(context, false), 80.0, 40.0),
-                ButtonWidget().buttonWidgetSimple("Update", () async {
-                }, 80.0, 40.0),
-              ],
-            ),
-          );
-        }))) ??
-        false;
-   }
-}
-
+ }

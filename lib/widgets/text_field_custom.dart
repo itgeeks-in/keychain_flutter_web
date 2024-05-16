@@ -77,8 +77,11 @@ class TextFieldCustom {
   }
   Widget textFieldForDialog(TextEditingController textEditingController,String hintText,String lableText,Function(String) onChanged,IconData prefixIconData){
     return TextField(
-      onChanged: onChanged,
+      onChanged: (value){
+        onChanged(value);
+      },
       controller: textEditingController,
+      style: ThemeText.textMediumSecondary,
       decoration: InputDecoration(
         labelText: lableText,
         labelStyle: TextStyle(color: ColorConsts.primaryColor),
