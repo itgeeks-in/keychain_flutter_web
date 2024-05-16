@@ -8,13 +8,11 @@ import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/users/bloc/user_bloc.dart';
 import 'package:key_admin_panel/views/users/bloc/user_event.dart';
 import 'package:key_admin_panel/views/users/bloc/user_state.dart';
-import 'package:key_admin_panel/views/users/popups_user/bloc_user_add/user_add_bloc.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_add_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_edit_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_view_user.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
-
 
 class UserPage extends StatefulWidget {
   UserPage({super.key});
@@ -24,7 +22,6 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-
   int currentPage = 1;
   bool IsLoading = false;
   TextEditingController searchController = TextEditingController();
@@ -120,10 +117,7 @@ class _UserPageState extends State<UserPage> {
                       () => {
                             showDialog(
                               context: context,
-                              builder: (context) => BlocProvider(
-                                create: (_) => AddUserBloc(),
-                                child: PopUpAddUser(),
-                              ),
+                              builder: (context) => PopupAddUser(),
                             ),
                           },
                       120,
@@ -387,4 +381,4 @@ class _UserPageState extends State<UserPage> {
       ),
     );
   }
- }
+}
