@@ -77,7 +77,7 @@ class _HomePageUIState extends State<SideDrawer> {
                 label: const Text("Plans"),
               ),
               NavigationRailDestination(
-                icon:SizedBox(height: size,child: const Icon(Icons.palette_rounded)),
+                icon:SizedBox(height: size,child: const Icon(Icons.category_outlined)),
                 label: const Text("Category"),
               ),
               NavigationRailDestination(

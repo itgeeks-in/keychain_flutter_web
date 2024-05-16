@@ -165,7 +165,7 @@ class _PlanPageState extends State<PlanPageUI> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    InkResponse(
+                                   /* InkResponse(
                                       onTap: () =>
                                           _showDeleteDialog(context,
                                                   () {
@@ -199,7 +199,7 @@ class _PlanPageState extends State<PlanPageUI> {
                                           size: 20,
                                         ),
                                       ),
-                                    ),
+                                    ),*/
                                   ],
                                 ),
                               ],

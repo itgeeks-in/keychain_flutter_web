@@ -120,10 +120,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+
                   Padding(
                     padding: EdgeInsets.only(
                         left: 50, right: 90, top: 20, bottom: 30),
@@ -131,16 +128,34 @@ class _PopupViewUserState extends State<PopupViewUser> {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              "Total Keys :  ",
+                            const Text(
+                              "Plan Present :  ",
                               style: TextStyle(
-                                  color: ColorConsts.textColorLight,
+                                  color: ColorConsts.secondaryColor,
                                   fontSize: 18),
                             ),
                             Text(
-                              widget.userData.keys != null
-                                  ? widget.userData.keys!.length.toString()
-                                  : '0',
+
+                                widget.userData.totalKey.toString(),
+
+                              style: TextStyle(
+                                  color: ColorConsts.textColorDark,
+                                  fontSize: 18),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              "Total scanned  :  ",
+                              style: TextStyle(
+                                  color: ColorConsts.secondaryColor,
+                                  fontSize: 18),
+                            ),
+                            Text(
+
+                              widget.userData.keys.length.toString(),
+
                               style: TextStyle(
                                   color: ColorConsts.textColorDark,
                                   fontSize: 18),
@@ -149,8 +164,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                         ),
                       ],
                     ),
-                  ),
-                ],
+
               ),
             ],
           ),
