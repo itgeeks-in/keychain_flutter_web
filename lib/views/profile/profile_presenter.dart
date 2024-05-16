@@ -26,16 +26,14 @@ class ProfilePresenter{
     print("> ????        ${file.uri.path}");
     String fileName = file.uri.path.split('/').last;
 
-
+//       [MultipartFile.fromString(file.uri.path, filename: fileName),],
     FormData jsonFromData = FormData.fromMap(
         {
-
-          'profile' : [MultipartFile.fromString(file.uri.path, filename: fileName),],
-
+          'profile' :   await  MultipartFile.fromFile(file.path, filename: fileName)
     });
     var response = await ApiRepository.putAPI(
         ApiConst.addProfileImgAPI, jsonFromData);
-print(">>>>>>>>>>>>     "+response.toString());
+      print(">>>>>>>>>>>>     "+response.toString());
     return response;
   }
 }

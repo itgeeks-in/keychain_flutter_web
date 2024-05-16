@@ -185,7 +185,7 @@ class _HomePageUIState extends State<SideDrawer> {
         return 'Profile';
 
       default:
-        return '';
+        return 'Dashboard';
     }
   }
 

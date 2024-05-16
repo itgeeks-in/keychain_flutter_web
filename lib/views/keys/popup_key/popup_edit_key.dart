@@ -29,7 +29,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
   List<CategoryData> categoryList = [];
    TextEditingController _keyNameController =  TextEditingController();
    TextEditingController _descriptionNameController = TextEditingController();
-String error="";
+   String error="";
    bool isPassVisible = false;
    Uint8List? _image;
 
@@ -211,7 +211,7 @@ String error="";
               ],
             ),
           ),
-          SizedBox(height: 5,),
+          SizedBox(height: 6,),
 
           Center(child: ButtonWidget().buttonWidgetSimple('Update',
                () {
