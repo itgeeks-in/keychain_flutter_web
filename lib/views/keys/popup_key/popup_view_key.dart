@@ -40,7 +40,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
   @override
   Widget build(BuildContext context) {
     double sizeW=MediaQuery.of(context).size.width/2.4;
-    double sizeH=MediaQuery.of(context).size.height/1.2;
+    double sizeH=MediaQuery.of(context).size.height/1.1;
     return Dialog(
         child: SingleChildScrollView(
       child: Container(
@@ -156,12 +156,12 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                         borderRadius: BorderRadius.circular(8.0),
                         child:   Image.network(
                         widget.keysData.backImagePath,
-                        height: sizeH/3.33,
+                        height: sizeH/3.4,
                         width: sizeW/3.6,
                         fit: BoxFit.cover
                           ,errorBuilder: (context, error, stackTrace) {
                           return Container(color: ColorConsts.primaryColor,
-                            height: sizeH/3.33,
+                            height: sizeH/3.4,
                             width: sizeW/3.6,
                           );
                         },
@@ -176,7 +176,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                         borderRadius: BorderRadius.circular(8.0),
                         child:   Image.network(
                         widget.keysData.lockImagePath,
-                        height: sizeH/3.33,
+                        height: sizeH/3.4,
                         width: sizeW/3.6,
                         fit: BoxFit.cover
                       ,errorBuilder: (context, error, stackTrace) {
