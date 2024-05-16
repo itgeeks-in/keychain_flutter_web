@@ -11,6 +11,8 @@ class ApiConst {
   static const String allUsersAPI = "/auth/getallusers";
   static const String updateUserAPI = '/auth/update';
   static const String addProfileImgAPI = '/profile/addprofile';
+  static const String deleteUser = '/auth/deleteuser';
+
 
   static const String compareAPI = '/key/compare';
   static const String addkeyAPI = '/key/addkey';

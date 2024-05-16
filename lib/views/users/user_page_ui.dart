@@ -11,8 +11,13 @@ import 'package:key_admin_panel/views/users/bloc/user_state.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_add_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_edit_user.dart';
 import 'package:key_admin_panel/views/users/popups_user/popup_view_user.dart';
+import 'package:key_admin_panel/views/users/user_page_presenter.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
+
+import '../../utils/ShowSnackBar.dart';
+import '../../utils/dialogs.dart';
+import '../../utils/loading_dialog.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({super.key});
@@ -25,6 +30,25 @@ class _UserPageState extends State<UserPage> {
   int currentPage = 1;
   bool IsLoading = false;
   TextEditingController searchController = TextEditingController();
+
+  deleteAPICall(String id) async {
+    LoadingDialog.show(context);
+    var result=await UserPagePresenter().deleteUserAPI(id);
+    print("Working");
+    LoadingDialog.hide(context);
+    if(result.toString().contains("status")){
+      Map<String, dynamic> parsed = json.decode(result.toString());
+      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+
+      Navigator.pop(context);
+      context
+          .read<UsersDataBloc>()
+          .filtered(searchController.text);
+    }else{
+      Navigator.pop(context);
+      ShowSnackBar().snackBarSuccessShow(context, "Try Again !");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +144,7 @@ class _UserPageState extends State<UserPage> {
                               builder: (context) => PopupAddUser(),
                             ),
                           },
-                      120,
+                      140,
                       40),
                 ],
               ),
@@ -348,6 +372,43 @@ class _UserPageState extends State<UserPage> {
                                           padding: const EdgeInsets.all(1.0),
                                           child: Icon(
                                             Icons.edit_outlined,
+                                            color: ColorConsts.whiteColor,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      InkResponse(
+                                        onTap: () {
+                                          Dialogs().deleteUser(context,() {
+                                            deleteAPICall(state.data[index].id);
+                                          },);
+                                        },
+                                        child: Container(
+                                          height: 32,
+                                          width: 32,
+                                          decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  ColorConsts.primaryColor,
+                                                  ColorConsts.primaryColor,
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                              ),
+                                              borderRadius:
+                                              BorderRadius.circular(25.0),
+                                              boxShadow: [
+                                                new BoxShadow(
+                                                  color:
+                                                  ColorConsts.primaryColor,
+                                                  blurRadius: 1.0,
+                                                  offset: Offset(1, 2),
+                                                ),
+                                              ]),
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: Icon(
+                                            Icons.delete,
                                             color: ColorConsts.whiteColor,
                                             size: 20,
                                           ),

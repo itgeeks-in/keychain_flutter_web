@@ -20,7 +20,6 @@ class _PopUpAddUserState extends State<PopupAddUser> {
   TextEditingController _firstNameController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
-  TextEditingController _confirmEmailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
   String error = "";
@@ -28,10 +27,11 @@ class _PopUpAddUserState extends State<PopupAddUser> {
   bool isAgreed = false;
   bool isAdmin = false;
   bool isPassVisible = false;
+  bool isCPassVisible = false;
 
   apiCall() async {
     LoadingDialog.show(context);
-    var res =    await  UserPagePresenter().signupAPI(_firstNameController.text,_lastNameController.text,_emailController.text,_confirmEmailController.text,_passwordController.text, _confirmPasswordController.text, isAgreed);
+    var res =    await  UserPagePresenter().signupAPI(_firstNameController.text,_lastNameController.text,_emailController.text,_passwordController.text, _confirmPasswordController.text, isAgreed);
     LoadingDialog.hide(context);
     if(res.toString().contains("status")){
       Map<String,dynamic> parsed = json.decode(res.toString());
@@ -125,19 +125,6 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                     padding:
                     const EdgeInsets.only(left: 50, right: 50, top: 20),
                     child: Center(
-                      child: CustomTextField(
-                        controller: _confirmEmailController,
-                        isPassVisible: false,
-                        labelText: "Confirm email",
-                        prefixIconData: Icons.email_outlined,
-                        hintText: "Enter confirm email",
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(left: 50, right: 50, top: 20),
-                    child: Center(
                         child: CustomTextField(
                           controller: _passwordController,
                           labelText: 'Password',
@@ -163,13 +150,13 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                           labelText: 'Confirm password',
                           prefixIconData: Icons.lock,
                           hintText: 'Enter confirm password',
-                          obscureText: !isPassVisible,
+                          obscureText: !isCPassVisible,
                           suffixIconData: Icons.visibility,
                           suffixIconDataSecond: Icons.visibility_off,
-                          isPassVisible: isPassVisible,
+                          isPassVisible: isCPassVisible,
                           onSuffixPressed: () {
                             setState(() {
-                              isPassVisible = !isPassVisible;
+                              isCPassVisible = !isCPassVisible;
                             });
                           },
                         )),

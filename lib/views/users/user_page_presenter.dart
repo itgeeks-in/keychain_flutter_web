@@ -28,7 +28,6 @@ class UserPagePresenter {
       String firstName,
       String lastName,
       String email,
-      String confirmEmail,
       String password,
       String confirmPassword,
       bool isAgreed) async {
@@ -44,6 +43,15 @@ class UserPagePresenter {
     var response =
         await ApiRepository.postAPI(ApiConst.signupAPI, jsonFromData);
 
+    return response;
+  }
+
+  Future<dynamic> deleteUserAPI(String id) async{
+    final jsonFormData = {
+      ApiConst.id : id,
+    };
+    var response = await ApiRepository.deleteAPI(ApiConst.deleteUser, data: jsonFormData);
+    print("== $response");
     return response;
   }
 }

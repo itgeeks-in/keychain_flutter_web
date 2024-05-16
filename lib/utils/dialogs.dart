@@ -258,4 +258,30 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
       ),
     )) ?? false;
   }
+
+  Future<bool> deleteUser(BuildContext context,Function() onClick) async {
+    return( await showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+          contentPadding: EdgeInsets.all(30),
+          elevation: 8,
+          backgroundColor: ColorConsts.whiteColor,
+          content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(children: [Text(
+            "\nAre you sure.. you want to delete this user ? ",
+
+            style:TextStyle(color: ColorConsts.secondaryColor,fontWeight: FontWeight.w500,fontSize: 22),
+          ),Text(
+            "\nWARNING: This action may affect associated keys.",
+
+            style:TextStyle(color: ColorConsts.redColor,fontSize: 15,fontWeight: FontWeight.w300),
+          )])),
+          actions: [
+            ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
+            ButtonWidget().buttonWidgetSimple("Continue", () async => {
+              onClick.call(),
+            }, 80.0, 40.0),
+          ],
+        )
+    )) ?? false;
+  }
 }
