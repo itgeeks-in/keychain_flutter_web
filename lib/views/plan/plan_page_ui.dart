@@ -54,9 +54,7 @@ class _PlanPageState extends State<PlanPageUI> {
       ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
 
       Navigator.pop(context);
-      context
-          .read<PlanListBloc>()
-          .filtered();
+      context.read<PlanListBloc>().filtered();
     }else{
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again !");
@@ -76,7 +74,7 @@ class _PlanPageState extends State<PlanPageUI> {
               builder: (context, state) {
                 if (state is PlanSuccessState) {
                   return Container(
-                    margin: EdgeInsets.all(8.0),
+                    margin: const EdgeInsets.all(8.0),
                     height: 180,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -512,41 +510,33 @@ class SubscriptionHeading extends StatelessWidget {
           color: ColorConsts.primaryColor,
         ),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Expanded(
             flex: 2,
-            child: Container(
-              child: const Text(
-                "User Name",
-                style: ThemeText.textMediumPrimaryBold,
-                maxLines: 1,
-              ),
+            child: Text(
+              "User Name",
+              style: ThemeText.textMediumPrimaryBold,
+              maxLines: 1,
             ),
           ),
           Expanded(
             flex: 2,
-            child: Container(
-              child: const Text("Email",
-                  style: ThemeText.textMediumPrimaryBold, maxLines: 1),
-            ),
+            child: Text("Email",
+                style: ThemeText.textMediumPrimaryBold, maxLines: 1),
           ),
           Expanded(
             flex: 2,
-            child: Container(
-              child: const Text("Start date",
-                  style: ThemeText.textMediumPrimaryBold, maxLines: 1),
-            ),
+            child: Text("Start date",
+                style: ThemeText.textMediumPrimaryBold, maxLines: 1),
           ),
           Expanded(
             flex: 2,
-            child: Container(
-              child: const Padding(
-                  padding: EdgeInsets.only(left: 60),
-                  child: Text("Plan",
-                      style: ThemeText.textMediumPrimaryBold, maxLines: 1)),
-            ),
+            child: Padding(
+                padding: EdgeInsets.only(left: 60),
+                child: Text("Plan",
+                    style: ThemeText.textMediumPrimaryBold, maxLines: 1)),
           )
         ],
       ),
