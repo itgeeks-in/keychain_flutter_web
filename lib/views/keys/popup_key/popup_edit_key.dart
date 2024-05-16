@@ -49,8 +49,8 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
 
   @override
   Widget build(BuildContext context) {
-    double sizeW=MediaQuery.of(context).size.width/2.4;
-    double sizeH=MediaQuery.of(context).size.height/1.3;
+    double sizeW=MediaQuery.of(context).size.width/2.5;
+    double sizeH=MediaQuery.of(context).size.height/1.5;
     return Dialog(
         child: SingleChildScrollView(
       child: Container(
@@ -64,7 +64,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 6, 16, 0),
+              padding: const EdgeInsets.fromLTRB(10, 12, 16, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -87,7 +87,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
               ),
             ),
              Padding(
-              padding: EdgeInsets.only(left: 40, right: 40, top: 19),
+              padding: EdgeInsets.only(left: 40, right: 40, top: 30),
               child: Center(
                   child: CustomTextField(
                 controller: _keyNameController,
@@ -167,7 +167,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
               )
             ),
             SizedBox(height: 5,),
-            Container(
+          /*  Container(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 15),
               child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -210,7 +210,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
                 ),
               ],
             ),
-          ),
+          ),*/
           SizedBox(height: 6,),
 
           Center(child: ButtonWidget().buttonWidgetSimple('Update',

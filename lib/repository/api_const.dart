@@ -19,6 +19,7 @@ class ApiConst {
   static const String getAllKeysAPI = '/key/getKeys';
   static const String getAllCategoryAPI = '/key/getkeycategory';
   static const String addKeyCategoryAPI = '/key/addkeycategory';
+  static const String keyUpdateAPI = '/key/updatekey';
 
   static const String updateCategoryAPI = '/admin/update-category';
   static const String getDashboardDetailAPI = '/admin/dashboard';
@@ -41,6 +42,7 @@ class ApiConst {
   static const String description = 'description';
   static const String imageName = 'imageName';
   static const String id = 'id';
+  static const String categoryId = 'categoryId';
 
   static const String firstName = 'firstName';
   static const String lastName = 'lastName';

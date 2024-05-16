@@ -105,7 +105,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                     hintText: '',
                   )),
             ),
-            SizedBox(height: 5,),
+
             Container(
               padding: const EdgeInsets.only( top: 20),
               child: Row(
