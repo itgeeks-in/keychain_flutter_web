@@ -83,7 +83,7 @@ apiCall() async {
         child: SingleChildScrollView(
       child: Container(
         width: sizeW,
-        height: sizeH,
+
         decoration: const BoxDecoration(
             color: ColorConsts.backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(21))),

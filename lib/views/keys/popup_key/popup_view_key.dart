@@ -45,7 +45,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
         child: SingleChildScrollView(
       child: Container(
         width: sizeW,
-        height: sizeH,
+
         decoration: const BoxDecoration(
             color: ColorConsts.backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(21))),
@@ -148,6 +148,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                       )),
                       SizedBox(height: 3),
                       Text("Front Image" , style: ThemeText.textMediumSecondary,),
+                      SizedBox(height: 3),
                     ],
                   ),
                   Column(
@@ -168,6 +169,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                       )),
                       SizedBox(height: 3),
                       Text("Back Image" , style: ThemeText.textMediumSecondary,),
+                      SizedBox(height: 3),
                     ],
                   ),
                   Column(
@@ -188,6 +190,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                       )),
                       SizedBox(height: 3),
                       Text("Lock Image" , style: ThemeText.textMediumSecondary,),
+                      SizedBox(height: 3),
                     ],
                   ),
                 ],
