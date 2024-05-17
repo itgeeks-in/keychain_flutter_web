@@ -50,6 +50,13 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
     }
      }
 
+  bool validateEmailStructure(String value) {
+    String pattern =
+        '[a-z0-9]+@[a-z0-9]+.[a-z]{2,3}';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
+
 
 
   filtered(String query1) {

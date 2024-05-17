@@ -29,6 +29,9 @@ class _PopUpAddUserState extends State<PopupAddUser> {
   bool isAdmin = false;
   bool isPassVisible = false;
   bool isCPassVisible = false;
+  bool isEmailValid = false;
+  bool isPassValid = false;
+  bool isPassMatch = false;
 
   apiCall() async {
     LoadingDialog.show(context);
@@ -46,6 +49,12 @@ class _PopUpAddUserState extends State<PopupAddUser> {
     setState(() {
 
     },);
+  }
+  bool validateEmailStructure(String value) {
+    String pattern =
+        '[a-z0-9]+@[a-z0-9]+.[a-z]{2,3}';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value);
   }
 
 
@@ -244,14 +253,20 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                   ),
                   Center(child: ButtonWidget().buttonWidgetSimple('Update',
                           () {
-                        if(_firstNameController.text.isNotEmpty && _lastNameController.text.isNotEmpty && _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty && _confirmPasswordController.text.isNotEmpty && isAgreed ) {
-                          apiCall();
-                        }else{
-                          error = "Required all fields";
-                          setState(() {
-
-                          });
+                        if(_firstNameController.text.trim().isNotEmpty && _lastNameController.text.trim().isNotEmpty && _emailController.text.trim().isNotEmpty && _passwordController.text.trim().isNotEmpty && _confirmPasswordController.text.trim().isNotEmpty && isAgreed){
+                           validateEmailStructure(_emailController.text) ? isEmailValid=true : error="Email not valid.";
+                          _passwordController.text.length >=5 ? isPassValid=true :  error="Password must be 5 digit.";
+                          _passwordController.text == _confirmPasswordController.text ? isPassMatch = true : error="password must be same.";
+                          if( isEmailValid &&isPassValid && isPassMatch){
+                            apiCall();
+                          }
                         }
+                        else{
+                          error = "Required all fields.";
+                        }
+                        setState(() {
+
+                        });
                       },
                       100.0, 40.0)),
                   Center(child: Text(""+error,style: TextStyle(color: ColorConsts.redColor))),
