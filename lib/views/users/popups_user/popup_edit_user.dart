@@ -3,11 +3,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/model/all_user_model.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
-import 'package:key_admin_panel/views/users/bloc/user_bloc.dart';
 import 'package:key_admin_panel/views/users/user_page_presenter.dart';
 
 import '../../../utils/ShowSnackBar.dart';
@@ -45,8 +43,6 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
       ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
 
       Navigator.pop(context);
-      context
-          .read<UsersDataBloc>().filtered('');
     }else{
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");

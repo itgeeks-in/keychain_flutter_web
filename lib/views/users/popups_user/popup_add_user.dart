@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
@@ -11,7 +10,6 @@ import 'package:key_admin_panel/widgets/buttons.dart';
 
 import '../../../utils/ShowSnackBar.dart';
 import '../../../utils/loading_dialog.dart';
-import '../bloc/user_bloc.dart';
 import '../user_page_presenter.dart';
 
 class PopupAddUser extends StatefulWidget {
@@ -41,8 +39,6 @@ class _PopUpAddUserState extends State<PopupAddUser> {
       ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
 
       Navigator.pop(context);
-      context
-          .read<UsersDataBloc>().refresh();
     }else{
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");

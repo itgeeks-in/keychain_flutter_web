@@ -142,7 +142,9 @@ class _UserPageState extends State<UserPage> {
                             showDialog(
                               context: context,
                               builder: (context) => PopupAddUser(),
-                            ),
+                            ).then((value){
+                              context.read<UsersDataBloc>().filtered(searchController.text);
+                            })
                           },
                       140,
                       40),
@@ -345,7 +347,11 @@ class _UserPageState extends State<UserPage> {
                                             builder: (context) => PopUpEditUser(
                                               userData: state.data[index],
                                             ),
-                                          );
+                                          ).then((value) {
+                                            context
+                                                .read<UsersDataBloc>()
+                                                .filtered(searchController.text);
+                                          },);
                                         },
                                         child: Container(
                                           height: 32,
