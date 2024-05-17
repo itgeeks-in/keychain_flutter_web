@@ -240,7 +240,7 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
                   labelText: "Category name",
                   labelStyle: TextStyle(color: ColorConsts.primaryColor),
                   filled: true,
-                 // fillColor: ColorConsts.whiteColor,
+                  fillColor: ColorConsts.whiteColor,
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(11),
                     borderSide: BorderSide(
