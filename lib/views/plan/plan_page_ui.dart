@@ -64,9 +64,8 @@ class _PlanPageState extends State<PlanPageUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConsts.backgroundColor,
+      backgroundColor: ColorConsts.whiteColor,
       body: Expanded(
-        //margin: EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -339,8 +338,7 @@ class _PlanPageState extends State<PlanPageUI> {
                     height: MediaQuery.of(context).size.height / 2.5,
                     child: AlertDialog(
                       contentPadding: EdgeInsets.all(18.0),
-                      elevation: 8,
-                      backgroundColor: ColorConsts.backgroundColor,
+                      backgroundColor: ColorConsts.whiteColor,
                       content: SizedBox(
                         height: MediaQuery.of(context).size.height / 2.5,
                         width: MediaQuery.of(context).size.height / 2,
@@ -364,20 +362,36 @@ class _PlanPageState extends State<PlanPageUI> {
                                 style: ThemeText.textMediumSecondary,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: ColorConsts.primaryColor,
-                                          width: 2.0),
+                                  labelText: "Plan Name",
+                                  labelStyle: TextStyle(color: ColorConsts.primaryColor),
+                                  filled: true,
+                                  fillColor: ColorConsts.whiteColor,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(11),
+                                    borderSide: BorderSide(
+                                      color: ColorConsts.primaryColor,
+                                      width: 2,
                                     ),
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: ColorConsts.primaryColor,
-                                          width: 2.0),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(11),
+                                    borderSide: BorderSide(
+                                      color: ColorConsts.primaryColor,
                                     ),
-                                    labelText: "Plan name",
-                                    labelStyle: ThemeText.textMediumPrimary,
-                                    alignLabelWithHint: true,
-                                    hintText: "Enter plan name"),
+                                  ),
+                                  disabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(11),
+                                    borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.description_sharp,
+                                    color: ColorConsts.primaryColor,
+                                  ),
+                                  hintText: "Enter plan name",
+                                  hintStyle: TextStyle(
+                                    color: ColorConsts.primaryColor,
+                                  ),
+                                ),
                               ),
                             ),
                             if (isNameValid)
@@ -401,20 +415,36 @@ class _PlanPageState extends State<PlanPageUI> {
                                 style: ThemeText.textMediumSecondary,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: ColorConsts.primaryColor,
-                                          width: 2.0),
+                                  labelText: 'Plan price',
+                                  labelStyle: TextStyle(color: ColorConsts.primaryColor),
+                                  filled: true,
+                                  fillColor: ColorConsts.whiteColor,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(11),
+                                    borderSide: BorderSide(
+                                      color: ColorConsts.primaryColor,
+                                      width: 2,
                                     ),
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: ColorConsts.primaryColor,
-                                          width: 2.0),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(11),
+                                    borderSide: BorderSide(
+                                      color: ColorConsts.primaryColor,
                                     ),
-                                    labelText: "Plan price",
-                                    labelStyle: ThemeText.textMediumPrimary,
-                                    alignLabelWithHint: true,
-                                    hintText: "Enter plan price"),
+                                  ),
+                                  disabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(11),
+                                    borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.price_change,
+                                    color: ColorConsts.primaryColor,
+                                  ),
+                                  hintText: "Enter plan price",
+                                  hintStyle: TextStyle(
+                                    color: ColorConsts.primaryColor,
+                                  ),
+                                ),
                               ),
                             ),
                             if (isPriceValid)

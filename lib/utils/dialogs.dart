@@ -123,11 +123,8 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
               height: MediaQuery.of(context).size.height/2.5,
           child:AlertDialog(
           contentPadding: EdgeInsets.all(18.0),
-            elevation: 8,
+            //elevation: 8,
             backgroundColor: ColorConsts.whiteColor,
-            //insetPadding: EdgeInsets.zero,
-           // contentPadding: EdgeInsets.zero,
-
             content: SizedBox(
               height: MediaQuery.of(context).size.height/2.5,
               width: MediaQuery.of(context).size.height/2,
@@ -147,17 +144,37 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
                 controller: categoryController,
                 style: ThemeText.textMediumSecondary,
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: const BorderSide(color: ColorConsts.primaryColor, width: 2.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: const BorderSide(color: ColorConsts.primaryColor, width: 2.0),
-                  ),
-                  labelText:"Enter category name",
-                  labelStyle: ThemeText.textMediumPrimary,
-                  alignLabelWithHint: true,
-                ),
+                      decoration: InputDecoration(
+                        labelText: "Category name",
+                        labelStyle: TextStyle(color: ColorConsts.primaryColor),
+                        filled: true,
+                        fillColor: ColorConsts.whiteColor,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(11),
+                          borderSide: BorderSide(
+                            color: ColorConsts.primaryColor,
+                            width: 2,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(11),
+                          borderSide: BorderSide(
+                            color: ColorConsts.primaryColor,
+                          ),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(11),
+                          borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
+                        ),
+                        prefixIcon: Icon(
+                          Icons.category_rounded,
+                          color: ColorConsts.primaryColor,
+                        ),
+                        hintText: "Enter category name",
+                        hintStyle: TextStyle(
+                          color: ColorConsts.primaryColor,
+                        ),
+                      ),
               )),
                 if(isCategoryValid)Text("Add category title to continue..",
                   style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
@@ -220,15 +237,35 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
                 style: ThemeText.textMediumSecondary,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: const BorderSide(color: ColorConsts.primaryColor, width: 2.0),
+                  labelText: "Category name",
+                  labelStyle: TextStyle(color: ColorConsts.primaryColor),
+                  filled: true,
+                 // fillColor: ColorConsts.whiteColor,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(11),
+                    borderSide: BorderSide(
+                      color: ColorConsts.primaryColor,
+                      width: 2,
+                    ),
                   ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: const BorderSide(color: ColorConsts.primaryColor, width: 2.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(11),
+                    borderSide: BorderSide(
+                      color: ColorConsts.primaryColor,
+                    ),
                   ),
-                  labelText:"Enter category name",
-                  labelStyle: ThemeText.textMediumPrimary,
-                  alignLabelWithHint: true,
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(11),
+                    borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
+                  ),
+                  prefixIcon: Icon(
+                    Icons.category_rounded,
+                    color: ColorConsts.primaryColor,
+                  ),
+                  hintText: "Enter category name",
+                  hintStyle: TextStyle(
+                    color: ColorConsts.primaryColor,
+                  ),
                 ),
               ),
                 if(isCategoryValid)Text("Add category title to continue..",
