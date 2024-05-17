@@ -141,6 +141,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 },
                 100.0, 40.0)),
             Center(child: Text(""+error,style: TextStyle(color: ColorConsts.redColor))),
+            SizedBox(height: 6,),
           ],
         ),
       ),

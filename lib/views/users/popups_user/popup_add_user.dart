@@ -166,7 +166,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                   ),
                   Padding(
                     padding:
-                    const EdgeInsets.only(left: 25, right: 50, top: 18),
+                    const EdgeInsets.only(left: 25, right: 50, top: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
@@ -223,7 +223,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                   ),
                   Padding(
                     padding:
-                    const EdgeInsets.only(left: 50, right: 50, top: 16),
+                    const EdgeInsets.only(left: 50, right: 50, top: 15),
                     child: Row(
                       children: [
                         Checkbox(
@@ -259,6 +259,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                       },
                       100.0, 40.0)),
                   Center(child: Text(""+error,style: TextStyle(color: ColorConsts.redColor))),
+                  SizedBox(height: 6,)
                 ],
               ),
             ),

@@ -148,7 +148,8 @@ apiCall() async {
                     borderRadius: BorderRadius.circular(11.0),
 
                 ),
-                child:Row(children: [ Icon(Icons.category_outlined,color: ColorConsts.primaryColor,size: 28)
+                child:Row(children: [
+                  Icon(Icons.category_outlined,color: ColorConsts.primaryColor,size: 28)
                   ,SizedBox(width: 7,),
 
                   BlocProvider(
@@ -189,7 +190,8 @@ apiCall() async {
                       return DropdownMenuItem<CategoryData>(
                         value: item,
                         child: Text(
-                          item.categoryName, style: (item.categoryId == widget.keysData.categoryId)?ThemeText.textMediumSecondaryBold:ThemeText.textSmallGrey,),
+                          item.categoryName,
+                          style: (item.categoryId == widget.keysData.categoryId)?ThemeText.textMediumSecondaryBold:ThemeText.textSmallGrey,),
                       );
                     }).toList(),
                     onChanged: (CategoryData? newValue) {

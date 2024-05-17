@@ -97,7 +97,7 @@ class EditUserProfile  {
 
       return AlertDialog(  contentPadding: EdgeInsets.all(18.0),
           elevation: 8,
-          backgroundColor: ColorConsts.whiteColor,content:  Column(
+          backgroundColor: ColorConsts.whiteColor,content: SingleChildScrollView(child:  Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -217,7 +217,7 @@ class EditUserProfile  {
                 }, 100.0, 40.0),
               )
             ],
-          )
+          ),)
       );
     })
     )) ?? false;

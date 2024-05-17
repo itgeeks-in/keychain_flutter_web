@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/theme/app_assets.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/dialogs.dart';
 import 'package:key_admin_panel/views/category/category_page_ui.dart';
@@ -40,7 +41,7 @@ class _HomePageUIState extends State<SideDrawer> {
 
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              child: Image.asset("assets/img.jpg",
+              child: Image.asset(AppAssets.logoImg,
                   height: 65, width: 65, fit: BoxFit.cover),
             ),
             indicatorColor: ColorConsts.backgroundColor,
