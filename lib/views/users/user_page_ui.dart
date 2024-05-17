@@ -15,7 +15,7 @@ import 'package:key_admin_panel/views/users/user_page_presenter.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
 
-import '../../utils/ShowSnackBar.dart';
+import '../../utils/show_snack_bar.dart';
 import '../../utils/dialogs.dart';
 import '../../utils/loading_dialog.dart';
 

@@ -12,7 +12,7 @@ import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_state.da
 import 'package:key_admin_panel/views/plan/plan_page_presenter.dart';
 
 import '../../model/plan_model.dart';
-import '../../utils/ShowSnackBar.dart';
+import '../../utils/show_snack_bar.dart';
 import '../../utils/loading_dialog.dart';
 import '../../widgets/buttons.dart';
 import '../../widgets/loader_widget.dart';

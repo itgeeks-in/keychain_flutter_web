@@ -266,7 +266,7 @@ apiCall() async {
             }
                },
               100.0, 40.0)),
-            Center(child: Text(""+error,style: TextStyle(color: ColorConsts.redColor))),
+            Center(child: Text(error,style: TextStyle(color: ColorConsts.redColor))),
 
           ],
         ),
