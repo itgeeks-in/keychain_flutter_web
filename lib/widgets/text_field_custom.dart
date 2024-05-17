@@ -31,50 +31,7 @@ class TextFieldCustom {
 
   }
 
-  Widget textFieldPasswordWidget(TextEditingController controller, String hintText,bool passwordVisible,Function() onclick
-      , TextInputType keyboardType){
 
-    return   Container(
-      margin: EdgeInsets.fromLTRB(12, 2, 12, 8),
-      child:
-      TextFormField(
-        controller: controller,
-        obscureText: !passwordVisible,
-        autocorrect: true,
-        style: ThemeText.textMediumSecondary,
-        cursorColor: ColorConsts.primaryColor,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(
-            borderSide: const BorderSide(color: ColorConsts.primaryColor, width: 2.0),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: const BorderSide(color: ColorConsts.primaryColor, width: 2.0),
-          ),
-          labelText: hintText,
-          labelStyle: ThemeText.textMediumPrimary,
-          alignLabelWithHint: true,
-          suffixIcon: IconButton(
-              icon: passwordVisible
-                  ? Image.asset(
-                'assets/icons/eyei_hide.png',
-                width: 19,
-                height: 21,
-                color: ColorConsts.primaryColor,
-              )
-                  : Image.asset(
-                'assets/icons/eyeshow.png',
-                width: 19,
-                height: 21,
-                color: ColorConsts.primaryColor,
-              ),
-              onPressed: () {
-                onclick.call();
-              }),
-        ),
-      ),
-    );
-  }
   Widget textFieldForDialog(TextEditingController textEditingController,String hintText,String lableText,Function(String) onChanged,IconData prefixIconData){
     return TextField(
       onChanged: (value){
