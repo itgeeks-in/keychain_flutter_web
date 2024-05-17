@@ -26,7 +26,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
   String error = "";
 
   bool isAgreed = false;
-  bool isAdmin = false;
+ // bool isAdmin = false;
   bool isPassVisible = false;
   bool isCPassVisible = false;
   bool isEmailValid = false;
@@ -173,62 +173,62 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                           maxline: 1,
                         )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 25, right: 50, top: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                          child: ListTile(
-                            title: Text("User", style: ThemeText.textMediumSecondaryBold),
-                            leading: Radio(
-                              activeColor: ColorConsts.primaryColor,
-                              value: false,
-                              groupValue: isAdmin,
-                              onChanged: (value) {
-                                if(isAdmin != false){
-                                  setState(() {
-                                    isAdmin = value as bool; // Update isAdmin when radio button is tapped
-                                  });
-                                }
-                              },
-                            ),
-                            onTap: () {
-                              if (isAdmin != false) {
-                                setState(() {
-                                  isAdmin = false; // Update isAdmin when ListTile is tapped
-                                });
-                              }
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: ListTile(
-                            title: Text("Admin", style: ThemeText.textMediumSecondary),
-                            leading: Radio(
-                              activeColor: ColorConsts.primaryColor,
-                              value: true,
-                              groupValue: isAdmin,
-                              onChanged: (value) {
-                                if (isAdmin != true) {
-                                  setState(() {
-                                    isAdmin = true; // Update isAdmin when radio button is tapped
-                                  });
-                                }
-                              },
-                            ),
-                            onTap: () {
-                              if (isAdmin != true) {
-                                setState(() {
-                                  isAdmin = true; // Update isAdmin when ListTile is tapped
-                                });
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 25, right: 50, top: 16),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: <Widget>[
+                  //       Expanded(
+                  //         child: ListTile(
+                  //           title: Text("User", style: ThemeText.textMediumSecondaryBold),
+                  //           leading: Radio(
+                  //             activeColor: ColorConsts.primaryColor,
+                  //             value: false,
+                  //             groupValue: isAdmin,
+                  //             onChanged: (value) {
+                  //               if(isAdmin != false){
+                  //                 setState(() {
+                  //                   isAdmin = value as bool; // Update isAdmin when radio button is tapped
+                  //                 });
+                  //               }
+                  //             },
+                  //           ),
+                  //           onTap: () {
+                  //             if (isAdmin != false) {
+                  //               setState(() {
+                  //                 isAdmin = false; // Update isAdmin when ListTile is tapped
+                  //               });
+                  //             }
+                  //           },
+                  //         ),
+                  //       ),
+                  //       Expanded(
+                  //         child: ListTile(
+                  //           title: Text("Admin", style: ThemeText.textMediumSecondary),
+                  //           leading: Radio(
+                  //             activeColor: ColorConsts.primaryColor,
+                  //             value: true,
+                  //             groupValue: isAdmin,
+                  //             onChanged: (value) {
+                  //               if (isAdmin != true) {
+                  //                 setState(() {
+                  //                   isAdmin = true; // Update isAdmin when radio button is tapped
+                  //                 });
+                  //               }
+                  //             },
+                  //           ),
+                  //           onTap: () {
+                  //             if (isAdmin != true) {
+                  //               setState(() {
+                  //                 isAdmin = true; // Update isAdmin when ListTile is tapped
+                  //               });
+                  //             }
+                  //           },
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Padding(
                     padding:
                     const EdgeInsets.only(left: 50, right: 50, top: 15),
