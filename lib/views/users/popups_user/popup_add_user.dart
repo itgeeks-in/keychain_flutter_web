@@ -105,6 +105,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                           labelText: "First name",
                           prefixIconData: Icons.person_add_outlined,
                           hintText: "Enter first name",
+                          maxline: 1,
                         )),
                   ),
                   Padding(
@@ -116,6 +117,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                           labelText: "Last name",
                           prefixIconData: Icons.person_add_outlined,
                           hintText: "Enter first name",
+                          maxline: 1,
                         )),
                   ),
                   Padding(
@@ -127,6 +129,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                           labelText: "Email",
                           prefixIconData: Icons.email_outlined,
                           hintText: "Enter email",
+                          maxline: 1,
                         )),
                   ),
                   Padding(
@@ -146,7 +149,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                             setState(() {
                               isPassVisible = !isPassVisible;
                             });
-                          },
+                          },      maxline: 1,
                         )),
                   ),
                   Padding(
@@ -167,11 +170,11 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                               isCPassVisible = !isCPassVisible;
                             });
                           },
+                          maxline: 1,
                         )),
                   ),
                   Padding(
-                    padding:
-                    const EdgeInsets.only(left: 25, right: 50, top: 16),
+                    padding: const EdgeInsets.only(left: 25, right: 50, top: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
@@ -253,13 +256,34 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                   ),
                   Center(child: ButtonWidget().buttonWidgetSimple('Update',
                           () {
-                        if(_firstNameController.text.trim().isNotEmpty && _lastNameController.text.trim().isNotEmpty && _emailController.text.trim().isNotEmpty && _passwordController.text.trim().isNotEmpty && _confirmPasswordController.text.trim().isNotEmpty && isAgreed){
-                           validateEmailStructure(_emailController.text) ? isEmailValid=true : error="Email not valid.";
-                          _passwordController.text.length >=5 ? isPassValid=true :  error="Password must be 5 digit.";
-                          _passwordController.text == _confirmPasswordController.text ? isPassMatch = true : error="password must be same.";
-                          if( isEmailValid &&isPassValid && isPassMatch){
-                            apiCall();
+                        if(_firstNameController.text.trim().isNotEmpty && _lastNameController.text.trim().isNotEmpty && _emailController.text.trim().isNotEmpty
+                            && _passwordController.text.trim().isNotEmpty && _confirmPasswordController.text.trim().isNotEmpty){
+                          if(isAgreed) {
+                            validateEmailStructure(_emailController.text) ?
+                           { isEmailValid = true,
+
+
+                            _passwordController.text.length >= 5 ?
+                            isPassValid = true : error =
+                            "Password must be 5 digit.",
+
+                            _passwordController.text ==
+                                _confirmPasswordController.text ?
+                            isPassMatch = true : error =
+                            "password must be same.",
+
+                            if (isEmailValid && isPassValid && isPassMatch) {
+                              apiCall(),
+                            }
+                           }: {error = "Email not valid."};
+
+
+                          }else{
+                            error = "Accept term & conditions first";
                           }
+
+
+
                         }
                         else{
                           error = "Required all fields.";

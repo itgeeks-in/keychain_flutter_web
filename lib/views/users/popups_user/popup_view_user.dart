@@ -3,7 +3,6 @@ import 'package:key_admin_panel/model/all_user_model.dart';
 import 'package:key_admin_panel/theme/app_assets.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
-import 'package:key_admin_panel/views/users/user_page_ui.dart';
 import '../../../utils/theme_text.dart';
 
 class PopupViewUser extends StatefulWidget {
@@ -91,6 +90,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                     labelText: "First name",
                     prefixIconData: Icons.person_add_outlined,
                     hintText: "Enter first name",
+                    maxline: 1,
                   ),
                 ),
               ),
@@ -104,6 +104,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                     labelText: "Last name",
                     prefixIconData: Icons.person_add_outlined,
                     hintText: "Enter last name",
+                    maxline: 1,
                   ),
                 ),
               ),
@@ -117,6 +118,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                     labelText: "Email",
                     prefixIconData: Icons.email_outlined,
                     hintText: "Enter email",
+                    maxline: 1,
                   ),
                 ),
               ),
@@ -129,22 +131,20 @@ class _PopupViewUserState extends State<PopupViewUser> {
                         Row(
                           children: [
                             const Text(
-                              "Plan Present :  ",
+                              "Plan wise key count present :  ",
                               style: TextStyle(
                                   color: ColorConsts.secondaryColor,
                                   fontSize: 18),
                             ),
                             Text(
-
                                 widget.userData.totalKey.toString(),
-
                               style: TextStyle(
                                   color: ColorConsts.textColorDark,
                                   fontSize: 18),
                             ),
                           ],
                         ),
-                        Row(
+                   /*     Row(
                           children: [
                             const Text(
                               "Total scanned  :  ",
@@ -161,7 +161,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                                   fontSize: 18),
                             ),
                           ],
-                        ),
+                        ),*/
                       ],
                     ),
 

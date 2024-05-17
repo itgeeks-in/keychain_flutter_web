@@ -41,6 +41,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
     RegExp regExp = new RegExp(pattern);
     return regExp.hasMatch(value);
   }
+
   apiCall() async {
     LoadingDialog.show(context);
     var res =    await  UserPagePresenter().editUserDetailAPI(widget.userData.id,_firstNameController.text,_lastNameController.text,_emailController.text);
@@ -106,6 +107,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 labelText: "First name",
                 prefixIconData: Icons.person_add_outlined,
                 hintText: "Enter first name",
+                    maxline: 1,
               )),
             ),
              Padding(
@@ -117,6 +119,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 labelText: "Last name",
                 prefixIconData: Icons.person_add_outlined,
                 hintText: "Enter last name",
+                    maxline: 1,
               )),
             ),
              Padding(
@@ -128,6 +131,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 labelText: "Email",
                 prefixIconData: Icons.email,
                 hintText: "Enter email",
+                    maxline: 1,
               )),
             ),
             SizedBox(height: 11,),
@@ -136,7 +140,8 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                   if(_firstNameController.text.isNotEmpty && _lastNameController.text.isNotEmpty &&
                       _emailController.text.isNotEmpty) {
 if(validateEmailStructure(_emailController.text)){
-                    apiCall();}else{
+                    apiCall();
+}else{
   error = "Enter correct email to continue.";
   setState(() {
   });

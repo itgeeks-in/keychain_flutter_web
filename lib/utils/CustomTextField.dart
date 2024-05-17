@@ -12,8 +12,9 @@ class CustomTextField extends StatefulWidget {
   final bool isPassVisible;
   final VoidCallback? onSuffixPressed;
   final bool enable;
-
-  const CustomTextField({
+  int maxline=0
+;
+   CustomTextField({
     Key? key,
     required this.labelText,
     required this.prefixIconData,
@@ -25,6 +26,7 @@ class CustomTextField extends StatefulWidget {
     required this.isPassVisible,
     this.onSuffixPressed,
     this.enable = true,
+    required this.maxline ,
   }) : super(key: key);
 
   @override
@@ -35,6 +37,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLines:widget.maxline ,
       enabled: widget.enable,
       controller: widget.controller,
       style: TextStyle(color: ColorConsts.textColorDark),
@@ -48,7 +51,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(11),
           borderSide: BorderSide(
             color: ColorConsts.primaryColor,
-            width: 2,
+            width: 1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
@@ -59,11 +62,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(11),
-          borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
+          borderSide: BorderSide(color: ColorConsts.primaryColor, width: 1),
         ),
         prefixIcon: Icon(
           widget.prefixIconData,
-          color: ColorConsts.primaryColor,
+          color: ColorConsts.primaryColor,size: 20,
         ),
         suffixIcon: Padding(
           padding: const EdgeInsets.only(right: 10),
@@ -73,7 +76,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     widget.isPassVisible
                         ? widget.suffixIconData
                         : widget.suffixIconDataSecond,
-                    color: ColorConsts.primaryColor,
+                    color: ColorConsts.primaryColor,size: 20,
                   ),
                   onPressed: widget.onSuffixPressed,
                 )

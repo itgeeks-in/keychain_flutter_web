@@ -77,7 +77,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left:25, right: 25, top: 20),
+              padding: const EdgeInsets.only(left:25, right: 25, top: 20),
               child: Center(
                   child: CustomTextField(
                     enable: false,
@@ -86,6 +86,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                     labelText: "Key name",
                     prefixIconData: Icons.vpn_key_outlined,
                     hintText: '',
+                    maxline: 1,
                   )),
             ),
             Padding(
@@ -97,12 +98,13 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                 controller: _descriptionNameController,
                 labelText: "Description",
                 hintText:'',
+                maxline: (_descriptionNameController.text.length > 70)?2:1,
               ),
             ),
 
 
             Padding(
-              padding: EdgeInsets.only(left: 25, right: 25, top: 20),
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 20),
               child: Center(
                   child: CustomTextField(
                     enable: false,
@@ -111,6 +113,7 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                     labelText: "Key added on",
                     prefixIconData: Icons.calendar_month,
                     hintText: '',
+                    maxline: 1,
                   )),
             ),
             Padding(
@@ -121,8 +124,9 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                     controller: _categoryNameController,
                     isPassVisible: false,
                     labelText: "Category name",
-                    prefixIconData: Icons.vpn_key_outlined,
+                    prefixIconData: Icons.category_outlined,
                     hintText: '',
+                    maxline: 1,
                   )),
             ),
 
@@ -182,7 +186,8 @@ class _PopUpViewKeyState extends State<PopUpViewKey> {
                         width: sizeW/3.6,
                         fit: BoxFit.cover
                       ,errorBuilder: (context, error, stackTrace) {
-        return Container(color: ColorConsts.primaryColor,
+        return Container(
+          color: ColorConsts.primaryColor,
         height: sizeH/3.33,
         width: sizeW/3.6,
         );

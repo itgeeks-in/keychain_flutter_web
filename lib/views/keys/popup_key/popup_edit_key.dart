@@ -123,6 +123,7 @@ apiCall() async {
                 labelText: "Key name",
                 prefixIconData: Icons.vpn_key_outlined,
                 hintText: "Enter key name",
+                    maxline: 1,
               )),
             ),
              Padding(
@@ -133,6 +134,7 @@ apiCall() async {
                 controller: _descriptionNameController,
                 labelText: "Description",
                 hintText: "Enter description",
+                maxline: 1,
               ),
             ),
             Container(
@@ -149,7 +151,7 @@ apiCall() async {
 
                 ),
                 child:Row(children: [
-                  Icon(Icons.category_outlined,color: ColorConsts.primaryColor,size: 28)
+                  Icon(Icons.category_outlined,color: ColorConsts.primaryColor,size: 20)
                   ,SizedBox(width: 7,),
 
                   BlocProvider(

@@ -69,7 +69,7 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
@@ -77,9 +77,10 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
               labelText: "Enter your Key Name",
               prefixIconData: Icons.vpn_key_outlined,
               hintText: "Enter your Key Name",
+                  maxline: 1,
             )),
           ),
-          const Padding(
+         Padding(
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Center(
                 child: CustomTextField(
@@ -87,6 +88,7 @@ class _PopUpAddKeysState extends State<PopUpAddKeys> {
               labelText: "Enter Capture Title",
               prefixIconData: Icons.screen_search_desktop_outlined,
               hintText: "Enter your Capture Title",
+                  maxline: 1,
             )),
           ),
           const Padding(
@@ -229,7 +231,7 @@ class DropdownMenuList extends StatelessWidget {
         ),
         leadingIcon: const Icon(
           Icons.category_rounded,
-          color: ColorConsts.primaryColor,
+          color: ColorConsts.primaryColor,size: 20,
         ),
         label: const Text(
           "Categories",

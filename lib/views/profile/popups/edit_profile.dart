@@ -173,6 +173,7 @@ class EditUserProfile  {
                       labelText: "First name",
                       prefixIconData: Icons.person_add_outlined,
                       hintText: "Enter first Name",
+                      maxline: 1,
                     )),
               ),
               Padding(
@@ -184,6 +185,7 @@ class EditUserProfile  {
                       labelText: "Last name",
                       prefixIconData: Icons.person_add_outlined,
                       hintText: "Enter last Name",
+                      maxline: 1,
                     )),
               ),
               Padding(
@@ -195,6 +197,7 @@ class EditUserProfile  {
                       labelText: "Email",
                       prefixIconData: Icons.email_outlined,
                       hintText: "Enter email",
+                      maxline: 1,
                     )),
               ),
                   Center(child:  Text("\n"+error,style: TextStyle(fontSize: 14,color: ColorConsts.redColor),)),
