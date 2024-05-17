@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'package:dio/dio.dart';
 import '../../repository/ApiRepository.dart';
 import '../../repository/api_const.dart';
@@ -20,14 +20,17 @@ class ProfilePresenter{
       return response;
   }
 
-  Future<dynamic> profileImageAPI(File file) async{
-    print("> ????        ${file.uri.path}");
-    String fileName = file.uri.path.split('/').last;
+  Future<dynamic> profileImageAPI(String file) async{
+
+    String fileName = file.split('/').last;
 
 //       [MultipartFile.fromFile(file.uri.path, filename: fileName),],
+
+print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n$file >>>>>>>>>>>");
+
     FormData jsonFromData = FormData.fromMap(
         {
-          'profile' :   await  MultipartFile.fromString(file.uri.path, filename: fileName)
+          'profile' :   MultipartFile.fromString(file, filename: fileName)
     });
 
     var response = await ApiRepository.putAPI(

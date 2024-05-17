@@ -45,6 +45,7 @@ dependencies:
   equatable: ^2.0.5
   pie_chart :
   intl :
+  image_picker_for_web:
 
 dev_dependencies:
   flutter_test:

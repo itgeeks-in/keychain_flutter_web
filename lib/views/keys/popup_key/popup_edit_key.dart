@@ -193,7 +193,9 @@ apiCall() async {
                         value: item,
                         child: Text(
                           item.categoryName,
-                          style: (item.categoryId == widget.keysData.categoryId)?ThemeText.textMediumSecondaryBold:ThemeText.textSmallGrey,),
+                          style: (item.categoryId == widget.keysData.categoryId)?ThemeText.textMediumSecondaryBold:
+                          ThemeText.textSmallGrey,
+                        ),
                       );
                     }).toList(),
                     onChanged: (CategoryData? newValue) {

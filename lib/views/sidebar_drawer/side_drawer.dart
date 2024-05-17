@@ -81,10 +81,10 @@ class _HomePageUIState extends State<SideDrawer> {
                 icon:SizedBox(height: size,child: const Icon(Icons.category_outlined)),
                 label: const Text("Category"),
               ),
-              NavigationRailDestination(
+             /* NavigationRailDestination(
                 icon:SizedBox(height: size,child: const Icon(Icons.person_rounded)),
                 label: const Text("Profile"),
-              ),
+              ),*/
               NavigationRailDestination(
                 icon: SizedBox(height: size,child:const Icon(Icons.logout)),
                 label: const Text("Logout"),
@@ -97,7 +97,7 @@ class _HomePageUIState extends State<SideDrawer> {
               setState(() {
                 _selectedIndex = index;
               });
-              if (_selectedIndex == 6) {
+              if (_selectedIndex == 5) {
                 Dialogs().logoutPopup(context, "en");
               }
             },
@@ -187,8 +187,8 @@ class _HomePageUIState extends State<SideDrawer> {
         return 'Plans';
       case 4:
         return 'Category';
-      case 5:
-        return 'Profile';
+     /* case 5:
+        return 'Profile';*/
 
       default:
         return 'Dashboard';
@@ -217,8 +217,8 @@ class _HomePageUIState extends State<SideDrawer> {
             create: (context) {
               return CategoryPageBloc();
             },child: CategoryPageUI());
-      case 5:
-        return ProfilePage();
+  /*    case 5:
+        return ProfilePage();*/
       // case 3:
       //   return  BlocProvider(create:(context){
       //     return PlanBloc();
@@ -234,7 +234,7 @@ class _HomePageUIState extends State<SideDrawer> {
             child: PlanPageUI(),
           ),
         ], child: PlanPageUI());
-      case 6:
+      case 5:
         return  HomePageUI();
       default:
         return Container(

@@ -1,9 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../model/user_model.dart';
 import '../../../theme/app_assets.dart';
 import '../../../utils/custom_text_field.dart';
@@ -38,35 +39,48 @@ class EditUserProfile  {
 
         builder: (context, setState)
     {
+
+
+
+
+
+      uploadAPI() async {
+        LoadingDialog.show(context);
+        var res = await   ProfilePresenter().profileImageAPI(image);
+        LoadingDialog.hide(context);
+        if(res.toString().contains("status")){
+
+          Map<String,dynamic> parsed = json.decode(res.toString());
+          if (parsed['status']) {
+            UserDataModel userDataModel = UserDataModel.fromJson(parsed);
+
+            error="Profile updated successfully.";
+            Session session = Session();
+            session.setLoginUserData("$res");
+          }else{
+            error="Profile not updated.";
+          }
+        }else{
+          error="Profile not updated";
+        }
+        //   file=File(image).readAsBytesSync();
+        setState(() {
+        });
+      }
+
+
       void selectImage() async {
+
         final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
         image = pickedImage!.path;
+
         print("$image");
-        setState(() {
 
+        setState(() {
         },);
-        LoadingDialog.show(context);
-      var res = await   ProfilePresenter().profileImageAPI(File(image));
-        LoadingDialog.hide(context);
-    if(res.toString().contains("status")){
 
-    Map<String,dynamic> parsed = json.decode(res.toString());
-    if (parsed['status']) {
-    UserDataModel userDataModel = UserDataModel.fromJson(parsed);
 
-    error="Profile updated successfully.";
-    Session session = Session();
-    session.setLoginUserData("$res");
-    }else{
-      error="Profile not updated.";
-    }
-    }else{
-      error="Profile not updated";
-    }
-    //   file=File(image).readAsBytesSync();
-        setState(() {
-
-        });
+        uploadAPI();
       }
 
 
