@@ -65,7 +65,8 @@ class _PlanPageState extends State<PlanPageUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConsts.whiteColor,
-      body: Expanded(
+      body: SingleChildScrollView
+        (
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -74,7 +75,7 @@ class _PlanPageState extends State<PlanPageUI> {
                 if (state is PlanSuccessState) {
                   return Container(
                     margin: const EdgeInsets.all(8.0),
-                    height: 180,
+                    height: MediaQuery.of(context).size.height/3.8,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: state.planDetail.length,
@@ -221,9 +222,8 @@ class _PlanPageState extends State<PlanPageUI> {
               ),
             ),
             SubscriptionHeading(),
-            Expanded(
-              child:
-                  BlocBuilder<PlanBloc, PlanState>(builder: (context, state) {
+
+                 SizedBox(height: MediaQuery.of(context).size.height/2.1,child:  BlocBuilder<PlanBloc, PlanState>(builder: (context, state) {
                 if (state is SuccessState) {
                   return ListView.builder(
                     itemCount: state.userDataPlan.length,
@@ -315,8 +315,8 @@ class _PlanPageState extends State<PlanPageUI> {
                 } else {
                   return Center(child: Loader().loaderWidget2());
                 }
-              }),
-            ),
+              }),),
+
           ],
         ),
       ),
