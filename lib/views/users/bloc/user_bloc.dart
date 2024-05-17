@@ -6,6 +6,7 @@ import 'package:key_admin_panel/views/users/bloc/user_event.dart';
 import 'package:key_admin_panel/views/users/bloc/user_state.dart';
 import 'package:key_admin_panel/views/users/user_page_presenter.dart';
 
+
 class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
   int limit = 9, offset = 0;
   int current_page = 1;
@@ -62,7 +63,8 @@ class UsersDataBloc extends Bloc<UsersDataEvent, UsersDataState> {
     getAllUserAPI();
   }
 
-
-
-
-    }
+  refresh(){
+    print("refresh");
+    emit(RefreshChangeState());
+  }
+}

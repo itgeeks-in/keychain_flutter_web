@@ -3,11 +3,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/model/all_user_model.dart';
 import 'package:key_admin_panel/utils/CustomTextField.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
+import 'package:key_admin_panel/views/users/bloc/user_bloc.dart';
 import 'package:key_admin_panel/views/users/user_page_presenter.dart';
 
+import '../../../utils/ShowSnackBar.dart';
 import '../../../utils/loading_dialog.dart';
 import '../../../utils/theme_text.dart';
 import '../../../widgets/buttons.dart';
@@ -39,14 +42,14 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
     LoadingDialog.hide(context);
     if(res.toString().contains("status")){
       Map<String,dynamic> parsed = json.decode(res.toString());
-      if (parsed['status']) {
-        error="Updated successfully.";
-        Navigator.pop(context);
-      }else{
-        error="Not updated.";
-      }
+      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+
+      Navigator.pop(context);
+      context
+          .read<UsersDataBloc>().filtered('');
     }else{
-      error="Not updated";
+      Navigator.pop(context);
+      ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
     }
     setState(() {
 

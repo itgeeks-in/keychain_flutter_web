@@ -8,6 +8,10 @@ class InitialState extends UsersDataState {}
 
 class LoadState extends UsersDataState {}
 
+class RefreshChangeState extends UsersDataState{
+
+}
+
 class SuccessState extends UsersDataState {
   List<UserData> data;
   int current_page;

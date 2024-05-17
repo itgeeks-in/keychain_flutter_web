@@ -188,7 +188,7 @@ class _UserPageState extends State<UserPage> {
                     Expanded(
                       flex: 1,
                       child: Text(
-                        "Keys",
+                        "Key scan",
                         style: ThemeText.textMediumPrimaryBold,
                       ),
                     ),
