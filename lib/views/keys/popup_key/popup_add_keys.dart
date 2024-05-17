@@ -12,14 +12,14 @@ import 'package:key_admin_panel/utils/RoundedButton.dart';
 import 'package:key_admin_panel/utils/TextFieldMultiline.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 
-class PopUpAddKeys extends StatefulWidget {
-  const PopUpAddKeys({super.key});
+class PopupAddKeys extends StatefulWidget {
+  const PopupAddKeys({super.key});
 
   @override
-  State<PopUpAddKeys> createState() => _PopUpAddKeysState();
+  State<PopupAddKeys> createState() => _PopUpAddKeysState();
 }
 
-class _PopUpAddKeysState extends State<PopUpAddKeys> {
+class _PopUpAddKeysState extends State<PopupAddKeys> {
   bool isPassVisible = false;
   Uint8List? _image;
 
