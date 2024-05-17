@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../model/user_model.dart';
 import '../../../theme/app_assets.dart';
-import '../../../utils/CustomTextField.dart';
+import '../../../utils/custom_text_field.dart';
 import '../../../utils/color_const.dart';
 import '../../../utils/loading_dialog.dart';
 import '../../../utils/session.dart';

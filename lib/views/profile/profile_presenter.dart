@@ -20,18 +20,19 @@ class ProfilePresenter{
       return response;
   }
 
-  Future<dynamic> profileImageAPI(
-     File file) async{
+  Future<dynamic> profileImageAPI(File file) async{
     print("> ????        ${file.uri.path}");
     String fileName = file.uri.path.split('/').last;
 
-//       [MultipartFile.fromString(file.uri.path, filename: fileName),],
+//       [MultipartFile.fromFile(file.uri.path, filename: fileName),],
     FormData jsonFromData = FormData.fromMap(
         {
-          'profile' :   await  MultipartFile.fromFile(file.path, filename: fileName)
+          'profile' :   await  MultipartFile.fromString(file.uri.path, filename: fileName)
     });
+
     var response = await ApiRepository.putAPI(
         ApiConst.addProfileImgAPI, jsonFromData);
+
       print(">>>>>>>>>>>>     "+response.toString());
     return response;
   }
