@@ -34,6 +34,13 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
       _lastNameController.text = widget.userData.lastName;
       _emailController.text = widget.userData.email;
   }
+
+  bool validateEmailStructure(String value) {
+    String pattern =
+        '[a-z0-9]+@[a-z0-9]+.[a-z]{2,3}';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
   apiCall() async {
     LoadingDialog.show(context);
     var res =    await  UserPagePresenter().editUserDetailAPI(widget.userData.id,_firstNameController.text,_lastNameController.text,_emailController.text);
@@ -126,12 +133,18 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
             SizedBox(height: 11,),
             Center(child: ButtonWidget().buttonWidgetSimple('Update',
                     () {
-                  if(_firstNameController.text.isNotEmpty && _lastNameController.text.isNotEmpty && _emailController.text.isNotEmpty) {
-                    apiCall();
+                  if(_firstNameController.text.isNotEmpty && _lastNameController.text.isNotEmpty &&
+                      _emailController.text.isNotEmpty) {
+if(validateEmailStructure(_emailController.text)){
+                    apiCall();}else{
+  error = "Enter correct email to continue.";
+  setState(() {
+  });
+}
+
                   }else{
                     error = "Required all fields";
                     setState(() {
-
                     });
                   }
                 },

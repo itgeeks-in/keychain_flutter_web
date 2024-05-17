@@ -190,7 +190,7 @@ class _UserPageState extends State<UserPage> {
                     Expanded(
                       flex: 1,
                       child: Text(
-                        "Key scan",
+                        "Role",
                         style: ThemeText.textMediumPrimaryBold,
                       ),
                     ),
@@ -282,9 +282,9 @@ class _UserPageState extends State<UserPage> {
                                 Expanded(
                                   flex: 1,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 5),
+                                    padding: const EdgeInsets.only(left: 3),
                                     child: Text(
-                                      state.data[index].totalKey,
+                                      state.data[index].isAdmin?"Admin":"User",
                                       style: TextStyle(
                                         color: ColorConsts.textColorDark,
                                         fontSize: 16,
