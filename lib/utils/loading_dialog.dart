@@ -50,7 +50,7 @@ class LoadingDialog extends StatelessWidget {
                     AppAssets.loadImg,
             ),),
           ),
-         // child: CircularProgressIndicator(color: ColorConsts.primaryColor,strokeWidth: 1),
+          child: CircularProgressIndicator(color: ColorConsts.primaryColor,strokeWidth: 1),
         ),
       ),
     );

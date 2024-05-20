@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:key_admin_panel/utils/session.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
-import 'package:key_admin_panel/views/category/category_page_presenter.dart';
 import 'package:key_admin_panel/widgets/text_field_custom.dart';
 import '../route/route_generate.dart';
 import '../widgets/buttons.dart';
@@ -108,189 +107,93 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
     )) ?? false;
   }
 
-
   Future<bool> editKeyCategory(BuildContext context,String title,String idCATE,Function(String name,String id) onClick) async {
-    TextEditingController categoryController = TextEditingController();
-    bool isCategoryValid = false;
+    TextEditingController titleController = TextEditingController(text: title);
+    bool isCatNotValid = false;
     return (await showDialog(
       context: context,
-      
+
       builder: (context) => StatefulBuilder(
 
         builder: (context, setState) {
-          categoryController.text=title;
           return SizedBox(
               height: MediaQuery.of(context).size.height/2.5,
-          child:AlertDialog(
-          contentPadding: EdgeInsets.all(18.0),
-            //elevation: 8,
-            backgroundColor: ColorConsts.whiteColor,
-            content: SizedBox(
-              height: MediaQuery.of(context).size.height/2.5,
-              width: MediaQuery.of(context).size.height/2,
-              child: Column(children: [
-                Center(child: Text("Edit Category", style: ThemeText.textLargeSecondaryBold)),
-                SizedBox(height: 35),
-                SizedBox(
-                    width: MediaQuery.of(context).size.height/2,
-                    child: TextField(
-                onChanged: (value) {
-                  if(categoryController.text.isNotEmpty){
-                    isCategoryValid=true;
-                  }else{
-                    isCategoryValid = false;
-                  }
-                },
-                controller: categoryController,
-                style: ThemeText.textMediumSecondary,
-                keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelText: "Category name",
-                        labelStyle: TextStyle(color: ColorConsts.primaryColor),
-                        filled: true,
-                        fillColor: ColorConsts.whiteColor,
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(
-                            color: ColorConsts.primaryColor,
-                            width: 2,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(
-                            color: ColorConsts.primaryColor,
-                          ),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.category_rounded,
-                          color: ColorConsts.primaryColor,
-                        ),
-                        hintText: "Enter category name",
-                        hintStyle: TextStyle(
-                          color: ColorConsts.primaryColor,
-                        ),
-                      ),
-              )),
-                if(isCategoryValid)Text("Add category title to continue..",
-                  style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
-                )],),
-            ),
-            actions: [
-              ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
-              ButtonWidget().buttonWidgetSimple("Update", () async {
-                if(categoryController.text.isNotEmpty){
-                  isCategoryValid=false;
-                  setState(() {
-
-                  },);
-                  onClick(categoryController.text,idCATE);
-                }else{
-                  isCategoryValid=true;
-                  setState(() {
-
-                  },);
-
-                }
-              }, 80.0, 40.0),
-            ],
-          ));
+              child:AlertDialog(
+                contentPadding: EdgeInsets.all(18.0),
+                backgroundColor: ColorConsts.whiteColor,
+                content: SizedBox(
+                  height: MediaQuery.of(context).size.height/2.5,
+                  width: MediaQuery.of(context).size.height/2,
+                  child: Column(children: [
+                    Center(child: Text("Edit Category", style: ThemeText.textLargeSecondaryBold)),
+                    SizedBox(height: 35),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.height/2,
+                        child: TextFieldCustom().textFieldForDialog(titleController,"Enter category title","Category title",Icons.category_sharp)
+                    ),
+                    if(isCatNotValid)Text("Add category title to continue..",
+                      style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
+                    )],),
+                ),
+                actions: [
+                  ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
+                  ButtonWidget().buttonWidgetSimple("Update", () async {
+                    if(titleController.text.isNotEmpty){
+                      onClick(titleController.text,idCATE);
+                    }else{
+                      setState((){
+                        isCatNotValid = true;
+                      },);
+                    }
+                  }, 80.0, 40.0),
+                ],
+              ));
         },
       ),
     )) ?? false;
   }
 
-
-
-
-  Future<bool> addKeyCategory(BuildContext context,Function(String s) onClick) async {
-    TextEditingController categoryController = TextEditingController();
-    bool isCategoryValid = false;
+  Future<bool> addKeyCategory(BuildContext context,Function(String s) onClick) async  {
+    TextEditingController titleController = TextEditingController();
+    bool isCatNotValid = false;
     return (await showDialog(
       context: context,
+
       builder: (context) => StatefulBuilder(
 
         builder: (context, setState) {
-
-          return AlertDialog(
-            contentPadding: EdgeInsets.all(18.0),
-            elevation: 8,
-            backgroundColor: ColorConsts.whiteColor,
-            title: const Center(child: Text("Add Category", style: ThemeText.textLargeSecondaryBold)),
-            content: SizedBox(
-                height: MediaQuery.of(context).size.height/2.5,
-                width: MediaQuery.of(context).size.height/2,
-
-              child: Column(children: [TextField(
-                onChanged: (value) {
-                  if(categoryController.text.isNotEmpty){
-                    isCategoryValid=true;
-                  }else{
-                     isCategoryValid = false;
-                  }
-                },
-                controller: categoryController,
-                style: ThemeText.textMediumSecondary,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  labelText: "Category name",
-                  labelStyle: TextStyle(color: ColorConsts.primaryColor),
-                  filled: true,
-                  fillColor: ColorConsts.whiteColor,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(11),
-                    borderSide: BorderSide(
-                      color: ColorConsts.primaryColor,
-                      width: 2,
+          return SizedBox(
+              height: MediaQuery.of(context).size.height/2.5,
+              child:AlertDialog(
+                contentPadding: EdgeInsets.all(18.0),
+                backgroundColor: ColorConsts.whiteColor,
+                content: SizedBox(
+                  height: MediaQuery.of(context).size.height/2.5,
+                  width: MediaQuery.of(context).size.height/2,
+                  child: Column(children: [
+                    Center(child: Text("Add Category", style: ThemeText.textLargeSecondaryBold)),
+                    SizedBox(height: 35),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.height/2,
+                        child: TextFieldCustom().textFieldForDialog(titleController,"Enter category title","Category title",Icons.category_sharp)
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(11),
-                    borderSide: BorderSide(
-                      color: ColorConsts.primaryColor,
-                    ),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(11),
-                    borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
-                  ),
-                  prefixIcon: Icon(
-                    Icons.category_rounded,
-                    color: ColorConsts.primaryColor,
-                  ),
-                  hintText: "Enter category name",
-                  hintStyle: TextStyle(
-                    color: ColorConsts.primaryColor,
-                  ),
+                    if(isCatNotValid)Text("Add category title to continue..",
+                      style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
+                    )],),
                 ),
-              ),
-                if(isCategoryValid)Text("Add category title to continue..",
-                style: TextStyle(color: ColorConsts.redColor,fontSize: 14),
-              )],),
-            ),
-            actions: [
-              ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
-              ButtonWidget().buttonWidgetSimple("Add", () async {
-                if(categoryController.text.isNotEmpty){
-                  isCategoryValid=false;
-                  setState(() {
-
-                  },);
-                  onClick(categoryController.text);
-                }else{
-                  isCategoryValid=true;
-                  setState(() {
-
-                  },);
-
-                }
-              }, 80.0, 40.0),
-            ],
-          );
+                actions: [
+                  ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
+                  ButtonWidget().buttonWidgetSimple("Update", () async {
+                    if(titleController.text.isNotEmpty){
+                      onClick(titleController.text);
+                    }else{
+                      setState((){
+                        isCatNotValid = true;
+                      },);
+                    }
+                  }, 80.0, 40.0),
+                ],
+              ));
         },
       ),
     )) ?? false;

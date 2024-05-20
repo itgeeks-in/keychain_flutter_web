@@ -32,11 +32,8 @@ class TextFieldCustom {
   }
 
 
-  Widget textFieldForDialog(TextEditingController textEditingController,String hintText,String lableText,Function(String) onChanged,IconData prefixIconData){
+  Widget textFieldForDialog(TextEditingController textEditingController,String hintText,String lableText,IconData prefixIconData){
     return TextField(
-      onChanged: (value){
-        onChanged(value);
-      },
       controller: textEditingController,
       style: ThemeText.textMediumSecondary,
       decoration: InputDecoration(

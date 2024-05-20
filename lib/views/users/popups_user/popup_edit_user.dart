@@ -25,45 +25,48 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  String error="";
+  String error = "";
 
   @override
   void initState() {
     super.initState();
-      _firstNameController.text = widget.userData.firstName;
-      _lastNameController.text = widget.userData.lastName;
-      _emailController.text = widget.userData.email;
+    _firstNameController.text = widget.userData.firstName;
+    _lastNameController.text = widget.userData.lastName;
+    _emailController.text = widget.userData.email;
   }
 
   bool validateEmailStructure(String value) {
-    String pattern =
-        '[a-z0-9]+@[a-z0-9]+.[a-z]{2,3}';
+    String pattern = '[a-z0-9]+@[a-z0-9]+.[a-z]{2,3}';
     RegExp regExp = new RegExp(pattern);
     return regExp.hasMatch(value);
   }
 
   apiCall() async {
     LoadingDialog.show(context);
-    var res =    await  UserPagePresenter().editUserDetailAPI(widget.userData.id,_firstNameController.text,_lastNameController.text,_emailController.text);
+    var res = await UserPagePresenter().editUserDetailAPI(
+        widget.userData.id,
+        _firstNameController.text,
+        _lastNameController.text,
+        _emailController.text);
     LoadingDialog.hide(context);
-    if(res.toString().contains("status")){
-      Map<String,dynamic> parsed = json.decode(res.toString());
+    if (res.toString().contains("status")) {
+      Map<String, dynamic> parsed = json.decode(res.toString());
       ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
 
       Navigator.pop(context);
-    }else{
+    } else {
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
     }
-    setState(() {
-
-    },);
+    setState(
+      () {},
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    double sizeW=MediaQuery.of(context).size.width/2.5;
-    double sizeH=MediaQuery.of(context).size.height/1.5;
+    double sizeW = MediaQuery.of(context).size.width / 2.5;
+    double sizeH = MediaQuery.of(context).size.height / 1.5;
     return Dialog(
         child: SingleChildScrollView(
       child: Container(
@@ -98,64 +101,67 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
                 style: ThemeText.textLargeSecondaryBold,
               ),
             ),
-             Padding(
+            Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
-                    controller: _firstNameController,
+                controller: _firstNameController,
                 isPassVisible: false,
                 labelText: "First name",
                 prefixIconData: Icons.person_add_outlined,
                 hintText: "Enter first name",
-                    maxline: 1,
+                maxline: 1,
               )),
             ),
-             Padding(
+            Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
-                    controller:_lastNameController ,
+                controller: _lastNameController,
                 isPassVisible: false,
                 labelText: "Last name",
                 prefixIconData: Icons.person_add_outlined,
                 hintText: "Enter last name",
-                    maxline: 1,
+                maxline: 1,
               )),
             ),
-             Padding(
+            Padding(
               padding: EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Center(
                   child: CustomTextField(
-                    controller: _emailController,
+                controller: _emailController,
                 isPassVisible: false,
                 labelText: "Email",
                 prefixIconData: Icons.email,
                 hintText: "Enter email",
-                    maxline: 1,
+                maxline: 1,
               )),
             ),
-            SizedBox(height: 11,),
-            Center(child: ButtonWidget().buttonWidgetSimple('Update',
-                    () {
-                  if(_firstNameController.text.isNotEmpty && _lastNameController.text.isNotEmpty &&
-                      _emailController.text.isNotEmpty) {
-if(validateEmailStructure(_emailController.text)){
-                    apiCall();
-}else{
-  error = "Enter correct email to continue.";
-  setState(() {
-  });
-}
-
-                  }else{
-                    error = "Required all fields";
-                    setState(() {
-                    });
-                  }
-                },
-                100.0, 40.0)),
-            Center(child: Text(""+error,style: TextStyle(color: ColorConsts.redColor))),
-            SizedBox(height: 6,),
+            SizedBox(
+              height: 11,
+            ),
+            Center(
+                child: ButtonWidget().buttonWidgetSimple('Update', () {
+              if (_firstNameController.text.isNotEmpty &&
+                  _lastNameController.text.isNotEmpty &&
+                  _emailController.text.isNotEmpty) {
+                if (validateEmailStructure(_emailController.text)) {
+                  apiCall();
+                } else {
+                  error = "Enter correct email to continue.";
+                  setState(() {});
+                }
+              } else {
+                error = "Required all fields.";
+                setState(() {});
+              }
+            }, 100.0, 40.0)),
+            Center(
+                child: Text("" + error,
+                    style: TextStyle(color: ColorConsts.redColor))),
+            SizedBox(
+              height: 6,
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,7 @@ import 'package:key_admin_panel/views/plan/bloc/plan_state.dart';
 import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_bloc.dart';
 import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_state.dart';
 import 'package:key_admin_panel/views/plan/plan_page_presenter.dart';
+import 'package:key_admin_panel/widgets/text_field_custom.dart';
 
 import '../../model/plan_model.dart';
 import '../../utils/show_snack_bar.dart';
@@ -42,6 +44,9 @@ class _PlanPageState extends State<PlanPageUI> {
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
     }
+    setState(() {
+
+    },);
   }
 
   deleteAPICall(String id) async {
@@ -122,84 +127,84 @@ class _PlanPageState extends State<PlanPageUI> {
                                         textAlign: TextAlign.start,
                                       ),
                                     ]),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    InkResponse(
-                                      onTap: () =>
-                                          _showEditDialog(context, planDetail,
-                                              (name, id, price) {
-                                        editAPICall(id, name, price);
-                                      }),
-                                      child: Container(
-                                        height: 32,
-                                        width: 32,
-                                        decoration: BoxDecoration(
-                                            gradient: const LinearGradient(
-                                              colors: [
-                                                ColorConsts.primaryColor,
-                                                ColorConsts.primaryColor,
-                                              ],
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(25.0),
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: ColorConsts.primaryColor,
-                                                blurRadius: 1.0,
-                                                offset: Offset(1, 2),
-                                              ),
-                                            ]),
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: const Icon(
-                                          Icons.edit_outlined,
-                                          color: ColorConsts.whiteColor,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                   /* InkResponse(
-                                      onTap: () =>
-                                          _showDeleteDialog(context,
-                                                  () {
-                                                deleteAPICall(state.planDetail[index].id);
-                                              }),
-                                      child: Container(
-                                        height: 32,
-                                        width: 32,
-                                        decoration: BoxDecoration(
-                                            gradient: const LinearGradient(
-                                              colors: [
-                                                ColorConsts.primaryColor,
-                                                ColorConsts.primaryColor,
-                                              ],
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(25.0),
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: ColorConsts.primaryColor,
-                                                blurRadius: 1.0,
-                                                offset: Offset(1, 2),
-                                              ),
-                                            ]),
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: const Icon(
-                                          Icons.delete_forever,
-                                          color: ColorConsts.whiteColor,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    ),*/
-                                  ],
-                                ),
+                                // Column(
+                                //   mainAxisAlignment: MainAxisAlignment.center,
+                                //   children: [
+                                //     InkResponse(
+                                //       onTap: () =>
+                                //           _showEditDialog(context, planDetail,
+                                //               (name, id, price) {
+                                //         editAPICall(id, name, price);
+                                //       }),
+                                //       child: Container(
+                                //         height: 32,
+                                //         width: 32,
+                                //         decoration: BoxDecoration(
+                                //             gradient: const LinearGradient(
+                                //               colors: [
+                                //                 ColorConsts.primaryColor,
+                                //                 ColorConsts.primaryColor,
+                                //               ],
+                                //               begin: Alignment.centerLeft,
+                                //               end: Alignment.centerRight,
+                                //             ),
+                                //             borderRadius:
+                                //                 BorderRadius.circular(25.0),
+                                //             boxShadow: const [
+                                //               BoxShadow(
+                                //                 color: ColorConsts.primaryColor,
+                                //                 blurRadius: 1.0,
+                                //                 offset: Offset(1, 2),
+                                //               ),
+                                //             ]),
+                                //         padding: const EdgeInsets.all(1.0),
+                                //         child: const Icon(
+                                //           Icons.edit_outlined,
+                                //           color: ColorConsts.whiteColor,
+                                //           size: 20,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       height: 10,
+                                //     ),
+                                //    /* InkResponse(
+                                //       onTap: () =>
+                                //           _showDeleteDialog(context,
+                                //                   () {
+                                //                 deleteAPICall(state.planDetail[index].id);
+                                //               }),
+                                //       child: Container(
+                                //         height: 32,
+                                //         width: 32,
+                                //         decoration: BoxDecoration(
+                                //             gradient: const LinearGradient(
+                                //               colors: [
+                                //                 ColorConsts.primaryColor,
+                                //                 ColorConsts.primaryColor,
+                                //               ],
+                                //               begin: Alignment.centerLeft,
+                                //               end: Alignment.centerRight,
+                                //             ),
+                                //             borderRadius:
+                                //                 BorderRadius.circular(25.0),
+                                //             boxShadow: const [
+                                //               BoxShadow(
+                                //                 color: ColorConsts.primaryColor,
+                                //                 blurRadius: 1.0,
+                                //                 offset: Offset(1, 2),
+                                //               ),
+                                //             ]),
+                                //         padding: const EdgeInsets.all(1.0),
+                                //         child: const Icon(
+                                //           Icons.delete_forever,
+                                //           color: ColorConsts.whiteColor,
+                                //           size: 20,
+                                //         ),
+                                //       ),
+                                //     ),*/
+                                //   ],
+                                // ),
                               ],
                             ),
                           ),
@@ -325,177 +330,62 @@ class _PlanPageState extends State<PlanPageUI> {
 
   Future<bool> _showEditDialog(BuildContext context, PlanDetail planDetail,
       Function(String name, String id, String price) onClick) async {
-    TextEditingController planNameController = TextEditingController();
-    TextEditingController planPriceController = TextEditingController();
-    bool isNameValid = false;
-    bool isPriceValid = false;
-    return (await showDialog(
-            context: context,
-            builder: (context) => StatefulBuilder(builder: (context, setState) {
-                  planNameController.text = planDetail.planName;
-                  planPriceController.text = planDetail.price;
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height / 2.5,
-                    child: AlertDialog(
-                      contentPadding: EdgeInsets.all(18.0),
-                      backgroundColor: ColorConsts.whiteColor,
-                      content: SizedBox(
-                        height: MediaQuery.of(context).size.height / 2.5,
-                        width: MediaQuery.of(context).size.height / 2,
-                        child: Column(
-                          children: [
-                            Center(
-                                child: Text("Edit Plan",
-                                    style: ThemeText.textLargeSecondaryBold)),
-                            SizedBox(height: 35),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.height / 2,
-                              child: TextField(
-                                onChanged: (value) {
-                                  if (planNameController.text.isNotEmpty) {
-                                    isNameValid = true;
-                                  } else {
-                                    isNameValid = false;
-                                  }
-                                },
-                                controller: planNameController,
-                                style: ThemeText.textMediumSecondary,
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  labelText: "Plan Name",
-                                  labelStyle: TextStyle(color: ColorConsts.primaryColor),
-                                  filled: true,
-                                  fillColor: ColorConsts.whiteColor,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(11),
-                                    borderSide: BorderSide(
-                                      color: ColorConsts.primaryColor,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(11),
-                                    borderSide: BorderSide(
-                                      color: ColorConsts.primaryColor,
-                                    ),
-                                  ),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(11),
-                                    borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
-                                  ),
-                                  prefixIcon: Icon(
-                                    Icons.description_sharp,
-                                    color: ColorConsts.primaryColor,
-                                  ),
-                                  hintText: "Enter plan name",
-                                  hintStyle: TextStyle(
-                                    color: ColorConsts.primaryColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            if (isNameValid)
-                              Text(
-                                "Add plan name to continue..",
-                                style: TextStyle(
-                                    color: ColorConsts.redColor, fontSize: 14),
-                              ),
-                            SizedBox(height: 35),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.height / 2,
-                              child: TextField(
-                                onChanged: (value) {
-                                  if (planPriceController.text.isNotEmpty) {
-                                    isPriceValid = true;
-                                  } else {
-                                    isPriceValid = false;
-                                  }
-                                },
-                                controller: planPriceController,
-                                style: ThemeText.textMediumSecondary,
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  labelText: 'Plan price',
-                                  labelStyle: TextStyle(color: ColorConsts.primaryColor),
-                                  filled: true,
-                                  fillColor: ColorConsts.whiteColor,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(11),
-                                    borderSide: BorderSide(
-                                      color: ColorConsts.primaryColor,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(11),
-                                    borderSide: BorderSide(
-                                      color: ColorConsts.primaryColor,
-                                    ),
-                                  ),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(11),
-                                    borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
-                                  ),
-                                  prefixIcon: Icon(
-                                    Icons.price_change,
-                                    color: ColorConsts.primaryColor,
-                                  ),
-                                  hintText: "Enter plan price",
-                                  hintStyle: TextStyle(
-                                    color: ColorConsts.primaryColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            if (isPriceValid)
-                              Text(
-                                "Add plan price to continue..",
-                                style: TextStyle(
-                                    color: ColorConsts.redColor, fontSize: 14),
-                              ),
-                          ],
+      TextEditingController planNameController = TextEditingController(text: planDetail.planName);
+      TextEditingController planPriceController = TextEditingController(text: planDetail.price);
+      String error = "";
+     return (
+         await showDialog(
+         context: context,
+         builder: (context) => StatefulBuilder(builder: (context, setState) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height / 2.5,
+            child: AlertDialog(
+              contentPadding: EdgeInsets.all(18.0),
+              backgroundColor: ColorConsts.whiteColor,
+              content: SizedBox(
+                height: MediaQuery.of(context).size.height / 2.5,
+                width: MediaQuery.of(context).size.height / 2,
+                child: Column(
+                  children: [
+                    Center(child: Text("Edit Plan", style: ThemeText.textLargeSecondaryBold)),
+                    SizedBox(height: 35),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.height / 2,
+                      child: TextFieldCustom().textFieldForDialog(planNameController,"Enter plan name", "Plan name",Icons.person),
+                    ),
+                    SizedBox(height: 35),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.height / 2,
+                      child:TextFieldCustom().textFieldForDialog(planPriceController,"Enter plan price", "Price",Icons.price_change),
+                    ),
+                    if (error.isNotEmpty)
+                      Padding(padding:  EdgeInsets.only(top: 10.0),
+                        child: Text(error, style: TextStyle(color: Colors.red, fontSize: 14),
                         ),
                       ),
-                      actions: [
-                        ButtonWidget().buttonWidgetSimple("Cancel",
-                            () => Navigator.pop(context, false), 80.0, 40.0),
-                        ButtonWidget().buttonWidgetSimple("Update", () async {
-                          if (planNameController.text.isNotEmpty) {
-                            isNameValid = false;
-                            setState(
-                              () {},
-                            );
-                          } else {
-                            isNameValid = true;
-                            setState(
-                              () {},
-                            );
-                          }
-                          if (planPriceController.text.isNotEmpty) {
-                            isPriceValid = false;
-                            setState(
-                              () {},
-                            );
-                          } else {
-                            isPriceValid = true;
-                            setState(
-                              () {},
-                            );
-                          }
-                          if (planNameController.text.isNotEmpty &&
-                              planPriceController.text.isNotEmpty) {
-                            onClick(planNameController.text, planDetail.id,
-                                planPriceController.text);
-                          }
-                        }, 80.0, 40.0),
-                      ],
-                    ),
-                  );
-                }))) ??
+                  ],
+                ),
+              ),
+              actions: [
+                ButtonWidget().buttonWidgetSimple("Cancel",
+                        () => Navigator.pop(context, false), 80.0, 40.0),
+                ButtonWidget().buttonWidgetSimple("Update", () async {
+                  if (planNameController.text.isNotEmpty &&
+                      planPriceController.text.isNotEmpty ) {
+                      onClick(planNameController.text, planDetail.id, planPriceController.text);
+                  }
+                  else{
+                    setState(() {
+                      error = "Required all fields.";
+                    });
+                  }
+                }, 80.0, 40.0),
+              ],
+            ),
+          );
+        }))) ??
         false;
   }
-
-
   Future<bool> _showDeleteDialog(BuildContext context,Function() onClick) async {
     return( await showDialog(
         context: context,
