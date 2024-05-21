@@ -43,16 +43,16 @@ class _HomePageUIState extends State<HomePageUI> {
                     Container(
                       height: heightSize,
                       width: widthSize,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        color: ColorConsts.blueColorlyt,
+                      ),
                       child: Center(
                         child: Text(
                           '$totalKey\nTotal Key',
                           style: ThemeText.textLargeWhiteBold,
                           textAlign: TextAlign.center,
                         ),
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: ColorConsts.blueColorlyt,
                       ),
                     ),
                     Container(

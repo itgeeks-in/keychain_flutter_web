@@ -26,7 +26,6 @@ class _PopUpAddUserState extends State<PopupAddUser> {
   String error = "";
 
   bool isAgreed = false;
-
   // bool isAdmin = false;
   bool isPassVisible = false;
   bool isCPassVisible = false;
