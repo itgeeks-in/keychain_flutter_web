@@ -38,12 +38,21 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
     LoadingDialog.hide(context);
     if(result.toString().contains("status")){
       Map<String, dynamic> parsed = json.decode(result.toString());
-      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+      if(parsed["status"]){
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
 
-    Navigator.pop(context);
-      context
-          .read<CategoryPageBloc>()
-          .filtered(searchController.text);
+        Navigator.pop(context);
+        context.read<CategoryPageBloc>().filtered(searchController.text);
+      }else{
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+        Navigator.pop(context);
+      }
+    //   ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+    //
+    // Navigator.pop(context);
+    //   context
+    //       .read<CategoryPageBloc>()
+    //       .filtered(searchController.text);
   }else{
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again !");
@@ -57,12 +66,21 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
     LoadingDialog.hide(context);
     if(result.toString().contains("status")){
       Map<String, dynamic> parsed = json.decode(result.toString());
-      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+      if(parsed["status"]){
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
 
-      Navigator.pop(context);
-      context
-          .read<CategoryPageBloc>()
-          .filtered(searchController.text);
+        Navigator.pop(context);
+        context.read<CategoryPageBloc>().filtered(searchController.text);
+      }else{
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+        Navigator.pop(context);
+      }
+      // ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+      //
+      // Navigator.pop(context);
+      // context
+      //     .read<CategoryPageBloc>()
+      //     .filtered(searchController.text);
     }else{
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
@@ -77,12 +95,20 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
     LoadingDialog.hide(context);
     if(result.toString().contains("status")){
       Map<String, dynamic> parsed = json.decode(result.toString());
-      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-
-      Navigator.pop(context);
-      context
-          .read<CategoryPageBloc>()
-          .filtered(searchController.text);
+      if(parsed["status"]){
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+        Navigator.pop(context);
+        context.read<CategoryPageBloc>().filtered(searchController.text);
+      }else{
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+        Navigator.pop(context);
+      }
+      // ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+      //
+      // Navigator.pop(context);
+      // context
+      //     .read<CategoryPageBloc>()
+      //     .filtered(searchController.text);
     }else{
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");

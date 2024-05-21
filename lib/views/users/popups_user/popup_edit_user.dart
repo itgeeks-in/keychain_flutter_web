@@ -51,9 +51,13 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
     LoadingDialog.hide(context);
     if (res.toString().contains("status")) {
       Map<String, dynamic> parsed = json.decode(res.toString());
-      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-
-      Navigator.pop(context);
+      if(parsed["status"]){
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+        Navigator.pop(context);
+      }else{
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+        Navigator.pop(context);
+      }
     } else {
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
@@ -71,7 +75,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
         child: SingleChildScrollView(
       child: Container(
         width: sizeW,
-        height: sizeH,
+       // height: sizeH,
         decoration: const BoxDecoration(
             color: ColorConsts.backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(21))),

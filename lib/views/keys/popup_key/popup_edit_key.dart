@@ -17,6 +17,7 @@ import 'package:key_admin_panel/views/category/bloc/category_page_state.dart';
 import 'package:key_admin_panel/views/keys/key_page_presenter.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 import '../../../utils/loading_dialog.dart';
+import '../../../utils/show_snack_bar.dart';
 
 class PopUpEditkey extends StatefulWidget {
   final KeysData keysData;
@@ -57,17 +58,18 @@ apiCall() async {
       _descriptionNameController.text, categoryIdSelect, widget.keysData.id);
 
   LoadingDialog.hide(context);
-  if(res.toString().contains("status")){
-
-    Map<String,dynamic> parsed = json.decode(res.toString());
-    if (parsed['status']) {
-      error="Updated successfully.";
+  if (res.toString().contains("status")) {
+    Map<String, dynamic> parsed = json.decode(res.toString());
+    if(parsed["status"]){
+      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
       Navigator.pop(context);
     }else{
-      error="Not updated.";
+      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+      Navigator.pop(context);
     }
-  }else{
-    error="Not updated";
+  } else {
+    Navigator.pop(context);
+    ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
   }
   setState(() {
 
@@ -138,10 +140,11 @@ apiCall() async {
               ),
             ),
             Container(
-                height: 55,
-                width: sizeW,
+                 height: 60,
+                // width: sizeW,
                 margin: EdgeInsets.fromLTRB(40, 20, 40, 10),
-                padding: EdgeInsets.fromLTRB(8, 0, 4, 0),
+                //padding: EdgeInsets.fromLTRB(8, 0, 4, 0),
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                 decoration: new BoxDecoration(
                     border: Border.all(
                         color: ColorConsts.primaryColor,
@@ -154,60 +157,62 @@ apiCall() async {
                   Icon(Icons.category_outlined,color: ColorConsts.primaryColor,size: 20)
                   ,SizedBox(width: 7,),
 
-                  BlocProvider(
-                  create: (context) => CategoryPageBloc(),
-                  child: BlocBuilder<CategoryPageBloc,CategoryPageState>(builder: (context, state) {
-                  if(state is CategoryLoadState){
-                    return Center(child: Text("Loading Please wait...",style: ThemeText.textSmallPrimary),);
-                  }
-                  if(state is CategoryFailedState){
-                    return Center(child: Text("Not found",style: ThemeText.textSmallPrimary),);
-                  }
-                  if(state is CategorySuccessState) {
-                    if(state.data.length ==0){
-                      return Center(child: Text("Not found any category",style: ThemeText.textSmallPrimary),);
+                  Expanded(
+                    child: BlocProvider(
+                    create: (context) => CategoryPageBloc(),
+                    child: BlocBuilder<CategoryPageBloc,CategoryPageState>(builder: (context, state) {
+                    if(state is CategoryLoadState){
+                      return Center(child: Text("Loading Please wait...",style: ThemeText.textSmallPrimary),);
                     }
-                    categoryList = state.data;
-                   /* if(context.read<CategoryPageBloc>().selectOptionCategory == null){
-                      context.read<CategoryPageBloc>().selectOptionCategory=categoryList[0];
-                    }*/
-                  }
-                  return SizedBox(width: sizeW/1.5,
-                      child:  DropdownButton<CategoryData>(
-                    dropdownColor: ColorConsts.whiteColor,
-                    icon: Icon(Icons.arrow_drop_down,color: ColorConsts.primaryColor,size: 30),
-                    iconSize: 30,
-                    underline: const SizedBox(),
-                    value: context.read<CategoryPageBloc>().selectOptionCategory,
-
-                    items: categoryList.map((CategoryData item) {
-                      if(item.categoryId == categoryIdSelect){
-
-                        if(context.read<CategoryPageBloc>().selectOptionCategory == null){
-                          context.read<CategoryPageBloc>().selectOptionCategory=item;
-                         // print("Initial >>>>>>>>>>>>>>>>>>>>> "+context.read<CategoryPageBloc>().selectOptionCategory!.category.toString());
-
-                          context.read<CategoryPageBloc>().refresh();}
+                    if(state is CategoryFailedState){
+                      return Center(child: Text("Not found",style: ThemeText.textSmallPrimary),);
+                    }
+                    if(state is CategorySuccessState) {
+                      if(state.data.length ==0){
+                        return Center(child: Text("Not found any category",style: ThemeText.textSmallPrimary),);
                       }
-                      return DropdownMenuItem<CategoryData>(
-                        value: item,
-                        child: Text(
-                          item.categoryName,
-                          style: (item.categoryId == widget.keysData.categoryId)?ThemeText.textMediumSecondaryBold:
-                          ThemeText.textSmallGrey,
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (CategoryData? newValue) {
-                      context.read<CategoryPageBloc>().selectOptionCategory = newValue;
-                      categoryIdSelect=context.read<CategoryPageBloc>().selectOptionCategory!.categoryId;
-                      setState(() {
-                      });
-                    },
-                  )
-                  );
-                },),
-              )],)
+                      categoryList = state.data;
+                     /* if(context.read<CategoryPageBloc>().selectOptionCategory == null){
+                        context.read<CategoryPageBloc>().selectOptionCategory=categoryList[0];
+                      }*/
+                    }
+                    return SizedBox(width: sizeW/1.5,
+                        child:  DropdownButton<CategoryData>(
+                      dropdownColor: ColorConsts.whiteColor,
+                      icon: Icon(Icons.arrow_drop_down,color: ColorConsts.primaryColor,size: 30),
+                      iconSize: 30,
+                      underline: const SizedBox(),
+                      value: context.read<CategoryPageBloc>().selectOptionCategory,
+                    
+                      items: categoryList.map((CategoryData item) {
+                        if(item.categoryId == categoryIdSelect){
+                    
+                          if(context.read<CategoryPageBloc>().selectOptionCategory == null){
+                            context.read<CategoryPageBloc>().selectOptionCategory=item;
+                           // print("Initial >>>>>>>>>>>>>>>>>>>>> "+context.read<CategoryPageBloc>().selectOptionCategory!.category.toString());
+                    
+                            context.read<CategoryPageBloc>().refresh();}
+                        }
+                        return DropdownMenuItem<CategoryData>(
+                          value: item,
+                          child: Text(
+                            item.categoryName,
+                            style: (item.categoryId == widget.keysData.categoryId)?ThemeText.textMediumSecondaryBold:
+                            ThemeText.textSmallGrey,
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (CategoryData? newValue) {
+                        context.read<CategoryPageBloc>().selectOptionCategory = newValue;
+                        categoryIdSelect=context.read<CategoryPageBloc>().selectOptionCategory!.categoryId;
+                        setState(() {
+                        });
+                      },
+                    )
+                    );
+                                    },),
+                                  ),
+                  )],)
             ),
             SizedBox(height: 5,),
           /*  Container(

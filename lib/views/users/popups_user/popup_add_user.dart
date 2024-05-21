@@ -46,9 +46,13 @@ class _PopUpAddUserState extends State<PopupAddUser> {
     LoadingDialog.hide(context);
     if (res.toString().contains("status")) {
       Map<String, dynamic> parsed = json.decode(res.toString());
-      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-
-      Navigator.pop(context);
+      if(parsed["status"]){
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+        Navigator.pop(context);
+      }else{
+        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+        Navigator.pop(context);
+      }
     } else {
       Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
@@ -318,7 +322,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                           }
                         : {error = "Email not valid."};
                   } else {
-                    error = "Accept term & conditions first";
+                    error = "Accept term & conditions";
                   }
                 } else {
                   error = "Required all fields.";
