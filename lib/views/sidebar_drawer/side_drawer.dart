@@ -31,171 +31,169 @@ class _HomePageUIState extends State<SideDrawer> {
   bool isExpanded = true;
   int _selectedIndex = 0;
 
-void backHandle(){
-
-
-  html.window.onBeforeUnload.listen((event) async {
-
+  void backHandle() {
+    html.window.onBeforeUnload.listen((event) async {
       event.preventDefault();
-
-
-  });
-
-
-}
+    });
+  }
 
   @override
   void setState(VoidCallback fn) {
-
-backHandle();
+    backHandle();
     super.setState(fn);
   }
+
   @override
   Widget build(BuildContext context) {
- double size=   MediaQuery.of(context).size.height/12;
+    double size = MediaQuery.of(context).size.height / 12;
     return PopScope(
-
-        canPop: false
-,
-    child:Scaffold(
-      body: Row(
-        children: [
-          NavigationRail(
-            minExtendedWidth: MediaQuery.of(context).size.width/6,
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Image.asset(AppAssets.logoImg,
-                  height: 65, width: 65, fit: BoxFit.cover),
-            ),
-            indicatorColor: ColorConsts.backgroundColor,
-            extended: isExpanded,
-            backgroundColor: ColorConsts.primaryColor,
-            unselectedIconTheme:
-                IconThemeData(color: ColorConsts.whiteColor, opacity: 1),
-            selectedLabelTextStyle:
-                TextStyle(color: ColorConsts.whiteColor, fontSize: 18),
-            unselectedLabelTextStyle:
-                TextStyle(color: ColorConsts.whiteColor, fontSize: 13),
-            selectedIconTheme: const IconThemeData(
-              color: ColorConsts.primaryColor,
-            ),
-
-            destinations: [
-
-              NavigationRailDestination(
-                icon: SizedBox(height: size,child: const Icon(Icons.home)),
-                padding: const EdgeInsets.only(top: 30),
-                label: const Text("Dashboard"),
-              ),
-              NavigationRailDestination(
-                icon: SizedBox(height: size,child:const Icon(Icons.people_outline_sharp)),
-                label: const Text("Users"),
-              ),
-              NavigationRailDestination(
-                icon: SizedBox(height: size,child:const Icon(Icons.vpn_key_outlined)),
-                label: const Text("Keys"),
-              ),
-              NavigationRailDestination(
-                icon: SizedBox(height: size,child:const Icon(Icons.playlist_add_rounded)),
-                label: const Text("Plans"),
-              ),
-              NavigationRailDestination(
-                icon:SizedBox(height: size,child: const Icon(Icons.category_outlined)),
-                label: const Text("Category"),
-              ),
-             /* NavigationRailDestination(
+        canPop: false,
+        child: Scaffold(
+          body: Row(
+            children: [
+              NavigationRail(
+                minExtendedWidth: MediaQuery.of(context).size.width / 6,
+                leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.asset(AppAssets.logoImg,
+                      height: 65, width: 65, fit: BoxFit.cover),
+                ),
+                indicatorColor: ColorConsts.backgroundColor,
+                extended: isExpanded,
+                backgroundColor: ColorConsts.primaryColor,
+                unselectedIconTheme:
+                    IconThemeData(color: ColorConsts.whiteColor, opacity: 1),
+                selectedLabelTextStyle:
+                    TextStyle(color: ColorConsts.whiteColor, fontSize: 18),
+                unselectedLabelTextStyle:
+                    TextStyle(color: ColorConsts.whiteColor, fontSize: 13),
+                selectedIconTheme: const IconThemeData(
+                  color: ColorConsts.primaryColor,
+                ),
+                destinations: [
+                  NavigationRailDestination(
+                    icon: SizedBox(height: size, child: const Icon(Icons.home)),
+                    padding: const EdgeInsets.only(top: 30),
+                    label: const Text("Dashboard"),
+                  ),
+                  NavigationRailDestination(
+                    icon: SizedBox(
+                        height: size,
+                        child: const Icon(Icons.people_outline_sharp)),
+                    label: const Text("Users"),
+                  ),
+                  NavigationRailDestination(
+                    icon: SizedBox(
+                        height: size,
+                        child: const Icon(Icons.vpn_key_outlined)),
+                    label: const Text("Keys"),
+                  ),
+                  NavigationRailDestination(
+                    icon: SizedBox(
+                        height: size,
+                        child: const Icon(Icons.playlist_add_rounded)),
+                    label: const Text("Plans"),
+                  ),
+                  NavigationRailDestination(
+                    icon: SizedBox(
+                        height: size,
+                        child: const Icon(Icons.category_outlined)),
+                    label: const Text("Category"),
+                  ),
+                  /* NavigationRailDestination(
                 icon:SizedBox(height: size,child: const Icon(Icons.person_rounded)),
                 label: const Text("Profile"),
               ),*/
-              NavigationRailDestination(
-                icon: SizedBox(height: size,child:const Icon(Icons.logout)),
-                label: const Text("Logout"),
-              ),
-            ],
-            selectedIndex: _selectedIndex,
-            onDestinationSelected: (int index) {
-              print("??????");
+                  NavigationRailDestination(
+                    icon:
+                        SizedBox(height: size, child: const Icon(Icons.logout)),
+                    label: const Text("Logout"),
+                  ),
+                ],
+                selectedIndex: _selectedIndex,
+                onDestinationSelected: (int index) {
+                  print("??????");
 
-              setState(() {
-                _selectedIndex = index;
-              });
-              if (_selectedIndex == 5) {
-                Dialogs().logoutPopup(context, "en");
-              }
-            },
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: ColorConsts.backgroundColor,
-                      boxShadow: const [
-                        BoxShadow(
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                  if (_selectedIndex == 5) {
+                    Dialogs().logoutPopup(context, "en");
+                  }
+                },
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
                           color: ColorConsts.backgroundColor,
-                          blurRadius: 2,
-                          spreadRadius: 2,
-                        )
-                      ]),
-                  padding: const EdgeInsets.all(8),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isExpanded = !isExpanded;
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.menu,
-                          color: ColorConsts.primaryColor,
-                        ),
-                      ),
-                      TextButton(
-                        child: Text(
-                          _getLabelForIndex(_selectedIndex),
-                          style: TextStyle(color: ColorConsts.primaryColor),
-                        ),
-                        onPressed: () {},
-                      ),
-                      const Spacer(),
-                 /*     IconButton(
+                          boxShadow: const [
+                            BoxShadow(
+                              color: ColorConsts.backgroundColor,
+                              blurRadius: 2,
+                              spreadRadius: 2,
+                            )
+                          ]),
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isExpanded = !isExpanded;
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.menu,
+                              color: ColorConsts.primaryColor,
+                            ),
+                          ),
+                          TextButton(
+                            child: Text(
+                              _getLabelForIndex(_selectedIndex),
+                              style: TextStyle(color: ColorConsts.primaryColor),
+                            ),
+                            onPressed: () {},
+                          ),
+                          const Spacer(),
+                          /*     IconButton(
                         icon: Icon(Icons.notification_important,
                             color: ColorConsts.primaryColor),
                         onPressed: () {},
                       ),*/
-                      const SizedBox(width: 12),
-                      IconButton(
-                        icon: Icon(Icons.power_settings_new,
-                            color: ColorConsts.primaryColor),
-                        onPressed: () {
-                          Dialogs().logoutPopup(context, "en");
-                        },
+                          const SizedBox(width: 12),
+                          IconButton(
+                            icon: Icon(Icons.power_settings_new,
+                                color: ColorConsts.primaryColor),
+                            onPressed: () {
+                              Dialogs().logoutPopup(context, "en");
+                            },
+                          ),
+                          const SizedBox(width: 12),
+                        ],
                       ),
-                      const SizedBox(width: 12),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 1,
-                  color: Colors.black12,
-                ),
+                    ),
+                    Container(
+                      height: 1,
+                      color: Colors.black12,
+                    ),
 
-                Expanded(child: buildPages()),
-                // Padding(
-                //   padding: EdgeInsets.all(8.0),
-                //   child: SingleChildScrollView(
-                //     child: _screens[_selectedIndex],
-                //   ),
-                // ),
-              ],
-            ),
+                    Expanded(child: buildPages()),
+                    // Padding(
+                    //   padding: EdgeInsets.all(8.0),
+                    //   child: SingleChildScrollView(
+                    //     child: _screens[_selectedIndex],
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    )
-    );
+        ));
   }
+
 //ToDo:
 
   String _getLabelForIndex(int index) {
@@ -210,7 +208,7 @@ backHandle();
         return 'Plans';
       case 4:
         return 'Category';
-     /* case 5:
+      /* case 5:
         return 'Profile';*/
 
       default:
@@ -221,33 +219,36 @@ backHandle();
   Widget buildPages() {
     switch (_selectedIndex) {
       case 0:
-        return  HomePageUI();
+        return BlocProvider(
+          create: (context) {
+            return HomeBloc();
+          },
+          child: HomePageUI(),
+        );
       case 1:
         return BlocProvider(
-        create: (context) {
-    return UsersDataBloc();
-    },child: UserPage());
-
+            create: (context) {
+              return UsersDataBloc();
+            },
+            child: UserPage());
 
       case 2:
         return BlocProvider(
             create: (context) {
               return KeyBloc();
-            },child: KeyPageUI());
+            },
+            child: KeyPageUI());
 
       case 4:
         return BlocProvider(
             create: (context) {
               return CategoryPageBloc();
-            },child: CategoryPageUI());
-  /*    case 5:
+            },
+            child: CategoryPageUI());
+      /*    case 5:
         return ProfilePage();*/
-      // case 3:
-      //   return  BlocProvider(create:(context){
-      //     return PlanBloc();
-      //   },child: PlanPageUI());
       case 3:
-        return  MultiBlocProvider(providers:[
+        return MultiBlocProvider(providers: [
           BlocProvider<PlanListBloc>(
             create: (context) => PlanListBloc(),
             child: PlanPageUI(),
@@ -258,7 +259,12 @@ backHandle();
           ),
         ], child: PlanPageUI());
       case 5:
-        return  HomePageUI();
+        return BlocProvider(
+          create: (context) {
+            return HomeBloc();
+          },
+          child: HomePageUI(),
+        );
       default:
         return Container(
           child: Text("This is Screen Not Present",
