@@ -15,6 +15,7 @@ import 'package:key_admin_panel/views/users/user_page_ui.dart';
 
 import '../../utils/theme_text.dart';
 import '../category/bloc/category_page_bloc.dart';
+import '../home/bloc/home_bloc.dart';
 import '../keys/bloc/key_bloc.dart';
 import '../plan/plan_page_ui.dart';
 import '../users/bloc/user_bloc.dart';
@@ -32,12 +33,12 @@ class _HomePageUIState extends State<SideDrawer> {
 
   @override
   Widget build(BuildContext context) {
- double size=   MediaQuery.of(context).size.height/12;
+    double size = MediaQuery.of(context).size.height / 12;
     return Scaffold(
       body: Row(
         children: [
           NavigationRail(
-            minExtendedWidth: MediaQuery.of(context).size.width/6,
+            minExtendedWidth: MediaQuery.of(context).size.width / 6,
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Image.asset(AppAssets.logoImg,
@@ -55,36 +56,40 @@ class _HomePageUIState extends State<SideDrawer> {
             selectedIconTheme: const IconThemeData(
               color: ColorConsts.primaryColor,
             ),
-
             destinations: [
-
               NavigationRailDestination(
-                icon: SizedBox(height: size,child: const Icon(Icons.home)),
+                icon: SizedBox(height: size, child: const Icon(Icons.home)),
                 padding: const EdgeInsets.only(top: 30),
                 label: const Text("Dashboard"),
               ),
               NavigationRailDestination(
-                icon: SizedBox(height: size,child:const Icon(Icons.people_outline_sharp)),
+                icon: SizedBox(
+                    height: size,
+                    child: const Icon(Icons.people_outline_sharp)),
                 label: const Text("Users"),
               ),
               NavigationRailDestination(
-                icon: SizedBox(height: size,child:const Icon(Icons.vpn_key_outlined)),
+                icon: SizedBox(
+                    height: size, child: const Icon(Icons.vpn_key_outlined)),
                 label: const Text("Keys"),
               ),
               NavigationRailDestination(
-                icon: SizedBox(height: size,child:const Icon(Icons.playlist_add_rounded)),
+                icon: SizedBox(
+                    height: size,
+                    child: const Icon(Icons.playlist_add_rounded)),
                 label: const Text("Plans"),
               ),
               NavigationRailDestination(
-                icon:SizedBox(height: size,child: const Icon(Icons.category_outlined)),
+                icon: SizedBox(
+                    height: size, child: const Icon(Icons.category_outlined)),
                 label: const Text("Category"),
               ),
-             /* NavigationRailDestination(
+              /* NavigationRailDestination(
                 icon:SizedBox(height: size,child: const Icon(Icons.person_rounded)),
                 label: const Text("Profile"),
               ),*/
               NavigationRailDestination(
-                icon: SizedBox(height: size,child:const Icon(Icons.logout)),
+                icon: SizedBox(height: size, child: const Icon(Icons.logout)),
                 label: const Text("Logout"),
               ),
             ],
@@ -135,7 +140,7 @@ class _HomePageUIState extends State<SideDrawer> {
                         onPressed: () {},
                       ),
                       const Spacer(),
-                 /*     IconButton(
+                      /*     IconButton(
                         icon: Icon(Icons.notification_important,
                             color: ColorConsts.primaryColor),
                         onPressed: () {},
@@ -171,6 +176,7 @@ class _HomePageUIState extends State<SideDrawer> {
       ),
     );
   }
+
 //ToDo:
 
   String _getLabelForIndex(int index) {
@@ -185,7 +191,7 @@ class _HomePageUIState extends State<SideDrawer> {
         return 'Plans';
       case 4:
         return 'Category';
-     /* case 5:
+      /* case 5:
         return 'Profile';*/
 
       default:
@@ -196,33 +202,36 @@ class _HomePageUIState extends State<SideDrawer> {
   Widget buildPages() {
     switch (_selectedIndex) {
       case 0:
-        return  HomePageUI();
+        return BlocProvider(
+          create: (context) {
+            return HomeBloc();
+          },
+          child: HomePageUI(),
+        );
       case 1:
         return BlocProvider(
-        create: (context) {
-    return UsersDataBloc();
-    },child: UserPage());
-
+            create: (context) {
+              return UsersDataBloc();
+            },
+            child: UserPage());
 
       case 2:
         return BlocProvider(
             create: (context) {
               return KeyBloc();
-            },child: KeyPageUI());
+            },
+            child: KeyPageUI());
 
       case 4:
         return BlocProvider(
             create: (context) {
               return CategoryPageBloc();
-            },child: CategoryPageUI());
-  /*    case 5:
+            },
+            child: CategoryPageUI());
+      /*    case 5:
         return ProfilePage();*/
-      // case 3:
-      //   return  BlocProvider(create:(context){
-      //     return PlanBloc();
-      //   },child: PlanPageUI());
       case 3:
-        return  MultiBlocProvider(providers:[
+        return MultiBlocProvider(providers: [
           BlocProvider<PlanListBloc>(
             create: (context) => PlanListBloc(),
             child: PlanPageUI(),
@@ -233,7 +242,13 @@ class _HomePageUIState extends State<SideDrawer> {
           ),
         ], child: PlanPageUI());
       case 5:
-        return  HomePageUI();
+        return BlocProvider(
+          create: (context) {
+            return HomeBloc();
+          },
+          child: HomePageUI(),
+        );
+      // return  HomePageUI();
       default:
         return Container(
           child: Text("This is Screen Not Present",

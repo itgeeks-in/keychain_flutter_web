@@ -34,7 +34,7 @@ class CategoryPageBloc extends Bloc<CategoryPageEvent,CategoryPageState> {
   }
 
   refresh(){
-    print("refresh called cate bloc issue");
+    print("refresh state is called.");
     emit(RefreshChangeState());
   }
 
