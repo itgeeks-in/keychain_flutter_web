@@ -51,11 +51,11 @@ class _PopUpAddUserState extends State<PopupAddUser> {
         Navigator.pop(context);
       }else{
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-        Navigator.pop(context);
+      //  Navigator.pop(context);
       }
     } else {
-      Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
+     // Navigator.pop(context);
     }
     setState(
       () {},

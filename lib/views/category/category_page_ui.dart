@@ -45,7 +45,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
         context.read<CategoryPageBloc>().filtered(searchController.text);
       }else{
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-        Navigator.pop(context);
+        //Navigator.pop(context);
       }
     //   ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
     //
@@ -54,8 +54,8 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
     //       .read<CategoryPageBloc>()
     //       .filtered(searchController.text);
   }else{
-      Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again !");
+      //Navigator.pop(context);
     }
   }
 
@@ -82,8 +82,8 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
       //     .read<CategoryPageBloc>()
       //     .filtered(searchController.text);
     }else{
-      Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
+      //Navigator.pop(context);
     }
   }
 
@@ -101,7 +101,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
         context.read<CategoryPageBloc>().filtered(searchController.text);
       }else{
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-        Navigator.pop(context);
+       // Navigator.pop(context);
       }
       // ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
       //
@@ -110,8 +110,8 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
       //     .read<CategoryPageBloc>()
       //     .filtered(searchController.text);
     }else{
-      Navigator.pop(context);
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
+      //Navigator.pop(context);
     }
   }
 
