@@ -34,7 +34,9 @@ class _PopUpAddUserState extends State<PopupAddUser> {
   bool isPassMatch = false;
 
   apiCall() async {
+    error = "";
     LoadingDialog.show(context);
+
     var res = await UserPagePresenter().signupAPI(
         _firstNameController.text,
         _lastNameController.text,
@@ -42,17 +44,21 @@ class _PopUpAddUserState extends State<PopupAddUser> {
         _passwordController.text,
         _confirmPasswordController.text,
         isAgreed);
+
     LoadingDialog.hide(context);
     if (res.toString().contains("status")) {
       Map<String, dynamic> parsed = json.decode(res.toString());
       if(parsed["status"]){
+        error = parsed["message"];
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
         Navigator.pop(context);
       }else{
+        error = parsed["message"];
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
       //  Navigator.pop(context);
       }
     } else {
+      error = "Try again! something went wrong";
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
      // Navigator.pop(context);
     }
@@ -90,7 +96,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: Icon(3
                         Icons.close_outlined,
                         color: ColorConsts.primaryColor,
                       ),
