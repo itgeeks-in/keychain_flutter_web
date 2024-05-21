@@ -12,7 +12,7 @@ import 'package:key_admin_panel/views/plan/bloc/plan_bloc.dart';
 import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_bloc.dart';
 import 'package:key_admin_panel/views/profile/profile_page_ui.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
-
+import 'dart:html' as html;
 import '../../utils/theme_text.dart';
 import '../category/bloc/category_page_bloc.dart';
 import '../keys/bloc/key_bloc.dart';
@@ -30,10 +30,33 @@ class _HomePageUIState extends State<SideDrawer> {
   bool isExpanded = true;
   int _selectedIndex = 0;
 
+void backHandle(){
+
+
+  html.window.onBeforeUnload.listen((event) async {
+
+      event.preventDefault();
+
+
+  });
+
+
+}
+
+  @override
+  void setState(VoidCallback fn) {
+
+backHandle();
+    super.setState(fn);
+  }
   @override
   Widget build(BuildContext context) {
  double size=   MediaQuery.of(context).size.height/12;
-    return Scaffold(
+    return PopScope(
+
+        canPop: false
+,
+    child:Scaffold(
       body: Row(
         children: [
           NavigationRail(
@@ -169,6 +192,7 @@ class _HomePageUIState extends State<SideDrawer> {
           ),
         ],
       ),
+    )
     );
   }
 //ToDo:

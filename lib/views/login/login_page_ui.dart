@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/route/route_generate.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/views/login/bloc/login_state.dart';
 import 'package:key_admin_panel/views/login/bloc/login_bloc.dart';
@@ -25,6 +26,7 @@ class _LoginScreenState extends State<LoginPageUI> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+
       onWillPop: () async {
         return Dialogs().isBack(context, "en");
       },
@@ -37,10 +39,10 @@ class _LoginScreenState extends State<LoginPageUI> {
               child: BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is SuccessState) {
-                    Navigator.pushReplacement(
+                    Navigator.pushReplacementNamed(
                       context,
-                      MaterialPageRoute(builder: (context) => SideDrawer()),
-                    );
+                      RouteGenerate.homeScreen);
+
                   }
                 },
                 child: BlocBuilder<LoginBloc, LoginState>(

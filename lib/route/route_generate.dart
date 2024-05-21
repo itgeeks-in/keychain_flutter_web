@@ -1,5 +1,5 @@
 import 'dart:js';
-
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
@@ -43,6 +43,7 @@ class RouteGenerate {
 
    */
       case login:
+
         return MaterialPageRoute(builder: (context){
           return BlocProvider(
               create: (context) {
@@ -50,6 +51,7 @@ class RouteGenerate {
               },
               child: const LoginPageUI());
         });
+
 
       case homeScreen:
         return MaterialPageRoute(builder: (context) {
@@ -90,6 +92,9 @@ class RouteGenerate {
               },
             child:  PlanPageUI());
         });
+
+   /*   case '/':
+       html.window.location.reload();*/
     }
   }
 }

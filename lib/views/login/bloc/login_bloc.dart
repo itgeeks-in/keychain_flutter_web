@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/model/user_model.dart';
 import 'package:key_admin_panel/utils/session.dart';
+import 'package:key_admin_panel/utils/globals.dart' as globals;
 import 'package:key_admin_panel/views/login/bloc/login_state.dart';
 import 'package:key_admin_panel/views/login/bloc/login_event.dart';
 import '../login_page_presenter.dart';
@@ -59,6 +60,7 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
        if (userDataModel.result.isAdmin) {
          await session.setToken(userDataModel.result.token);
          session.setLoginUserData("$result");
+         globals.token = userDataModel.result.token;
          emit(SuccessState());
        } else {
          emit(NonAdminState());
