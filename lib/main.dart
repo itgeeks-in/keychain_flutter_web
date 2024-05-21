@@ -17,11 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerate.onCreateRoute,
-      home: Scaffold(
-        body: Center(
-          child: const LoginPageUI(),
-        ),
-      ),
+initialRoute: RouteGenerate.login,
+
     );
   }
 }

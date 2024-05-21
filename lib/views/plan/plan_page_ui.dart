@@ -45,7 +45,6 @@ class _PlanPageState extends State<PlanPageUI> {
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
     }
     setState(() {
-
     },);
   }
 
@@ -57,7 +56,6 @@ class _PlanPageState extends State<PlanPageUI> {
     if(result.toString().contains("status")){
       Map<String, dynamic> parsed = json.decode(result.toString());
       ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-
       Navigator.pop(context);
       context.read<PlanListBloc>().filtered();
     }else{
@@ -456,7 +454,8 @@ class SubscriptionHeading extends StatelessWidget {
             child: Padding(
                 padding: EdgeInsets.only(left: 60),
                 child: Text("Plan",
-                    style: ThemeText.textMediumPrimaryBold, maxLines: 1)),
+                    style: ThemeText.textMediumPrimaryBold, maxLines: 1)
+            ),
           )
         ],
       ),

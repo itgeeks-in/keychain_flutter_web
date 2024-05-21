@@ -38,7 +38,6 @@ class _HomePageUIState extends State<SideDrawer> {
         children: [
           NavigationRail(
             minExtendedWidth: MediaQuery.of(context).size.width/6,
-
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Image.asset(AppAssets.logoImg,
@@ -63,7 +62,6 @@ class _HomePageUIState extends State<SideDrawer> {
                 icon: SizedBox(height: size,child: const Icon(Icons.home)),
                 padding: const EdgeInsets.only(top: 30),
                 label: const Text("Dashboard"),
-
               ),
               NavigationRailDestination(
                 icon: SizedBox(height: size,child:const Icon(Icons.people_outline_sharp)),

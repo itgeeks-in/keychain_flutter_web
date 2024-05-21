@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../model/user_model.dart';
 import '../../../theme/app_assets.dart';
 import '../../../utils/custom_text_field.dart';
@@ -34,14 +32,9 @@ class EditUserProfile  {
 
     return (await showDialog(
         context: context,
-
         builder: (context) => StatefulBuilder(
-
         builder: (context, setState)
     {
-
-
-
 
 
       uploadAPI() async {
@@ -70,16 +63,11 @@ class EditUserProfile  {
 
 
       void selectImage() async {
-
         final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
         image = pickedImage!.path;
-
         print("$image");
-
         setState(() {
         },);
-
-
         uploadAPI();
       }
 

@@ -77,8 +77,9 @@ class _PopUpAddKeysState extends State<PopupAddKeys> {
               labelText: "Enter your Key Name",
               prefixIconData: Icons.vpn_key_outlined,
               hintText: "Enter your Key Name",
-                  maxline: 1,
-            )),
+              maxline: 1,
+            )
+            ),
           ),
          Padding(
             padding: EdgeInsets.only(left: 50, right: 50, top: 20),
@@ -127,7 +128,8 @@ class _PopUpAddKeysState extends State<PopupAddKeys> {
                                 width: 2,
                                 color: ColorConsts.primaryColor,
                               ),
-                            ))
+                            )
+                    )
                         : Container(
                             margin: EdgeInsets.only(bottom: 10),
                             padding: EdgeInsets.all(8.0),
@@ -148,7 +150,8 @@ class _PopUpAddKeysState extends State<PopupAddKeys> {
                                 width: 2,
                                 color: ColorConsts.primaryColor,
                               ),
-                            )),
+                            )
+                    ),
                     InkWell(
                       onTap: selectImage,
                       child: Text(
@@ -160,7 +163,7 @@ class _PopUpAddKeysState extends State<PopupAddKeys> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 80,
                 ),
                 Container(
@@ -202,130 +205,128 @@ class DropdownMenuList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: DropdownMenu(
-        width: 400,
-        enableFilter: true,
-        enableSearch: true,
-        inputDecorationTheme: InputDecorationTheme(
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(11)),
-            borderSide: BorderSide(
-              color: ColorConsts.primaryColor,
-              width: 2,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(11),
-            borderSide: const BorderSide(
-              color: ColorConsts.primaryColor,
-              width: 2,
-            ),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(11)),
-            borderSide: BorderSide(
-              color: ColorConsts.primaryColor,
-            ),
+    return DropdownMenu(
+      width: 400,
+      enableFilter: true,
+      enableSearch: true,
+      inputDecorationTheme: InputDecorationTheme(
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(11)),
+          borderSide: BorderSide(
+            color: ColorConsts.primaryColor,
+            width: 2,
           ),
         ),
-        leadingIcon: const Icon(
-          Icons.category_rounded,
-          color: ColorConsts.primaryColor,size: 20,
-        ),
-        label: const Text(
-          "Categories",
-          style: TextStyle(color: ColorConsts.textColorLight),
-        ),
-        textStyle: TextStyle(color: ColorConsts.textColorLight),
-        trailingIcon: Icon(
-          Icons.arrow_drop_down_outlined,
-          color: ColorConsts.primaryColor,
-        ),
-        selectedTrailingIcon: Icon(
-          Icons.arrow_drop_up_sharp,
-          color: ColorConsts.primaryColor,
-        ),
-        requestFocusOnTap: true,
-        menuStyle: MenuStyle(
-          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
-                return ColorConsts
-                    .primaryColor; // Change the selected background color here
-              }
-              return ColorConsts
-                  .backgroundColor; // Change the default background color here
-            },
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(11),
+          borderSide: const BorderSide(
+            color: ColorConsts.primaryColor,
+            width: 2,
           ),
         ),
-        dropdownMenuEntries: const <DropdownMenuEntry>[
-          DropdownMenuEntry(
-            value: ColorConsts.primaryColor,
-            label: "KeyLock",
-            // labelWidget: Text(
-            //   "dsfsdfj",
-            //   style: TextStyle(color: Colors.red),
-            // ),
-            leadingIcon: Icon(
-              Icons.key_rounded,
-              color: ColorConsts.primaryColor,
-            ),
-            style: ButtonStyle(
-              foregroundColor:
-                  MaterialStatePropertyAll(ColorConsts.primaryColor),
-              backgroundColor:
-                  MaterialStatePropertyAll(ColorConsts.backgroundColor),
-              elevation: MaterialStatePropertyAll(11),
-              textStyle: MaterialStatePropertyAll(
-                TextStyle(
-                  color: ColorConsts.primaryColor,
-                ),
-              ),
-            ),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(11)),
+          borderSide: BorderSide(
+            color: ColorConsts.primaryColor,
           ),
-          DropdownMenuEntry(
-            value: ColorConsts.primaryColor,
-            label: "KeyLock1",
-            leadingIcon: Icon(
-              Icons.key_rounded,
-              color: ColorConsts.primaryColor,
-            ),
-            style: ButtonStyle(
-              foregroundColor:
-                  MaterialStatePropertyAll(ColorConsts.primaryColor),
-              backgroundColor:
-                  MaterialStatePropertyAll(ColorConsts.backgroundColor),
-              elevation: MaterialStatePropertyAll(11),
-              textStyle: MaterialStatePropertyAll(
-                TextStyle(
-                  color: ColorConsts.primaryColor,
-                ),
-              ),
-            ),
-          ),
-          DropdownMenuEntry(
-            value: Colors.red,
-            label: "KeyLock2",
-            leadingIcon: Icon(
-              Icons.key_rounded,
-              color: ColorConsts.primaryColor,
-            ),
-            style: ButtonStyle(
-              foregroundColor:
-                  MaterialStatePropertyAll(ColorConsts.primaryColor),
-              backgroundColor:
-                  MaterialStatePropertyAll(ColorConsts.backgroundColor),
-              elevation: MaterialStatePropertyAll(11),
-              textStyle: MaterialStatePropertyAll(
-                TextStyle(
-                  color: ColorConsts.primaryColor,
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
+      leadingIcon: const Icon(
+        Icons.category_rounded,
+        color: ColorConsts.primaryColor,size: 20,
+      ),
+      label: const Text(
+        "Categories",
+        style: TextStyle(color: ColorConsts.textColorLight),
+      ),
+      textStyle: TextStyle(color: ColorConsts.textColorLight),
+      trailingIcon: Icon(
+        Icons.arrow_drop_down_outlined,
+        color: ColorConsts.primaryColor,
+      ),
+      selectedTrailingIcon: Icon(
+        Icons.arrow_drop_up_sharp,
+        color: ColorConsts.primaryColor,
+      ),
+      requestFocusOnTap: true,
+      menuStyle: MenuStyle(
+        backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return ColorConsts
+                  .primaryColor; // Change the selected background color here
+            }
+            return ColorConsts
+                .backgroundColor; // Change the default background color here
+          },
+        ),
+      ),
+      dropdownMenuEntries: const <DropdownMenuEntry>[
+        DropdownMenuEntry(
+          value: ColorConsts.primaryColor,
+          label: "KeyLock",
+          // labelWidget: Text(
+          //   "dsfsdfj",
+          //   style: TextStyle(color: Colors.red),
+          // ),
+          leadingIcon: Icon(
+            Icons.key_rounded,
+            color: ColorConsts.primaryColor,
+          ),
+          style: ButtonStyle(
+            foregroundColor:
+                MaterialStatePropertyAll(ColorConsts.primaryColor),
+            backgroundColor:
+                MaterialStatePropertyAll(ColorConsts.backgroundColor),
+            elevation: MaterialStatePropertyAll(11),
+            textStyle: MaterialStatePropertyAll(
+              TextStyle(
+                color: ColorConsts.primaryColor,
+              ),
+            ),
+          ),
+        ),
+        DropdownMenuEntry(
+          value: ColorConsts.primaryColor,
+          label: "KeyLock1",
+          leadingIcon: Icon(
+            Icons.key_rounded,
+            color: ColorConsts.primaryColor,
+          ),
+          style: ButtonStyle(
+            foregroundColor:
+                MaterialStatePropertyAll(ColorConsts.primaryColor),
+            backgroundColor:
+                MaterialStatePropertyAll(ColorConsts.backgroundColor),
+            elevation: MaterialStatePropertyAll(11),
+            textStyle: MaterialStatePropertyAll(
+              TextStyle(
+                color: ColorConsts.primaryColor,
+              ),
+            ),
+          ),
+        ),
+        DropdownMenuEntry(
+          value: Colors.red,
+          label: "KeyLock2",
+          leadingIcon: Icon(
+            Icons.key_rounded,
+            color: ColorConsts.primaryColor,
+          ),
+          style: ButtonStyle(
+            foregroundColor:
+                MaterialStatePropertyAll(ColorConsts.primaryColor),
+            backgroundColor:
+                MaterialStatePropertyAll(ColorConsts.backgroundColor),
+            elevation: MaterialStatePropertyAll(11),
+            textStyle: MaterialStatePropertyAll(
+              TextStyle(
+                color: ColorConsts.primaryColor,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
