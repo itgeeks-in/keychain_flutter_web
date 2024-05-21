@@ -42,6 +42,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
   }
 
   apiCall() async {
+    error = "";
     LoadingDialog.show(context);
     var res = await UserPagePresenter().editUserDetailAPI(
         widget.userData.id,
@@ -55,12 +56,14 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
         Navigator.pop(context);
       }else{
-        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+        error = parsed["message"];
+        //ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
         //Navigator.pop(context);
       }
     } else {
+      error = "Try again! something went wrong";
      // Navigator.pop(context);
-      ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
+      //ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
     }
     setState(
       () {},
