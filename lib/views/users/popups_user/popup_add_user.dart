@@ -96,7 +96,7 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(3
+                      child: Icon(
                         Icons.close_outlined,
                         color: ColorConsts.primaryColor,
                       ),
