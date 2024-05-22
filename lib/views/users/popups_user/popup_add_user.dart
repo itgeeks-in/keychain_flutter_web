@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,7 +6,6 @@ import 'package:key_admin_panel/utils/custom_text_field.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
-
 import '../../../utils/show_snack_bar.dart';
 import '../../../utils/loading_dialog.dart';
 import '../user_page_presenter.dart';
@@ -143,7 +141,8 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                   prefixIconData: Icons.email_outlined,
                   hintText: "Enter email",
                   maxline: 1,
-                )),
+                )
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
@@ -163,7 +162,9 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                     });
                   },
                   maxline: 1,
-                )),
+                )
+
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
@@ -332,7 +333,8 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                   error = "Required all fields.";
                 }
                 setState(() {});
-              }, 100.0, 40.0)),
+              }, 100.0, 40.0)
+              ),
               Center(
                   child: Text("" + error,
                       style: TextStyle(color: ColorConsts.redColor))),

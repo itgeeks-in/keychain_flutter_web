@@ -144,6 +144,22 @@ class _PopupViewUserState extends State<PopupViewUser> {
                             ),
                           ],
                         ),
+                        if(widget.userData.createdAt.toString().isNotEmpty)Row(
+                          children: [
+                            const Text(
+                              "This user added on :  ",
+                              style: TextStyle(
+                                  color: ColorConsts.secondaryColor,
+                                  fontSize: 18),
+                            ),
+                            Text(
+                              widget.userData.createdAt.toString().split("T")[0],
+                              style: TextStyle(
+                                  color: ColorConsts.textColorDark,
+                                  fontSize: 18),
+                            ),
+                          ],
+                        ),
                    /*     Row(
                           children: [
                             const Text(

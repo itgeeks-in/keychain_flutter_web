@@ -49,6 +49,7 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
         _firstNameController.text,
         _lastNameController.text,
         _emailController.text);
+
     LoadingDialog.hide(context);
     if (res.toString().contains("status")) {
       Map<String, dynamic> parsed = json.decode(res.toString());
