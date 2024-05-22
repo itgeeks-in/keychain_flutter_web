@@ -53,6 +53,7 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
 
 
 apiCall() async {
+  error = "";
   LoadingDialog.show(context);
   var res =    await  KeyPagePresenter().keyEditAPI(_keyNameController.text,
       _descriptionNameController.text, categoryIdSelect, widget.keysData.id);
@@ -64,11 +65,13 @@ apiCall() async {
       ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
       Navigator.pop(context);
     }else{
-      ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+      error = parsed['message'];
+      //ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
       //Navigator.pop(context);
     }
   } else {
-    ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
+    error = "Try again! something went wrong";
+   // ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
     //Navigator.pop(context);
   }
   setState(() {

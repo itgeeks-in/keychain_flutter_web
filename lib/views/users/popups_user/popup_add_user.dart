@@ -48,17 +48,17 @@ class _PopUpAddUserState extends State<PopupAddUser> {
     if (res.toString().contains("status")) {
       Map<String, dynamic> parsed = json.decode(res.toString());
       if(parsed["status"]){
-        error = parsed["message"];
+        //error = parsed["message"];
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
         Navigator.pop(context);
       }else{
         error = parsed["message"];
-        ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
+       // ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
       //  Navigator.pop(context);
       }
     } else {
       error = "Try again! something went wrong";
-      ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
+     // ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
      // Navigator.pop(context);
     }
     setState(() {},);
