@@ -24,7 +24,6 @@ class _PopUpAddUserState extends State<PopupAddUser> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
   String error = "";
-
   bool isAgreed = false;
   // bool isAdmin = false;
   bool isPassVisible = false;
@@ -62,9 +61,8 @@ class _PopUpAddUserState extends State<PopupAddUser> {
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
      // Navigator.pop(context);
     }
-    setState(
-      () {},
-    );
+    setState(() {},);
+
   }
 
   bool validateEmailStructure(String value) {
@@ -185,7 +183,8 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                     });
                   },
                   maxline: 1,
-                )),
+                )
+                ),
               ),
               // Padding(
               //   padding: const EdgeInsets.only(left: 25, right: 50, top: 16),
