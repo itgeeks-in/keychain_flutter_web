@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../utils/color_const.dart';
 
 class ChartPieDis {
@@ -13,13 +16,79 @@ class ChartPieDis {
     };
 
     bool allValuesZero = dataMap.values.every((value) => value == 0);
-
     if (allValuesZero) {
       return Center(
-        child: Loader().loaderWidget2(),
+        child: Shimmer.fromColors(
+          baseColor: ColorConsts.blueColorlyt,
+          highlightColor: ColorConsts.secondaryColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.35,
+                width: MediaQuery.of(context).size.width / 3.2,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: ColorConsts.secondaryColor,
+                ),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: false,
+                            onChanged: (value) {},
+                          ),
+                          Container(
+                            width: 60,
+                            height: 16,
+                            color: ColorConsts.blueColorlyt,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2),
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: false,
+                            onChanged: (value) {},
+                          ),
+                          Container(
+                            width: 60,
+                            height: 16,
+                            color: ColorConsts.primaryColor,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2),
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: false,
+                            onChanged: (value) {},
+                          ),
+                          Container(
+                            width: 60,
+                            height: 16,
+                            color: ColorConsts.secondaryColor,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       );
     }
-
     return PieChart(
       dataMap: dataMap,
       animationDuration: Duration(milliseconds: 900),
