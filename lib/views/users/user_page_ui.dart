@@ -224,8 +224,7 @@ class _UserPageState extends State<UserPage> {
                         if (IsLoading == false) {
                           IsLoading = true;
                           currentPage++;
-                          context
-                              .read<UsersDataBloc>()
+                          context.read<UsersDataBloc>()
                               .add(OnScrollPageEvent(currentPage, 0));
                         }
                         return true;

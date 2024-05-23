@@ -34,10 +34,6 @@ class ApiConst {
   static const String deletePlan = '/plan/deleteplan';
 
 
-
-
-
-
   //TODO : Api parameter for calling (fields or param)
   static const String email = 'email';
   static const String file = 'file';
