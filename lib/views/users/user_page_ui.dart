@@ -13,6 +13,7 @@ import 'package:key_admin_panel/views/users/popups_user/popup_view_user.dart';
 import 'package:key_admin_panel/views/users/user_page_presenter.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
 import 'package:key_admin_panel/widgets/loader_widget.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../utils/show_snack_bar.dart';
 import '../../utils/dialogs.dart';
 import '../../utils/loading_dialog.dart';
@@ -443,7 +444,21 @@ class _UserPageState extends State<UserPage> {
                     ),
                   );
                 } else {
-                  return Center(child: Loader().loaderWidget2());
+                  return Shimmer.fromColors(
+                    baseColor: ColorConsts.simmer2Color,
+                    highlightColor: ColorConsts.simmerColor,
+                    child: ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return Container(
+                           margin: EdgeInsets.all(10),
+                           height:45 ,
+                           color: ColorConsts.whiteColor,
+                         //   decoration: BoxDecoration(borderRadius:BorderRadius.circular(10.0)),
+                        );
+                      },
+                    ),
+                  );
                 }
               },
             ))

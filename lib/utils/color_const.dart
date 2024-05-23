@@ -21,7 +21,7 @@ class ColorConsts {
 //background: #12262E;
   static const Color hintColor = Color(0xFFa1a3ce);
   static const Color simmer2Color = Color(0xfffafafa);
-  static const Color simmerColor = Color(0xe8c0c1c4);
+  static const Color simmerColor = Color(0xe8e0e0e1);
   static const Color outline = Color(0xFFa1a3ce);
   static const Color pinkLytColor = Color(0xFFF0E6FF);
   static const Color pinkColor = Color(0xE8833066);
