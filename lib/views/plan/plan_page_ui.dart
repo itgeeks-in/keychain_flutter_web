@@ -260,7 +260,8 @@ class _PlanPageState extends State<PlanPageUI> {
             ),
             SubscriptionHeading(),
 
-                 SizedBox(height: MediaQuery.of(context).size.height/2,child:  BlocBuilder<PlanBloc, PlanState>(builder: (context, state) {
+                 SizedBox(height: MediaQuery.of(context).size.height/2,
+                   child:  BlocBuilder<PlanBloc, PlanState>(builder: (context, state) {
                 if (state is SuccessState) {
                   return ListView.builder(
                     itemCount: state.userDataPlan.length,
@@ -350,7 +351,20 @@ class _PlanPageState extends State<PlanPageUI> {
                     ),
                   );
                 } else {
-                  return Center(child: Loader().loaderWidget2());
+                  return    Shimmer.fromColors(
+                      baseColor: ColorConsts.simmer2Color,
+                      highlightColor: ColorConsts.simmerColor,
+                      child: ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.all(10),
+                      height:45 ,
+                      color: ColorConsts.whiteColor,
+                      //   decoration: BoxDecoration(borderRadius:BorderRadius.circular(10.0)),
+                    );
+                  },
+                   ));
                 }
               }),),
 

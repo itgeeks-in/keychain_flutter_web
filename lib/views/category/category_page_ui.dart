@@ -124,12 +124,13 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: ColorConsts.whiteColor,
-         padding: const EdgeInsets.all(10.0),
-        margin: const EdgeInsets.all(10.0),
+         padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+        SizedBox(height: 80,
+        child: Row(
 
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -216,11 +217,12 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                   }),
                 }, 140.0, 40.0)
               ],)
+        ),
 
 
 
-          , const SizedBox(height: 20,),
-           SizedBox(height: MediaQuery.of(context).size.height/1.36,
+          Spacer(),
+           SizedBox(height: MediaQuery.of(context).size.height-155,
                child:  BlocBuilder<CategoryPageBloc,CategoryPageState>(
                builder: (context, state) {
                if(state is CategorySuccessState) {
