@@ -9,6 +9,7 @@ import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_state.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../utils/loading_dialog.dart';
 import '../../widgets/loader_widget.dart';
@@ -193,6 +194,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                   context
                       .read<CategoryPageBloc>()
                       .filtered(searchController.text);
+
                 },child: Container(width: 60,height: 55,
                     margin: const EdgeInsets.fromLTRB(12, 3, 0, 0),
                     decoration: BoxDecoration(
@@ -218,11 +220,11 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
 
 
           , const SizedBox(height: 20,),
-            BlocBuilder<CategoryPageBloc,CategoryPageState>(
+           SizedBox(height: MediaQuery.of(context).size.height/1.36,
+               child:  BlocBuilder<CategoryPageBloc,CategoryPageState>(
                builder: (context, state) {
                if(state is CategorySuccessState) {
-                 return Expanded(
-                     child: GridView.count(
+                 return  GridView.count(
                        crossAxisCount: 4,
                        crossAxisSpacing: 10,
                        mainAxisSpacing: 10,
@@ -328,7 +330,7 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                           );
                         }
                        ),
-                     )
+
                   );
                 }else if(state is CategoryNotFoundState){
                  return Center(
@@ -338,11 +340,42 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                     ),
                   );
                 }else{
-                 return Center(child: Loader().loaderWidget2());
+
+
+                 return GridView.count(
+                 crossAxisCount: 4,
+                 crossAxisSpacing: 10,
+    mainAxisSpacing: 10,
+    childAspectRatio: (180 / 100),
+    children: List.generate(12, (index) {
+                 return Container(
+                     margin: const EdgeInsets.all(8.0),
+      height: MediaQuery.of(context).size.height/4.1,
+      alignment: Alignment.center,
+      padding: EdgeInsets.all(2),
+      child: Shimmer.fromColors(
+      baseColor: ColorConsts.simmerColor,
+      highlightColor: ColorConsts.simmer2Color,
+
+      child:
+      Container(
+      height: MediaQuery.of(context).size.height/4.2,
+      width: MediaQuery.of(context).size.height/2.5,
+      decoration: BoxDecoration(
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.circular(10.0),
+      color: ColorConsts.simmer2Color,
+      ),
+      )
+      ));
+                 }
+    )
+                 );
                }
               },
 
             )
+           )
            ],
          ),
        ),

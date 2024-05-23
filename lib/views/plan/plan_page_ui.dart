@@ -12,6 +12,7 @@ import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_bloc.dar
 import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_state.dart';
 import 'package:key_admin_panel/views/plan/plan_page_presenter.dart';
 import 'package:key_admin_panel/widgets/text_field_custom.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../model/plan_model.dart';
 import '../../utils/show_snack_bar.dart';
@@ -213,7 +214,40 @@ class _PlanPageState extends State<PlanPageUI> {
                 } else if (state is PlanNotFoundState) {
                   return Center(child: Text('Plans not found.'));
                 } else {
-                  return Center(child: Loader().loaderWidget2());
+                  return Center(child: Container(
+                  margin: const EdgeInsets.all(8.0),
+                height: MediaQuery.of(context).size.height/4.1,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(2),
+                      child: Shimmer.fromColors(
+                baseColor: ColorConsts.simmerColor,
+                highlightColor: ColorConsts.simmer2Color,
+                
+                child:Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 6),
+                    Container(
+                      height: MediaQuery.of(context).size.height/4.2,
+                      width: MediaQuery.of(context).size.height/2.5,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: ColorConsts.simmer2Color,
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                    Container(
+                      height: MediaQuery.of(context).size.height/4.2,
+                      width: MediaQuery.of(context).size.height/2.5,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: ColorConsts.simmer2Color,
+                      ),
+                    ),
+                ],))
+                  ));
                 }
               },
             ),
