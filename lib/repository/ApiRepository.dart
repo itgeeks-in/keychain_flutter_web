@@ -7,9 +7,6 @@ import 'api_const.dart';
 class ApiRepository {
   static Dio client = Dio();
 
-// ...
-
-
   static Future<dynamic> getAPI(String apiName,var data) async {
     try {
       String callingUrl;

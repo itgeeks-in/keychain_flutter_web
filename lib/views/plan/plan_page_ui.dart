@@ -78,17 +78,17 @@ class _PlanPageState extends State<PlanPageUI> {
                 if (state is PlanSuccessState) {
                   return Container(
                     margin: const EdgeInsets.all(8.0),
-                    height: MediaQuery.of(context).size.height/3.8,
+                    height: MediaQuery.of(context).size.height/4.1,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: state.planDetail.length,
                       itemBuilder: (context, index) {
                         final planDetail = state.planDetail[index];
                         return Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(6.0),
                           child: Container(
-                            margin: EdgeInsets.all(10.0),
-                            padding: EdgeInsets.all(8.0),
+                            margin: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(6.0),
                             width: 275,
                             decoration: BoxDecoration(
                               color: ColorConsts.backgroundColor,
@@ -226,7 +226,7 @@ class _PlanPageState extends State<PlanPageUI> {
             ),
             SubscriptionHeading(),
 
-                 SizedBox(height: MediaQuery.of(context).size.height/2.1,child:  BlocBuilder<PlanBloc, PlanState>(builder: (context, state) {
+                 SizedBox(height: MediaQuery.of(context).size.height/2,child:  BlocBuilder<PlanBloc, PlanState>(builder: (context, state) {
                 if (state is SuccessState) {
                   return ListView.builder(
                     itemCount: state.userDataPlan.length,

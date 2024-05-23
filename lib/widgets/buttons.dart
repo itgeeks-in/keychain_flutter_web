@@ -24,7 +24,8 @@ class ButtonWidget{
               end: Alignment.centerRight,
             ),
             borderRadius:
-            BorderRadius.circular(10.0)),
+            BorderRadius.circular(10.0)
+        ),
         alignment: Alignment.center,
         child:Text(text,
           style: ThemeText.textLargePrimary,
