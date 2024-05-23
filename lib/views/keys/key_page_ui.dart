@@ -381,7 +381,21 @@ class _KeysScreenState extends State<KeyPageUI> {
                       ),
                     );
                   } else {
-                    return Center(child: Loader().loaderWidget2());
+                    return Shimmer.fromColors(
+                      baseColor: ColorConsts.simmer2Color,
+                      highlightColor: ColorConsts.simmerColor,
+                      child: ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.all(10),
+                            height:100 ,
+                            color: ColorConsts.whiteColor,
+                            //   decoration: BoxDecoration(borderRadius:BorderRadius.circular(10.0)),
+                          );
+                        },
+                      ),
+                    );
                   }
                 },
               ),
