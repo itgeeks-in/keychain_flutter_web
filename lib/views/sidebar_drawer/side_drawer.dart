@@ -10,7 +10,6 @@ import 'package:key_admin_panel/views/home/home_page_ui.dart';
 import 'package:key_admin_panel/views/keys/key_page_ui.dart';
 import 'package:key_admin_panel/views/plan/bloc/plan_bloc.dart';
 import 'package:key_admin_panel/views/plan/bloc_for_plan_list/plan_list_bloc.dart';
-import 'package:key_admin_panel/views/profile/profile_page_ui.dart';
 import 'package:key_admin_panel/views/users/user_page_ui.dart';
 import 'dart:html' as html;
 import '../../utils/theme_text.dart';
@@ -55,8 +54,22 @@ class _HomePageUIState extends State<SideDrawer> {
                 minExtendedWidth: MediaQuery.of(context).size.width / 6,
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(50),
-                  child: Image.asset(AppAssets.logoImg,
-                      height: 65, width: 65, fit: BoxFit.cover),
+                  child: Image.asset(
+                    AppAssets.logoImg,
+                    height: 65,
+                    width: 65,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        height: 65,
+                        width: 65,
+                        decoration: BoxDecoration(
+                          color: ColorConsts.secondaryColor, // You can choose any color you like
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 indicatorColor: ColorConsts.backgroundColor,
                 extended: isExpanded,
