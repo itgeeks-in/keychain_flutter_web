@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:key_admin_panel/utils/custom_text_field.dart';
 import 'package:key_admin_panel/utils/show_snack_bar.dart';
 import 'package:key_admin_panel/utils/color_const.dart';
 import 'package:key_admin_panel/utils/dialogs.dart';
@@ -12,9 +13,7 @@ import 'package:key_admin_panel/widgets/buttons.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../utils/loading_dialog.dart';
-import '../../widgets/loader_widget.dart';
 import 'category_page_presenter.dart';
-
 
 class CategoryPageUI extends StatefulWidget {
   CategoryPageUI({super.key});
@@ -31,91 +30,63 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
     super.initState();
   }
 
-
   deleteAPICall(String id) async {
     LoadingDialog.show(context);
-    var result=await CategoryPagePresenter().deleteCategory(id);
+    var result = await CategoryPagePresenter().deleteCategory(id);
     print("Working");
     LoadingDialog.hide(context);
-    if(result.toString().contains("status")){
+    if (result.toString().contains("status")) {
       Map<String, dynamic> parsed = json.decode(result.toString());
-      if(parsed["status"]){
+      if (parsed["status"]) {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
 
         Navigator.pop(context);
         context.read<CategoryPageBloc>().filtered(searchController.text);
-      }else{
+      } else {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-        //Navigator.pop(context);
       }
-    //   ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-    //
-    // Navigator.pop(context);
-    //   context
-    //       .read<CategoryPageBloc>()
-    //       .filtered(searchController.text);
-  }else{
+    } else {
       ShowSnackBar().snackBarSuccessShow(context, "Try Again !");
-      //Navigator.pop(context);
     }
   }
-
 
   addAPICall(String name) async {
     LoadingDialog.show(context);
-    var result=await CategoryPagePresenter().addKeyCategory(name);
+    var result = await CategoryPagePresenter().addKeyCategory(name);
     LoadingDialog.hide(context);
-    if(result.toString().contains("status")){
+    if (result.toString().contains("status")) {
       Map<String, dynamic> parsed = json.decode(result.toString());
-      if(parsed["status"]){
+      if (parsed["status"]) {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
 
         Navigator.pop(context);
         context.read<CategoryPageBloc>().filtered(searchController.text);
-      }else{
+      } else {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
         Navigator.pop(context);
       }
-      // ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-      //
-      // Navigator.pop(context);
-      // context
-      //     .read<CategoryPageBloc>()
-      //     .filtered(searchController.text);
-    }else{
+    } else {
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
-      //Navigator.pop(context);
     }
   }
 
-
-
-  editAPICall(String name,String id) async {
+  editAPICall(String name, String id) async {
     LoadingDialog.show(context);
-    var result=await CategoryPagePresenter().editCategory(name,id);
+    var result = await CategoryPagePresenter().editCategory(name, id);
     LoadingDialog.hide(context);
-    if(result.toString().contains("status")){
+    if (result.toString().contains("status")) {
       Map<String, dynamic> parsed = json.decode(result.toString());
-      if(parsed["status"]){
+      if (parsed["status"]) {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
         Navigator.pop(context);
         context.read<CategoryPageBloc>().filtered(searchController.text);
-      }else{
+      } else {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-       // Navigator.pop(context);
       }
-      // ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-      //
-      // Navigator.pop(context);
-      // context
-      //     .read<CategoryPageBloc>()
-      //     .filtered(searchController.text);
-    }else{
+    } else {
       ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
-      //Navigator.pop(context);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -124,263 +95,278 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: ColorConsts.whiteColor,
-         padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-        child:Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-        SizedBox(height: 80,
-        child: Row(
-
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-
-                  width: MediaQuery.of(context).size.width / 3,
-                  height: 60,
-                  child:  Padding(
-                    padding: EdgeInsets.all(1.0),
-                    child: TextField(
-
-                      controller: searchController,
-                      style: TextStyle(color: ColorConsts.textColorDark),
-
-                      decoration: InputDecoration(
-                        labelText: "Search",
-                        labelStyle: const TextStyle(color: ColorConsts.primaryColor),
-                        filled: true,
-                        fillColor: ColorConsts.backgroundColor,
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: const BorderSide(
-                            color: ColorConsts.primaryColor,
-                            width: 2,
+            SizedBox(
+                height: 80,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3,
+                      height: 60,
+                      child: Padding(
+                        padding: EdgeInsets.all(1.0),
+                        // child: CustomTextField(
+                        //   controller: searchController,
+                        //   hintText: "Search key",
+                        //   isPassVisible: false,
+                        //   labelText: "Search Key",
+                        //   maxline: 1,
+                        //   prefixIconData: Icons.person_search_sharp
+                        // ),
+                        child:TextField(
+                          controller: searchController,
+                          style: TextStyle(color: ColorConsts.textColorDark),
+                          decoration: InputDecoration(
+                            labelText: "Search",
+                            labelStyle: const TextStyle(
+                                color: ColorConsts.primaryColor),
+                            filled: true,
+                            fillColor: ColorConsts.backgroundColor,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(11),
+                              borderSide: const BorderSide(
+                                color: ColorConsts.primaryColor,
+                                width: 2,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(11),
+                              borderSide: BorderSide(
+                                color: ColorConsts.primaryColor,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(11),
+                              borderSide: BorderSide(
+                                  color: ColorConsts.primaryColor, width: 2),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.person_search_sharp,
+                              color: ColorConsts.primaryColor,
+                            ),
+                            hintText: "Search keys",
+                            hintStyle: const TextStyle(
+                              color: ColorConsts.primaryColor,
+                            ),
                           ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(
-                            color: ColorConsts.primaryColor,
-                          ),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
-                        ),
-                        prefixIcon: const Icon(
-                          Icons.person_search_sharp,
-                          color: ColorConsts.primaryColor,
-                        ),
-
-                        hintText: "Search keys",
-                        hintStyle: const TextStyle(
-                          color: ColorConsts.primaryColor,
+                          onChanged: (value) {},
+                          onSubmitted: (value) {
+                            context
+                                .read<CategoryPageBloc>()
+                                .filtered(searchController.text);
+                          },
                         ),
                       ),
-                      onChanged: (value) {
-
-                      },
-                      onSubmitted: (value) {
-                        context
-                            .read<CategoryPageBloc>()
-                            .filtered(searchController.text);
-                      },
-                    )
-
-
-                    ,
-                  ),
-                ),
-                InkResponse(onTap: () {
-                  context
-                      .read<CategoryPageBloc>()
-                      .filtered(searchController.text);
-
-                },child: Container(width: 60,height: 55,
-                    margin: const EdgeInsets.fromLTRB(12, 3, 0, 0),
-                    decoration: BoxDecoration(
-                      color: ColorConsts.primaryColor,
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(10)),
-                      border: Border.all(
-                        width: 1,
-                        color: ColorConsts.primaryColor,
-                      ),),
-
-                    child: const Icon(Icons.search
-                      ,size: 25,
-                      color: ColorConsts.whiteColor,))),
-                Spacer(),
-                ButtonWidget().buttonWidgetSimple('Add Category+', () => {
-                  Dialogs().addKeyCategory(context,(s) {
-                    addAPICall(s);
-                  }),
-                }, 140.0, 40.0)
-              ],)
-        ),
-
-
-
-          Spacer(),
-           SizedBox(height: MediaQuery.of(context).size.height-155,
-               child:  BlocBuilder<CategoryPageBloc,CategoryPageState>(
-               builder: (context, state) {
-               if(state is CategorySuccessState) {
-                 return  GridView.count(
-                       crossAxisCount: 4,
-                       crossAxisSpacing: 10,
-                       mainAxisSpacing: 10,
-                       childAspectRatio: (180 / 100),
-                       children: List.generate(state.data.length, (index) {
-                         return Container(
-                           alignment: Alignment.center,
-                           decoration: BoxDecoration(
-                             color: ColorConsts.whiteColor,
-                             border: Border.all(
-                               color: ColorConsts.secondaryColor,
-                               width: 1.0,
-                             ),
-                             borderRadius: BorderRadius.circular(10.0),
-                           ),
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                             children: [Text(state.data[index].categoryName,
-                                 style: ThemeText.textMediumSecondaryBold,
-                               ),
-                               const SizedBox(height: 10,),
-                               Column(
-                                 mainAxisAlignment: MainAxisAlignment.center,
-                                 children: [
-                                   InkResponse(
-                                     onTap: () {
-                                       Dialogs().editKeyCategory(context,
-                                           state.data[index].categoryName,state.data[index].categoryId,
-                                             (name, id) {
-                                               editAPICall(name, id);
-                                           },);
-                                     },
-                                     child: Container(
-                                       height: 32,
-                                       width: 32,
-                                       decoration: BoxDecoration(
-                                           gradient: const LinearGradient(
-                                             colors: [
-                                               ColorConsts.primaryColor,
-                                               ColorConsts.primaryColor,
-                                             ],
-                                             begin: Alignment.centerLeft,
-                                             end: Alignment.centerRight,
-                                           ),
-                                           borderRadius:
-                                           BorderRadius.circular(25.0)
-                                           ,boxShadow: const [BoxShadow(
-                                         color: ColorConsts.primaryColor,
-                                         blurRadius: 1.0,
-                                         offset: Offset(1, 2),
-                                       ),]
-                                       ),
-                                       padding:
-                                       const EdgeInsets.all(1.0),
-                                       child: const Icon(
-                                         Icons.edit_outlined,
-                                         color: ColorConsts.whiteColor,size: 20,
-                                       ),
-                                     ),
-
-                                   ),
-                                   const SizedBox(height: 10,),
-                                   InkResponse(
-                                     onTap: () {
-                                      Dialogs().deleteKeyCategory(context,() {
-                                        deleteAPICall(state.data[index].categoryId);
-                                      },);
-                                     },
-                                     child: Container(
-                                       height: 32,
-                                       width: 32,
-                                       decoration: BoxDecoration(
-                                           gradient: const LinearGradient(
-                                             colors: [
-                                               ColorConsts.primaryColor,
-                                               ColorConsts.primaryColor,
-                                             ],
-                                             begin: Alignment.centerLeft,
-                                             end: Alignment.centerRight,
-                                           ),
-                                           borderRadius:
-                                           BorderRadius.circular(25.0)
-
-                                           ,boxShadow: const [BoxShadow(
-                                         color: ColorConsts.primaryColor,
-                                         blurRadius: 1.0,
-                                         offset: Offset(1, 2),
-                                       ),]
-                                       ),
-                                       padding:
-                                       const EdgeInsets.all(1.0),
-                                       child: const Icon(
-                                         Icons.delete_forever,
-                                         color: ColorConsts.whiteColor,size: 20,
-                                       ),
-                                     ),
-
-                                   ),
+                    ),
+                    InkResponse(
+                        onTap: () {
+                          context
+                              .read<CategoryPageBloc>()
+                              .filtered(searchController.text);
+                        },
+                        child: Container(
+                            width: 60,
+                            height: 55,
+                            margin: const EdgeInsets.fromLTRB(12, 3, 0, 0),
+                            decoration: BoxDecoration(
+                              color: ColorConsts.primaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              border: Border.all(
+                                width: 1,
+                                color: ColorConsts.primaryColor,
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.search,
+                              size: 25,
+                              color: ColorConsts.whiteColor,
+                            ))),
+                    Spacer(),
+                    ButtonWidget().buttonWidgetSimple(
+                        'Add Category+',
+                        () => {
+                              Dialogs().addKeyCategory(context, (s) {
+                                addAPICall(s);
+                              }),
+                            },
+                        140.0,
+                        40.0)
+                  ],
+                )),
+            Spacer(),
+            SizedBox(
+                height: MediaQuery.of(context).size.height - 155,
+                child: BlocBuilder<CategoryPageBloc, CategoryPageState>(
+                  builder: (context, state) {
+                    if (state is CategorySuccessState) {
+                      return GridView.count(
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: (180 / 100),
+                        children: List.generate(state.data.length, (index) {
+                          return Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: ColorConsts.whiteColor,
+                              border: Border.all(
+                                color: ColorConsts.secondaryColor,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  state.data[index].categoryName,
+                                  style: ThemeText.textMediumSecondaryBold,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkResponse(
+                                      onTap: () {
+                                        Dialogs().editKeyCategory(
+                                          context,
+                                          state.data[index].categoryName,
+                                          state.data[index].categoryId,
+                                          (name, id) {
+                                            editAPICall(name, id);
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        height: 32,
+                                        width: 32,
+                                        decoration: BoxDecoration(
+                                            gradient: const LinearGradient(
+                                              colors: [
+                                                ColorConsts.primaryColor,
+                                                ColorConsts.primaryColor,
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(25.0),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: ColorConsts.primaryColor,
+                                                blurRadius: 1.0,
+                                                offset: Offset(1, 2),
+                                              ),
+                                            ]),
+                                        padding: const EdgeInsets.all(1.0),
+                                        child: const Icon(
+                                          Icons.edit_outlined,
+                                          color: ColorConsts.whiteColor,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    InkResponse(
+                                      onTap: () {
+                                        Dialogs().deleteKeyCategory(
+                                          context,
+                                          () {
+                                            deleteAPICall(
+                                                state.data[index].categoryId);
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        height: 32,
+                                        width: 32,
+                                        decoration: BoxDecoration(
+                                            gradient: const LinearGradient(
+                                              colors: [
+                                                ColorConsts.primaryColor,
+                                                ColorConsts.primaryColor,
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(25.0),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: ColorConsts.primaryColor,
+                                                blurRadius: 1.0,
+                                                offset: Offset(1, 2),
+                                              ),
+                                            ]),
+                                        padding: const EdgeInsets.all(1.0),
+                                        child: const Icon(
+                                          Icons.delete_forever,
+                                          color: ColorConsts.whiteColor,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
                             ),
                           );
-                        }
-                       ),
-
-                  );
-                }else if(state is CategoryNotFoundState){
-                 return Center(
-                   child: Text(
-                     state.msg,
-                     style: ThemeText.textMediumSecondaryBold,
-                    ),
-                  );
-                }else{
-
-
-                 return GridView.count(
-                 crossAxisCount: 4,
-                 crossAxisSpacing: 10,
-    mainAxisSpacing: 10,
-    childAspectRatio: (180 / 100),
-    children: List.generate(12, (index) {
-                 return Container(
-                     margin: const EdgeInsets.all(8.0),
-      height: MediaQuery.of(context).size.height/4.1,
-      alignment: Alignment.center,
-      padding: EdgeInsets.all(2),
-      child: Shimmer.fromColors(
-      baseColor: ColorConsts.simmerColor,
-      highlightColor: ColorConsts.simmer2Color,
-
-      child:
-      Container(
-      height: MediaQuery.of(context).size.height/4.2,
-      width: MediaQuery.of(context).size.height/2.5,
-      decoration: BoxDecoration(
-      shape: BoxShape.rectangle,
-      borderRadius: BorderRadius.circular(10.0),
-      color: ColorConsts.simmer2Color,
+                        }),
+                      );
+                    } else if (state is CategoryNotFoundState) {
+                      return Center(
+                        child: Text(
+                          state.msg,
+                          style: ThemeText.textMediumSecondaryBold,
+                        ),
+                      );
+                    } else {
+                      return GridView.count(
+                          crossAxisCount: 4,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: (180 / 100),
+                          children: List.generate(12, (index) {
+                            return Container(
+                                margin: const EdgeInsets.all(8.0),
+                                height:
+                                    MediaQuery.of(context).size.height / 4.1,
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.all(2),
+                                child: Shimmer.fromColors(
+                                    baseColor: ColorConsts.simmerColor,
+                                    highlightColor: ColorConsts.simmer2Color,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              4.2,
+                                      width:
+                                          MediaQuery.of(context).size.height /
+                                              2.5,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        color: ColorConsts.simmer2Color,
+                                      ),
+                                    )));
+                          }));
+                    }
+                  },
+                ))
+          ],
+        ),
       ),
-      )
-      ));
-                 }
-    )
-                 );
-               }
-              },
-
-            )
-           )
-           ],
-         ),
-       ),
-     );
+    );
   }
 }

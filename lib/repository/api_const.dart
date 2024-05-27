@@ -1,10 +1,11 @@
 class ApiConst {
   // // FIXME common base url to change // //
-  static const String mainUrl = 'http://144.126.248.21';
-//  static const String mainUrl = 'https://urchin-app-ce3bk.ondigitalocean.app';
+  static const String mainUrl = 'http://143.244.212.142:8017';
+  //static const String mainUrl = 'http://144.126.248.21';
+  //static const String mainUrl = 'https://urchin-app-ce3bk.ondigitalocean.app';
   static const String appName = 'KEYPIT';
   static const String comparePercentage = "90";
-  static const String imagePath = "$mainUrl/images/image/{user_id}/{image_id}";
+ // static const String imagePath = "$mainUrl/images/image/{user_id}/{image_id}";
 
   // TODO :   APIs
   static const String signupAPI = '/auth/signup';

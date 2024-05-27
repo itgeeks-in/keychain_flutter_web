@@ -70,4 +70,43 @@ class TextFieldCustom {
 
     );
   }
+
+  // textFieldSearch is created for search  bar , but currently I am working on this.
+ /* Widget textFieldForSearch(TextEditingController textEditingController,String hintText,String lableText,IconData prefixIconData){
+    return TextField(
+      controller: textEditingController,
+      style: ThemeText.textMediumSecondary,
+      decoration: InputDecoration(
+        labelText: lableText,
+        labelStyle: TextStyle(color: ColorConsts.primaryColor),
+        filled: true,
+        fillColor: ColorConsts.backgroundColor,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(11),
+          borderSide: BorderSide(
+            color: ColorConsts.primaryColor,
+            width: 2,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(11),
+          borderSide: BorderSide(
+            color: ColorConsts.primaryColor,
+          ),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(11),
+          borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
+        ),
+        prefixIcon: Icon(
+          prefixIconData,
+          color: ColorConsts.primaryColor,
+        ),
+        hintText: hintText,
+        hintStyle: TextStyle(
+          color: ColorConsts.primaryColor,
+        ),
+      ),
+    );
+  } */
 }
