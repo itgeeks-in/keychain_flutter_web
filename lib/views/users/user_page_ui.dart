@@ -17,6 +17,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../utils/show_snack_bar.dart';
 import '../../utils/dialogs.dart';
 import '../../utils/loading_dialog.dart';
+import '../../widgets/text_field_custom.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({super.key});
@@ -32,25 +33,18 @@ class _UserPageState extends State<UserPage> {
 
   deleteAPICall(String id) async {
     LoadingDialog.show(context);
-    var result=await UserPagePresenter().deleteUserAPI(id);
+    var result = await UserPagePresenter().deleteUserAPI(id);
     print("Working");
     LoadingDialog.hide(context);
-    if(result.toString().contains("status")){
+    if (result.toString().contains("status")) {
       Map<String, dynamic> parsed = json.decode(result.toString());
-      if(parsed["status"]){
+      if (parsed["status"]) {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
         Navigator.pop(context);
-      }else{
+      } else {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-        //Navigator.pop(context);
       }
-      // ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-      //
-      // Navigator.pop(context);
-      // context
-      //     .read<UsersDataBloc>()
-      //     .filtered(searchController.text);
-    }else{
+    } else {
       ShowSnackBar().snackBarSuccessShow(context, "Try Again !");
       Navigator.pop(context);
     }
@@ -61,7 +55,7 @@ class _UserPageState extends State<UserPage> {
     return Scaffold(
       backgroundColor: ColorConsts.backgroundColor,
       body: Padding(
-        padding: const EdgeInsets.only(left: 10, top: 10),
+        padding: EdgeInsets.only(left: 10, top: 10),
         child: SafeArea(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,55 +63,25 @@ class _UserPageState extends State<UserPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                //  mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      height: 70,
-                      child: TextField(
-                        controller: searchController,
-                        style: TextStyle(color: ColorConsts.textColorDark),
-                        decoration: InputDecoration(
-                          labelText: "Search",
-                          labelStyle:
-                              TextStyle(color: ColorConsts.primaryColor),
-                          filled: true,
-                          fillColor: ColorConsts.backgroundColor,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(11),
-                            borderSide: BorderSide(
-                              color: ColorConsts.primaryColor,
-                              width: 2,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(11),
-                            borderSide: BorderSide(
-                              color: ColorConsts.primaryColor,
-                            ),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(11),
-                            borderSide: BorderSide(
-                                color: ColorConsts.primaryColor, width: 2),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.person_search_sharp,
-                            color: ColorConsts.primaryColor,
-                          ),
-                          hintText: "Search keys",
-                          hintStyle: TextStyle(
-                            color: ColorConsts.primaryColor,
-                          ),
-                        ),
-                        onChanged: (value) {},
-                        onSubmitted: (value) {
-                          context
-                              .read<UsersDataBloc>()
-                              .filtered(searchController.text);
-                        },
-                      )),
+                    width: MediaQuery.of(context).size.width / 3,
+                    // height: 70,
+                    child: Padding(
+                      padding: EdgeInsets.all(1.0),
+                      child: TextFieldCustom().textFieldForSearch(
+                          searchController,
+                          "Enter user name",
+                          "Search user",
+                          (value) {}, (value) {
+                        context
+                            .read<UsersDataBloc>()
+                            .filtered(searchController.text);
+                      }),
+                    ),
+                  ),
                   InkResponse(
                       onTap: () {
                         context
@@ -126,11 +90,11 @@ class _UserPageState extends State<UserPage> {
                       },
                       child: Container(
                           width: 60,
-                          height: 56,
-                          margin: EdgeInsets.fromLTRB(12, 0, 0, 9),
+                          height: 47,
+                          margin: EdgeInsets.fromLTRB(12, 0, 0, 0),
                           decoration: BoxDecoration(
                             color: ColorConsts.primaryColor,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius: BorderRadius.all(Radius.circular(11)),
                             border: Border.all(
                               width: 1,
                               color: ColorConsts.primaryColor,
@@ -148,8 +112,10 @@ class _UserPageState extends State<UserPage> {
                             showDialog(
                               context: context,
                               builder: (context) => PopupAddUser(),
-                            ).then((value){
-                              context.read<UsersDataBloc>().filtered(searchController.text);
+                            ).then((value) {
+                              context
+                                  .read<UsersDataBloc>()
+                                  .filtered(searchController.text);
                             })
                           },
                       140,
@@ -225,7 +191,8 @@ class _UserPageState extends State<UserPage> {
                         if (IsLoading == false) {
                           IsLoading = true;
                           currentPage++;
-                          context.read<UsersDataBloc>()
+                          context
+                              .read<UsersDataBloc>()
                               .add(OnScrollPageEvent(currentPage, 0));
                         }
                         return true;
@@ -289,7 +256,9 @@ class _UserPageState extends State<UserPage> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 3),
                                     child: Text(
-                                      state.data[index].isAdmin?"Admin":"User",
+                                      state.data[index].isAdmin
+                                          ? "Admin"
+                                          : "User",
                                       style: TextStyle(
                                         color: ColorConsts.textColorDark,
                                         fontSize: 16,
@@ -352,11 +321,14 @@ class _UserPageState extends State<UserPage> {
                                             builder: (context) => PopUpEditUser(
                                               userData: state.data[index],
                                             ),
-                                          ).then((value) {
-                                            context
-                                                .read<UsersDataBloc>()
-                                                .filtered(searchController.text);
-                                          },);
+                                          ).then(
+                                            (value) {
+                                              context
+                                                  .read<UsersDataBloc>()
+                                                  .filtered(
+                                                      searchController.text);
+                                            },
+                                          );
                                         },
                                         child: Container(
                                           height: 32,
@@ -391,9 +363,13 @@ class _UserPageState extends State<UserPage> {
                                       Spacer(),
                                       InkResponse(
                                         onTap: () {
-                                          Dialogs().deleteUser(context,() {
-                                            deleteAPICall(state.data[index].id);
-                                          },);
+                                          Dialogs().deleteUser(
+                                            context,
+                                            () {
+                                              deleteAPICall(
+                                                  state.data[index].id);
+                                            },
+                                          );
                                         },
                                         child: Container(
                                           height: 32,
@@ -408,11 +384,11 @@ class _UserPageState extends State<UserPage> {
                                                 end: Alignment.centerRight,
                                               ),
                                               borderRadius:
-                                              BorderRadius.circular(25.0),
+                                                  BorderRadius.circular(25.0),
                                               boxShadow: [
                                                 new BoxShadow(
                                                   color:
-                                                  ColorConsts.primaryColor,
+                                                      ColorConsts.primaryColor,
                                                   blurRadius: 1.0,
                                                   offset: Offset(1, 2),
                                                 ),
@@ -451,10 +427,10 @@ class _UserPageState extends State<UserPage> {
                       itemCount: 10,
                       itemBuilder: (context, index) {
                         return Container(
-                           margin: EdgeInsets.all(10),
-                           height:45 ,
-                           color: ColorConsts.whiteColor,
-                         //   decoration: BoxDecoration(borderRadius:BorderRadius.circular(10.0)),
+                          margin: EdgeInsets.all(10),
+                          height: 45,
+                          color: ColorConsts.whiteColor,
+                          //   decoration: BoxDecoration(borderRadius:BorderRadius.circular(10.0)),
                         );
                       },
                     ),

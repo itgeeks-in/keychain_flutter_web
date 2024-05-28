@@ -10,6 +10,7 @@ import 'package:key_admin_panel/utils/theme_text.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_bloc.dart';
 import 'package:key_admin_panel/views/category/bloc/category_page_state.dart';
 import 'package:key_admin_panel/widgets/buttons.dart';
+import 'package:key_admin_panel/widgets/text_field_custom.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../utils/loading_dialog.dart';
@@ -103,64 +104,22 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
             SizedBox(
                 height: 80,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 3,
-                      height: 60,
+                      //height: 60,
                       child: Padding(
                         padding: EdgeInsets.all(1.0),
-                        // child: CustomTextField(
-                        //   controller: searchController,
-                        //   hintText: "Search key",
-                        //   isPassVisible: false,
-                        //   labelText: "Search Key",
-                        //   maxline: 1,
-                        //   prefixIconData: Icons.person_search_sharp
-                        // ),
-                        child:TextField(
-                          controller: searchController,
-                          style: TextStyle(color: ColorConsts.textColorDark),
-                          decoration: InputDecoration(
-                            labelText: "Search",
-                            labelStyle: const TextStyle(
-                                color: ColorConsts.primaryColor),
-                            filled: true,
-                            fillColor: ColorConsts.backgroundColor,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide: const BorderSide(
-                                color: ColorConsts.primaryColor,
-                                width: 2,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(
-                                color: ColorConsts.primaryColor,
-                              ),
-                            ),
-                            disabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(
-                                  color: ColorConsts.primaryColor, width: 2),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.person_search_sharp,
-                              color: ColorConsts.primaryColor,
-                            ),
-                            hintText: "Search keys",
-                            hintStyle: const TextStyle(
-                              color: ColorConsts.primaryColor,
-                            ),
-                          ),
-                          onChanged: (value) {},
-                          onSubmitted: (value) {
-                            context
-                                .read<CategoryPageBloc>()
-                                .filtered(searchController.text);
-                          },
-                        ),
+                        child: TextFieldCustom().textFieldForSearch(
+                            searchController,
+                            "Enter category name",
+                            "Search category",
+                            (value) {}, (value) {
+                          context
+                              .read<CategoryPageBloc>()
+                              .filtered(searchController.text);
+                        }),
                       ),
                     ),
                     InkResponse(
@@ -171,12 +130,12 @@ class _CategoryPageUIState extends State<CategoryPageUI> {
                         },
                         child: Container(
                             width: 60,
-                            height: 55,
-                            margin: const EdgeInsets.fromLTRB(12, 3, 0, 0),
+                            height: 47,
+                            margin: const EdgeInsets.fromLTRB(12, 0, 0, 0),
                             decoration: BoxDecoration(
                               color: ColorConsts.primaryColor,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(11)),
                               border: Border.all(
                                 width: 1,
                                 color: ColorConsts.primaryColor,

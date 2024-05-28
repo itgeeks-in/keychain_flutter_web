@@ -72,8 +72,10 @@ class TextFieldCustom {
   }
 
   // textFieldSearch is created for search  bar , but currently I am working on this.
- /* Widget textFieldForSearch(TextEditingController textEditingController,String hintText,String lableText,IconData prefixIconData){
+  Widget textFieldForSearch(TextEditingController textEditingController,String hintText,String lableText,Function(String) onChanged,Function(String) onSubmitted){
     return TextField(
+
+      onSubmitted: onSubmitted,
       controller: textEditingController,
       style: ThemeText.textMediumSecondary,
       decoration: InputDecoration(
@@ -99,7 +101,7 @@ class TextFieldCustom {
           borderSide: BorderSide(color: ColorConsts.primaryColor, width: 2),
         ),
         prefixIcon: Icon(
-          prefixIconData,
+          Icons.person_search_sharp,
           color: ColorConsts.primaryColor,
         ),
         hintText: hintText,
@@ -108,5 +110,5 @@ class TextFieldCustom {
         ),
       ),
     );
-  } */
+  }
 }
