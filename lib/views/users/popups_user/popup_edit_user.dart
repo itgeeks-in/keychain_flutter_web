@@ -58,13 +58,9 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
         Navigator.pop(context);
       }else{
         error = parsed["message"];
-        //ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
-        //Navigator.pop(context);
       }
     } else {
       error = "Try again! something went wrong";
-     // Navigator.pop(context);
-      //ShowSnackBar().snackBarSuccessShow(context, "Try Again later!");
     }
     setState(
       () {},
@@ -79,7 +75,6 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
         child: SingleChildScrollView(
       child: Container(
         width: sizeW,
-       // height: sizeH,
         decoration: const BoxDecoration(
             color: ColorConsts.backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(21))),
@@ -150,9 +145,9 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
             ),
             Center(
                 child: ButtonWidget().buttonWidgetSimple('Update', () {
-              if (_firstNameController.text.isNotEmpty &&
-                  _lastNameController.text.isNotEmpty &&
-                  _emailController.text.isNotEmpty) {
+              if (_firstNameController.text.trim().isNotEmpty &&
+                  _lastNameController.text.trim().isNotEmpty &&
+                  _emailController.text.trim().isNotEmpty) {
                 if (validateEmailStructure(_emailController.text)) {
                   apiCall();
                 } else {

@@ -138,7 +138,7 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
                 actions: [
                   ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
                   ButtonWidget().buttonWidgetSimple("Update", () async {
-                    if(titleController.text.isNotEmpty){
+                    if(titleController.text.trim().isNotEmpty){
                       onClick(titleController.text,idCATE);
                     }else{
                       setState((){
@@ -184,7 +184,7 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
                 actions: [
                   ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
                   ButtonWidget().buttonWidgetSimple("Update", () async {
-                    if(titleController.text.isNotEmpty){
+                    if(titleController.text.trim().isNotEmpty){
                       onClick(titleController.text);
                     }else{
                       setState((){

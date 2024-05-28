@@ -41,12 +41,13 @@ class _UserPageState extends State<UserPage> {
       if (parsed["status"]) {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
         Navigator.pop(context);
+        context.read<UsersDataBloc>().filtered(searchController.text);
       } else {
         ShowSnackBar().snackBarSuccessShow(context, parsed["message"]);
       }
     } else {
       ShowSnackBar().snackBarSuccessShow(context, "Try Again !");
-      Navigator.pop(context);
+      // Navigator.pop(context);
     }
   }
 
