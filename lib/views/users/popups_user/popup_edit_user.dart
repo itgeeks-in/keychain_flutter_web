@@ -46,9 +46,9 @@ class _PopUpEditUserState extends State<PopUpEditUser> {
     LoadingDialog.show(context);
     var res = await UserPagePresenter().editUserDetailAPI(
         widget.userData.id,
-        _firstNameController.text,
-        _lastNameController.text,
-        _emailController.text);
+        _firstNameController.text.trim(),
+        _lastNameController.text.trim(),
+        _emailController.text.trim());
 
     LoadingDialog.hide(context);
     if (res.toString().contains("status")) {
