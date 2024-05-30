@@ -311,8 +311,8 @@ class _PopUpAddUserState extends State<PopupAddUser> {
                             _passwordController.text.length >= 5
                                 ? isPassValid = true
                                 : error = "Password must be 5 digit.",
-                            _passwordController.text ==
-                                    _confirmPasswordController.text
+                            _passwordController.text.trim() ==
+                                    _confirmPasswordController.text.trim()
                                 ? isPassMatch = true
                                 : error = "password must be same.",
                             if (isEmailValid && isPassValid && isPassMatch)
