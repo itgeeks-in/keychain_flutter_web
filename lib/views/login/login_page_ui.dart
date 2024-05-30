@@ -135,6 +135,12 @@ class _LoginScreenState extends State<LoginPageUI> {
                                             style: TextStyle(
                                                 color: ColorConsts.redColor),
                                           ),
+                                        if (state is EmailContainsSpace)
+                                          Text(
+                                            "No leading/trailing spaces allowed.",
+                                            style: TextStyle(
+                                                color: ColorConsts.redColor),
+                                          ),
                                         if (state is EmailInvalidState)
                                           Text(
                                             "Invalid email format",
@@ -192,7 +198,13 @@ class _LoginScreenState extends State<LoginPageUI> {
                                         ),
                                         if (state is PassRequiredState)
                                           Text(
-                                            "Password is required",
+                                            "Password is required.",
+                                            style: TextStyle(
+                                                color: ColorConsts.redColor),
+                                          ),
+                                        if (state is PasswordContainsSpace)
+                                          Text(
+                                            "No leading/trailing spaces allowed.",
                                             style: TextStyle(
                                                 color: ColorConsts.redColor),
                                           ),

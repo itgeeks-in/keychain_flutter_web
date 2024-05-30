@@ -7,9 +7,13 @@ class LoadState extends LoginState {}
 
 class EmailRequiredState extends LoginState {}
 
+class EmailContainsSpace extends LoginState {}
+
 class EmailInvalidState extends LoginState {}
 
 class PassRequiredState extends LoginState {}
+
+class PasswordContainsSpace extends LoginState {}
 
 class PassInvalidState extends LoginState {}
 

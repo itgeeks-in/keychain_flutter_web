@@ -139,7 +139,7 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
                   ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
                   ButtonWidget().buttonWidgetSimple("Update", () async {
                     if(titleController.text.trim().isNotEmpty){
-                      onClick(titleController.text,idCATE);
+                      onClick(titleController.text.trim(),idCATE);
                     }else{
                       setState((){
                         isCatNotValid = true;
@@ -185,7 +185,7 @@ content: SizedBox(height: MediaQuery.of(context).size.height/4,child: Column(chi
                   ButtonWidget().buttonWidgetSimple("Cancel", () => Navigator.pop(context, false), 80.0, 40.0),
                   ButtonWidget().buttonWidgetSimple("Update", () async {
                     if(titleController.text.trim().isNotEmpty){
-                      onClick(titleController.text);
+                      onClick(titleController.text.trim());
                     }else{
                       setState((){
                         isCatNotValid = true;

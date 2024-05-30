@@ -12,17 +12,22 @@ class  LoginBloc extends Bloc<LoginEvent,LoginState>{
     // todo : on click login button event
     on<OnButtonClick>((event, emit) async {
       emit(LoadState());
-      if(event.email.trim().isEmpty){
+      if(event.email.isEmpty || event.email.trim().isEmpty){
         emit(EmailRequiredState());
-      } else {
+      }else if(event.email != event.email.trim()){
+        emit(EmailContainsSpace());
+      }
+      else {
         if(validateEmailStructure(event.email)){
-          if(event.password.trim().isEmpty){
+          if(event.password.isEmpty || event.password.trim().isEmpty){
             emit(PassRequiredState());
+          }else if(event.password != event.password.trim()){
+            emit(PasswordContainsSpace());
           } else {
-            if(event.password.trim().length < 5){
+            if(event.password.length < 5){
               emit(PassInvalidState());
             } else {
-              loginAPI(event.email.trim(), event.password.trim());
+              loginAPI(event.email, event.password);
             }
           }
         } else {

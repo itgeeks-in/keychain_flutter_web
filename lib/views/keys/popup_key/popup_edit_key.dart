@@ -55,8 +55,8 @@ class _PopUpEditkeyState extends State<PopUpEditkey> {
   apiCall() async {
     error = "";
     LoadingDialog.show(context);
-    var res = await KeyPagePresenter().keyEditAPI(_keyNameController.text,
-        _descriptionNameController.text, categoryIdSelect, widget.keysData.id);
+    var res = await KeyPagePresenter().keyEditAPI(_keyNameController.text.trim(),
+        _descriptionNameController.text.trim(), categoryIdSelect.trim(), widget.keysData.id);
 
     LoadingDialog.hide(context);
     if (res.toString().contains("status")) {
