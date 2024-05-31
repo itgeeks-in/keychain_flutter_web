@@ -1,9 +1,13 @@
+import 'package:dio/dio.dart';
+
 import '../../repository/ApiRepository.dart';
 import '../../repository/api_const.dart';
 
 class PlanPagePresenter{
-  Future<dynamic> getAllUserPlanDetail() async {
-    var response = await ApiRepository.getAPI(ApiConst.getAllUserPlanDetail, '');
+  Future<dynamic> getAllUserPlanDetail(offset, limit, search) async {
+    var requestBody = {"searchterm": search, "offset": offset, "limit": limit};
+    Response response =
+    await ApiRepository.postAPI(ApiConst.allUsersAPI, requestBody);
     return response;
   }
 

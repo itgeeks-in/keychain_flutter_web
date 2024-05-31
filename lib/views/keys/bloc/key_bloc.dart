@@ -34,8 +34,7 @@ class KeyBloc extends Bloc<KeyEvent,KeyState>{
 
   Future<void> getAllKeysAPI() async{
 
-    var result = await KeyPagePresenter().getAllKeyAPI(offset.toString(),limit,query);
-  //  print("object======================= $result");
+    var result = await KeyPagePresenter().getAllKeyAPI(offset,limit,query);
     Map<String,dynamic> parsed = jsonDecode(result.toString());
     if(parsed['status']){
     KeysModel keysModel = KeysModel.fromJson(parsed);

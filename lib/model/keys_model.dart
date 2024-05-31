@@ -7,45 +7,65 @@ class KeysModel {
 
   factory KeysModel.fromJson(Map<dynamic, dynamic> json) {
     return KeysModel(json['status'], json['message'],
-        List<KeysData>.from(
-            json["result"].map((x) => KeysData.fromJson(x))));
+        List<KeysData>.from(json["result"].map((x) => KeysData.fromJson(x))));
   }
 }
 
 class KeysData {
   String imagePath;
+  String imageName;
   String backImagePath;
   String lockImagePath;
-  String edgedImagePath;
-  String imageName;
-  String randomImageName;
+  String backgroundLessImage;
+  String backBackgroundLess;
   String description;
   String id;
   String categoryName;
   String categoryId;
   String createdAt;
+  String updatedAt;
+  String userId;
+  int edges;
+  int backEdges;
+  int __v;
 
-
-  KeysData(this.imagePath,this.backImagePath,this.edgedImagePath,this.lockImagePath,
-      this.imageName,this.randomImageName,this.description,this.id,this.categoryName,this.categoryId,this.createdAt);
+  KeysData(
+    this.imagePath,
+    this.imageName,
+    this.backImagePath,
+    this.lockImagePath,
+    this.backgroundLessImage,
+    this.backBackgroundLess,
+    this.description,
+    this.id,
+    this.categoryName,
+    this.categoryId,
+    this.createdAt,
+    this.updatedAt,
+    this.userId,
+    this.edges,
+    this.backEdges,
+    this.__v
+  );
 
   factory KeysData.fromJson(Map<dynamic, dynamic> json) {
     return KeysData(
-        json['imagePath'] ?? "",
-        json['backImagePath'] ?? "",
-        json['edgedImagePath'] ?? "",
-        json['lockImagePath'] ?? "",
-        json['imageName'] ?? "",
-        json['randomImageName'] ?? "",
-        json['description'] ?? "",
-        json['_id'] ?? "",
-        json['categoryName'] ?? "",
-        json['categoryId'] ?? "",
-        json['createdAt'] ?? ""
+      json['imagePath'] ?? "",
+      json['imageName'] ?? "",
+      json['backImagePath'] ?? "",
+      json['lockImagePath'] ?? "",
+      json['backgroundLessImage'] ?? "",
+      json['backBackgroundLess'] ?? "",
+      json['description'] ?? "",
+      json['_id'] ?? "",
+      json['categoryName'] ?? "",
+      json['categoryId'] ?? "",
+      json['createdAt'] ?? "",
+      json['updatedAt'] ?? "",
+      json['userId'] ?? "",
+      json['edges'] ?? 0,
+      json['backEdges'] ?? 0,
+      json['__v'] ?? 0,
     );
   }
 }
-
-
-
-

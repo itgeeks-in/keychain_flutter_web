@@ -130,7 +130,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                       children: [
                         Row(
                           children: [
-                            const Text(
+                           /* const Text(
                               "Plan wise key count present :  ",
                               style: TextStyle(
                                   color: ColorConsts.secondaryColor,
@@ -141,7 +141,7 @@ class _PopupViewUserState extends State<PopupViewUser> {
                               style: TextStyle(
                                   color: ColorConsts.textColorDark,
                                   fontSize: 18),
-                            ),
+                            ),*/
                           ],
                         ),
                         if(widget.userData.createdAt.toString().isNotEmpty)Row(

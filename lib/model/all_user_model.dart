@@ -28,9 +28,10 @@ class UserData {
   String updatedAt;
   int __v;
   String profileImage;
+  String plan;
 
 
-  UserData(this.id,this.firstName,this.lastName,this.email,this.salt,this.hash,this.isAgreed,this.isAdmin,this.totalKey,this.resetLink,this.keys,this.createdAt,this.updatedAt,this.__v,this.profileImage);
+  UserData(this.id,this.firstName,this.lastName,this.email,this.salt,this.hash,this.isAgreed,this.isAdmin,this.totalKey,this.resetLink,this.keys,this.createdAt,this.updatedAt,this.__v,this.profileImage,this.plan);
 
   factory UserData.fromJson(Map<dynamic, dynamic> json) {
     return UserData(
@@ -48,7 +49,9 @@ class UserData {
         json['createdAt'] ?? "",
         json['updatedAt'] ?? "",
         json['__v'] ?? 0,
-        json['profileImage'] ?? ""
+        json['profileImage'] ?? "",
+        json['plan'] ?? ""
+
     );
   }
 }
