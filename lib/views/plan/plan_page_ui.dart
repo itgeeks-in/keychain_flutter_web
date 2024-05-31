@@ -408,7 +408,7 @@ class _PlanPageState extends State<PlanPageUI> {
                                   child: Container(
                                     padding: const EdgeInsets.only(left: 50),
                                     child: Text(
-                                      isTrialExpired ? 'plan-expired' : state.data[index].plan,
+                                      isTrialExpired ? 'Expired' : state.data[index].plan,
                                       style: isTrialExpired
                                           ? ThemeText.textMediumGrey
                                           : ThemeText.textMediumSecondary,
@@ -570,11 +570,6 @@ class SubscriptionHeading extends StatelessWidget {
             child: Text("Email",
                 style: ThemeText.textMediumPrimaryBold, maxLines: 1),
           ),
-          // Expanded(
-          //   flex: 2,
-          //   child: Text("Purchased on",
-          //       style: ThemeText.textMediumPrimaryBold, maxLines: 1),
-          // ),
           Expanded(
             flex: 2,
             child: Padding(
