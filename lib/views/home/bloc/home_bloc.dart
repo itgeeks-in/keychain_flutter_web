@@ -7,7 +7,7 @@ import 'package:key_admin_panel/views/home/home_page_presenter.dart';
 import '../../../model/home_model.dart';
 
 class HomeBloc extends Bloc<HomeBloc, HomeState> {
-  HomeBloc() : super(InitialState()) {
+  HomeBloc() : super(LoadState()) {
     getDashboardDetailAPI();
   }
 

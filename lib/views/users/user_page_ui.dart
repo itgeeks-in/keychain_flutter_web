@@ -171,7 +171,7 @@ class _UserPageState extends State<UserPage> {
                       flex: 2,
                       child: Center(
                         child: Text(
-                          "Action",
+                          "Actions",
                           style: ThemeText.textMediumPrimaryBold,
                         ),
                       ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:key_admin_panel/views/home/bloc/home_bloc.dart';
 import 'package:key_admin_panel/views/home/bloc/home_state.dart';
 import 'package:key_admin_panel/views/home/chart_pie.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../utils/color_const.dart';
 import '../../utils/theme_text.dart';
 
@@ -31,13 +32,36 @@ class _HomePageUIState extends State<HomePageUI> {
             totalUser = state.homeData.totalUser;
             totalPlan = state.homeData.totalPlan;
           }
-
           return Container(
             margin: EdgeInsets.all(10.0),
             padding: EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                Row(
+            child: Center(
+              child: state is LoadState ? Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: heightSize,
+                      width: widthSize,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Container(
+                      height: heightSize,
+                      width: widthSize,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+                  :Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
@@ -70,34 +94,33 @@ class _HomePageUIState extends State<HomePageUI> {
                         color: ColorConsts.primaryColor,
                       ),
                     ),
-                    Container(
-                      height: heightSize,
-                      width: widthSize,
-                      child: Center(
-                        child: Text(
-                          '$totalPlan\nTotal Plan',
-                          style: ThemeText.textLargeWhiteBold,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: ColorConsts.secondaryColor,
-                      ),
-                    ),
+                    // Container(
+                    //   height: heightSize,
+                    //   width: widthSize,
+                    //   child: Center(
+                    //     child: Text(
+                    //       '$totalPlan\nTotal Plan',
+                    //       style: ThemeText.textLargeWhiteBold,
+                    //       textAlign: TextAlign.center,
+                    //     ),
+                    //   ),
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(25.0),
+                    //     color: ColorConsts.secondaryColor,
+                    //   ),
+                    // ),
                   ],
                 ),
-                Spacer(),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 2.5,
-                  child: ChartPieDis().pieChartUI(
-                    context,
-                    totalKey.toDouble(),
-                    totalUser.toDouble(),
-                    totalPlan.toDouble(),
-                  ),
-                ),
-              ],
+               // Spacer(),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height / 2.5,
+                //   child: ChartPieDis().pieChartUI(
+                //     context,
+                //     totalKey.toDouble(),
+                //     totalUser.toDouble(),
+                //     totalPlan.toDouble(),
+                //   ),
+                // ),
             ),
           );
         },

@@ -446,7 +446,7 @@ class KeyHeader extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Center(
-              child: Text("Action",
+              child: Text("Actions",
                   style: ThemeText.textMediumPrimaryBold, maxLines: 1),
             ),
           ),

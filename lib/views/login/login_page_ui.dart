@@ -224,7 +224,7 @@ class _LoginScreenState extends State<LoginPageUI> {
                                               context)
                                                   .add(
                                               OnButtonClick(
-                                              emailController.text,
+                                              emailController.text.toLowerCase(),
                                               passwordController.text,
                                               ),
                                               ),
